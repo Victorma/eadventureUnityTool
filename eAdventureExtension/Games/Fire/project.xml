@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment> Project Configuration </comment>
+<entry key="Chapter0.OfficeOnFire.X">36</entry>
+<entry key="Chapter0.SceneId.Visible">true</entry>
+<entry key="Chapter0.HallMiddle.Visible">true</entry>
+<entry key="Chapter0.HallStart.Y">374</entry>
+<entry key="Chapter0.HallStart.X">232</entry>
+<entry key="Chapter0.DepartmentArea.Visible">true</entry>
+<entry key="Chapter0.TeacherOffices.Y">515</entry>
+<entry key="Chapter0.TeacherOffices.Visible">true</entry>
+<entry key="Chapter0.TeacherOffices.X">24</entry>
+<entry key="CutscenesListPanel.Size">0</entry>
+<entry key="Chapter0.OfficeInFire.Visible">true</entry>
+<entry key="Chapter0.SceneId.Y">487</entry>
+<entry key="Chapter0.SceneId.X">710</entry>
+<entry key="Chapter0.StairsAndElevator.Visible">true</entry>
+<entry key="Chapter0.OccupiedOffice.Y">180</entry>
+<entry key="Chapter0.OccupiedOffice.X">321</entry>
+<entry key="Chapter0.HallEnd.Y">261</entry>
+<entry key="Chapter0.HallEnd.X">98</entry>
+<entry key="Chapter0.HallEnd.Visible">true</entry>
+<entry key="Chapter0.PlayerOffice1.Visible">true</entry>
+<entry key="Chapter0.OfficeInFire.Y">66</entry>
+<entry key="Chapter0.OfficeInFire.X">149</entry>
+<entry key="Chapter0.PlayerOffice.Y">481</entry>
+<entry key="Chapter0.PlayerOffice.X">211</entry>
+<entry key="Chapter0.SceneId1.Visible">true</entry>
+<entry key="Chapter0.StairsAndElevator.Y">310</entry>
+<entry key="Chapter0.StairsAndElevator.X">462</entry>
+<entry key="Chapter0.HallMiddle.Y">496</entry>
+<entry key="Chapter0.DepartmentArea.Y">510</entry>
+<entry key="Chapter0.HallMiddle.X">207</entry>
+<entry key="Chapter0.DepartmentArea.X">579</entry>
+<entry key="Chapter0.OfficeOnFire.Visible">true</entry>
+<entry key="Chapter0.PlayerOffice1.Y">124</entry>
+<entry key="Chapter0.PlayerOffice1.X">524</entry>
+<entry key="autosave">yes</entry>
+<entry key="Chapter0.HallStart.Visible">true</entry>
+<entry key="Chapter0.OccupiedOffice.Visible">true</entry>
+<entry key="Chapter0.PlayerOffice.Visible">true</entry>
+<entry key="Chapter0.SceneId1.Y">507</entry>
+<entry key="Chapter0.SceneId1.X">156</entry>
+<entry key="Chapter0.OfficeOnFire.Y">308</entry>
+</properties>
