@@ -17,6 +17,7 @@ public class CutscenesWindowAppearance : LayoutWindow, DialogReceiverInterface
     private static Rect previewRect;
 
     private string slidesPath = "";
+    private string slidesPathPreview = "";
     private string musicPath = "";
     private string videoscenePath = "";
 
@@ -35,12 +36,18 @@ public class CutscenesWindowAppearance : LayoutWindow, DialogReceiverInterface
         {
             slidesPath =
                 Controller.getInstance().getSelectedChapterDataControl().getCutscenesList().getCutscenes()[
+                    GameRources.GetInstance().selectedCutsceneIndex].getPathToSlides();
+            slidesPathPreview =
+                Controller.getInstance().getSelectedChapterDataControl().getCutscenesList().getCutscenes()[
                     GameRources.GetInstance().selectedCutsceneIndex].getPreviewImage();
             canSkipVideo =
                 canSkipVideoLast =
                     Controller.getInstance().getSelectedChapterDataControl().getCutscenesList().getCutscenes()[
                         GameRources.GetInstance().selectedCutsceneIndex].getCanSkip();
             // Get videopath
+            videoscenePath =
+                Controller.getInstance().getSelectedChapterDataControl().getCutscenesList().getCutscenes()[
+                    GameRources.GetInstance().selectedCutsceneIndex].getPathToVideo();
         }
 
         //musicPath =
@@ -49,7 +56,7 @@ public class CutscenesWindowAppearance : LayoutWindow, DialogReceiverInterface
 
         if (slidesPath != null && !slidesPath.Equals(""))
             slidesPreview =
-                (Texture2D) Resources.Load(slidesPath.Substring(0, slidesPath.LastIndexOf(".")), typeof (Texture2D));
+                (Texture2D) Resources.Load(slidesPathPreview.Substring(0, slidesPathPreview.LastIndexOf(".")), typeof (Texture2D));
 
 
         slidePreviewMovie = (Texture2D) Resources.Load("EAdventureData/img/icons/video", typeof (Texture2D));
@@ -181,6 +188,8 @@ public class CutscenesWindowAppearance : LayoutWindow, DialogReceiverInterface
         {
             //TODO: create file
             OnSlidesceneCreated(message);
+            Controller.getInstance().getSelectedChapterDataControl().getCutscenesList().getCutscenes()[
+                GameRources.GetInstance().selectedCutsceneIndex].setPathToSlides(message);
             EditCutscene();
             return;
         }
@@ -214,11 +223,21 @@ public class CutscenesWindowAppearance : LayoutWindow, DialogReceiverInterface
     void OnSlidesceneChanged(string val)
     {
         slidesPath = val;
+        Controller.getInstance().getSelectedChapterDataControl().getCutscenesList().getCutscenes()[
+            GameRources.GetInstance().selectedCutsceneIndex].setPathToSlides(val);
+        slidesPathPreview =
+            Controller.getInstance().getSelectedChapterDataControl().getCutscenesList().getCutscenes()[
+                GameRources.GetInstance().selectedCutsceneIndex].getPreviewImage();
+        slidesPreview =
+            (Texture2D)Resources.Load(slidesPathPreview.Substring(0, slidesPathPreview.LastIndexOf(".")), typeof(Texture2D));
+
     }
 
     void OnVideosceneChanged(string val)
     {
         videoscenePath = val;
+        Controller.getInstance().getSelectedChapterDataControl().getCutscenesList().getCutscenes()[
+            GameRources.GetInstance().selectedCutsceneIndex].setPathToVideo(val);
     }
 
     void OnSlidesceneMusicChanged(string val)
@@ -243,7 +262,6 @@ public class CutscenesWindowAppearance : LayoutWindow, DialogReceiverInterface
     {
         CutsceneSlidesEditor slidesEditor =
             (CutsceneSlidesEditor) ScriptableObject.CreateInstance(typeof (CutsceneSlidesEditor));
-        // TODO: CHANGE
         slidesEditor.Init(this, Controller.getInstance().getSelectedChapterDataControl().getCutscenesList().getCutscenes()[
             GameRources.GetInstance().selectedCutsceneIndex].getPathToSlides());
     }

@@ -448,8 +448,17 @@ public class CutsceneDataControl : DataControlWithResources
 
     public void setPathToSlides(string path)
     {
-        //TODO:
-        //return resourcesDataControlList[selectedResources].setAssetPath("slides");
+        resourcesDataControlList[selectedResources].addAsset("slides", path.Substring(0, path.LastIndexOf(".eaa")));
+    }
+
+    public string getPathToVideo()
+    {
+        return resourcesDataControlList[selectedResources].getAssetPath("video");
+    }
+
+    public void setPathToVideo(string path)
+    {
+        resourcesDataControlList[selectedResources].addAsset("video", path.Substring(0, path.LastIndexOf(".mpg")));
     }
 
 

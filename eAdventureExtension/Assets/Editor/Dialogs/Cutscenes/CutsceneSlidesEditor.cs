@@ -58,7 +58,12 @@ public class CutsceneSlidesEditor : BaseCreatorPopup, DialogReceiverInterface
         transitionTypes = new string []{ "None" , "Fade in", "Horizontal", "Vertical"};
         Debug.Log(cutsceneFilePath);
 
-        workingAnimation = new Animation(cutsceneFilePath, 40, new EditorImageLoader());
+        workingAnimation = Loader.loadAnimation(AssetsController.InputStreamCreatorEditor.getInputStreamCreator(),
+            cutsceneFilePath, new EditorImageLoader());
+
+        Debug.Log(workingAnimation.getAboslutePath() + " " + workingAnimation.getFrames().Count + " " + workingAnimation.isSlides() + " " + workingAnimation.getId());
+        if (workingAnimation == null)
+            workingAnimation = new Animation(cutsceneFilePath, 40, new EditorImageLoader());
 
         // Initalize
         selectedFrame = 0;

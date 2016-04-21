@@ -1513,7 +1513,7 @@ public class AssetsController
         public InputStreamCreatorEditor()
         {
 
-            absolutePath = null;
+            absolutePath = "";
         }
 
         public InputStreamCreatorEditor(string absolutePath)
@@ -1554,6 +1554,7 @@ public class AssetsController
             //}
 
             //return iss;
+            Debug.Log(absolutePath + "\n" + filePath);
             return Path.Combine(absolutePath, filePath);
         }
 
