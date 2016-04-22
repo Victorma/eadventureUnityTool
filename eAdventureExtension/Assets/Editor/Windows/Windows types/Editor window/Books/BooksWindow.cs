@@ -10,6 +10,8 @@ public class BooksWindow : LayoutWindow
     private static BooksWindowContents booksWindowContents;
     private static BooksWindowDocumentation booksWindowDocumentation;
 
+    private static float windowWidth, windowHeight;
+
     // Two methods responsible for showing right window content 
     // - concrete item info or base window view
     public void ShowBaseWindowView()
@@ -33,6 +35,9 @@ public class BooksWindow : LayoutWindow
         booksWindowAppearance = new BooksWindowAppearance(aStartPos, new GUIContent(Language.GetText("APPEARANCE")), "Window");
         booksWindowContents = new BooksWindowContents(aStartPos, new GUIContent(Language.GetText("CONTENTS")), "Window");
         booksWindowDocumentation = new BooksWindowDocumentation(aStartPos, new GUIContent(Language.GetText("DOCUMENTATION")), "Window");
+
+        windowWidth = aStartPos.width;
+        windowHeight = aStartPos.height;
     }
 
 
@@ -74,7 +79,19 @@ public class BooksWindow : LayoutWindow
         }
         else
         {
-            GUILayout.Label("BooksWindow");
+            GUILayout.Space(30);
+            for (int i = 0; i < Controller.getInstance().getCharapterList().getSelectedChapterData().getBooks().Count; i++)
+            {
+                GUILayout.BeginHorizontal();
+                GUILayout.Box(Controller.getInstance().getCharapterList().getSelectedChapterData().getBooks()[i].getId(), GUILayout.Width(windowWidth * 0.75f));
+                if (GUILayout.Button(Language.GetText("EDIT"), GUILayout.MaxWidth(windowWidth * 0.2f)))
+                {
+                    ShowItemWindowView(i);
+                }
+
+                GUILayout.EndHorizontal();
+
+            }
         }
     }
 
