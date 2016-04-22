@@ -18,7 +18,8 @@ public abstract class BaseFileOpenDialog : EditorWindow
         CUTSCENE_VIDEO, 
         CUTSCENE_SLIDES, 
         FRAME_IMAGE,
-        FRAME_MUSIC
+        FRAME_MUSIC,
+        BOOK_IMAGE_PARAGRAPH, 
     };
 
     protected const string DIR_PREFIX = "Assets/Resources";
@@ -100,6 +101,9 @@ public abstract class BaseFileOpenDialog : EditorWindow
                 break;
             case FileType.FRAME_IMAGE:
                 assetTypeDir = AssetsController.CATEGORY_ANIMATION_FOLDER;
+                break;
+            case FileType.BOOK_IMAGE_PARAGRAPH:
+                assetTypeDir = AssetsController.CATEGORY_IMAGE_FOLDER;
                 break;
             default:
                 assetTypeDir = "";
