@@ -34,9 +34,19 @@ public static class SpecialAssetPaths
     public const string ASSET_DEFAULT_ARROW_NORMAL = "assets/special/DefaultLeftNormalArrow.png";
 
     /**
+     * Asset path for the default book normal arrow image. For use only in assets.
+     */
+    public const string ASSET_DEFAULT_ARROW_NORMAL_RIGHT = "assets/special/DefaultLeftNormalArrow.png";
+
+    /**
      * Asset path for the default book over arrow image. For use only in assets.
      */
     public const string ASSET_DEFAULT_ARROW_OVER = "assets/special/DefaultLeftOverArrow.png";
+
+    /**
+     * Asset path for the default book over arrow image. For use only in assets.
+     */
+    public const string ASSET_DEFAULT_ARROW_OVER_RIGHT = "assets/special/DefaultLeftOverArrow.png";
 
     /**
      * Asset path for the default book normal arrow image in engine. For use only in assets.

@@ -12,19 +12,8 @@ public class BooksWindow : LayoutWindow
 
     private static float windowWidth, windowHeight;
 
-    // Two methods responsible for showing right window content 
-    // - concrete item info or base window view
-    public void ShowBaseWindowView()
-    {
-        isConcreteItemVisible = false;
-        GameRources.GetInstance().selectedBookIndex = -1;
-    }
-
-    public void ShowItemWindowView(int o)
-    {
-        isConcreteItemVisible = true;
-        GameRources.GetInstance().selectedBookIndex = o;
-    }
+    private static Rect thisRect;
+ 
 
     // Flag determining visibility of concrete item information
     private bool isConcreteItemVisible = false;
@@ -38,6 +27,8 @@ public class BooksWindow : LayoutWindow
 
         windowWidth = aStartPos.width;
         windowHeight = aStartPos.height;
+
+        thisRect = aStartPos;
     }
 
 
@@ -98,5 +89,24 @@ public class BooksWindow : LayoutWindow
     void OnWindowTypeChanged(BookWindowType type_)
     {
         openedWindow = type_;
+    }
+
+    // Two methods responsible for showing right window content 
+    // - concrete item info or base window view
+    public void ShowBaseWindowView()
+    {
+        isConcreteItemVisible = false;
+        GameRources.GetInstance().selectedBookIndex = -1;
+    }
+
+    public void ShowItemWindowView(int o)
+    {
+        isConcreteItemVisible = true;
+        GameRources.GetInstance().selectedBookIndex = o;
+
+        // Reload windows for newly selected book
+        booksWindowAppearance = new BooksWindowAppearance(thisRect, new GUIContent(Language.GetText("APPEARANCE")), "Window");
+        booksWindowContents = new BooksWindowContents(thisRect, new GUIContent(Language.GetText("CONTENTS")), "Window");
+        booksWindowDocumentation = new BooksWindowDocumentation(thisRect, new GUIContent(Language.GetText("DOCUMENTATION")), "Window");
     }
 }

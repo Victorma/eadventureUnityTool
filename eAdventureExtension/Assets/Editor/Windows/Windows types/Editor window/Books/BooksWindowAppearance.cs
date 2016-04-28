@@ -1,15 +1,244 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BooksWindowAppearance : LayoutWindow
+public class BooksWindowAppearance : LayoutWindow, DialogReceiverInterface
 {
+
+    private Texture2D clearImg = null;
+
+    private Texture2D backgroundPreview = null;
+    private static float windowWidth, windowHeight;
+    private static Rect tableRect;
+    private static Rect previewRect;
+    private static Rect infoPreviewRect;
+
+    private string backgroundPath = "";
+    private string leftNormalArrowPath = "", rightNormalArrowPath = "";
+    private string leftOverArrowPath = "", rightOverArrowPath = "";
+
+
     public BooksWindowAppearance(Rect aStartPos, GUIContent aContent, GUIStyle aStyle, params GUILayoutOption[] aOptions)
         : base(aStartPos, aContent, aStyle, aOptions)
     {
+        clearImg = (Texture2D) Resources.Load("EAdventureData/img/icons/deleteContent", typeof (Texture2D));
+
+        windowWidth = aStartPos.width;
+        windowHeight = aStartPos.height;
+
+        tableRect = new Rect(0f, 0.1f*windowHeight, windowWidth, windowHeight*0.33f);
+        infoPreviewRect = new Rect(0f, 0.45f*windowHeight, windowWidth, windowHeight*0.05f);
+        previewRect = new Rect(0f, 0.5f*windowHeight, windowWidth, windowHeight*0.45f);
+
+        if (GameRources.GetInstance().selectedBookIndex >= 0)
+        {
+            backgroundPath =
+                Controller.getInstance().getSelectedChapterDataControl().getBooksList().getBooks()[
+                    GameRources.GetInstance().selectedBookIndex].getPreviewImage();
+
+            leftNormalArrowPath = Controller.getInstance().getSelectedChapterDataControl().getBooksList().getBooks()[
+                GameRources.GetInstance().selectedBookIndex].getArrowImagePath(BookDataControl.ARROW_LEFT,
+                    BookDataControl.ARROW_NORMAL);
+
+            rightNormalArrowPath = Controller.getInstance().getSelectedChapterDataControl().getBooksList().getBooks()[
+                GameRources.GetInstance().selectedBookIndex].getArrowImagePath(BookDataControl.ARROW_RIGHT,
+                    BookDataControl.ARROW_NORMAL);
+
+            leftOverArrowPath = Controller.getInstance().getSelectedChapterDataControl().getBooksList().getBooks()[
+                GameRources.GetInstance().selectedBookIndex].getArrowImagePath(BookDataControl.ARROW_LEFT,
+                    BookDataControl.ARROW_OVER);
+
+            rightOverArrowPath = Controller.getInstance().getSelectedChapterDataControl().getBooksList().getBooks()[
+                GameRources.GetInstance().selectedBookIndex].getArrowImagePath(BookDataControl.ARROW_RIGHT,
+                    BookDataControl.ARROW_OVER);
+        }
+        if (backgroundPath != null && !backgroundPath.Equals(""))
+            backgroundPreview =
+                (Texture2D)
+                    Resources.Load(backgroundPath.Substring(0, backgroundPath.LastIndexOf(".")), typeof(Texture2D));
+
     }
 
     public override void Draw(int aID)
     {
-        GUILayout.Label("BooksWindowAppearance");
+        /**
+        * TABLE
+        */
+        GUILayout.BeginArea(tableRect);
+
+        GUILayout.Label("Background image of the book");
+        GUILayout.BeginHorizontal();
+        GUILayout.Box(backgroundPath, GUILayout.MaxWidth(0.85f*windowWidth));
+        if (GUILayout.Button("Select", GUILayout.MaxWidth(0.15f * windowWidth)))
+        {
+            ImageFileOpenDialog imageDialog =
+                (ImageFileOpenDialog)ScriptableObject.CreateInstance(typeof(ImageFileOpenDialog));
+            imageDialog.Init(this, BaseFileOpenDialog.FileType.BOOK_IMAGE_PARAGRAPH);
+        }
+        GUILayout.EndHorizontal();
+
+        GUILayout.BeginHorizontal();
+        // NORMAL ARROWS PART
+        GUILayout.Label("Image for left normal arrow", GUILayout.MaxWidth(0.5f*windowWidth));
+        GUILayout.Label("Image for right normal arrow", GUILayout.MaxWidth(0.5f*windowWidth));
+        GUILayout.EndHorizontal();
+
+        GUILayout.BeginHorizontal();
+        if (GUILayout.Button(clearImg, GUILayout.MaxWidth(0.05f * windowWidth)))
+        {
+            //TODO: clear
+        }
+        GUILayout.Box(leftNormalArrowPath, GUILayout.MaxWidth(0.3f*windowWidth));
+        if (GUILayout.Button("Select", GUILayout.MaxWidth(0.1f*windowWidth)))
+        {
+            ImageFileOpenDialog imageDialog =
+                (ImageFileOpenDialog)ScriptableObject.CreateInstance(typeof(ImageFileOpenDialog));
+            imageDialog.Init(this, BaseFileOpenDialog.FileType.BOOK_ARROW_LEFT_NORMAL);
+        }
+
+        GUILayout.Space(0.05f*windowWidth);
+
+        if (GUILayout.Button(clearImg, GUILayout.MaxWidth(0.05f * windowWidth)))
+        {
+            //TODO: clear
+
+        }
+        GUILayout.Box(rightNormalArrowPath, GUILayout.MaxWidth(0.3f*windowWidth));
+        if (GUILayout.Button("Select", GUILayout.MaxWidth(0.1f*windowWidth)))
+        {
+            ImageFileOpenDialog imageDialog =
+                (ImageFileOpenDialog)ScriptableObject.CreateInstance(typeof(ImageFileOpenDialog));
+            imageDialog.Init(this, BaseFileOpenDialog.FileType.BOOK_ARROW_RIGHT_NORMAL);
+        }
+        GUILayout.EndHorizontal();
+
+        GUILayout.Space(10);
+
+        // OVER ARROWS PART
+        GUILayout.BeginHorizontal();
+        GUILayout.Label("Image for left over arrow", GUILayout.MaxWidth(0.5f*windowWidth));
+        GUILayout.Label("Image for right over arrow", GUILayout.MaxWidth(0.5f*windowWidth));
+        GUILayout.EndHorizontal();
+
+        GUILayout.BeginHorizontal();
+        if (GUILayout.Button(clearImg, GUILayout.MaxWidth(0.05f * windowWidth)))
+        {
+
+            //TODO: clear
+        }
+        GUILayout.Box(leftOverArrowPath, GUILayout.MaxWidth(0.3f*windowWidth));
+        if (GUILayout.Button("Select", GUILayout.MaxWidth(0.1f*windowWidth)))
+        {
+            ImageFileOpenDialog imageDialog =
+                (ImageFileOpenDialog)ScriptableObject.CreateInstance(typeof(ImageFileOpenDialog));
+            imageDialog.Init(this, BaseFileOpenDialog.FileType.BOOK_ARROW_LEFT_OVER);
+        }
+
+        GUILayout.Space(0.05f*windowWidth);
+
+        if (GUILayout.Button(clearImg, GUILayout.MaxWidth(0.05f * windowWidth)))
+        {
+
+            //TODO: clear
+        }
+        GUILayout.Box(rightOverArrowPath, GUILayout.MaxWidth(0.3f*windowWidth));
+        if (GUILayout.Button("Select", GUILayout.MaxWidth(0.1f*windowWidth)))
+        {
+            ImageFileOpenDialog imageDialog =
+                (ImageFileOpenDialog)ScriptableObject.CreateInstance(typeof(ImageFileOpenDialog));
+            imageDialog.Init(this, BaseFileOpenDialog.FileType.BOOK_ARROW_RIGHT_OVER);
+        }
+        GUILayout.EndHorizontal();
+
+        GUILayout.EndArea();
+
+
+        if (backgroundPath != "")
+        {
+
+            /**
+            * PREVIEW BUTTON
+            */
+            GUILayout.BeginArea(infoPreviewRect);
+            if (GUILayout.Button("Edit book settings"))
+            {
+                BooksAppearanceEditor window =
+                  (BooksAppearanceEditor)ScriptableObject.CreateInstance(typeof(BooksAppearanceEditor));
+                window.Init(this, Controller.getInstance().getSelectedChapterDataControl().getBooksList().getBooks()[
+                GameRources.GetInstance().selectedBookIndex]);
+            }
+            GUILayout.EndArea();
+
+
+            /**
+            * PREVIEW TEXTURE
+            */
+            GUI.DrawTexture(previewRect, backgroundPreview, ScaleMode.ScaleToFit);
+
+        }
+        else
+        {
+            GUILayout.BeginArea(infoPreviewRect);
+            GUILayout.Button("No background!");
+            GUILayout.EndArea();
+        }
+    }
+
+    public void OnDialogOk(string message, object workingObject = null)
+    {
+
+        if (workingObject is BaseFileOpenDialog.FileType)
+        {
+            switch ((BaseFileOpenDialog.FileType) workingObject)
+            {
+                case BaseFileOpenDialog.FileType.BOOK_IMAGE_PARAGRAPH:
+                    OnBackgroundChange(message);
+                    break;
+                case BaseFileOpenDialog.FileType.BOOK_ARROW_LEFT_NORMAL:
+                    OnArrowLeftNormalChange(message);
+                    break;
+                case BaseFileOpenDialog.FileType.BOOK_ARROW_RIGHT_NORMAL:
+                    OnArrowRightNormalChange(message);
+                    break;
+                case BaseFileOpenDialog.FileType.BOOK_ARROW_LEFT_OVER:
+                    OnArrowLeftOverChange(message);
+                    break;
+                case BaseFileOpenDialog.FileType.BOOK_ARROW_RIGHT_OVER:
+                    OnArrowRightOverChange(message);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    public void OnDialogCanceled(object workingObject = null)
+    {
+        Debug.Log("Wiadomość nie OK");
+    }
+
+    private void OnBackgroundChange(string val)
+    {
+        backgroundPath = val;
+        //TODO: set value to data model
+    }
+    private void OnArrowLeftNormalChange(string val)
+    {
+        leftNormalArrowPath = val;
+        //TODO: set value to data model
+    }
+    private void OnArrowRightNormalChange(string val)
+    {
+        rightNormalArrowPath = val;
+        //TODO: set value to data model
+    }
+    private void OnArrowLeftOverChange(string val)
+    {
+        leftOverArrowPath = val;
+        //TODO: set value to data model
+    }
+    private void OnArrowRightOverChange(string val)
+    {
+        rightOverArrowPath = val;
+        //TODO: set value to data model
     }
 }

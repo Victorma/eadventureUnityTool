@@ -20,6 +20,10 @@ public abstract class BaseFileOpenDialog : EditorWindow
         FRAME_IMAGE,
         FRAME_MUSIC,
         BOOK_IMAGE_PARAGRAPH, 
+        BOOK_ARROW_LEFT_NORMAL,
+        BOOK_ARROW_RIGHT_NORMAL,
+        BOOK_ARROW_LEFT_OVER,
+        BOOK_ARROW_RIGHT_OVER
     };
 
     protected const string DIR_PREFIX = "Assets/Resources";
@@ -104,6 +108,12 @@ public abstract class BaseFileOpenDialog : EditorWindow
                 break;
             case FileType.BOOK_IMAGE_PARAGRAPH:
                 assetTypeDir = AssetsController.CATEGORY_IMAGE_FOLDER;
+                break;
+            case FileType.BOOK_ARROW_LEFT_NORMAL:
+            case FileType.BOOK_ARROW_RIGHT_NORMAL:
+            case FileType.BOOK_ARROW_LEFT_OVER:
+            case FileType.BOOK_ARROW_RIGHT_OVER:
+                assetTypeDir = AssetsController.CATEGORY_ARROW_BOOK_PATH;
                 break;
             default:
                 assetTypeDir = "";

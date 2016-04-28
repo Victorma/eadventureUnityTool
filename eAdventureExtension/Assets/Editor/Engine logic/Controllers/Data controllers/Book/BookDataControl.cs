@@ -101,7 +101,6 @@ public class BookDataControl : DataControlWithResources
      */
     public string getPreviewImage()
     {
-
         return resourcesDataControlList[selectedResources].getAssetPath("background");
     }
 
@@ -140,6 +139,67 @@ public class BookDataControl : DataControlWithResources
         }
 
         return resourcesDataControlList[selectedResources].getAssetPath(asset);
+    }
+
+    /**
+     * Get the path of image for the specified arrow.
+     * @param arrowOrientation Arrow orientation. It can be <i>ARROW_LEFT</i> or <i>ARROW_RIGHT</i>
+     * @param arrowState Arrow state. It can be <i>ARROW_NORMAL</i> or <i>ARROW_OVER<i>
+     * @return
+     */
+    public string getArrowImagePath_WithDefault(int arrowOrientation, int arrowState)
+    {
+
+        string asset = "";
+        string retVal = "";
+        switch (arrowOrientation)
+        {
+            case ARROW_LEFT:
+                asset += "arrowLeft";
+                break;
+            case ARROW_RIGHT:
+                asset += "arrowRight";
+                break;
+        }
+
+        switch (arrowState)
+        {
+            case ARROW_NORMAL:
+                asset += "Normal";
+                break;
+            case ARROW_OVER:
+                asset += "Over";
+                break;
+        }
+
+        retVal = resourcesDataControlList[selectedResources].getAssetPath(asset);
+        if (retVal == null || retVal.Equals(""))
+        {
+            if (arrowOrientation == ARROW_LEFT)
+            {
+                if (arrowState == ARROW_NORMAL)
+                {
+                    retVal = SpecialAssetPaths.ASSET_DEFAULT_ARROW_NORMAL;
+                }
+                else
+                {
+                    retVal = SpecialAssetPaths.ASSET_DEFAULT_ARROW_OVER;
+                }
+            }
+            else
+            {
+                if (arrowState == ARROW_NORMAL)
+                {
+                    retVal = SpecialAssetPaths.ASSET_DEFAULT_ARROW_NORMAL_RIGHT;
+                }
+                else
+                {
+                    retVal = SpecialAssetPaths.ASSET_DEFAULT_ARROW_OVER_RIGHT;
+                }
+            }
+        }
+
+        return retVal;
     }
 
     /**

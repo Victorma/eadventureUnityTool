@@ -73,21 +73,18 @@ public class Book :  Documented, HasId, ICloneable
 
     public void setPreviousPageVector2(Vector2 previousPageVector2)
     {
-
         this.previousPageVector2 = previousPageVector2;
     }
 
 
     public Vector2 getNextPageVector2()
     {
-
         return nextPageVector2;
     }
 
 
     public void setNextPageVector2(Vector2 nextPageVector2)
     {
-
         this.nextPageVector2 = nextPageVector2;
     }
 
