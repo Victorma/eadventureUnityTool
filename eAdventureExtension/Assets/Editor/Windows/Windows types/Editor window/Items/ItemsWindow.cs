@@ -10,19 +10,9 @@ public class ItemsWindow : LayoutWindow
     private static ItemsWindowAppearance itemsWindowAppearance;
     private static ItemsWindowDescription itemsWindowDescription;
 
-    // Two methods responsible for showing right window content 
-    // - concrete item info or base window view
-    public void ShowBaseWindowView()
-    {
-        isConcreteItemVisible = false;
-        GameRources.GetInstance().selectedItemIndex = -1;
-    }
+    private static float windowWidth, windowHeight;
 
-    public void ShowItemWindowView(int o)
-    {
-        isConcreteItemVisible = true;
-        GameRources.GetInstance().selectedItemIndex = o;
-    }
+    private static Rect thisRect;
 
     // Flag determining visibility of concrete item information
     private bool isConcreteItemVisible = false;
@@ -33,6 +23,11 @@ public class ItemsWindow : LayoutWindow
         itemsWindowActions = new ItemsWindowActions(aStartPos, new GUIContent(Language.GetText("ACTIONS")), "Window");
         itemsWindowAppearance = new ItemsWindowAppearance(aStartPos, new GUIContent(Language.GetText("APPEARANCE")), "Window");
         itemsWindowDescription = new ItemsWindowDescription(aStartPos, new GUIContent(Language.GetText("DESCRIPTION_AND_CONFIG")), "Window");
+
+        windowWidth = aStartPos.width;
+        windowHeight = aStartPos.height;
+
+        thisRect = aStartPos;
     }
 
 
@@ -74,8 +69,38 @@ public class ItemsWindow : LayoutWindow
         }
         else
         {
-            GUILayout.Label("ItemsWindow");
+            GUILayout.Space(30);
+            for (int i = 0; i < Controller.getInstance().getCharapterList().getSelectedChapterData().getItems().Count; i++)
+            {
+                GUILayout.BeginHorizontal();
+                GUILayout.Box(Controller.getInstance().getCharapterList().getSelectedChapterData().getItems()[i].getId(), GUILayout.Width(windowWidth * 0.75f));
+                if (GUILayout.Button(Language.GetText("EDIT"), GUILayout.MaxWidth(windowWidth * 0.2f)))
+                {
+                    ShowItemWindowView(i);
+                }
+
+                GUILayout.EndHorizontal();
+
+            }
         }
+    }
+
+    // Two methods responsible for showing right window content 
+    // - concrete item info or base window view
+    public void ShowBaseWindowView()
+    {
+        isConcreteItemVisible = false;
+        GameRources.GetInstance().selectedItemIndex = -1;
+    }
+
+    public void ShowItemWindowView(int o)
+    {
+        isConcreteItemVisible = true;
+        GameRources.GetInstance().selectedItemIndex = o;
+
+        itemsWindowActions = new ItemsWindowActions(thisRect, new GUIContent(Language.GetText("ACTIONS")), "Window");
+        itemsWindowAppearance = new ItemsWindowAppearance(thisRect, new GUIContent(Language.GetText("APPEARANCE")), "Window");
+        itemsWindowDescription = new ItemsWindowDescription(thisRect, new GUIContent(Language.GetText("DESCRIPTION_AND_CONFIG")), "Window");
     }
 
     void OnWindowTypeChanged(ItemsWindowType type_)

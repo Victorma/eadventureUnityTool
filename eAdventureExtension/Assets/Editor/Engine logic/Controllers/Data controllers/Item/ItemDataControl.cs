@@ -73,6 +73,26 @@ public class ItemDataControl : DataControlWithResources
     }
 
     /**
+   * Returns the path to the selected preview image.
+   * 
+   * @return Path to the image, null if not present
+   */
+    public string getIconImage()
+    {
+        return resourcesDataControlList[selectedResources].getAssetPath("icon");
+    }
+
+    /**
+   * Returns the path to the selected preview image.
+   * 
+   * @return Path to the image, null if not present
+   */
+    public string getMouseOverImage()
+    {
+        return resourcesDataControlList[selectedResources].getAssetPath("imageover");
+    }
+
+    /**
      * Returns the id of the item.
      * 
      * @return Item's id

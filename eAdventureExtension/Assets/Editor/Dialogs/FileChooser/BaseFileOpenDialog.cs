@@ -23,7 +23,10 @@ public abstract class BaseFileOpenDialog : EditorWindow
         BOOK_ARROW_LEFT_NORMAL,
         BOOK_ARROW_RIGHT_NORMAL,
         BOOK_ARROW_LEFT_OVER,
-        BOOK_ARROW_RIGHT_OVER
+        BOOK_ARROW_RIGHT_OVER,
+        ITEM_IMAGE,
+        ITEM_ICON,
+        ITEM_IMAGE_OVER
     };
 
     protected const string DIR_PREFIX = "Assets/Resources";
@@ -107,7 +110,12 @@ public abstract class BaseFileOpenDialog : EditorWindow
                 assetTypeDir = AssetsController.CATEGORY_ANIMATION_FOLDER;
                 break;
             case FileType.BOOK_IMAGE_PARAGRAPH:
+            case FileType.ITEM_IMAGE:
+            case FileType.ITEM_IMAGE_OVER:
                 assetTypeDir = AssetsController.CATEGORY_IMAGE_FOLDER;
+                break;
+            case FileType.ITEM_ICON:
+                assetTypeDir = AssetsController.CATEGORY_ICON_FOLDER;
                 break;
             case FileType.BOOK_ARROW_LEFT_NORMAL:
             case FileType.BOOK_ARROW_RIGHT_NORMAL:
@@ -119,7 +127,6 @@ public abstract class BaseFileOpenDialog : EditorWindow
                 assetTypeDir = "";
                 break;
         }
-
 
         DirectoryInfo path = new DirectoryInfo(DIR_PREFIX + "/" + assetTypeDir);
         if (!Directory.Exists(path.FullName))
