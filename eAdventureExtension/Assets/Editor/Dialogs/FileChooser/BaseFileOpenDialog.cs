@@ -11,22 +11,25 @@ public abstract class BaseFileOpenDialog : EditorWindow
     {
         SCENE_BACKGROUND,
         SCENE_FOREGROUND,
-        SCENE_MUSIC, 
+        SCENE_MUSIC,
         EXIT_MUSIC,
-        EXIT_ICON, 
+        EXIT_ICON,
         CUTSCENE_MUSIC,
-        CUTSCENE_VIDEO, 
-        CUTSCENE_SLIDES, 
+        CUTSCENE_VIDEO,
+        CUTSCENE_SLIDES,
         FRAME_IMAGE,
         FRAME_MUSIC,
-        BOOK_IMAGE_PARAGRAPH, 
+        BOOK_IMAGE_PARAGRAPH,
         BOOK_ARROW_LEFT_NORMAL,
         BOOK_ARROW_RIGHT_NORMAL,
         BOOK_ARROW_LEFT_OVER,
         BOOK_ARROW_RIGHT_OVER,
         ITEM_IMAGE,
         ITEM_ICON,
-        ITEM_IMAGE_OVER
+        ITEM_IMAGE_OVER,
+        ITEM_DESCRIPTION_NAME_SOUND,
+        ITEM_DESCRIPTION_BRIEF_SOUND,
+        ITEM_DESCRIPTION_DETAILED_SOUND
     };
 
     protected const string DIR_PREFIX = "Assets/Resources";
@@ -94,6 +97,9 @@ public abstract class BaseFileOpenDialog : EditorWindow
             case FileType.EXIT_MUSIC:
             case FileType.CUTSCENE_MUSIC:
             case FileType.FRAME_MUSIC:
+            case FileType.ITEM_DESCRIPTION_NAME_SOUND:
+            case FileType.ITEM_DESCRIPTION_BRIEF_SOUND:
+            case FileType.ITEM_DESCRIPTION_DETAILED_SOUND:
                 assetTypeDir = AssetsController.CATEGORY_AUDIO_PATH;
                 break;
             case FileType.EXIT_ICON:
@@ -134,7 +140,7 @@ public abstract class BaseFileOpenDialog : EditorWindow
 
         string nameOnly = Path.GetFileName(selectedAssetPath);
 
-        File.Copy(selectedAssetPath, Path.Combine(path.FullName, nameOnly),true);
+        File.Copy(selectedAssetPath, Path.Combine(path.FullName, nameOnly), true);
 
         returnPath = assetTypeDir + "/" + nameOnly;
     }

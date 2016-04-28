@@ -114,6 +114,11 @@ public class ItemDataControl : DataControlWithResources
         return item.getDocumentation();
     }
 
+    public void setDocumentation(string val)
+    {
+        item.setDocumentation(val);
+    }
+
 
     public void setReturnsWhenDragged(bool returnsWhenDragged)
     {
