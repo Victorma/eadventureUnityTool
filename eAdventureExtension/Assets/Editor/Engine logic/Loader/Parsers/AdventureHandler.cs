@@ -420,8 +420,9 @@ public class AdventureHandler : XMLHandler
             try
             {
                 // Set the chapter handler
-                ChapterHandler chapterParser = new ChapterHandler(isCreator, currentChapter);
-
+                // ChapterHandler chapterParser = new ChapterHandler(isCreator, currentChapter);
+                ChapterHandler_ chapterParser = new ChapterHandler_(currentChapter);
+                Debug.Log(currentChapter.getBooks().Count);
                 //// Create a new factory
                 //SAXParserFactory factory = SAXParserFactory.newInstance();
                 ////factory.setValidating( validate );
@@ -436,6 +437,7 @@ public class AdventureHandler : XMLHandler
                 //chapterIS.close();
                 string chapterIS = isCreator.buildInputStream(chapterPath);
                 chapterParser.Parse(chapterIS);
+                Debug.Log("AAAA" + currentChapter.getBooks().Count);
 
             }
             catch (Exception e) { Debug.LogError(e); }
