@@ -44,12 +44,7 @@ public class AssessmentSubParser_ : Subparser_
             assessEffects;
 
         string tmpArgVal;
-
-        tmpArgVal = element.GetAttribute("concept");
-        currentAssessmentRule.setConcept(tmpArgVal.ToString().Trim());
-        tmpArgVal = element.GetAttribute("set-text");
-        currentAssessmentRule.setText(tmpArgVal.ToString().Trim());
-
+       
         tmpArgVal = element.GetAttribute("show-report-at-end");
         if (!string.IsNullOrEmpty(tmpArgVal))
         {
@@ -142,8 +137,67 @@ public class AssessmentSubParser_ : Subparser_
             {
                 repeatRule = tmpArgVal.Equals("yes");
             }
-        }
 
+            currentAssessmentRule = new AssessmentRule(id, importance, repeatRule);
+
+            conditions = element.SelectNodes("condition");
+            foreach (XmlElement ell_ in conditions)
+            {
+                currentConditions = new Conditions();
+                new ConditionSubParser_(currentConditions, chapter).ParseElement(ell_);
+                currentAssessmentRule.setConditions(currentConditions);
+            }
+
+            initsconditions = element.SelectNodes("init-condition");
+            foreach (XmlElement ell_ in initsconditions)
+            {
+                currentConditions = new Conditions();
+                new ConditionSubParser_(currentConditions, chapter).ParseElement(ell_);
+                ((TimedAssessmentRule)currentAssessmentRule).setInitConditions(currentConditions);
+            }
+
+            endsconditions = element.SelectNodes("end-condition");
+            foreach (XmlElement ell_ in endsconditions)
+            {
+                currentConditions = new Conditions();
+                new ConditionSubParser_(currentConditions, chapter).ParseElement(ell_);
+                ((TimedAssessmentRule)currentAssessmentRule).setEndConditions(currentConditions);
+            }
+
+            if(ell.SelectSingleNode("concept")!= null)
+                currentAssessmentRule.setConcept(ell.SelectSingleNode("concept").InnerText.ToString().Trim());
+            if (ell.SelectSingleNode("set-text") != null)
+                currentAssessmentRule.setText(ell.SelectSingleNode("set-text").InnerText.ToString().Trim());
+
+            assessEffects = element.SelectNodes("assessEffect");
+            foreach (XmlElement ell_ in assessEffects)
+            {
+                int timeMin = int.MinValue;
+                int timeMax = int.MinValue;
+                tmpArgVal = element.GetAttribute("time-min");
+                if (!string.IsNullOrEmpty(tmpArgVal))
+                {
+                    timeMin = int.Parse(tmpArgVal);
+                }
+                tmpArgVal = element.GetAttribute("time-max");
+                if (!string.IsNullOrEmpty(tmpArgVal))
+                {
+                    timeMax = int.Parse(tmpArgVal);
+                }
+
+                TimedAssessmentRule tRule = (TimedAssessmentRule)currentAssessmentRule;
+                if (timeMin != int.MinValue && timeMax != int.MaxValue)
+                {
+                    tRule.addEffect(timeMin, timeMax);
+                }
+                else
+                {
+                    tRule.addEffect();
+                }
+            }
+
+            profile.addRule(currentAssessmentRule);
+        }
 
         foreach (XmlElement ell in timedsssessmentsrule)
         {
@@ -194,7 +248,7 @@ public class AssessmentSubParser_ : Subparser_
             {
                 currentConditions = new Conditions();
                 new ConditionSubParser_(currentConditions, chapter).ParseElement(ell_);
-                ((TimedAssessmentRule) currentAssessmentRule).setInitConditions(currentConditions);
+                ((TimedAssessmentRule)currentAssessmentRule).setInitConditions(currentConditions);
             }
 
             endsconditions = element.SelectNodes("end-condition");
@@ -202,8 +256,13 @@ public class AssessmentSubParser_ : Subparser_
             {
                 currentConditions = new Conditions();
                 new ConditionSubParser_(currentConditions, chapter).ParseElement(ell_);
-                ((TimedAssessmentRule) currentAssessmentRule).setEndConditions(currentConditions);
+                ((TimedAssessmentRule)currentAssessmentRule).setEndConditions(currentConditions);
             }
+
+            if (ell.SelectSingleNode("concept") != null)
+                currentAssessmentRule.setConcept(ell.SelectSingleNode("concept").InnerText.ToString().Trim());
+            if (ell.SelectSingleNode("set-text") != null)
+                currentAssessmentRule.setText(ell.SelectSingleNode("set-text").InnerText.ToString().Trim());
 
             assessEffects = element.SelectNodes("assessEffect");
             foreach (XmlElement ell_ in assessEffects)
@@ -221,7 +280,7 @@ public class AssessmentSubParser_ : Subparser_
                     timeMax = int.Parse(tmpArgVal);
                 }
 
-                TimedAssessmentRule tRule = (TimedAssessmentRule) currentAssessmentRule;
+                TimedAssessmentRule tRule = (TimedAssessmentRule)currentAssessmentRule;
                 if (timeMin != int.MinValue && timeMax != int.MaxValue)
                 {
                     tRule.addEffect(timeMin, timeMax);
@@ -234,30 +293,7 @@ public class AssessmentSubParser_ : Subparser_
 
             profile.addRule(currentAssessmentRule);
         }
-        //TODO:
-//        else if (qName.Equals("set-property"))
-//        {
-//            string id = null;
-//string value = null;
-//string varName = null;
 
-//            foreach (KeyValuePair<string, string> entry in attrs)
-//            {
-//                if (entry.Key.Equals("id"))
-//                    id = tmpArgVal;
-//                if (entry.Key.Equals("value"))
-//                    value = tmpArgVal;
-//                if (entry.Key.Equals("varName"))
-//                    varName = tmpArgVal;
-
-//            }
-//            if (varName == null)
-//                currentAssessmentRule.addProperty(new AssessmentProperty(id, value));
-//            else
-//                currentAssessmentRule.addProperty(new AssessmentProperty(id, value, varName));
-//        }
-//        chapter.addAssessmentProfile(profile);
-//    }
-
+        chapter.addAssessmentProfile(profile);
     }
 }
