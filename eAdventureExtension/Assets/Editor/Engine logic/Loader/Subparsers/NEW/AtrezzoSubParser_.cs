@@ -51,7 +51,8 @@ public class AtrezzoSubParser_ : Subparser_
         descriptions = new List<Description>();
         atrezzo.setDescriptions(descriptions);
 
-        atrezzo.setDocumentation(element.SelectSingleNode("documentation").InnerText);
+        if (element.SelectSingleNode("documentation") != null)
+            atrezzo.setDocumentation(element.SelectSingleNode("documentation").InnerText);
 
         foreach (XmlElement el in resourcess)
         {

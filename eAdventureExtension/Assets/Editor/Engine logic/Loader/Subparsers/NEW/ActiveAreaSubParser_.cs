@@ -123,7 +123,8 @@ public class ActiveAreaSubParser_ : Subparser_
             activeArea.setInfluenceArea(influenceArea);
         }
 
-        activeArea.setDocumentation(element.SelectSingleNode("documentation").InnerText);
+        if (element.SelectSingleNode("documentation") != null)
+            activeArea.setDocumentation(element.SelectSingleNode("documentation").InnerText);
 
         descriptions = new List<Description>();
         activeArea.setDescriptions(descriptions);

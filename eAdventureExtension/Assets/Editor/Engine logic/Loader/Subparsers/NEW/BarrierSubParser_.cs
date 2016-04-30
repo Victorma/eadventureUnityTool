@@ -55,7 +55,8 @@ public class BarrierSubParser_ : Subparser_
         }
         barrier = new Barrier(generateId(), x, y, width, height);
 
-        barrier.setDocumentation(element.SelectSingleNode("documentation").InnerText);
+        if (element.SelectSingleNode("documentation") != null)
+            barrier.setDocumentation(element.SelectSingleNode("documentation").InnerText);
 
         foreach (XmlElement ell in conditions)
         {

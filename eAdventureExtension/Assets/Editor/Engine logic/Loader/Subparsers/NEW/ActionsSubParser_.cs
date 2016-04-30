@@ -91,7 +91,8 @@ public class ActionsSubParser_ : Subparser_
 
         string tmpArgVal;
 
-        this.element.setDocumentation(element.SelectSingleNode("documentation").InnerText);
+        if (element.SelectSingleNode("documentation") != null)
+            this.element.setDocumentation(element.SelectSingleNode("documentation").InnerText);
 
         foreach (XmlElement el in examines)
         {

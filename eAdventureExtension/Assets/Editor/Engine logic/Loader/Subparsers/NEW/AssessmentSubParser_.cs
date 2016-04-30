@@ -29,19 +29,19 @@ public class AssessmentSubParser_ : Subparser_
     {
         profile = new AssessmentProfile();
     }
-    
+
     public override void ParseElement(XmlElement element)
     {
 
         XmlNodeList
-           smtpsconfigs = element.SelectNodes("smtp-config"),
-           assessmentsrule = element.SelectNodes("assessment-rule"),
-           timedsssessmentsrule = element.SelectNodes("timed-assessment-rule"),
-           conditions,
-           initsconditions,
-           endsconditions,
-           setpropertys, 
-           assessEffects;
+            smtpsconfigs = element.SelectNodes("smtp-config"),
+            assessmentsrule = element.SelectNodes("assessment-rule"),
+            timedsssessmentsrule = element.SelectNodes("timed-assessment-rule"),
+            conditions,
+            initsconditions,
+            endsconditions,
+            setpropertys,
+            assessEffects;
 
         string tmpArgVal;
 
@@ -64,12 +64,13 @@ public class AssessmentSubParser_ : Subparser_
                 profile.setEmail("");
                 profile.setSendByEmail(false);
             }
-            else {
+            else
+            {
                 profile.setEmail(tmpArgVal);
                 profile.setSendByEmail(true);
             }
         }
-        
+
         tmpArgVal = element.GetAttribute("scorm12");
         if (!string.IsNullOrEmpty(tmpArgVal))
         {
@@ -178,7 +179,7 @@ public class AssessmentSubParser_ : Subparser_
             }
             currentAssessmentRule = new TimedAssessmentRule(id, importance, repeatRule);
             if (has)
-                ((TimedAssessmentRule)currentAssessmentRule).setUsesEndConditions(usesEndConditions);
+                ((TimedAssessmentRule) currentAssessmentRule).setUsesEndConditions(usesEndConditions);
 
             conditions = element.SelectNodes("condition");
             foreach (XmlElement ell_ in conditions)
@@ -193,7 +194,7 @@ public class AssessmentSubParser_ : Subparser_
             {
                 currentConditions = new Conditions();
                 new ConditionSubParser_(currentConditions, chapter).ParseElement(ell_);
-                ((TimedAssessmentRule)currentAssessmentRule).setInitConditions(currentConditions);
+                ((TimedAssessmentRule) currentAssessmentRule).setInitConditions(currentConditions);
             }
 
             endsconditions = element.SelectNodes("end-condition");
@@ -201,7 +202,7 @@ public class AssessmentSubParser_ : Subparser_
             {
                 currentConditions = new Conditions();
                 new ConditionSubParser_(currentConditions, chapter).ParseElement(ell_);
-                ((TimedAssessmentRule)currentAssessmentRule).setEndConditions(currentConditions);
+                ((TimedAssessmentRule) currentAssessmentRule).setEndConditions(currentConditions);
             }
 
             assessEffects = element.SelectNodes("assessEffect");
@@ -220,19 +221,20 @@ public class AssessmentSubParser_ : Subparser_
                     timeMax = int.Parse(tmpArgVal);
                 }
 
-                TimedAssessmentRule tRule = (TimedAssessmentRule)currentAssessmentRule;
+                TimedAssessmentRule tRule = (TimedAssessmentRule) currentAssessmentRule;
                 if (timeMin != int.MinValue && timeMax != int.MaxValue)
                 {
                     tRule.addEffect(timeMin, timeMax);
                 }
-                else {
+                else
+                {
                     tRule.addEffect();
                 }
             }
 
             profile.addRule(currentAssessmentRule);
         }
-    //TODO:
+        //TODO:
 //        else if (qName.Equals("set-property"))
 //        {
 //            string id = null;
@@ -257,4 +259,5 @@ public class AssessmentSubParser_ : Subparser_
 //        chapter.addAssessmentProfile(profile);
 //    }
 
+    }
 }
