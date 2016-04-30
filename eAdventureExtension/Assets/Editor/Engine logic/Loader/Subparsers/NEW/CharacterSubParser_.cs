@@ -41,8 +41,8 @@ public class CharacterSubParser_ : Subparser_
             descriptionss = element.SelectNodes("description"),
             assets,
             conditions,
-            frontcolors = element.SelectNodes("frontcolor"),
-            bordercolors = element.SelectNodes("bordercolor"),
+            frontcolors,
+            bordercolors,
             textcolors = element.SelectNodes("textcolor"),
             conversationsref = element.SelectNodes("conversation-ref"),
             voices = element.SelectNodes("voice"),
@@ -99,31 +99,6 @@ public class CharacterSubParser_ : Subparser_
             npc.addResources(currentResources);
         }
 
-        foreach (XmlElement el in frontcolors)
-        {
-            string color = "";
-
-            tmpArgVal = el.GetAttribute("color");
-            if (!string.IsNullOrEmpty(tmpArgVal))
-            {
-                color = tmpArgVal;
-            }
-
-            npc.setTextFrontColor(color);
-        }
-
-        foreach (XmlElement el in bordercolors)
-        {
-            string color = "";
-
-            tmpArgVal = el.GetAttribute("color");
-            if (!string.IsNullOrEmpty(tmpArgVal))
-            {
-                color = tmpArgVal;
-            }
-
-            npc.setTextBorderColor(color);
-        }
 
         foreach (XmlElement el in textcolors)
         {
@@ -143,6 +118,34 @@ public class CharacterSubParser_ : Subparser_
             if (!string.IsNullOrEmpty(tmpArgVal))
             {
                 npc.setBubbleBorderColor(tmpArgVal);
+            }
+
+            frontcolors = element.SelectNodes("frontcolor");
+            foreach (XmlElement ell in frontcolors)
+            {
+                string color = "";
+
+                tmpArgVal = ell.GetAttribute("color");
+                if (!string.IsNullOrEmpty(tmpArgVal))
+                {
+                    color = tmpArgVal;
+                }
+
+                npc.setTextFrontColor(color);
+            }
+
+            bordercolors = element.SelectNodes("bordercolor");
+            foreach (XmlElement ell in bordercolors)
+            {
+                string color = "";
+
+                tmpArgVal = el.GetAttribute("color");
+                if (!string.IsNullOrEmpty(tmpArgVal))
+                {
+                    color = tmpArgVal;
+                }
+
+                npc.setTextBorderColor(color);
             }
         }
 

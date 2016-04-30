@@ -33,7 +33,7 @@ public class ConditionSubParser_ : Subparser_
             lesssequalssthan = element.SelectNodes("less-equals-than"),
             equalss = element.SelectNodes("equals"),
             notsequals = element.SelectNodes("not-equals"),
-            globalsstatesref = element.SelectNodes("global -state-ref");
+            globalsstatesref = element.SelectNodes("global-state-ref");
 
         string tmpArgVal;
 
