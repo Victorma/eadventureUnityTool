@@ -54,6 +54,29 @@ public class ItemsListDataControl : DataControl
         return itemsDataControlList[itemsDataControlList.Count - 1];
     }
 
+
+    public string[] getItemsIDs()
+    {
+        string[] scenesInfo = null;
+        scenesInfo = new string[itemsList.Count];
+        for (int i = 0; i < itemsList.Count; i++)
+        {
+            scenesInfo[i] = itemsList[i].getId();
+        }
+
+        return scenesInfo;
+    }
+
+    public int getItemIndexByID(string id)
+    {
+        for (int i = 0; i < itemsList.Count; i++)
+        {
+            if (itemsList[i].getId().Equals(id))
+                return i;
+        }
+        return -1;
+    }
+
     /**
      * Returns the info of the items contained in the list.
      * 

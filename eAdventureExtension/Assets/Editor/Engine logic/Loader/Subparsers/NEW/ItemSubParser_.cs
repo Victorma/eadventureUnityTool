@@ -61,7 +61,7 @@ public class ItemSubParser_ : Subparser_
         if (element.SelectSingleNode("documentation") != null)
             parsedObject.setDocumentation(element.SelectSingleNode("documentation").InnerText);
 
-        tmpArgVal = element.GetAttribute("name");
+        tmpArgVal = element.GetAttribute("id");
         if (!string.IsNullOrEmpty(tmpArgVal))
         {
             parsedObjectId = tmpArgVal;

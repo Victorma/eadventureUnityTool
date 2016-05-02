@@ -407,7 +407,7 @@ public class ActionsListDataControl : DataControl
 
         bool elementMoved = false;
         int elementIndex = actionsList.IndexOf((Action)dataControl.getContent());
-
+        
         if (elementIndex > 0)
         {
             Action e = actionsList[elementIndex];
@@ -427,10 +427,9 @@ public class ActionsListDataControl : DataControl
     
     public override bool moveElementDown(DataControl dataControl)
     {
-
         bool elementMoved = false;
         int elementIndex = actionsList.IndexOf((Action)dataControl.getContent());
-
+        
         if (elementIndex < actionsList.Count - 1)
         {
             Action e = actionsList[elementIndex];

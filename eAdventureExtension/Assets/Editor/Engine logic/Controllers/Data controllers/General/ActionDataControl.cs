@@ -147,6 +147,43 @@ public class ActionDataControl : DataControlWithResources
         return actionType;
     }
 
+    public string getTypeName()
+    {
+        string name = "";
+
+        switch (action.getType())
+        {
+            case Action.EXAMINE:
+                name = "Examine";
+                break;
+            case Action.GRAB:
+                name = "Grab";
+                break;
+            case Action.USE:
+                name = "Use";
+                break;
+            case Action.CUSTOM:
+                name = "Custom";
+                break;
+            case Action.USE_WITH:
+                name = "Use with";
+                break;
+            case Action.GIVE_TO:
+                name = "Give to";
+                break;
+            case Action.CUSTOM_INTERACT:
+                name = "Custom interact";
+                break;
+            case Action.TALK_TO:
+                name = "Talk to";
+                break;
+            case Action.DRAG_TO:
+                name = "Drag to";
+                break;
+        }
+        return name;
+    }
+
     /**
      * Returns whether the action accepts id target or not.
      * 

@@ -81,6 +81,28 @@ public class NPCsListDataControl : DataControl
         return npcsInfo;
     }
 
+    public string[] getNPCsIDs()
+    {
+        string[] scenesInfo = null;
+        scenesInfo = new string[npcsList.Count];
+        for (int i = 0; i < npcsList.Count; i++)
+        {
+            scenesInfo[i] = npcsList[i].getId();
+        }
+
+        return scenesInfo;
+    }
+
+    public int getNPCIndexByID(string id)
+    {
+        for (int i = 0; i < npcsList.Count; i++)
+        {
+            if (npcsList[i].getId().Equals(id))
+                return i;
+        }
+        return -1;
+    }
+
     public override System.Object getContent()
     {
 

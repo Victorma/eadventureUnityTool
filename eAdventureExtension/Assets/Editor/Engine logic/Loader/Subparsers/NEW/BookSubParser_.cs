@@ -146,7 +146,6 @@ public class BookSubParser_ : Subparser_
             titles = el.SelectNodes("title");
             foreach (XmlElement ell in titles)
             {
-                Debug.Log("T " + ell.InnerText);
                 string currentstring = ell.InnerText;
                 if (currentstring != null &&
                     currentstring.ToString().Trim().Replace("\t", "").Replace("\n", "").Length > 0)
@@ -158,7 +157,6 @@ public class BookSubParser_ : Subparser_
             foreach (XmlElement ell in bullets)
             {
                 string currentstring = ell.InnerText;
-                Debug.Log("B " + ell.InnerText);
                 if (currentstring != null &&
                     currentstring.ToString().Trim().Replace("\t", "").Replace("\n", "").Length > 0)
                     book.addParagraph(new BookParagraph(BookParagraph.BULLET,
