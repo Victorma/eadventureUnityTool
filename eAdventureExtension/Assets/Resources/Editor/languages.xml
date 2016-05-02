@@ -437,7 +437,7 @@
       
       <label id="DIALOG_CONFIGURATION">
         <text lang="Polski">Konfiguracja dialogu</text>
-        <text lang="English">Dialog konfiguration</text>
+        <text lang="English">Dialog configuration</text>
       </label>
       
       <label id="LIST_OF_TIMERS">

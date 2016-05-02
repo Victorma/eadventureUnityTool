@@ -10,23 +10,7 @@ public class PlayerWindow : LayoutWindow
     private static PlayerWindowDocumentation playerWindowDocumentation;
 
     private Player playerRef = null;
-
-    // Two methods responsible for showing right window content 
-    // - concrete item info or base window view
-    public void ShowBaseWindowView()
-    {
-        isConcreteItemVisible = false;
-    }
-
-    public void ShowItemWindowView(Player o)
-    {
-        isConcreteItemVisible = true;
-        playerRef = o;
-    }
-
-    // Flag determining visibility of concrete item information
-    private bool isConcreteItemVisible = false;
-
+    
     public PlayerWindow(Rect aStartPos, GUIContent aContent, GUIStyle aStyle, params GUILayoutOption[] aOptions)
         : base(aStartPos, aContent, aStyle, aOptions)
     {
@@ -37,12 +21,7 @@ public class PlayerWindow : LayoutWindow
 
     public override void Draw(int aID)
     {
-        // Show information of concrete item
-        if (isConcreteItemVisible)
-        {
-            /**
-             UPPER MENU
-            */
+      
             GUILayout.BeginHorizontal();
             if (GUILayout.Button(Language.GetText("DIALOG_CONFIGURATION")))
             {
@@ -63,11 +42,6 @@ public class PlayerWindow : LayoutWindow
                     playerWindowDocumentation.Draw(aID);
                     break;
             }
-        }
-        else
-        {
-            GUILayout.Label(Language.GetText("PLAYER"));
-        }
     }
 
     void OnWindowTypeChanged(PlayerWindowType type_)

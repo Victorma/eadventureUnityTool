@@ -608,20 +608,6 @@ public class EditorWindowBase : EditorWindow, DialogReceiverInterface
         if (GUILayout.Button(leftMenuContentPlayer))
         {
             OnWindowTypeChanged(EditorWindowType.Player);
-            playerWindow.ShowBaseWindowView();
-        }
-        // Item sublist player
-        if (openedWindow == EditorWindowType.Player)
-        {
-            GUI.skin = leftSubMenuSkin;
-            if (
-                GUILayout.Button(
-                    Controller.getInstance().getCharapterList().getSelectedChapterData().getPlayer().getId()))
-            {
-                playerWindow.ShowItemWindowView(
-                    Controller.getInstance().getCharapterList().getSelectedChapterData().getPlayer());
-            }
-            GUI.skin = defaultGUISkin;
         }
 
         // Button event NPC
