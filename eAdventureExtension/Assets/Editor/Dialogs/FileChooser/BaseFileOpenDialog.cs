@@ -29,7 +29,8 @@ public abstract class BaseFileOpenDialog : EditorWindow
         ITEM_IMAGE_OVER,
         ITEM_DESCRIPTION_NAME_SOUND,
         ITEM_DESCRIPTION_BRIEF_SOUND,
-        ITEM_DESCRIPTION_DETAILED_SOUND
+        ITEM_DESCRIPTION_DETAILED_SOUND,
+        SET_ITEM_IMAGE
     };
 
     protected const string DIR_PREFIX = "Assets/Resources";
@@ -118,6 +119,7 @@ public abstract class BaseFileOpenDialog : EditorWindow
             case FileType.BOOK_IMAGE_PARAGRAPH:
             case FileType.ITEM_IMAGE:
             case FileType.ITEM_IMAGE_OVER:
+            case FileType.SET_ITEM_IMAGE:
                 assetTypeDir = AssetsController.CATEGORY_IMAGE_FOLDER;
                 break;
             case FileType.ITEM_ICON:

@@ -46,6 +46,11 @@ public class AtrezzoDataControl : DataControlWithResources
         return resourcesDataControlList[selectedResources].getAssetPath("image");
     }
 
+    public void setImage(string path)
+    {
+        resourcesDataControlList[selectedResources].addAsset("image", path.Substring(0, path.LastIndexOf(".")));
+    }
+
     /**
      * Returns the id of the atrezzo item.
      * 

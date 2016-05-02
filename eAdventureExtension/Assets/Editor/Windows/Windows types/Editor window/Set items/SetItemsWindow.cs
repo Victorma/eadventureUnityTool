@@ -8,19 +8,8 @@ public class SetItemsWindow : LayoutWindow
     private static SetItemsWindowApperance setItemsWindowApperance;
     private static SetItemsWindowDocumentation setItemsWindowDocumentation;
 
-    // Two methods responsible for showing right window content 
-    // - concrete item info or base window view
-    public void ShowBaseWindowView()
-    {
-        isConcreteItemVisible = false;
-    }
-
-    // TODO - change Object to adequate class
-    public void ShowItemWindowView(Object o)
-    {
-        isConcreteItemVisible = true;
-        // TODO - set desire object reference
-    }
+    private static float windowWidth, windowHeight;
+    private static Rect thisRect;
 
     // Flag determining visibility of concrete item information
     private bool isConcreteItemVisible = false;
@@ -30,6 +19,11 @@ public class SetItemsWindow : LayoutWindow
     {
         setItemsWindowApperance = new SetItemsWindowApperance(aStartPos, new GUIContent(Language.GetText("APPEARANCE")), "Window");
         setItemsWindowDocumentation = new SetItemsWindowDocumentation(aStartPos, new GUIContent(Language.GetText("DOCUMENTATION")), "Window");
+
+        windowWidth = aStartPos.width;
+        windowHeight = aStartPos.height;
+
+        thisRect = aStartPos;
     }
 
 
@@ -64,12 +58,40 @@ public class SetItemsWindow : LayoutWindow
         }
         else
         {
-            GUILayout.Label("SetItemsWindow");
+            GUILayout.Space(30);
+            for (int i = 0; i < Controller.getInstance().getCharapterList().getSelectedChapterData().getAtrezzo().Count; i++)
+            {
+                GUILayout.BeginHorizontal();
+                GUILayout.Box(Controller.getInstance().getCharapterList().getSelectedChapterData().getAtrezzo()[i].getId(), GUILayout.Width(windowWidth * 0.75f));
+                if (GUILayout.Button(Language.GetText("EDIT"), GUILayout.MaxWidth(windowWidth * 0.2f)))
+                {
+                    ShowItemWindowView(i);
+                }
+
+                GUILayout.EndHorizontal();
+            }
         }
     }
 
     void OnWindowTypeChanged(SetItemsWindowType type_)
     {
         openedWindow = type_;
+    }
+
+    // Two methods responsible for showing right window content 
+    // - concrete item info or base window view
+    public void ShowBaseWindowView()
+    {
+        isConcreteItemVisible = false;
+        GameRources.GetInstance().selectedSetItemIndex = -1;
+    }
+
+    public void ShowItemWindowView(int o)
+    {
+        isConcreteItemVisible = true;
+        GameRources.GetInstance().selectedSetItemIndex = o;
+
+        setItemsWindowApperance = new SetItemsWindowApperance(thisRect, new GUIContent(Language.GetText("APPEARANCE")), "Window");
+        setItemsWindowDocumentation = new SetItemsWindowDocumentation(thisRect, new GUIContent(Language.GetText("DOCUMENTATION")), "Window");
     }
 }

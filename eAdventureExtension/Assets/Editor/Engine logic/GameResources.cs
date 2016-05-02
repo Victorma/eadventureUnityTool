@@ -13,6 +13,7 @@ public class GameRources
     public int selectedBookIndex = -1;
     public int selectedItemIndex = -1;
     public int selectedCharacterIndex = -1;
+    public int selectedSetItemIndex = -1;
 
     public static GameRources GetInstance()
     {
@@ -31,7 +32,8 @@ public class GameRources
         selectedBookIndex = -1;
         selectedItemIndex = -1;
         selectedCharacterIndex = -1;
-        instance = null;
+        selectedSetItemIndex = -1;
+         instance = null;
     }
 
     public static void LoadOrCreateGameProject(string selectedGameProjectPath)

@@ -537,23 +537,70 @@ public class EditorWindowBase : EditorWindow, DialogReceiverInterface
 
 
 
-        //// Button event
-        //if (GUILayout.Button(leftMenuContentPlayerSetItem))
-        //{
-        //    OnWindowTypeChanged(EditorWindowType.SetItems);
-        //    setItemsWindow.ShowBaseWindowView();
-        //}
-        //// Item sublist
-        //if (openedWindow == EditorWindowType.SetItems)
-        //{
-        //    GUI.skin = leftSubMenuSkin;
-        //    foreach (SetItem s in Controller.getInstance().getCharapterList().getSelectedChapterData().getCutscenes())
-        //        if (GUILayout.Button(s.modelName))
-        //        {
-        //            setItemsWindow.ShowItemWindowView(new Object());
-        //        }
-        //    GUI.skin = defaultGUISkin;
-        //}
+        // Button event item
+        GUILayout.BeginHorizontal();
+        if (GUILayout.Button(leftMenuContentSetItem))
+        {
+            OnWindowTypeChanged(EditorWindowType.SetItems);
+            setItemsWindow.ShowBaseWindowView();
+        }
+        //Add button item
+        if (openedWindow == EditorWindowType.SetItems)
+        {
+            if (GUILayout.Button(addTexture))
+            {
+                ChapterElementNameInputPopup window = (ChapterElementNameInputPopup)ScriptableObject.CreateInstance(typeof(ChapterElementNameInputPopup));
+                window.Init(this, "Atrezzo", EditorWindowType.SetItems);
+            }
+        }
+        GUILayout.EndHorizontal();
+        // Item sublist item
+        if (openedWindow == EditorWindowType.SetItems)
+        {
+            GUI.skin = leftSubMenuSkin;
+            for (int i = 0;
+                i < Controller.getInstance().getCharapterList().getSelectedChapterData().getAtrezzo().Count;
+                i++)
+            {
+                if (i == GameRources.GetInstance().selectedSetItemIndex)
+                {
+                    GUI.skin = leftSubMenuConcreteItemSkin;
+                }
+
+                if (
+                    GUILayout.Button(
+                        Controller.getInstance().getCharapterList().getSelectedChapterData().getAtrezzo()[i].getId()))
+                {
+                    setItemsWindow.ShowItemWindowView(i);
+                }
+
+                if (i == GameRources.GetInstance().selectedSetItemIndex)
+                {
+                    GUILayout.BeginHorizontal();
+                    if (GUILayout.Button("Rename"))
+                    {
+                        Debug.Log("Rename");
+                    }
+                    if (GUILayout.Button(duplicateImg))
+                    {
+                        Controller.getInstance()
+                              .getCharapterList()
+                              .getSelectedChapterDataControl().getAtrezzoList().duplicateElement(Controller.getInstance().getCharapterList().getSelectedChapterDataControl().getAtrezzoList().getAtrezzoList()[i]);
+
+                    }
+                    if (GUILayout.Button(deleteImg))
+                    {
+                        Controller.getInstance()
+                               .getCharapterList()
+                               .getSelectedChapterDataControl().getAtrezzoList().deleteElement(Controller.getInstance().getCharapterList().getSelectedChapterDataControl().getAtrezzoList().getAtrezzoList()[i], false);
+                        scenesWindow.ShowBaseWindowView();
+                    }
+                    GUILayout.EndHorizontal();
+                    GUI.skin = leftSubMenuSkin;
+                }
+            }
+            GUI.skin = defaultGUISkin;
+        }
 
 
 
