@@ -144,16 +144,18 @@ public class NPCDataControl : DataControlWithResources
         return npc.getDocumentation();
     }
 
+    public void setDocumentation(string val)
+    {
+        npc.setDocumentation(val);
+    }
     /**
      * Returns the text front color for the player strings.
      * 
      * @return Text front color
      */
-    public Color getTextFrontColor()
+    public string getTextFrontColor()
     {
-        //TODO: implementation
-        //return new Color(Integer.valueOf(npc.getTextFrontColor().Substring(1), 16).intValue());
-        return Color.blue;
+        return npc.getTextFrontColor();
     }
 
     /**
@@ -161,12 +163,9 @@ public class NPCDataControl : DataControlWithResources
      * 
      * @return Text front color
      */
-    public Color getTextBorderColor()
+    public string getTextBorderColor()
     {
-
-        //TODO: implementation
-        //return new Color(Integer.valueOf(npc.getTextBorderColor().substring(1), 16).intValue());
-        return Color.red;
+        return npc.getTextBorderColor();
     }
 
     /**
@@ -186,21 +185,9 @@ public class NPCDataControl : DataControlWithResources
      * @param textFrontColor
      *            New text front color
      */
-    public void setTextFrontColor(Color textFrontColor)
+    public void setTextFrontColor(string textFrontColor)
     {
-
-        string red = ((int)(textFrontColor.r*256)).ToString("X4");
-        string green = ((int)(textFrontColor.g * 256)).ToString("X4");
-        string blue = ((int)(textFrontColor.b * 256)).ToString("X4");
-
-        if (red.Length == 1)
-            red = "0" + red;
-        if (green.Length == 1)
-            green = "0" + green;
-        if (blue.Length == 1)
-            blue = "0" + blue;
-
-        controller.addTool(new ChangeStringValueTool(npc, "#" + red + green + blue, "getTextFrontColor", "setTextFrontColor"));
+        npc.setTextFrontColor(textFrontColor);
     }
 
     /**
@@ -209,55 +196,20 @@ public class NPCDataControl : DataControlWithResources
      * @param textBorderColor
      *            New text border color
      */
-    public void setTextBorderColor(Color textBorderColor)
+    public void setTextBorderColor(string textBorderColor)
     {
 
-        string red = ((int)(textBorderColor.r * 256)).ToString("X4");
-        string green = ((int)(textBorderColor.g * 256)).ToString("X4");
-        string blue = ((int)(textBorderColor.b * 256)).ToString("X4");
-
-        if (red.Length == 1)
-            red = "0" + red;
-        if (green.Length == 1)
-            green = "0" + green;
-        if (blue.Length == 1)
-            blue = "0" + blue;
-
-        controller.addTool(new ChangeStringValueTool(npc, "#" + red + green + blue, "getTextBorderColor", "setTextBorderColor"));
+        npc.setTextBorderColor(textBorderColor);
     }
 
-    public void setBubbleBkgColor(Color bubbleBkgColor)
+    public void setBubbleBkgColor(string bubbleBkgColor)
     {
-
-        string red = ((int)(bubbleBkgColor.r * 256)).ToString("X4");
-        string green = ((int)(bubbleBkgColor.g * 256)).ToString("X4");
-        string blue = ((int)(bubbleBkgColor.b * 256)).ToString("X4");
-
-        if (red.Length == 1)
-            red = "0" + red;
-        if (green.Length == 1)
-            green = "0" + green;
-        if (blue.Length == 1)
-            blue = "0" + blue;
-
-        controller.addTool(new ChangeStringValueTool(npc, "#" + red + green + blue, "getBubbleBkgColor", "setBubbleBkgColor"));
+        npc.setBubbleBkgColor(bubbleBkgColor);
     }
 
-    public void setBubbleBorderColor(Color bubbleBorderColor)
+    public void setBubbleBorderColor(string bubbleBorderColor)
     {
-
-        string red = ((int)(bubbleBorderColor.r * 256)).ToString("X4");
-        string green = ((int)(bubbleBorderColor.g * 256)).ToString("X4");
-        string blue = ((int)(bubbleBorderColor.b * 256)).ToString("X4");
-
-        if (red.Length == 1)
-            red = "0" + red;
-        if (green.Length == 1)
-            green = "0" + green;
-        if (blue.Length == 1)
-            blue = "0" + blue;
-
-        controller.addTool(new ChangeStringValueTool(npc, "#" + red + green + blue, "getBubbleBorderColor", "setBubbleBorderColor"));
+        npc.setBubbleBorderColor(bubbleBorderColor);
     }
 
     /**
@@ -588,18 +540,14 @@ public class NPCDataControl : DataControlWithResources
         return resourcesDataControlList[selectedResources].getAssetPath(animation);
     }
 
-    public Color getBubbleBorderColor()
+    public string getBubbleBorderColor()
     {
-        //TODO: implementation
-        //return new Color(Integer.valueOf(npc.getBubbleBorderColor().substring(1), 16).intValue());
-        return Color.yellow;
+        return npc.getBubbleBorderColor();
     }
 
-    public Color getBubbleBkgColor()
+    public string getBubbleBkgColor()
     {
-        //TODO: implementation
-        //return new Color(Integer.valueOf(npc.getBubbleBkgColor().substring(1), 16).intValue());
-        return Color.magenta;
+        return npc.getBubbleBkgColor();
     }
 
     public bool getShowsSpeechBubbles()

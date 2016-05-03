@@ -81,7 +81,8 @@ public class ItemsWindowActions : LayoutWindow
         GUILayout.Box("Needs to go", GUILayout.Width(windowWidth*0.39f));
         GUILayout.Box("Conditions", GUILayout.Width(windowWidth*0.1f));
         GUILayout.EndHorizontal();
-        scrollPosition = GUILayout.BeginScrollView(scrollPosition);
+        scrollPosition = GUILayout.BeginScrollView(scrollPosition, GUILayout.ExpandWidth(false));
+
         // Action table
         for (int i = 0;
             i <
@@ -120,14 +121,10 @@ public class ItemsWindowActions : LayoutWindow
                 }
                 else
                 {
-                    GUILayout.Label(Controller.getInstance().getSelectedChapterDataControl().getItemsList().getItems()[GameRources.GetInstance().selectedItemIndex].getActionsList().getActions()[i].getTypeName(),GUILayout.Width(windowWidth * 0.39f));
-                }
-
-                if (GUILayout.Button(Controller.getInstance().getSelectedChapterDataControl().getItemsList().getItems()[
-                    GameRources.GetInstance().selectedItemIndex].getActionsList().getActions()[i].getTypeName(),
-                    GUILayout.Width(windowWidth*0.39f)))
-                {
-                    OnActionSelectionChange(i);
+                    GUILayout.Label(
+                        Controller.getInstance().getSelectedChapterDataControl().getItemsList().getItems()[
+                            GameRources.GetInstance().selectedItemIndex].getActionsList().getActions()[i].getTypeName(),
+                        GUILayout.Width(windowWidth*0.39f));
                 }
 
                 //TODO: distinguish between first/third person
@@ -148,7 +145,7 @@ public class ItemsWindowActions : LayoutWindow
             {
                 if (GUILayout.Button(Controller.getInstance().getSelectedChapterDataControl().getItemsList().getItems()[
                     GameRources.GetInstance().selectedItemIndex].getActionsList().getActions()[i].getTypeName(),
-                    GUILayout.Width(windowWidth*0.44f)))
+                    GUILayout.Width(windowWidth*0.39f)))
                 {
                     OnActionSelectionChange(i);
                 }
@@ -302,182 +299,176 @@ public class ItemsWindowActions : LayoutWindow
                 GameRources.GetInstance().selectedItemIndex].getActionsList().getActions()[selectedAction].setIdTarget(
                     charactersNames[i - itemsNames.Length]);
     }
+
+
+    #region Add item action options
+
+    class AddItemActionMenu : WindowMenuContainer
+    {
+        private AddUseAction useAction;
+        private AddExamineAction examineAction;
+        private AddGrabAction grabAction;
+        private AddCustomAction customAction;
+        private AddUseWithAction useWithAction;
+        private AddGiveToAction giveToAction;
+        private AddDragToAction dragToAction;
+
+        public AddItemActionMenu()
+        {
+            SetMenuItems();
+        }
+
+        protected override void Callback(object obj)
+        {
+            if ((obj as AddUseAction) != null)
+                useAction.OnCliked();
+            else if ((obj as AddExamineAction) != null)
+                examineAction.OnCliked();
+            else if ((obj as AddGrabAction) != null)
+                grabAction.OnCliked();
+            else if ((obj as AddCustomAction) != null)
+                customAction.OnCliked();
+            else if ((obj as AddUseWithAction) != null)
+                useWithAction.OnCliked();
+            else if ((obj as AddGiveToAction) != null)
+                giveToAction.OnCliked();
+            else if ((obj as AddDragToAction) != null)
+                dragToAction.OnCliked();
+        }
+
+        protected override void SetMenuItems()
+        {
+            menu = new GenericMenu();
+
+            useAction = new AddUseAction("Add \"Use\" action");
+            examineAction = new AddExamineAction("Add \"Examine\" action");
+            grabAction = new AddGrabAction("Add \"Grab\" action");
+            customAction = new AddCustomAction("Add \"Custom\" action");
+            useWithAction = new AddUseWithAction("Add \"Use with...\" action");
+            giveToAction = new AddGiveToAction("Add \"Give to...\" action");
+            dragToAction = new AddDragToAction("Add \"Drag to..\" action");
+
+            menu.AddItem(new GUIContent(useAction.Label), false, Callback, useAction);
+            menu.AddItem(new GUIContent(examineAction.Label), false, Callback, examineAction);
+            menu.AddItem(new GUIContent(grabAction.Label), false, Callback, grabAction);
+            menu.AddItem(new GUIContent(customAction.Label), false, Callback, customAction);
+            menu.AddItem(new GUIContent(useWithAction.Label), false, Callback, useWithAction);
+            menu.AddItem(new GUIContent(giveToAction.Label), false, Callback, giveToAction);
+            menu.AddItem(new GUIContent(dragToAction.Label), false, Callback, dragToAction);
+        }
+    }
+
+    class AddUseAction : IMenuItem
+    {
+        public AddUseAction(string name_)
+        {
+            this.Label = name_;
+        }
+
+        public string Label { get; set; }
+
+        public void OnCliked()
+        {
+            Controller.getInstance().getSelectedChapterDataControl().getItemsList().getItems()[
+                GameRources.GetInstance().selectedItemIndex].getActionsList().addElement(Controller.ACTION_USE, "");
+        }
+    }
+
+    class AddExamineAction : IMenuItem
+    {
+        public AddExamineAction(string name_)
+        {
+            this.Label = name_;
+        }
+
+        public string Label { get; set; }
+
+        public void OnCliked()
+        {
+            Controller.getInstance().getSelectedChapterDataControl().getItemsList().getItems()[
+                GameRources.GetInstance().selectedItemIndex].getActionsList().addElement(Controller.ACTION_EXAMINE, "");
+        }
+    }
+
+    class AddGrabAction : IMenuItem
+    {
+        public AddGrabAction(string name_)
+        {
+            this.Label = name_;
+        }
+
+        public string Label { get; set; }
+
+        public void OnCliked()
+        {
+            Controller.getInstance().getSelectedChapterDataControl().getItemsList().getItems()[
+                GameRources.GetInstance().selectedItemIndex].getActionsList().addElement(Controller.ACTION_GRAB, "");
+        }
+    }
+
+    class AddCustomAction : IMenuItem
+    {
+        public AddCustomAction(string name_)
+        {
+            this.Label = name_;
+        }
+
+        public string Label { get; set; }
+
+        public void OnCliked()
+        {
+            Controller.getInstance().getSelectedChapterDataControl().getItemsList().getItems()[
+                GameRources.GetInstance().selectedItemIndex].getActionsList().addElement(Controller.ACTION_CUSTOM, "");
+        }
+    }
+
+    class AddUseWithAction : IMenuItem
+    {
+        public AddUseWithAction(string name_)
+        {
+            this.Label = name_;
+        }
+
+        public string Label { get; set; }
+
+        public void OnCliked()
+        {
+            Controller.getInstance().getSelectedChapterDataControl().getItemsList().getItems()[
+                GameRources.GetInstance().selectedItemIndex].getActionsList().addElement(Controller.ACTION_USE_WITH, "");
+        }
+    }
+
+    class AddGiveToAction : IMenuItem
+    {
+        public AddGiveToAction(string name_)
+        {
+            this.Label = name_;
+        }
+
+        public string Label { get; set; }
+
+        public void OnCliked()
+        {
+            Controller.getInstance().getSelectedChapterDataControl().getItemsList().getItems()[
+                GameRources.GetInstance().selectedItemIndex].getActionsList().addElement(Controller.ACTION_GIVE_TO, "");
+        }
+    }
+
+    class AddDragToAction : IMenuItem
+    {
+        public AddDragToAction(string name_)
+        {
+            this.Label = name_;
+        }
+
+        public string Label { get; set; }
+
+        public void OnCliked()
+        {
+            Controller.getInstance().getSelectedChapterDataControl().getItemsList().getItems()[
+                GameRources.GetInstance().selectedItemIndex].getActionsList().addElement(Controller.ACTION_DRAG_TO, "");
+        }
+    }
+
+    #endregion
 }
-
-#region Add item action options
-class AddItemActionMenu : WindowMenuContainer
-{
-    private AddUseAction useAction;
-    private AddExamineAction examineAction;
-    private AddGrabAction grabAction;
-    private AddCustomAction customAction;
-    private AddUseWithAction useWithAction;
-    private AddGiveToAction giveToAction;
-    private AddDragToAction dragToAction;
-
-    public AddItemActionMenu()
-    {
-        SetMenuItems();
-    }
-
-    protected override void Callback(object obj)
-    {
-        if ((obj as AddUseAction) != null)
-            useAction.OnCliked();
-        else if ((obj as AddExamineAction) != null)
-            examineAction.OnCliked();
-        else if ((obj as AddGrabAction) != null)
-            grabAction.OnCliked();
-        else if ((obj as AddCustomAction) != null)
-            customAction.OnCliked();
-        else if ((obj as AddUseWithAction) != null)
-            useWithAction.OnCliked();
-        else if ((obj as AddGiveToAction) != null)
-            giveToAction.OnCliked();
-        else if ((obj as AddDragToAction) != null)
-            dragToAction.OnCliked();
-    }
-
-    protected override void SetMenuItems()
-    {
-        menu = new GenericMenu();
-
-        useAction = new AddUseAction("Add \"Use\" action");
-        examineAction = new AddExamineAction("Add \"Examine\" action");
-        grabAction = new AddGrabAction("Add \"Grab\" action");
-        customAction = new AddCustomAction("Add \"Custom\" action");
-        useWithAction = new AddUseWithAction("Add \"Use with...\" action");
-        giveToAction = new AddGiveToAction("Add \"Give to...\" action");
-        dragToAction = new AddDragToAction("Add \"Drag to..\" action");
-
-        menu.AddItem(new GUIContent(useAction.Label), false, Callback, useAction);
-        menu.AddItem(new GUIContent(examineAction.Label), false, Callback, examineAction);
-        menu.AddItem(new GUIContent(grabAction.Label), false, Callback, grabAction);
-        menu.AddItem(new GUIContent(customAction.Label), false, Callback, customAction);
-        menu.AddItem(new GUIContent(useWithAction.Label), false, Callback, useWithAction);
-        menu.AddItem(new GUIContent(giveToAction.Label), false, Callback, giveToAction);
-        menu.AddItem(new GUIContent(dragToAction.Label), false, Callback, dragToAction);
-    }
-}
-
-public class AddUseAction : IMenuItem
-{
-    public AddUseAction(string name_)
-    {
-        this.Label = name_;
-    }
-
-    public string Label
-    {
-        get; set;
-    }
-
-    public void OnCliked()
-    {
-        Controller.getInstance().getSelectedChapterDataControl().getItemsList().getItems()[
-            GameRources.GetInstance().selectedItemIndex].getActionsList().addElement(Controller.ACTION_USE,"");
-    }
-}
-
-public class AddExamineAction : IMenuItem
-{
-    public AddExamineAction(string name_)
-    {
-        this.Label = name_;
-    }
-
-    public string Label
-    {
-        get; set;
-    }
-
-    public void OnCliked()
-    {
-        Controller.getInstance().getSelectedChapterDataControl().getItemsList().getItems()[
-            GameRources.GetInstance().selectedItemIndex].getActionsList().addElement(Controller.ACTION_EXAMINE, "");
-    }
-}
-
-public class AddGrabAction : IMenuItem
-{
-    public AddGrabAction(string name_)
-    {
-        this.Label = name_;
-    }
-
-    public string Label
-    {
-        get; set;
-    }
-
-    public void OnCliked()
-    {
-        Controller.getInstance().getSelectedChapterDataControl().getItemsList().getItems()[
-            GameRources.GetInstance().selectedItemIndex].getActionsList().addElement(Controller.ACTION_GRAB, "");
-    }
-}
-
-public class AddCustomAction : IMenuItem
-{
-    public AddCustomAction(string name_)
-    {
-        this.Label = name_;
-    }
-
-    public string Label { get; set; }
-
-    public void OnCliked()
-    {
-        Controller.getInstance().getSelectedChapterDataControl().getItemsList().getItems()[
-            GameRources.GetInstance().selectedItemIndex].getActionsList().addElement(Controller.ACTION_CUSTOM, "");
-    }
-}
-public class AddUseWithAction : IMenuItem
-{
-    public AddUseWithAction(string name_)
-    {
-        this.Label = name_;
-    }
-
-    public string Label { get; set; }
-
-    public void OnCliked()
-    {
-        Controller.getInstance().getSelectedChapterDataControl().getItemsList().getItems()[
-            GameRources.GetInstance().selectedItemIndex].getActionsList().addElement(Controller.ACTION_USE_WITH, "");
-    }
-}
-
-public class AddGiveToAction : IMenuItem
-{
-    public AddGiveToAction(string name_)
-    {
-        this.Label = name_;
-    }
-
-    public string Label { get; set; }
-
-    public void OnCliked()
-    {
-        Controller.getInstance().getSelectedChapterDataControl().getItemsList().getItems()[
-            GameRources.GetInstance().selectedItemIndex].getActionsList().addElement(Controller.ACTION_GIVE_TO, "");
-    }
-}
-
-public class AddDragToAction : IMenuItem
-{
-    public AddDragToAction(string name_)
-    {
-        this.Label = name_;
-    }
-
-    public string Label { get; set; }
-
-    public void OnCliked()
-    {
-        Controller.getInstance().getSelectedChapterDataControl().getItemsList().getItems()[
-            GameRources.GetInstance().selectedItemIndex].getActionsList().addElement(Controller.ACTION_DRAG_TO, "");
-    }
-}
-
-#endregion

@@ -30,6 +30,9 @@ public abstract class BaseFileOpenDialog : EditorWindow
         ITEM_DESCRIPTION_NAME_SOUND,
         ITEM_DESCRIPTION_BRIEF_SOUND,
         ITEM_DESCRIPTION_DETAILED_SOUND,
+        NPC_DESCRIPTION_NAME_SOUND,
+        NPC_DESCRIPTION_BRIEF_SOUND,
+        NPC_DESCRIPTION_DETAILED_SOUND,
         SET_ITEM_IMAGE
     };
 
@@ -101,6 +104,9 @@ public abstract class BaseFileOpenDialog : EditorWindow
             case FileType.ITEM_DESCRIPTION_NAME_SOUND:
             case FileType.ITEM_DESCRIPTION_BRIEF_SOUND:
             case FileType.ITEM_DESCRIPTION_DETAILED_SOUND:
+            case FileType.NPC_DESCRIPTION_NAME_SOUND:
+            case FileType.NPC_DESCRIPTION_BRIEF_SOUND:
+            case FileType.NPC_DESCRIPTION_DETAILED_SOUND:
                 assetTypeDir = AssetsController.CATEGORY_AUDIO_PATH;
                 break;
             case FileType.EXIT_ICON:

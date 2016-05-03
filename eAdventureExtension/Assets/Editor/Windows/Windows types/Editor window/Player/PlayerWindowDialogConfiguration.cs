@@ -39,6 +39,8 @@ public class PlayerWindowDialogConfiguration : LayoutWindow
 
         GUILayout.Space(20);
         shouldShowSpeachBubble = GUILayout.Toggle(shouldShowSpeachBubble, "Show speach bubble");
+        if(shouldShowSpeachBubble != shouldShowSpeachBubbleLast)
+            OnShowBubbleChange();
 
         GUILayout.Space(10);
 

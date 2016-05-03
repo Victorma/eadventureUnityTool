@@ -11,19 +11,8 @@ public class CharactersWindow : LayoutWindow
     private static CharactersWindowDialogConfiguration charactersWindowDialogConfiguration;
     private static CharactersWindowDocumentation charactersWindowDocumentation;
 
-    // Two methods responsible for showing right window content 
-    // - concrete item info or base window view
-    public void ShowBaseWindowView()
-    {
-        isConcreteItemVisible = false;
-        GameRources.GetInstance().selectedCharacterIndex = -1;
-    }
-
-    public void ShowItemWindowView(int o)
-    {
-        isConcreteItemVisible = true;
-        GameRources.GetInstance().selectedCharacterIndex = o;
-    }
+    private static float windowWidth, windowHeight;
+    private static Rect thisRect;
 
     // Flag determining visibility of concrete item information
     private bool isConcreteItemVisible = false;
@@ -35,6 +24,11 @@ public class CharactersWindow : LayoutWindow
         charactersWindowAppearance = new CharactersWindowAppearance(aStartPos, new GUIContent(Language.GetText("APPEARANCE")), "Window");
         charactersWindowDialogConfiguration = new CharactersWindowDialogConfiguration(aStartPos, new GUIContent(Language.GetText("DIALOG_CONFIGURATION")), "Window");
         charactersWindowDocumentation = new CharactersWindowDocumentation(aStartPos, new GUIContent(Language.GetText("DOCUMENTATION")), "Window");
+
+        windowWidth = aStartPos.width;
+        windowHeight = aStartPos.height;
+
+        thisRect = aStartPos;
     }
 
 
@@ -83,7 +77,19 @@ public class CharactersWindow : LayoutWindow
         }
         else
         {
-            GUILayout.Label("CharacterWindow");
+            GUILayout.Space(30);
+            for (int i = 0; i < Controller.getInstance().getCharapterList().getSelectedChapterData().getCharacters().Count; i++)
+            {
+                GUILayout.BeginHorizontal();
+                GUILayout.Box(Controller.getInstance().getCharapterList().getSelectedChapterData().getCharacters()[i].getId(), GUILayout.Width(windowWidth * 0.75f));
+                if (GUILayout.Button(Language.GetText("EDIT"), GUILayout.MaxWidth(windowWidth * 0.2f)))
+                {
+                    ShowItemWindowView(i);
+                }
+
+                GUILayout.EndHorizontal();
+
+            }
         }
     }
 
@@ -91,4 +97,24 @@ public class CharactersWindow : LayoutWindow
     {
         openedWindow = type_;
     }
+
+    // Two methods responsible for showing right window content 
+    // - concrete item info or base window view
+    public void ShowBaseWindowView()
+    {
+        isConcreteItemVisible = false;
+        GameRources.GetInstance().selectedCharacterIndex = -1;
+    }
+
+    public void ShowItemWindowView(int o)
+    {
+        isConcreteItemVisible = true;
+        GameRources.GetInstance().selectedCharacterIndex = o;
+
+        charactersWindowActions = new CharactersWindowActions(thisRect, new GUIContent(Language.GetText("ACTIONS")), "Window");
+        charactersWindowAppearance = new CharactersWindowAppearance(thisRect, new GUIContent(Language.GetText("APPEARANCE")), "Window");
+        charactersWindowDialogConfiguration = new CharactersWindowDialogConfiguration(thisRect, new GUIContent(Language.GetText("DIALOG_CONFIGURATION")), "Window");
+        charactersWindowDocumentation = new CharactersWindowDocumentation(thisRect, new GUIContent(Language.GetText("DOCUMENTATION")), "Window");
+    }
+
 }
