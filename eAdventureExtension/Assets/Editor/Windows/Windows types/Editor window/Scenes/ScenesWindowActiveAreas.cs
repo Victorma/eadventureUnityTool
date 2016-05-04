@@ -186,7 +186,7 @@ public class ScenesWindowActiveAreas : LayoutWindow, DialogReceiverInterface
         }
     }
 
-    public void OnDialogOk(string message, object workingObject = null)
+    public void OnDialogOk(string message, object workingObject = null, object workingObjectSecond = null)
     {
         Debug.Log("Apply");
         if (workingObject is ActiveAreaNewName)

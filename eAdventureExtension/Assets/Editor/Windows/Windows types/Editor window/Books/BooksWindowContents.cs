@@ -210,7 +210,7 @@ public class BooksWindowContents : LayoutWindow, DialogReceiverInterface
         GUILayout.EndArea();
     }
 
-    public void OnDialogOk(string message, object workingObject = null)
+    public void OnDialogOk(string message, object workingObject = null, object workingObjectSecond = null)
     {
         if (workingObject is BaseFileOpenDialog.FileType)
         {

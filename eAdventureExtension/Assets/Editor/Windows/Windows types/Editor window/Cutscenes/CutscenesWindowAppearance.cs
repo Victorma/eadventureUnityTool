@@ -180,7 +180,7 @@ public class CutscenesWindowAppearance : LayoutWindow, DialogReceiverInterface
         }
     }
 
-    public void OnDialogOk(string message, object workingObject = null)
+    public void OnDialogOk(string message, object workingObject = null, object w = null)
     {
 
         // After new cutscene name was choosed

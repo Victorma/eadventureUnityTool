@@ -78,12 +78,10 @@ public class NPCDataControl : DataControlWithResources
         // Add the extension of the frame
         if (previewImagePath != null && !previewImagePath.ToLower().EndsWith(".eaa"))
             previewImagePath += "_01.png";
-        //TODO:implementation
-        //else if (previewImagePath != null)
-        //{
-        //    return Loader.loadAnimation(AssetsController.InputStreamCreatorEditor.getInputStreamCreator(), previewImagePath, new EditorImageLoader()).getFrame(0).getUri();
-        //}
-
+        else if (previewImagePath != null)
+        {
+            return Loader.loadAnimation(AssetsController.InputStreamCreatorEditor.getInputStreamCreator(), previewImagePath, new EditorImageLoader()).getFrame(0).getUri();
+        }
         return previewImagePath;
     }
 
@@ -538,6 +536,28 @@ public class NPCDataControl : DataControlWithResources
     {
 
         return resourcesDataControlList[selectedResources].getAssetPath(animation);
+    }
+
+    public void addAnimationPath(string animation, string path)
+    {
+        resourcesDataControlList[selectedResources].addAsset(animation, path.Substring(0, path.LastIndexOf(".eaa")));
+    }
+
+
+    public string getAnimationPathPreview(string animation)
+    {
+
+        string previewImagePath = resourcesDataControlList[selectedResources].getAssetPath(animation);
+
+        // Add the extension of the frame
+        if (previewImagePath != null && !previewImagePath.ToLower().EndsWith(".eaa"))
+            previewImagePath += "_01.jpg";
+        else if (previewImagePath != null)
+        {
+            return Loader.loadAnimation(AssetsController.InputStreamCreatorEditor.getInputStreamCreator(), previewImagePath, new EditorImageLoader()).getFrame(0).getUri();
+        }
+
+        return previewImagePath;
     }
 
     public string getBubbleBorderColor()

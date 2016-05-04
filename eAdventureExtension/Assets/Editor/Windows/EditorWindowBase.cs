@@ -694,7 +694,6 @@ public class EditorWindowBase : EditorWindow, DialogReceiverInterface
         // Item sublist Conversation
         if (openedWindow == EditorWindowType.Conversations)
         {
-            Debug.Log("COV: " + Controller.getInstance().getCharapterList().getSelectedChapterData().getConversations().Count);
             GUI.skin = leftSubMenuSkin;
             for (int i = 0;
                 i < Controller.getInstance().getCharapterList().getSelectedChapterData().getConversations().Count;
@@ -913,7 +912,7 @@ public class EditorWindowBase : EditorWindow, DialogReceiverInterface
         Debug.Log("ADD assessment");
     }
 
-    public void OnDialogOk(string message, System.Object workingObject = null)
+    public void OnDialogOk(string message, System.Object workingObject = null, object workingObjectSecond = null)
     {
         if(((ChapterElementNameInputPopup)workingObject) != null)
         {

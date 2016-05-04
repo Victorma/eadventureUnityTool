@@ -84,7 +84,7 @@ public class CharactersWindowDocumentation : LayoutWindow, DialogReceiverInterfa
     {
         GUILayout.BeginArea(descriptionRect);
         GUILayout.Label("Full description of the character");
-        fullCharacterDescription = GUILayout.TextArea(fullCharacterDescription);
+        fullCharacterDescription = GUILayout.TextArea(fullCharacterDescription, GUILayout.MinHeight(0.2f));
         if (!fullCharacterDescription.Equals(fullCharacterDescriptionLast))
             OnCharacterDescriptionChanged(fullCharacterDescription);
         GUILayout.EndArea();
@@ -399,7 +399,7 @@ public class CharactersWindowDocumentation : LayoutWindow, DialogReceiverInterfa
 
     }
 
-    public void OnDialogOk(string message, object workingObject = null)
+    public void OnDialogOk(string message, object workingObject = null, object workingObjectSecond = null)
     {
         if (workingObject is BaseFileOpenDialog.FileType)
         {

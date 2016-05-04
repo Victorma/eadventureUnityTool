@@ -73,7 +73,7 @@ public class SetItemsWindowApperance : LayoutWindow, DialogReceiverInterface
                 (Texture2D)Resources.Load(pathToImg.Substring(0, pathToImg.LastIndexOf(".")), typeof(Texture2D));
     }
 
-    public void OnDialogOk(string message, object workingObject = null)
+    public void OnDialogOk(string message, object workingObject = null, object workingObjectSecond = null)
     {
         if (workingObject is BaseFileOpenDialog.FileType)
         {
