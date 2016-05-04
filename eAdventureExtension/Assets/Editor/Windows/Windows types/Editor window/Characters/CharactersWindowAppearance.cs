@@ -10,7 +10,7 @@ public class CharactersWindowAppearance : LayoutWindow, DialogReceiverInterface
     public enum CharacterAnimationType
     {
         LOOKING_UP,
-        LOOKING_DOWN, 
+        LOOKING_DOWN,
         LOOKING_RIGHT,
         LOOKING_LEFT,
         TALKING_UP,
@@ -28,7 +28,7 @@ public class CharactersWindowAppearance : LayoutWindow, DialogReceiverInterface
     private Texture2D clearImg = null;
 
     private Texture2D slidesPreviewLookUp = null;
-    private Texture2D slidesPreviewLookDown= null;
+    private Texture2D slidesPreviewLookDown = null;
     private Texture2D slidesPreviewLookRight = null;
     private Texture2D slidesPreviewLookLeft = null;
     private Texture2D slidesPreviewTalkUp = null;
@@ -43,7 +43,9 @@ public class CharactersWindowAppearance : LayoutWindow, DialogReceiverInterface
     private Texture2D slidesPreviewWalkLeft = null;
 
     private static float windowWidth, windowHeight;
-    private static Rect previewRect4_0, previewRect4_1, previewRect4_2, previewRect4_3 ;
+
+    private static Rect previewLabelsRect;
+    private static Rect previewRect4_0, previewRect4_1, previewRect4_2, previewRect4_3;
     private static Rect previewRect2_0, previewRect2_1;
 
     private string slidesPathLookUp = "", slidesPathLookUpPreview = "";
@@ -64,16 +66,18 @@ public class CharactersWindowAppearance : LayoutWindow, DialogReceiverInterface
     private int selectedAnimationGroup, selectedAnimationGroupLast;
     private string[] animationGroupNamesList;
 
-    public CharactersWindowAppearance(Rect aStartPos, GUIContent aContent, GUIStyle aStyle, params GUILayoutOption[] aOptions)
+    public CharactersWindowAppearance(Rect aStartPos, GUIContent aContent, GUIStyle aStyle,
+        params GUILayoutOption[] aOptions)
         : base(aStartPos, aContent, aStyle, aOptions)
     {
-        clearImg = (Texture2D)Resources.Load("EAdventureData/img/icons/deleteContent", typeof(Texture2D));
+        clearImg = (Texture2D) Resources.Load("EAdventureData/img/icons/deleteContent", typeof (Texture2D));
 
         windowWidth = aStartPos.width;
         windowHeight = aStartPos.height;
 
         selectedAnimationGroup = selectedAnimationGroupLast = 0;
-        animationGroupNamesList = new string[]{ "Standing animations", "Talking animations", "Using animations", "Walking animations" };
+        animationGroupNamesList = new string[]
+        {"Standing animations", "Talking animations", "Using animations", "Walking animations"};
 
         if (GameRources.GetInstance().selectedCharacterIndex >= 0)
         {
@@ -94,13 +98,16 @@ public class CharactersWindowAppearance : LayoutWindow, DialogReceiverInterface
                     GameRources.GetInstance().selectedCharacterIndex].getAnimationPathPreview(NPC.RESOURCE_TYPE_STAND_UP);
             slidesPathLookDownPreview =
                 Controller.getInstance().getSelectedChapterDataControl().getNPCsList().getNPCs()[
-                    GameRources.GetInstance().selectedCharacterIndex].getAnimationPathPreview(NPC.RESOURCE_TYPE_STAND_DOWN);
+                    GameRources.GetInstance().selectedCharacterIndex].getAnimationPathPreview(
+                        NPC.RESOURCE_TYPE_STAND_DOWN);
             slidesPathLookRightPreview =
                 Controller.getInstance().getSelectedChapterDataControl().getNPCsList().getNPCs()[
-                    GameRources.GetInstance().selectedCharacterIndex].getAnimationPathPreview(NPC.RESOURCE_TYPE_STAND_RIGHT);
+                    GameRources.GetInstance().selectedCharacterIndex].getAnimationPathPreview(
+                        NPC.RESOURCE_TYPE_STAND_RIGHT);
             slidesPathLookLeftPreview =
                 Controller.getInstance().getSelectedChapterDataControl().getNPCsList().getNPCs()[
-                    GameRources.GetInstance().selectedCharacterIndex].getAnimationPathPreview(NPC.RESOURCE_TYPE_STAND_RIGHT);
+                    GameRources.GetInstance().selectedCharacterIndex].getAnimationPathPreview(
+                        NPC.RESOURCE_TYPE_STAND_RIGHT);
 
 
 
@@ -121,13 +128,16 @@ public class CharactersWindowAppearance : LayoutWindow, DialogReceiverInterface
                     GameRources.GetInstance().selectedCharacterIndex].getAnimationPathPreview(NPC.RESOURCE_TYPE_SPEAK_UP);
             slidesPathTalkDownPreview =
                 Controller.getInstance().getSelectedChapterDataControl().getNPCsList().getNPCs()[
-                    GameRources.GetInstance().selectedCharacterIndex].getAnimationPathPreview(NPC.RESOURCE_TYPE_SPEAK_DOWN);
+                    GameRources.GetInstance().selectedCharacterIndex].getAnimationPathPreview(
+                        NPC.RESOURCE_TYPE_SPEAK_DOWN);
             slidesPathTalkRightPreview =
                 Controller.getInstance().getSelectedChapterDataControl().getNPCsList().getNPCs()[
-                    GameRources.GetInstance().selectedCharacterIndex].getAnimationPathPreview(NPC.RESOURCE_TYPE_SPEAK_RIGHT);
+                    GameRources.GetInstance().selectedCharacterIndex].getAnimationPathPreview(
+                        NPC.RESOURCE_TYPE_SPEAK_RIGHT);
             slidesPathTalkLeftPreview =
                 Controller.getInstance().getSelectedChapterDataControl().getNPCsList().getNPCs()[
-                    GameRources.GetInstance().selectedCharacterIndex].getAnimationPathPreview(NPC.RESOURCE_TYPE_SPEAK_LEFT);
+                    GameRources.GetInstance().selectedCharacterIndex].getAnimationPathPreview(
+                        NPC.RESOURCE_TYPE_SPEAK_LEFT);
 
 
 
@@ -139,7 +149,8 @@ public class CharactersWindowAppearance : LayoutWindow, DialogReceiverInterface
                     GameRources.GetInstance().selectedCharacterIndex].getAnimationPath(NPC.RESOURCE_TYPE_USE_LEFT);
             slidesPathUseRightPreview =
                 Controller.getInstance().getSelectedChapterDataControl().getNPCsList().getNPCs()[
-                    GameRources.GetInstance().selectedCharacterIndex].getAnimationPathPreview(NPC.RESOURCE_TYPE_USE_RIGHT);
+                    GameRources.GetInstance().selectedCharacterIndex].getAnimationPathPreview(
+                        NPC.RESOURCE_TYPE_USE_RIGHT);
             slidesPathUseLeftPreview =
                 Controller.getInstance().getSelectedChapterDataControl().getNPCsList().getNPCs()[
                     GameRources.GetInstance().selectedCharacterIndex].getAnimationPathPreview(NPC.RESOURCE_TYPE_USE_LEFT);
@@ -163,58 +174,124 @@ public class CharactersWindowAppearance : LayoutWindow, DialogReceiverInterface
                     GameRources.GetInstance().selectedCharacterIndex].getAnimationPathPreview(NPC.RESOURCE_TYPE_WALK_UP);
             slidesPathWalkDownPreview =
                 Controller.getInstance().getSelectedChapterDataControl().getNPCsList().getNPCs()[
-                    GameRources.GetInstance().selectedCharacterIndex].getAnimationPathPreview(NPC.RESOURCE_TYPE_WALK_DOWN);
+                    GameRources.GetInstance().selectedCharacterIndex].getAnimationPathPreview(
+                        NPC.RESOURCE_TYPE_WALK_DOWN);
             slidesPathWalkRightPreview =
                 Controller.getInstance().getSelectedChapterDataControl().getNPCsList().getNPCs()[
-                    GameRources.GetInstance().selectedCharacterIndex].getAnimationPathPreview(NPC.RESOURCE_TYPE_WALK_RIGHT);
+                    GameRources.GetInstance().selectedCharacterIndex].getAnimationPathPreview(
+                        NPC.RESOURCE_TYPE_WALK_RIGHT);
             slidesPathWalkLeftPreview =
                 Controller.getInstance().getSelectedChapterDataControl().getNPCsList().getNPCs()[
-                    GameRources.GetInstance().selectedCharacterIndex].getAnimationPathPreview(NPC.RESOURCE_TYPE_WALK_LEFT);
+                    GameRources.GetInstance().selectedCharacterIndex].getAnimationPathPreview(
+                        NPC.RESOURCE_TYPE_WALK_LEFT);
 
 
             if (!string.IsNullOrEmpty(slidesPathLookUpPreview))
-                slidesPreviewLookUp =(Texture2D)Resources.Load(slidesPathLookUpPreview.Substring(0, slidesPathLookUpPreview.LastIndexOf(".")), typeof(Texture2D));
+                slidesPreviewLookUp =
+                    (Texture2D)
+                        Resources.Load(slidesPathLookUpPreview.Substring(0, slidesPathLookUpPreview.LastIndexOf(".")),
+                            typeof (Texture2D));
             if (!string.IsNullOrEmpty(slidesPathLookDownPreview))
-                slidesPreviewLookDown = (Texture2D)Resources.Load(slidesPathLookDownPreview.Substring(0, slidesPathLookDownPreview.LastIndexOf(".")), typeof(Texture2D));
+                slidesPreviewLookDown =
+                    (Texture2D)
+                        Resources.Load(
+                            slidesPathLookDownPreview.Substring(0, slidesPathLookDownPreview.LastIndexOf(".")),
+                            typeof (Texture2D));
             if (!string.IsNullOrEmpty(slidesPathLookRightPreview))
-                slidesPreviewLookRight = (Texture2D)Resources.Load(slidesPathLookRightPreview.Substring(0, slidesPathLookRightPreview.LastIndexOf(".")), typeof(Texture2D));
+                slidesPreviewLookRight =
+                    (Texture2D)
+                        Resources.Load(
+                            slidesPathLookRightPreview.Substring(0, slidesPathLookRightPreview.LastIndexOf(".")),
+                            typeof (Texture2D));
             if (!string.IsNullOrEmpty(slidesPathLookLeftPreview))
-                slidesPreviewLookLeft = (Texture2D)Resources.Load(slidesPathLookLeftPreview.Substring(0, slidesPathLookLeftPreview.LastIndexOf(".")), typeof(Texture2D));
+                slidesPreviewLookLeft =
+                    (Texture2D)
+                        Resources.Load(
+                            slidesPathLookLeftPreview.Substring(0, slidesPathLookLeftPreview.LastIndexOf(".")),
+                            typeof (Texture2D));
 
 
             if (!string.IsNullOrEmpty(slidesPathTalkUpPreview))
-                slidesPreviewTalkUp = (Texture2D)Resources.Load(slidesPathTalkUpPreview.Substring(0, slidesPathTalkUpPreview.LastIndexOf(".")), typeof(Texture2D));
+                slidesPreviewTalkUp =
+                    (Texture2D)
+                        Resources.Load(slidesPathTalkUpPreview.Substring(0, slidesPathTalkUpPreview.LastIndexOf(".")),
+                            typeof (Texture2D));
             if (!string.IsNullOrEmpty(slidesPathTalkDownPreview))
-                slidesPreviewTalkDown = (Texture2D)Resources.Load(slidesPathTalkDownPreview.Substring(0, slidesPathTalkDownPreview.LastIndexOf(".")), typeof(Texture2D));
+                slidesPreviewTalkDown =
+                    (Texture2D)
+                        Resources.Load(
+                            slidesPathTalkDownPreview.Substring(0, slidesPathTalkDownPreview.LastIndexOf(".")),
+                            typeof (Texture2D));
             if (!string.IsNullOrEmpty(slidesPathTalkRightPreview))
-                slidesPreviewTalkRight = (Texture2D)Resources.Load(slidesPathTalkRightPreview.Substring(0, slidesPathTalkRightPreview.LastIndexOf(".")), typeof(Texture2D));
+                slidesPreviewTalkRight =
+                    (Texture2D)
+                        Resources.Load(
+                            slidesPathTalkRightPreview.Substring(0, slidesPathTalkRightPreview.LastIndexOf(".")),
+                            typeof (Texture2D));
             if (!string.IsNullOrEmpty(slidesPathTalkLeftPreview))
-                slidesPreviewTalkLeft = (Texture2D)Resources.Load(slidesPathTalkLeftPreview.Substring(0, slidesPathTalkLeftPreview.LastIndexOf(".")), typeof(Texture2D));
+                slidesPreviewTalkLeft =
+                    (Texture2D)
+                        Resources.Load(
+                            slidesPathTalkLeftPreview.Substring(0, slidesPathTalkLeftPreview.LastIndexOf(".")),
+                            typeof (Texture2D));
 
 
             if (!string.IsNullOrEmpty(slidesPathUseRightPreview))
-                slidesPreviewUseRight = (Texture2D)Resources.Load(slidesPathUseRightPreview.Substring(0, slidesPathUseRightPreview.LastIndexOf(".")), typeof(Texture2D));
+                slidesPreviewUseRight =
+                    (Texture2D)
+                        Resources.Load(
+                            slidesPathUseRightPreview.Substring(0, slidesPathUseRightPreview.LastIndexOf(".")),
+                            typeof (Texture2D));
             if (!string.IsNullOrEmpty(slidesPathUseLeftPreview))
-                slidesPreviewUseLeft = (Texture2D)Resources.Load(slidesPathUseLeftPreview.Substring(0, slidesPathUseLeftPreview.LastIndexOf(".")), typeof(Texture2D));
+                slidesPreviewUseLeft =
+                    (Texture2D)
+                        Resources.Load(
+                            slidesPathUseLeftPreview.Substring(0, slidesPathUseLeftPreview.LastIndexOf(".")),
+                            typeof (Texture2D));
 
 
             if (!string.IsNullOrEmpty(slidesPathWalkUpPreview))
-                slidesPreviewWalkUp = (Texture2D)Resources.Load(slidesPathWalkUpPreview.Substring(0, slidesPathWalkUpPreview.LastIndexOf(".")), typeof(Texture2D));
+                slidesPreviewWalkUp =
+                    (Texture2D)
+                        Resources.Load(slidesPathWalkUpPreview.Substring(0, slidesPathWalkUpPreview.LastIndexOf(".")),
+                            typeof (Texture2D));
             if (!string.IsNullOrEmpty(slidesPathWalkDownPreview))
-                slidesPreviewWalkDown = (Texture2D)Resources.Load(slidesPathWalkDownPreview.Substring(0, slidesPathWalkDownPreview.LastIndexOf(".")), typeof(Texture2D));
+                slidesPreviewWalkDown =
+                    (Texture2D)
+                        Resources.Load(
+                            slidesPathWalkDownPreview.Substring(0, slidesPathWalkDownPreview.LastIndexOf(".")),
+                            typeof (Texture2D));
             if (!string.IsNullOrEmpty(slidesPathWalkRightPreview))
-                slidesPreviewWalkRight = (Texture2D)Resources.Load(slidesPathWalkRightPreview.Substring(0, slidesPathWalkRightPreview.LastIndexOf(".")), typeof(Texture2D));
+                slidesPreviewWalkRight =
+                    (Texture2D)
+                        Resources.Load(
+                            slidesPathWalkRightPreview.Substring(0, slidesPathWalkRightPreview.LastIndexOf(".")),
+                            typeof (Texture2D));
             if (!string.IsNullOrEmpty(slidesPathWalkLeftPreview))
-                slidesPreviewWalkLeft = (Texture2D)Resources.Load(slidesPathWalkLeftPreview.Substring(0, slidesPathWalkLeftPreview.LastIndexOf(".")), typeof(Texture2D));
+                slidesPreviewWalkLeft =
+                    (Texture2D)
+                        Resources.Load(
+                            slidesPathWalkLeftPreview.Substring(0, slidesPathWalkLeftPreview.LastIndexOf(".")),
+                            typeof (Texture2D));
         }
+
+        previewRect2_0 = new Rect(0f, 0.5f*windowHeight, 0.5f*windowWidth, 0.48f*windowHeight);
+        previewRect2_1 = new Rect(0.5f*windowWidth, 0.5f*windowHeight, 0.5f*windowWidth, 0.48f*windowHeight);
+
+        previewRect4_0 = new Rect(0f, 0.5f*windowHeight, 0.25f*windowWidth, 0.48f*windowHeight);
+        previewRect4_1 = new Rect(0.25f*windowWidth, 0.5f*windowHeight, 0.25f*windowWidth, 0.48f*windowHeight);
+        previewRect4_2 = new Rect(0.5f*windowWidth, 0.5f*windowHeight, 0.25f*windowWidth, 0.48f*windowHeight);
+        previewRect4_3 = new Rect(0.75f*windowWidth, 0.5f*windowHeight, 0.25f*windowWidth, 0.48f*windowHeight);
+
+        previewLabelsRect = new Rect(0f, 0.45f*windowHeight, windowWidth, 0.05f*windowHeight);
     }
 
     public override void Draw(int aID)
     {
         GUILayout.Label("Resources Group");
         selectedAnimationGroup =
-                       EditorGUILayout.Popup(selectedAnimationGroup, animationGroupNamesList);
-        if(selectedAnimationGroup != selectedAnimationGroupLast)
+            EditorGUILayout.Popup(selectedAnimationGroup, animationGroupNamesList);
+        if (selectedAnimationGroup != selectedAnimationGroupLast)
             OnAnimationGroupChange(selectedAnimationGroup);
 
         switch (selectedAnimationGroup)
@@ -222,23 +299,23 @@ public class CharactersWindowAppearance : LayoutWindow, DialogReceiverInterface
             case LOOK_GROUP:
                 GUILayout.Label("Look up");
                 GUILayout.BeginHorizontal();
-                if (GUILayout.Button(clearImg, GUILayout.Width(0.1f * windowWidth)))
+                if (GUILayout.Button(clearImg, GUILayout.Width(0.1f*windowWidth)))
                 {
                     OnSlidesceneChangedLookUp("");
                 }
-                GUILayout.Box(slidesPathLookUp, GUILayout.Width(0.6f * windowWidth));
-                if (GUILayout.Button("Select", GUILayout.Width(0.1f * windowWidth)))
+                GUILayout.Box(slidesPathLookUp, GUILayout.Width(0.6f*windowWidth));
+                if (GUILayout.Button("Select", GUILayout.Width(0.1f*windowWidth)))
                 {
                     ShowAssetChooser(CharacterAnimationType.LOOKING_UP);
                 }
                 // Create/edit slidescene
-                if (GUILayout.Button("Create/Edit", GUILayout.Width(0.2f * windowWidth)))
+                if (GUILayout.Button("Create/Edit", GUILayout.Width(0.2f*windowWidth)))
                 {
                     // For not-existing cutscene - show new cutscene name dialog
                     if (slidesPathLookUp == null || slidesPathLookUp.Equals(""))
                     {
                         CutsceneNameInputPopup createCutsceneDialog =
-                            (CutsceneNameInputPopup)ScriptableObject.CreateInstance(typeof(CutsceneNameInputPopup));
+                            (CutsceneNameInputPopup) ScriptableObject.CreateInstance(typeof (CutsceneNameInputPopup));
                         createCutsceneDialog.Init(this, "", CharacterAnimationType.LOOKING_UP);
                     }
                     else
@@ -250,23 +327,23 @@ public class CharactersWindowAppearance : LayoutWindow, DialogReceiverInterface
 
                 GUILayout.Label("Look down");
                 GUILayout.BeginHorizontal();
-                if (GUILayout.Button(clearImg, GUILayout.Width(0.1f * windowWidth)))
+                if (GUILayout.Button(clearImg, GUILayout.Width(0.1f*windowWidth)))
                 {
                     OnSlidesceneChangedLookDown("");
                 }
-                GUILayout.Box(slidesPathLookDown, GUILayout.Width(0.6f * windowWidth));
-                if (GUILayout.Button("Select", GUILayout.Width(0.1f * windowWidth)))
+                GUILayout.Box(slidesPathLookDown, GUILayout.Width(0.6f*windowWidth));
+                if (GUILayout.Button("Select", GUILayout.Width(0.1f*windowWidth)))
                 {
                     ShowAssetChooser(CharacterAnimationType.LOOKING_DOWN);
                 }
                 // Create/edit slidescene
-                if (GUILayout.Button("Create/Edit", GUILayout.Width(0.2f * windowWidth)))
+                if (GUILayout.Button("Create/Edit", GUILayout.Width(0.2f*windowWidth)))
                 {
                     // For not-existing cutscene - show new cutscene name dialog
                     if (slidesPathLookDown == null || slidesPathLookDown.Equals(""))
                     {
                         CutsceneNameInputPopup createCutsceneDialog =
-                            (CutsceneNameInputPopup)ScriptableObject.CreateInstance(typeof(CutsceneNameInputPopup));
+                            (CutsceneNameInputPopup) ScriptableObject.CreateInstance(typeof (CutsceneNameInputPopup));
                         createCutsceneDialog.Init(this, "", CharacterAnimationType.LOOKING_DOWN);
                     }
                     else
@@ -278,23 +355,23 @@ public class CharactersWindowAppearance : LayoutWindow, DialogReceiverInterface
 
                 GUILayout.Label("Look right");
                 GUILayout.BeginHorizontal();
-                if (GUILayout.Button(clearImg, GUILayout.Width(0.1f * windowWidth)))
+                if (GUILayout.Button(clearImg, GUILayout.Width(0.1f*windowWidth)))
                 {
                     OnSlidesceneChangedLookRight("");
                 }
-                GUILayout.Box(slidesPathLookRight, GUILayout.Width(0.6f * windowWidth));
-                if (GUILayout.Button("Select", GUILayout.Width(0.1f * windowWidth)))
+                GUILayout.Box(slidesPathLookRight, GUILayout.Width(0.6f*windowWidth));
+                if (GUILayout.Button("Select", GUILayout.Width(0.1f*windowWidth)))
                 {
                     ShowAssetChooser(CharacterAnimationType.LOOKING_RIGHT);
                 }
                 // Create/edit slidescene
-                if (GUILayout.Button("Create/Edit", GUILayout.Width(0.2f * windowWidth)))
+                if (GUILayout.Button("Create/Edit", GUILayout.Width(0.2f*windowWidth)))
                 {
                     // For not-existing cutscene - show new cutscene name dialog
                     if (slidesPathLookRight == null || slidesPathLookRight.Equals(""))
                     {
                         CutsceneNameInputPopup createCutsceneDialog =
-                            (CutsceneNameInputPopup)ScriptableObject.CreateInstance(typeof(CutsceneNameInputPopup));
+                            (CutsceneNameInputPopup) ScriptableObject.CreateInstance(typeof (CutsceneNameInputPopup));
                         createCutsceneDialog.Init(this, "", CharacterAnimationType.LOOKING_RIGHT);
                     }
                     else
@@ -306,23 +383,23 @@ public class CharactersWindowAppearance : LayoutWindow, DialogReceiverInterface
 
                 GUILayout.Label("Look left");
                 GUILayout.BeginHorizontal();
-                if (GUILayout.Button(clearImg, GUILayout.Width(0.1f * windowWidth)))
+                if (GUILayout.Button(clearImg, GUILayout.Width(0.1f*windowWidth)))
                 {
                     OnSlidesceneChangedLookLeft("");
                 }
-                GUILayout.Box(slidesPathLookLeft, GUILayout.Width(0.6f * windowWidth));
-                if (GUILayout.Button("Select", GUILayout.Width(0.1f * windowWidth)))
+                GUILayout.Box(slidesPathLookLeft, GUILayout.Width(0.6f*windowWidth));
+                if (GUILayout.Button("Select", GUILayout.Width(0.1f*windowWidth)))
                 {
                     ShowAssetChooser(CharacterAnimationType.LOOKING_LEFT);
                 }
                 // Create/edit slidescene
-                if (GUILayout.Button("Create/Edit", GUILayout.Width(0.2f * windowWidth)))
+                if (GUILayout.Button("Create/Edit", GUILayout.Width(0.2f*windowWidth)))
                 {
                     // For not-existing cutscene - show new cutscene name dialog
                     if (slidesPathLookLeft == null || slidesPathLookLeft.Equals(""))
                     {
                         CutsceneNameInputPopup createCutsceneDialog =
-                            (CutsceneNameInputPopup)ScriptableObject.CreateInstance(typeof(CutsceneNameInputPopup));
+                            (CutsceneNameInputPopup) ScriptableObject.CreateInstance(typeof (CutsceneNameInputPopup));
                         createCutsceneDialog.Init(this, "", CharacterAnimationType.LOOKING_LEFT);
                     }
                     else
@@ -331,6 +408,20 @@ public class CharactersWindowAppearance : LayoutWindow, DialogReceiverInterface
                     }
                 }
                 GUILayout.EndHorizontal();
+
+                GUILayout.BeginArea(previewLabelsRect);
+                GUILayout.BeginHorizontal();
+                GUILayout.Label("Looking left", GUILayout.Width(0.25f*windowWidth));
+                GUILayout.Label("Looking right", GUILayout.Width(0.25f*windowWidth));
+                GUILayout.Label("Looking up", GUILayout.Width(0.25f*windowWidth));
+                GUILayout.Label("Looking down", GUILayout.Width(0.25f*windowWidth));
+                GUILayout.EndHorizontal();
+                GUILayout.EndArea();
+
+                GUI.DrawTexture(previewRect4_0, slidesPreviewLookLeft, ScaleMode.ScaleToFit);
+                GUI.DrawTexture(previewRect4_1, slidesPreviewLookRight, ScaleMode.ScaleToFit);
+                GUI.DrawTexture(previewRect4_2, slidesPreviewLookUp, ScaleMode.ScaleToFit);
+                GUI.DrawTexture(previewRect4_3, slidesPreviewLookDown, ScaleMode.ScaleToFit);
 
                 break;
 
@@ -341,23 +432,23 @@ public class CharactersWindowAppearance : LayoutWindow, DialogReceiverInterface
 
                 GUILayout.Label("Speak up");
                 GUILayout.BeginHorizontal();
-                if (GUILayout.Button(clearImg, GUILayout.Width(0.1f * windowWidth)))
+                if (GUILayout.Button(clearImg, GUILayout.Width(0.1f*windowWidth)))
                 {
                     OnSlidesceneChangedSpeakUp("");
                 }
-                GUILayout.Box(slidesPathTalkUp, GUILayout.Width(0.6f * windowWidth));
-                if (GUILayout.Button("Select", GUILayout.Width(0.1f * windowWidth)))
+                GUILayout.Box(slidesPathTalkUp, GUILayout.Width(0.6f*windowWidth));
+                if (GUILayout.Button("Select", GUILayout.Width(0.1f*windowWidth)))
                 {
                     ShowAssetChooser(CharacterAnimationType.TALKING_UP);
                 }
                 // Create/edit slidescene
-                if (GUILayout.Button("Create/Edit", GUILayout.Width(0.2f * windowWidth)))
+                if (GUILayout.Button("Create/Edit", GUILayout.Width(0.2f*windowWidth)))
                 {
                     // For not-existing cutscene - show new cutscene name dialog
                     if (slidesPathTalkUp == null || slidesPathTalkUp.Equals(""))
                     {
                         CutsceneNameInputPopup createCutsceneDialog =
-                            (CutsceneNameInputPopup)ScriptableObject.CreateInstance(typeof(CutsceneNameInputPopup));
+                            (CutsceneNameInputPopup) ScriptableObject.CreateInstance(typeof (CutsceneNameInputPopup));
                         createCutsceneDialog.Init(this, "", CharacterAnimationType.TALKING_UP);
                     }
                     else
@@ -369,23 +460,23 @@ public class CharactersWindowAppearance : LayoutWindow, DialogReceiverInterface
 
                 GUILayout.Label("Speak down");
                 GUILayout.BeginHorizontal();
-                if (GUILayout.Button(clearImg, GUILayout.Width(0.1f * windowWidth)))
+                if (GUILayout.Button(clearImg, GUILayout.Width(0.1f*windowWidth)))
                 {
                     OnSlidesceneChangedSpeakDown("");
                 }
-                GUILayout.Box(slidesPathTalkDown, GUILayout.Width(0.6f * windowWidth));
-                if (GUILayout.Button("Select", GUILayout.Width(0.1f * windowWidth)))
+                GUILayout.Box(slidesPathTalkDown, GUILayout.Width(0.6f*windowWidth));
+                if (GUILayout.Button("Select", GUILayout.Width(0.1f*windowWidth)))
                 {
                     ShowAssetChooser(CharacterAnimationType.TALKING_DOWN);
                 }
                 // Create/edit slidescene
-                if (GUILayout.Button("Create/Edit", GUILayout.Width(0.2f * windowWidth)))
+                if (GUILayout.Button("Create/Edit", GUILayout.Width(0.2f*windowWidth)))
                 {
                     // For not-existing cutscene - show new cutscene name dialog
                     if (slidesPathTalkDown == null || slidesPathTalkDown.Equals(""))
                     {
                         CutsceneNameInputPopup createCutsceneDialog =
-                            (CutsceneNameInputPopup)ScriptableObject.CreateInstance(typeof(CutsceneNameInputPopup));
+                            (CutsceneNameInputPopup) ScriptableObject.CreateInstance(typeof (CutsceneNameInputPopup));
                         createCutsceneDialog.Init(this, "", CharacterAnimationType.TALKING_DOWN);
                     }
                     else
@@ -397,23 +488,23 @@ public class CharactersWindowAppearance : LayoutWindow, DialogReceiverInterface
 
                 GUILayout.Label("Speak right");
                 GUILayout.BeginHorizontal();
-                if (GUILayout.Button(clearImg, GUILayout.Width(0.1f * windowWidth)))
+                if (GUILayout.Button(clearImg, GUILayout.Width(0.1f*windowWidth)))
                 {
                     OnSlidesceneChangedSpeakRight("");
                 }
-                GUILayout.Box(slidesPathTalkRight, GUILayout.Width(0.6f * windowWidth));
-                if (GUILayout.Button("Select", GUILayout.Width(0.1f * windowWidth)))
+                GUILayout.Box(slidesPathTalkRight, GUILayout.Width(0.6f*windowWidth));
+                if (GUILayout.Button("Select", GUILayout.Width(0.1f*windowWidth)))
                 {
                     ShowAssetChooser(CharacterAnimationType.TALKING_RIGHT);
                 }
                 // Create/edit slidescene
-                if (GUILayout.Button("Create/Edit", GUILayout.Width(0.2f * windowWidth)))
+                if (GUILayout.Button("Create/Edit", GUILayout.Width(0.2f*windowWidth)))
                 {
                     // For not-existing cutscene - show new cutscene name dialog
                     if (slidesPathTalkRight == null || slidesPathTalkRight.Equals(""))
                     {
                         CutsceneNameInputPopup createCutsceneDialog =
-                            (CutsceneNameInputPopup)ScriptableObject.CreateInstance(typeof(CutsceneNameInputPopup));
+                            (CutsceneNameInputPopup) ScriptableObject.CreateInstance(typeof (CutsceneNameInputPopup));
                         createCutsceneDialog.Init(this, "", CharacterAnimationType.TALKING_RIGHT);
                     }
                     else
@@ -425,23 +516,23 @@ public class CharactersWindowAppearance : LayoutWindow, DialogReceiverInterface
 
                 GUILayout.Label("Speak left");
                 GUILayout.BeginHorizontal();
-                if (GUILayout.Button(clearImg, GUILayout.Width(0.1f * windowWidth)))
+                if (GUILayout.Button(clearImg, GUILayout.Width(0.1f*windowWidth)))
                 {
                     OnSlidesceneChangedSpeakLeft("");
                 }
-                GUILayout.Box(slidesPathTalkLeft, GUILayout.Width(0.6f * windowWidth));
-                if (GUILayout.Button("Select", GUILayout.Width(0.1f * windowWidth)))
+                GUILayout.Box(slidesPathTalkLeft, GUILayout.Width(0.6f*windowWidth));
+                if (GUILayout.Button("Select", GUILayout.Width(0.1f*windowWidth)))
                 {
                     ShowAssetChooser(CharacterAnimationType.TALKING_LEFT);
                 }
                 // Create/edit slidescene
-                if (GUILayout.Button("Create/Edit", GUILayout.Width(0.2f * windowWidth)))
+                if (GUILayout.Button("Create/Edit", GUILayout.Width(0.2f*windowWidth)))
                 {
                     // For not-existing cutscene - show new cutscene name dialog
                     if (slidesPathTalkLeft == null || slidesPathTalkLeft.Equals(""))
                     {
                         CutsceneNameInputPopup createCutsceneDialog =
-                            (CutsceneNameInputPopup)ScriptableObject.CreateInstance(typeof(CutsceneNameInputPopup));
+                            (CutsceneNameInputPopup) ScriptableObject.CreateInstance(typeof (CutsceneNameInputPopup));
                         createCutsceneDialog.Init(this, "", CharacterAnimationType.TALKING_LEFT);
                     }
                     else
@@ -450,6 +541,21 @@ public class CharactersWindowAppearance : LayoutWindow, DialogReceiverInterface
                     }
                 }
                 GUILayout.EndHorizontal();
+
+                GUILayout.BeginArea(previewLabelsRect);
+                GUILayout.BeginHorizontal();
+                GUILayout.Label("Speaking left", GUILayout.Width(0.25f*windowWidth));
+                GUILayout.Label("Speaking right", GUILayout.Width(0.25f*windowWidth));
+                GUILayout.Label("Speaking up", GUILayout.Width(0.25f*windowWidth));
+                GUILayout.Label("Speaking down", GUILayout.Width(0.25f*windowWidth));
+                GUILayout.EndHorizontal();
+                GUILayout.EndArea();
+
+                GUI.DrawTexture(previewRect4_0, slidesPreviewTalkLeft, ScaleMode.ScaleToFit);
+                GUI.DrawTexture(previewRect4_1, slidesPreviewTalkRight, ScaleMode.ScaleToFit);
+                GUI.DrawTexture(previewRect4_2, slidesPreviewTalkUp, ScaleMode.ScaleToFit);
+                GUI.DrawTexture(previewRect4_3, slidesPreviewTalkDown, ScaleMode.ScaleToFit);
+
                 break;
 
 
@@ -457,23 +563,23 @@ public class CharactersWindowAppearance : LayoutWindow, DialogReceiverInterface
             case USE_GROUP:
                 GUILayout.Label("Use right");
                 GUILayout.BeginHorizontal();
-                if (GUILayout.Button(clearImg, GUILayout.Width(0.1f * windowWidth)))
+                if (GUILayout.Button(clearImg, GUILayout.Width(0.1f*windowWidth)))
                 {
                     OnSlidesceneChangedUseRight("");
                 }
-                GUILayout.Box(slidesPathUseRight, GUILayout.Width(0.6f * windowWidth));
-                if (GUILayout.Button("Select", GUILayout.Width(0.1f * windowWidth)))
+                GUILayout.Box(slidesPathUseRight, GUILayout.Width(0.6f*windowWidth));
+                if (GUILayout.Button("Select", GUILayout.Width(0.1f*windowWidth)))
                 {
                     ShowAssetChooser(CharacterAnimationType.USE_TO_RIGHT);
                 }
                 // Create/edit slidescene
-                if (GUILayout.Button("Create/Edit", GUILayout.Width(0.2f * windowWidth)))
+                if (GUILayout.Button("Create/Edit", GUILayout.Width(0.2f*windowWidth)))
                 {
                     // For not-existing cutscene - show new cutscene name dialog
                     if (slidesPathUseRight == null || slidesPathUseRight.Equals(""))
                     {
                         CutsceneNameInputPopup createCutsceneDialog =
-                            (CutsceneNameInputPopup)ScriptableObject.CreateInstance(typeof(CutsceneNameInputPopup));
+                            (CutsceneNameInputPopup) ScriptableObject.CreateInstance(typeof (CutsceneNameInputPopup));
                         createCutsceneDialog.Init(this, "", CharacterAnimationType.USE_TO_RIGHT);
                     }
                     else
@@ -485,23 +591,23 @@ public class CharactersWindowAppearance : LayoutWindow, DialogReceiverInterface
 
                 GUILayout.Label("Use left");
                 GUILayout.BeginHorizontal();
-                if (GUILayout.Button(clearImg, GUILayout.Width(0.1f * windowWidth)))
+                if (GUILayout.Button(clearImg, GUILayout.Width(0.1f*windowWidth)))
                 {
                     OnSlidesceneChangedUseLeft("");
                 }
-                GUILayout.Box(slidesPathUseLeft, GUILayout.Width(0.6f * windowWidth));
-                if (GUILayout.Button("Select", GUILayout.Width(0.1f * windowWidth)))
+                GUILayout.Box(slidesPathUseLeft, GUILayout.Width(0.6f*windowWidth));
+                if (GUILayout.Button("Select", GUILayout.Width(0.1f*windowWidth)))
                 {
                     ShowAssetChooser(CharacterAnimationType.USE_TO_LEFT);
                 }
                 // Create/edit slidescene
-                if (GUILayout.Button("Create/Edit", GUILayout.Width(0.2f * windowWidth)))
+                if (GUILayout.Button("Create/Edit", GUILayout.Width(0.2f*windowWidth)))
                 {
                     // For not-existing cutscene - show new cutscene name dialog
                     if (slidesPathUseLeft == null || slidesPathUseLeft.Equals(""))
                     {
                         CutsceneNameInputPopup createCutsceneDialog =
-                            (CutsceneNameInputPopup)ScriptableObject.CreateInstance(typeof(CutsceneNameInputPopup));
+                            (CutsceneNameInputPopup) ScriptableObject.CreateInstance(typeof (CutsceneNameInputPopup));
                         createCutsceneDialog.Init(this, "", CharacterAnimationType.USE_TO_LEFT);
                     }
                     else
@@ -510,6 +616,18 @@ public class CharactersWindowAppearance : LayoutWindow, DialogReceiverInterface
                     }
                 }
                 GUILayout.EndHorizontal();
+
+
+                GUILayout.BeginArea(previewLabelsRect);
+                GUILayout.BeginHorizontal();
+                GUILayout.Label("Object to the left", GUILayout.Width(0.5f*windowWidth));
+                GUILayout.Label("Object to the right", GUILayout.Width(0.5f*windowWidth));
+                GUILayout.EndHorizontal();
+                GUILayout.EndArea();
+
+                GUI.DrawTexture(previewRect2_0, slidesPreviewUseLeft, ScaleMode.ScaleToFit);
+                GUI.DrawTexture(previewRect2_1, slidesPreviewUseRight, ScaleMode.ScaleToFit);
+
                 break;
 
 
@@ -519,23 +637,23 @@ public class CharactersWindowAppearance : LayoutWindow, DialogReceiverInterface
 
                 GUILayout.Label("Walk up");
                 GUILayout.BeginHorizontal();
-                if (GUILayout.Button(clearImg, GUILayout.Width(0.1f * windowWidth)))
+                if (GUILayout.Button(clearImg, GUILayout.Width(0.1f*windowWidth)))
                 {
                     OnSlidesceneChangedWalkUp("");
                 }
-                GUILayout.Box(slidesPathWalkUp, GUILayout.Width(0.6f * windowWidth));
-                if (GUILayout.Button("Select", GUILayout.Width(0.1f * windowWidth)))
+                GUILayout.Box(slidesPathWalkUp, GUILayout.Width(0.6f*windowWidth));
+                if (GUILayout.Button("Select", GUILayout.Width(0.1f*windowWidth)))
                 {
                     ShowAssetChooser(CharacterAnimationType.WALKING_UP);
                 }
                 // Create/edit slidescene
-                if (GUILayout.Button("Create/Edit", GUILayout.Width(0.2f * windowWidth)))
+                if (GUILayout.Button("Create/Edit", GUILayout.Width(0.2f*windowWidth)))
                 {
                     // For not-existing cutscene - show new cutscene name dialog
                     if (slidesPathWalkUp == null || slidesPathWalkUp.Equals(""))
                     {
                         CutsceneNameInputPopup createCutsceneDialog =
-                            (CutsceneNameInputPopup)ScriptableObject.CreateInstance(typeof(CutsceneNameInputPopup));
+                            (CutsceneNameInputPopup) ScriptableObject.CreateInstance(typeof (CutsceneNameInputPopup));
                         createCutsceneDialog.Init(this, "", CharacterAnimationType.WALKING_UP);
                     }
                     else
@@ -547,23 +665,23 @@ public class CharactersWindowAppearance : LayoutWindow, DialogReceiverInterface
 
                 GUILayout.Label("Walk down");
                 GUILayout.BeginHorizontal();
-                if (GUILayout.Button(clearImg, GUILayout.Width(0.1f * windowWidth)))
+                if (GUILayout.Button(clearImg, GUILayout.Width(0.1f*windowWidth)))
                 {
                     OnSlidesceneChangedWalkDown("");
                 }
-                GUILayout.Box(slidesPathWalkDown, GUILayout.Width(0.6f * windowWidth));
-                if (GUILayout.Button("Select", GUILayout.Width(0.1f * windowWidth)))
+                GUILayout.Box(slidesPathWalkDown, GUILayout.Width(0.6f*windowWidth));
+                if (GUILayout.Button("Select", GUILayout.Width(0.1f*windowWidth)))
                 {
                     ShowAssetChooser(CharacterAnimationType.WALKING_DOWN);
                 }
                 // Create/edit slidescene
-                if (GUILayout.Button("Create/Edit", GUILayout.Width(0.2f * windowWidth)))
+                if (GUILayout.Button("Create/Edit", GUILayout.Width(0.2f*windowWidth)))
                 {
                     // For not-existing cutscene - show new cutscene name dialog
                     if (slidesPathWalkDown == null || slidesPathWalkDown.Equals(""))
                     {
                         CutsceneNameInputPopup createCutsceneDialog =
-                            (CutsceneNameInputPopup)ScriptableObject.CreateInstance(typeof(CutsceneNameInputPopup));
+                            (CutsceneNameInputPopup) ScriptableObject.CreateInstance(typeof (CutsceneNameInputPopup));
                         createCutsceneDialog.Init(this, "", CharacterAnimationType.WALKING_DOWN);
                     }
                     else
@@ -575,23 +693,23 @@ public class CharactersWindowAppearance : LayoutWindow, DialogReceiverInterface
 
                 GUILayout.Label("Walk right");
                 GUILayout.BeginHorizontal();
-                if (GUILayout.Button(clearImg, GUILayout.Width(0.1f * windowWidth)))
+                if (GUILayout.Button(clearImg, GUILayout.Width(0.1f*windowWidth)))
                 {
                     OnSlidesceneChangedWalkRight("");
                 }
-                GUILayout.Box(slidesPathWalkRight, GUILayout.Width(0.6f * windowWidth));
-                if (GUILayout.Button("Select", GUILayout.Width(0.1f * windowWidth)))
+                GUILayout.Box(slidesPathWalkRight, GUILayout.Width(0.6f*windowWidth));
+                if (GUILayout.Button("Select", GUILayout.Width(0.1f*windowWidth)))
                 {
                     ShowAssetChooser(CharacterAnimationType.WALKING_RIGHT);
                 }
                 // Create/edit slidescene
-                if (GUILayout.Button("Create/Edit", GUILayout.Width(0.2f * windowWidth)))
+                if (GUILayout.Button("Create/Edit", GUILayout.Width(0.2f*windowWidth)))
                 {
                     // For not-existing cutscene - show new cutscene name dialog
                     if (slidesPathWalkRight == null || slidesPathWalkRight.Equals(""))
                     {
                         CutsceneNameInputPopup createCutsceneDialog =
-                            (CutsceneNameInputPopup)ScriptableObject.CreateInstance(typeof(CutsceneNameInputPopup));
+                            (CutsceneNameInputPopup) ScriptableObject.CreateInstance(typeof (CutsceneNameInputPopup));
                         createCutsceneDialog.Init(this, "", CharacterAnimationType.WALKING_RIGHT);
                     }
                     else
@@ -603,23 +721,23 @@ public class CharactersWindowAppearance : LayoutWindow, DialogReceiverInterface
 
                 GUILayout.Label("Walk left");
                 GUILayout.BeginHorizontal();
-                if (GUILayout.Button(clearImg, GUILayout.Width(0.1f * windowWidth)))
+                if (GUILayout.Button(clearImg, GUILayout.Width(0.1f*windowWidth)))
                 {
                     OnSlidesceneChangedWalkLeft("");
                 }
-                GUILayout.Box(slidesPathWalkLeft, GUILayout.Width(0.6f * windowWidth));
-                if (GUILayout.Button("Select", GUILayout.Width(0.1f * windowWidth)))
+                GUILayout.Box(slidesPathWalkLeft, GUILayout.Width(0.6f*windowWidth));
+                if (GUILayout.Button("Select", GUILayout.Width(0.1f*windowWidth)))
                 {
                     ShowAssetChooser(CharacterAnimationType.WALKING_LEFT);
                 }
                 // Create/edit slidescene
-                if (GUILayout.Button("Create/Edit", GUILayout.Width(0.2f * windowWidth)))
+                if (GUILayout.Button("Create/Edit", GUILayout.Width(0.2f*windowWidth)))
                 {
                     // For not-existing cutscene - show new cutscene name dialog
                     if (slidesPathWalkLeft == null || slidesPathWalkLeft.Equals(""))
                     {
                         CutsceneNameInputPopup createCutsceneDialog =
-                            (CutsceneNameInputPopup)ScriptableObject.CreateInstance(typeof(CutsceneNameInputPopup));
+                            (CutsceneNameInputPopup) ScriptableObject.CreateInstance(typeof (CutsceneNameInputPopup));
                         createCutsceneDialog.Init(this, "", CharacterAnimationType.WALKING_LEFT);
                     }
                     else
@@ -628,6 +746,21 @@ public class CharactersWindowAppearance : LayoutWindow, DialogReceiverInterface
                     }
                 }
                 GUILayout.EndHorizontal();
+
+                GUILayout.BeginArea(previewLabelsRect);
+                GUILayout.BeginHorizontal();
+                GUILayout.Label("Walking left", GUILayout.Width(0.25f*windowWidth));
+                GUILayout.Label("Walking right", GUILayout.Width(0.25f*windowWidth));
+                GUILayout.Label("Walking up", GUILayout.Width(0.25f*windowWidth));
+                GUILayout.Label("Walking down", GUILayout.Width(0.25f*windowWidth));
+                GUILayout.EndHorizontal();
+                GUILayout.EndArea();
+
+                GUI.DrawTexture(previewRect4_0, slidesPreviewWalkLeft, ScaleMode.ScaleToFit);
+                GUI.DrawTexture(previewRect4_1, slidesPreviewWalkRight, ScaleMode.ScaleToFit);
+                GUI.DrawTexture(previewRect4_2, slidesPreviewWalkUp, ScaleMode.ScaleToFit);
+                GUI.DrawTexture(previewRect4_3, slidesPreviewWalkDown, ScaleMode.ScaleToFit);
+
                 break;
         }
     }
@@ -640,7 +773,8 @@ public class CharactersWindowAppearance : LayoutWindow, DialogReceiverInterface
     void ShowAssetChooser(CharacterAnimationType type)
     {
         AnimationCharacterFileOpenDialog animationDialog =
-            (AnimationCharacterFileOpenDialog) ScriptableObject.CreateInstance(typeof (AnimationCharacterFileOpenDialog));
+            (AnimationCharacterFileOpenDialog)
+                ScriptableObject.CreateInstance(typeof (AnimationCharacterFileOpenDialog));
         animationDialog.Init(this, BaseFileOpenDialog.FileType.CHARACTER_ANIM, type);
 
     }
@@ -648,7 +782,7 @@ public class CharactersWindowAppearance : LayoutWindow, DialogReceiverInterface
     void EditCutscene(CharacterAnimationType type)
     {
         CutsceneSlidesEditor slidesEditor =
-            (CutsceneSlidesEditor)ScriptableObject.CreateInstance(typeof(CutsceneSlidesEditor));
+            (CutsceneSlidesEditor) ScriptableObject.CreateInstance(typeof (CutsceneSlidesEditor));
         switch (type)
         {
             case CharacterAnimationType.LOOKING_UP:
@@ -775,7 +909,7 @@ public class CharactersWindowAppearance : LayoutWindow, DialogReceiverInterface
 
         if (workingObject is BaseFileOpenDialog.FileType)
         {
-            CharacterAnimationType type = (CharacterAnimationType)workingObjectSecond;
+            CharacterAnimationType type = (CharacterAnimationType) workingObjectSecond;
             //TODO: create file?
             switch (type)
             {
@@ -840,7 +974,7 @@ public class CharactersWindowAppearance : LayoutWindow, DialogReceiverInterface
     private void OnSlidesceneChangedWalkLeft(string v)
     {
         slidesPathWalkLeft = v;
-        
+
         Controller.getInstance().getSelectedChapterDataControl().getNPCsList().getNPCs()[
             GameRources.GetInstance().selectedCharacterIndex].addAnimationPath(NPC.RESOURCE_TYPE_WALK_LEFT, v);
 
@@ -849,7 +983,10 @@ public class CharactersWindowAppearance : LayoutWindow, DialogReceiverInterface
                 GameRources.GetInstance().selectedCharacterIndex].getAnimationPathPreview(NPC.RESOURCE_TYPE_WALK_LEFT);
 
         if (!string.IsNullOrEmpty(slidesPathWalkLeftPreview))
-            slidesPreviewWalkLeft = (Texture2D)Resources.Load(slidesPathWalkLeftPreview.Substring(0, slidesPathWalkLeftPreview.LastIndexOf(".")), typeof(Texture2D));
+            slidesPreviewWalkLeft =
+                (Texture2D)
+                    Resources.Load(slidesPathWalkLeftPreview.Substring(0, slidesPathWalkLeftPreview.LastIndexOf(".")),
+                        typeof (Texture2D));
     }
 
     private void OnSlidesceneChangedWalkRight(string v)
@@ -864,7 +1001,11 @@ public class CharactersWindowAppearance : LayoutWindow, DialogReceiverInterface
                 GameRources.GetInstance().selectedCharacterIndex].getAnimationPathPreview(NPC.RESOURCE_TYPE_WALK_RIGHT);
 
         if (!string.IsNullOrEmpty(slidesPathWalkRightPreview))
-            slidesPreviewWalkRight = (Texture2D)Resources.Load(slidesPathWalkRightPreview.Substring(0, slidesPathWalkRightPreview.LastIndexOf(".")), typeof(Texture2D));
+            slidesPreviewWalkRight =
+                (Texture2D)
+                    Resources.Load(
+                        slidesPathWalkRightPreview.Substring(0, slidesPathWalkRightPreview.LastIndexOf(".")),
+                        typeof (Texture2D));
     }
 
     private void OnSlidesceneChangedWalkDown(string v)
@@ -879,7 +1020,10 @@ public class CharactersWindowAppearance : LayoutWindow, DialogReceiverInterface
                 GameRources.GetInstance().selectedCharacterIndex].getAnimationPathPreview(NPC.RESOURCE_TYPE_WALK_DOWN);
 
         if (!string.IsNullOrEmpty(slidesPathWalkDownPreview))
-            slidesPreviewWalkDown = (Texture2D)Resources.Load(slidesPathWalkDownPreview.Substring(0, slidesPathWalkDownPreview.LastIndexOf(".")), typeof(Texture2D));
+            slidesPreviewWalkDown =
+                (Texture2D)
+                    Resources.Load(slidesPathWalkDownPreview.Substring(0, slidesPathWalkDownPreview.LastIndexOf(".")),
+                        typeof (Texture2D));
     }
 
     private void OnSlidesceneChangedWalkUp(string v)
@@ -894,7 +1038,10 @@ public class CharactersWindowAppearance : LayoutWindow, DialogReceiverInterface
                 GameRources.GetInstance().selectedCharacterIndex].getAnimationPathPreview(NPC.RESOURCE_TYPE_WALK_UP);
 
         if (!string.IsNullOrEmpty(slidesPathWalkUpPreview))
-            slidesPreviewWalkUp = (Texture2D)Resources.Load(slidesPathWalkUpPreview.Substring(0, slidesPathWalkUpPreview.LastIndexOf(".")), typeof(Texture2D));
+            slidesPreviewWalkUp =
+                (Texture2D)
+                    Resources.Load(slidesPathWalkUpPreview.Substring(0, slidesPathWalkUpPreview.LastIndexOf(".")),
+                        typeof (Texture2D));
     }
 
 
@@ -911,7 +1058,10 @@ public class CharactersWindowAppearance : LayoutWindow, DialogReceiverInterface
                 GameRources.GetInstance().selectedCharacterIndex].getAnimationPathPreview(NPC.RESOURCE_TYPE_USE_LEFT);
 
         if (!string.IsNullOrEmpty(slidesPathUseLeftPreview))
-            slidesPreviewUseLeft = (Texture2D)Resources.Load(slidesPathUseLeftPreview.Substring(0, slidesPathUseLeftPreview.LastIndexOf(".")), typeof(Texture2D));
+            slidesPreviewUseLeft =
+                (Texture2D)
+                    Resources.Load(slidesPathUseLeftPreview.Substring(0, slidesPathUseLeftPreview.LastIndexOf(".")),
+                        typeof (Texture2D));
     }
 
     private void OnSlidesceneChangedUseRight(string v)
@@ -926,7 +1076,10 @@ public class CharactersWindowAppearance : LayoutWindow, DialogReceiverInterface
                 GameRources.GetInstance().selectedCharacterIndex].getAnimationPathPreview(NPC.RESOURCE_TYPE_USE_RIGHT);
 
         if (!string.IsNullOrEmpty(slidesPathUseRightPreview))
-            slidesPreviewUseRight = (Texture2D)Resources.Load(slidesPathUseRightPreview.Substring(0, slidesPathUseRightPreview.LastIndexOf(".")), typeof(Texture2D));
+            slidesPreviewUseRight =
+                (Texture2D)
+                    Resources.Load(slidesPathUseRightPreview.Substring(0, slidesPathUseRightPreview.LastIndexOf(".")),
+                        typeof (Texture2D));
     }
 
 
@@ -943,7 +1096,10 @@ public class CharactersWindowAppearance : LayoutWindow, DialogReceiverInterface
                 GameRources.GetInstance().selectedCharacterIndex].getAnimationPathPreview(NPC.RESOURCE_TYPE_SPEAK_LEFT);
 
         if (!string.IsNullOrEmpty(slidesPathTalkLeftPreview))
-            slidesPreviewTalkLeft = (Texture2D)Resources.Load(slidesPathTalkLeftPreview.Substring(0, slidesPathTalkLeftPreview.LastIndexOf(".")), typeof(Texture2D));
+            slidesPreviewTalkLeft =
+                (Texture2D)
+                    Resources.Load(slidesPathTalkLeftPreview.Substring(0, slidesPathTalkLeftPreview.LastIndexOf(".")),
+                        typeof (Texture2D));
     }
 
     private void OnSlidesceneChangedSpeakRight(string v)
@@ -958,7 +1114,11 @@ public class CharactersWindowAppearance : LayoutWindow, DialogReceiverInterface
                 GameRources.GetInstance().selectedCharacterIndex].getAnimationPathPreview(NPC.RESOURCE_TYPE_SPEAK_RIGHT);
 
         if (!string.IsNullOrEmpty(slidesPathTalkRightPreview))
-            slidesPreviewTalkRight = (Texture2D)Resources.Load(slidesPathTalkRightPreview.Substring(0, slidesPathTalkRightPreview.LastIndexOf(".")), typeof(Texture2D));
+            slidesPreviewTalkRight =
+                (Texture2D)
+                    Resources.Load(
+                        slidesPathTalkRightPreview.Substring(0, slidesPathTalkRightPreview.LastIndexOf(".")),
+                        typeof (Texture2D));
     }
 
     private void OnSlidesceneChangedSpeakDown(string v)
@@ -973,7 +1133,10 @@ public class CharactersWindowAppearance : LayoutWindow, DialogReceiverInterface
                 GameRources.GetInstance().selectedCharacterIndex].getAnimationPathPreview(NPC.RESOURCE_TYPE_SPEAK_DOWN);
 
         if (!string.IsNullOrEmpty(slidesPathTalkDownPreview))
-            slidesPreviewTalkDown = (Texture2D)Resources.Load(slidesPathTalkDownPreview.Substring(0, slidesPathTalkDownPreview.LastIndexOf(".")), typeof(Texture2D));
+            slidesPreviewTalkDown =
+                (Texture2D)
+                    Resources.Load(slidesPathTalkDownPreview.Substring(0, slidesPathTalkDownPreview.LastIndexOf(".")),
+                        typeof (Texture2D));
     }
 
     private void OnSlidesceneChangedSpeakUp(string v)
@@ -988,7 +1151,10 @@ public class CharactersWindowAppearance : LayoutWindow, DialogReceiverInterface
                 GameRources.GetInstance().selectedCharacterIndex].getAnimationPathPreview(NPC.RESOURCE_TYPE_SPEAK_UP);
 
         if (!string.IsNullOrEmpty(slidesPathTalkUpPreview))
-            slidesPreviewTalkUp = (Texture2D)Resources.Load(slidesPathTalkUpPreview.Substring(0, slidesPathTalkUpPreview.LastIndexOf(".")), typeof(Texture2D));
+            slidesPreviewTalkUp =
+                (Texture2D)
+                    Resources.Load(slidesPathTalkUpPreview.Substring(0, slidesPathTalkUpPreview.LastIndexOf(".")),
+                        typeof (Texture2D));
     }
 
 
@@ -1005,7 +1171,10 @@ public class CharactersWindowAppearance : LayoutWindow, DialogReceiverInterface
                 GameRources.GetInstance().selectedCharacterIndex].getAnimationPathPreview(NPC.RESOURCE_TYPE_STAND_LEFT);
 
         if (!string.IsNullOrEmpty(slidesPathLookLeftPreview))
-            slidesPreviewLookLeft = (Texture2D)Resources.Load(slidesPathLookLeftPreview.Substring(0, slidesPathLookLeftPreview.LastIndexOf(".")), typeof(Texture2D));
+            slidesPreviewLookLeft =
+                (Texture2D)
+                    Resources.Load(slidesPathLookLeftPreview.Substring(0, slidesPathLookLeftPreview.LastIndexOf(".")),
+                        typeof (Texture2D));
     }
 
     private void OnSlidesceneChangedLookRight(string v)
@@ -1020,7 +1189,11 @@ public class CharactersWindowAppearance : LayoutWindow, DialogReceiverInterface
                 GameRources.GetInstance().selectedCharacterIndex].getAnimationPathPreview(NPC.RESOURCE_TYPE_STAND_RIGHT);
 
         if (!string.IsNullOrEmpty(slidesPathLookRightPreview))
-            slidesPreviewLookRight = (Texture2D)Resources.Load(slidesPathLookRightPreview.Substring(0, slidesPathLookRightPreview.LastIndexOf(".")), typeof(Texture2D));
+            slidesPreviewLookRight =
+                (Texture2D)
+                    Resources.Load(
+                        slidesPathLookRightPreview.Substring(0, slidesPathLookRightPreview.LastIndexOf(".")),
+                        typeof (Texture2D));
     }
 
     private void OnSlidesceneChangedLookDown(string v)
@@ -1035,7 +1208,10 @@ public class CharactersWindowAppearance : LayoutWindow, DialogReceiverInterface
                 GameRources.GetInstance().selectedCharacterIndex].getAnimationPathPreview(NPC.RESOURCE_TYPE_STAND_DOWN);
 
         if (!string.IsNullOrEmpty(slidesPathLookDownPreview))
-            slidesPreviewLookDown = (Texture2D)Resources.Load(slidesPathLookDownPreview.Substring(0, slidesPathLookDownPreview.LastIndexOf(".")), typeof(Texture2D));
+            slidesPreviewLookDown =
+                (Texture2D)
+                    Resources.Load(slidesPathLookDownPreview.Substring(0, slidesPathLookDownPreview.LastIndexOf(".")),
+                        typeof (Texture2D));
     }
 
     private void OnSlidesceneChangedLookUp(string v)
@@ -1050,7 +1226,10 @@ public class CharactersWindowAppearance : LayoutWindow, DialogReceiverInterface
                 GameRources.GetInstance().selectedCharacterIndex].getAnimationPathPreview(NPC.RESOURCE_TYPE_STAND_UP);
 
         if (!string.IsNullOrEmpty(slidesPathLookUpPreview))
-            slidesPreviewLookUp = (Texture2D)Resources.Load(slidesPathLookUpPreview.Substring(0, slidesPathLookUpPreview.LastIndexOf(".")), typeof(Texture2D));
+            slidesPreviewLookUp =
+                (Texture2D)
+                    Resources.Load(slidesPathLookUpPreview.Substring(0, slidesPathLookUpPreview.LastIndexOf(".")),
+                        typeof (Texture2D));
     }
 
     #endregion
