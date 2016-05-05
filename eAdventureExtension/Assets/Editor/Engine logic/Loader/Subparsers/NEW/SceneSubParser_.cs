@@ -70,7 +70,7 @@ public class SceneSubParser_ : Subparser_
             charactersrefs = element.SelectNodes("characters/character-ref"),
             atrezzosrefs = element.SelectNodes("atrezzo/atrezzo-ref"),
             activesareas = element.SelectNodes("active-area"),
-            barriers = element.SelectNodes("barrier"),
+            barriers = element.SelectNodes("barriers/barrier"),
             trajectorys = element.SelectNodes("trajectory");
 
         string tmpArgVal;

@@ -11,7 +11,9 @@ public class ScenesWindow : LayoutWindow
         Appearance,
         Documentation,
         ElementRefrence,
-        Exits
+        Exits, 
+        Barriers,
+        PlayerMovement
     }
 
     private static ScenesWindowType openedWindow = ScenesWindowType.Appearance;
@@ -20,6 +22,8 @@ public class ScenesWindow : LayoutWindow
     private static ScenesWindowDocumentation scenesWindowDocumentation;
     private static ScenesWindowElementReference scenesWindowElementReference;
     private static ScenesWindowExits scenesWindowExits;
+    private static ScenesWindowBarriers scenesWindowBarriers;
+    private static ScenesWindowPlayerMovement scenesWindowPlayerMovement;
 
     private static float windowWidth, windowHeight;
     private static List<bool> toggleList;
@@ -42,6 +46,10 @@ public class ScenesWindow : LayoutWindow
         scenesWindowElementReference = new ScenesWindowElementReference(aStartPos,
             new GUIContent(Language.GetText("ELEMENT_REFERENCES")), "Window");
         scenesWindowExits = new ScenesWindowExits(aStartPos, new GUIContent(Language.GetText("EXITS")), "Window");
+
+        scenesWindowBarriers = new ScenesWindowBarriers(aStartPos, new GUIContent("Barriers"), "Window");
+        scenesWindowPlayerMovement = new ScenesWindowPlayerMovement(aStartPos, new GUIContent("Player movement"), "Window");
+
 
         windowWidth = aStartPos.width;
         windowHeight = aStartPos.height;
@@ -79,6 +87,18 @@ public class ScenesWindow : LayoutWindow
             {
                 OnWindowTypeChanged(ScenesWindowType.Exits);
             }
+            // Only visible for 3rd person
+            if (Controller.getInstance().playerMode() == DescriptorData.MODE_PLAYER_3RDPERSON)
+            {
+                if (GUILayout.Button("Barriers"))
+                {
+                    OnWindowTypeChanged(ScenesWindowType.Barriers);
+                }
+                if (GUILayout.Button("Player movement"))
+                {
+                    OnWindowTypeChanged(ScenesWindowType.PlayerMovement);
+                }
+            }
             GUILayout.EndHorizontal();
 
             switch (openedWindow)
@@ -97,6 +117,12 @@ public class ScenesWindow : LayoutWindow
                     break;
                 case ScenesWindowType.Exits:
                     scenesWindowExits.Draw(aID);
+                    break;
+                case ScenesWindowType.Barriers:
+                    scenesWindowBarriers.Draw(aID);
+                    break;
+                case ScenesWindowType.PlayerMovement:
+                    scenesWindowPlayerMovement.Draw(aID);
                     break;
             }
         }
@@ -164,6 +190,13 @@ public class ScenesWindow : LayoutWindow
         scenesWindowElementReference = new ScenesWindowElementReference(thisRect,
             new GUIContent(Language.GetText("ELEMENT_REFERENCES")), "Window");
         scenesWindowExits = new ScenesWindowExits(thisRect, new GUIContent(Language.GetText("EXITS")), "Window");
+
+        // Only visible for 3rd person
+        if (Controller.getInstance().playerMode() == DescriptorData.MODE_PLAYER_3RDPERSON)
+        {
+            scenesWindowBarriers = new ScenesWindowBarriers(thisRect, new GUIContent("Barriers"), "Window");
+            scenesWindowPlayerMovement = new ScenesWindowPlayerMovement(thisRect, new GUIContent("Player movement"), "Window");
+        }
     }
 
     void GenerateToggleList()

@@ -508,11 +508,11 @@ public class Controller
         GameRources.GetInstance().Reset();
     }
 
-    //    public int playerMode()
-    //    {
+    public int playerMode()
+    {
 
-    //        return adventureDataControl.getPlayerMode();
-    //    }
+        return adventureDataControl.getPlayerMode();
+    }
 
     //    /**
     //     * Initializing function.

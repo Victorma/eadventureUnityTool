@@ -25,6 +25,7 @@ public class BarrierSubParser_ : Subparser_
 
     public override void ParseElement(XmlElement element)
     {
+        Debug.Log("barriera kurwao");
         XmlNodeList
             conditions = element.SelectNodes("condition");
 
