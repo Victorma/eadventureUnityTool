@@ -1,16 +1,49 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
-public class ScenesWindowPlayerMovement : LayoutWindow
+public class ScenesWindowPlayerMovement : LayoutWindow, DialogReceiverInterface
 {
+
+    private string backgroundPath = "";
+    private Texture2D backgroundPreviewTex = null;
+    private static Rect previewRect;
+    private static float windowWidth, windowHeight;
 
     public ScenesWindowPlayerMovement(Rect aStartPos, GUIContent aContent, GUIStyle aStyle,
         params GUILayoutOption[] aOptions)
         : base(aStartPos, aContent, aStyle, aOptions)
     {
+        if (GameRources.GetInstance().selectedSceneIndex >= 0)
+            backgroundPath =
+                Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
+                    GameRources.GetInstance().selectedSceneIndex].getPreviewBackground();
+        if (backgroundPath != null && !backgroundPath.Equals(""))
+            backgroundPreviewTex =
+                (Texture2D)
+                    Resources.Load(backgroundPath.Substring(0, backgroundPath.LastIndexOf(".")), typeof(Texture2D));
+        previewRect = new Rect(0f, 0.3f * windowHeight, windowWidth, windowHeight * 0.65f);
     }
 
     public override void Draw(int aID)
+    {
+        // Show preview dialog
+        if (GUILayout.Button("Show preview/edit window"))
+        {
+            //
+            PlayerMovementEditor window =
+                (PlayerMovementEditor)ScriptableObject.CreateInstance(typeof(PlayerMovementEditor));
+            window.Init(this, Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
+                GameRources.GetInstance().selectedSceneIndex]);
+        }
+        GUI.DrawTexture(previewRect, backgroundPreviewTex, ScaleMode.ScaleToFit);
+    }
+
+    public void OnDialogOk(string message, object workingObject = null, object workingObjectSecond = null)
+    {
+    }
+
+    public void OnDialogCanceled(object workingObject = null)
     {
     }
 }

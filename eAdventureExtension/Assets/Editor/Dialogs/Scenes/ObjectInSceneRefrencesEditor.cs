@@ -116,11 +116,11 @@ public class ObjectInSceneRefrencesEditor : BaseAreaEditablePopup
             reference.OnDialogOk("Applied");
             this.Close();
         }
-        if (GUILayout.Button("Cancel"))
-        {
-            reference.OnDialogCanceled();
-            this.Close();
-        }
+        //if (GUILayout.Button("Cancel"))
+        //{
+        //    reference.OnDialogCanceled();
+        //    this.Close();
+        //}
         GUILayout.EndHorizontal();
     }
 
