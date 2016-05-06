@@ -90,6 +90,11 @@ public class TrajectoryDataControl : DataControl
         return sideDataControlList;
     }
 
+    public Trajectory GetTrajectory()
+    {
+        return trajectory;
+    }
+
     /**
      * Returns the last node data control in the list
      * 

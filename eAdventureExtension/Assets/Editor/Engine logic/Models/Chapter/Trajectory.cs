@@ -71,9 +71,9 @@ public class Trajectory : ICloneable
     public void removeNode(Node node)
     {
 
-        foreach (Node n in nodes)
+        for (int index = 0; index < nodes.Count; index++)
         {
-            if (n.getID().Equals(node.getID()))
+            if (nodes[index].getID().Equals(node.getID()))
             {
                 for (int i = 0; i < sides.Count;)
                 {
@@ -83,10 +83,9 @@ public class Trajectory : ICloneable
                     else
                         i++;
                 }
-                nodes.Remove(n);
+                nodes.Remove(nodes[index]);
             }
         }
-
         /*if( nodes.contains( node ) ) {
             node = nodes.get( nodes.indexOf( node ) );
             for( int i = 0; i < sides.size( ); ) {
@@ -198,7 +197,12 @@ public class Trajectory : ICloneable
             this.scale = scale;
         }
 
-        /*
+        public Rect getEditorRect(float nodeWidth, float nodeHeight )
+        {
+            return new Rect(x - 0.5f*nodeWidth*scale, y - 0.5f*nodeHeight*scale, nodeWidth*scale, nodeHeight*scale);
+        }
+
+    /*
             @Override
                 public boolean equals(Object o)
             {
