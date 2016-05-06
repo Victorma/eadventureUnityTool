@@ -50,6 +50,9 @@ public class PlayerMovementEditor : BaseAreaEditablePopup
     private Texture2D deleteTex = null;
     private Texture2D initialNodeTex = null;
 
+    private int beginSideIndex = -1;
+    private Texture2D lineTex = null;
+
     private Trajectory trajectory;
 
     private TrajectoryToolType trajectoryTool;
@@ -76,6 +79,8 @@ public class PlayerMovementEditor : BaseAreaEditablePopup
         deleteTex = (Texture2D) Resources.Load("EAdventureData/img/icons/deleteTool", typeof (Texture2D)); 
 
         initialNodeTex = (Texture2D)Resources.Load("EAdventureData/img/icons/selectStartNode", typeof(Texture2D));
+
+        lineTex = (Texture2D)Resources.Load("Editor/LineTex", typeof(Texture2D));
 
         selectedAreaSkin = (GUISkin) Resources.Load("Editor/ButtonSelected", typeof (GUISkin));
 
@@ -219,13 +224,18 @@ public class PlayerMovementEditor : BaseAreaEditablePopup
                     if (clickedIndex!= -1)
                         DeleteNode(clickedIndex);
                 }
-
-                if (trajectoryTool == TrajectoryToolType.INIT_NODE)
+                else if (trajectoryTool == TrajectoryToolType.INIT_NODE)
                 {
                     if(clickedIndex!= -1)
                         SetInitNode(clickedIndex);
                 }
+                else if (trajectoryTool == TrajectoryToolType.EDIT_SIDE)
+                {
+                    if (clickedIndex != -1)
+                        SetSideNode(clickedIndex);
+                }
             }
+
             if (dragging)
             {
                 if (trajectoryTool == TrajectoryToolType.EDIT_NODE)
@@ -244,11 +254,23 @@ public class PlayerMovementEditor : BaseAreaEditablePopup
                 }
             }
 
+            if (trajectoryTool == TrajectoryToolType.EDIT_SIDE)
+            {
+                // If selected begin of side
+                if(beginSideIndex != -1)
+                  DrawLine(new Vector2(trajectory.getNodes()[beginSideIndex].getX(), trajectory.getNodes()[beginSideIndex].getY()), Event.current.mousePosition, 2);
+            }
 
             // DRAW NODES
             foreach (Trajectory.Node node in trajectory.getNodes())
             {
                 GUI.DrawTexture(node.getEditorRect(playerRect.width, playerRect.height), playerTex);
+            }
+
+            // DRAW SIDES
+            foreach (Trajectory.Side side in trajectory.getSides())
+            {
+                DrawLine(new Vector2(trajectory.getNodeForId(side.getIDStart()).getX(), trajectory.getNodeForId(side.getIDStart()).getY()), new Vector2(trajectory.getNodeForId(side.getIDEnd()).getX(), trajectory.getNodeForId(side.getIDEnd()).getY()), 2);
             }
 
             // DRAW INITIAL NODE
@@ -314,12 +336,18 @@ public class PlayerMovementEditor : BaseAreaEditablePopup
 
         if (useTrajectory)
         {
-            trajectory = new Trajectory();
-            sceneRef.setTrajectory(trajectory);
+            trajectory = sceneRef.getTrajectory().GetTrajectory();
+            if (trajectory == null)
+            {
+                trajectory = new Trajectory();
+                sceneRef.setTrajectory(trajectory);
+            }
+            beginSideIndex = -1;
         }
         else
         {
             sceneRef.setTrajectory(null);
+            beginSideIndex = -1;
         }
     }
 
@@ -383,21 +411,25 @@ public class PlayerMovementEditor : BaseAreaEditablePopup
     void OnEditNodeSelected()
     {
         trajectoryTool = TrajectoryToolType.EDIT_NODE;
+        beginSideIndex = -1;
     }
 
     void OnEditSideSelected()
     {
         trajectoryTool = TrajectoryToolType.EDIT_SIDE;
+        beginSideIndex = -1;
     }
 
     void OnInitialNodeSelected()
     {
         trajectoryTool = TrajectoryToolType.INIT_NODE;
+        beginSideIndex = -1;
     }
 
     void OnDeleteNodeSelected()
     {
         trajectoryTool = TrajectoryToolType.DELETE_NODE;
+        beginSideIndex = -1;
     }
 
     void AddNode(Vector2 pos)
@@ -413,6 +445,31 @@ public class PlayerMovementEditor : BaseAreaEditablePopup
     void SetInitNode(int i)
     {
         trajectory.setInitial(trajectory.getNodes()[i].getID());
+    }
+
+    void SetSideNode(int i)
+    {
+        if (beginSideIndex == -1)
+            beginSideIndex = i;
+        else
+        {
+            trajectory.addSide(trajectory.getNodes()[beginSideIndex].getID(), trajectory.getNodes()[i].getID(), -1);
+            beginSideIndex = -1;
+        }
+    }
+
+    private void DrawLine(Vector2 start, Vector2 end, int width)
+    {
+        Vector2 d = end - start;
+        float a = Mathf.Rad2Deg * Mathf.Atan(d.y / d.x);
+        if (d.x < 0)
+            a += 180;
+
+        int width2 = (int)Mathf.Ceil(width / 2);
+
+        GUIUtility.RotateAroundPivot(a, start);
+        GUI.DrawTexture(new Rect(start.x, start.y - width2, d.magnitude, width), lineTex);
+        GUIUtility.RotateAroundPivot(-a, start);
     }
 
     //void Update()
