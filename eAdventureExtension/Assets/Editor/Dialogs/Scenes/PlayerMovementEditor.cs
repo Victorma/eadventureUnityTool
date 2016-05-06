@@ -48,6 +48,7 @@ public class PlayerMovementEditor : BaseAreaEditablePopup
     private Texture2D editSideTex = null;
     private Texture2D setInitialNodeTex = null;
     private Texture2D deleteTex = null;
+    private Texture2D initialNodeTex = null;
 
     private Trajectory trajectory;
 
@@ -72,7 +73,9 @@ public class PlayerMovementEditor : BaseAreaEditablePopup
         editNodeTex = (Texture2D) Resources.Load("EAdventureData/img/icons/nodeEdit", typeof (Texture2D));
         editSideTex = (Texture2D) Resources.Load("EAdventureData/img/icons/sideEdit", typeof (Texture2D));
         setInitialNodeTex = (Texture2D) Resources.Load("EAdventureData/img/icons/selectStartNode", typeof (Texture2D));
-        deleteTex = (Texture2D) Resources.Load("EAdventureData/img/icons/deleteTool", typeof (Texture2D));
+        deleteTex = (Texture2D) Resources.Load("EAdventureData/img/icons/deleteTool", typeof (Texture2D)); 
+
+        initialNodeTex = (Texture2D)Resources.Load("EAdventureData/img/icons/selectStartNode", typeof(Texture2D));
 
         selectedAreaSkin = (GUISkin) Resources.Load("Editor/ButtonSelected", typeof (GUISkin));
 
@@ -216,6 +219,12 @@ public class PlayerMovementEditor : BaseAreaEditablePopup
                     if (clickedIndex!= -1)
                         DeleteNode(clickedIndex);
                 }
+
+                if (trajectoryTool == TrajectoryToolType.INIT_NODE)
+                {
+                    if(clickedIndex!= -1)
+                        SetInitNode(clickedIndex);
+                }
             }
             if (dragging)
             {
@@ -241,6 +250,10 @@ public class PlayerMovementEditor : BaseAreaEditablePopup
             {
                 GUI.DrawTexture(node.getEditorRect(playerRect.width, playerRect.height), playerTex);
             }
+
+            // DRAW INITIAL NODE
+            if(trajectory.getInitial() != null)
+                GUI.DrawTexture(trajectory.getInitial().getEditorRect(initialNodeTex.width, initialNodeTex.height), initialNodeTex);
 
             // BUTTONS
             GUILayout.BeginHorizontal();
@@ -394,8 +407,14 @@ public class PlayerMovementEditor : BaseAreaEditablePopup
 
     void DeleteNode(int i)
     {
-        trajectory.removeNode(trajectory.getNodes()[i]) ;
+        trajectory.removeNode(trajectory.getNodes()[i]);
     }
+
+    void SetInitNode(int i)
+    {
+        trajectory.setInitial(trajectory.getNodes()[i].getID());
+    }
+
     //void Update()
     //{
     //    if (EditorApplication.timeSinceStartup > nextActionTime)

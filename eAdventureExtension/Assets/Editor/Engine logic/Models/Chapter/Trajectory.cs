@@ -86,6 +86,10 @@ public class Trajectory : ICloneable
                 nodes.Remove(nodes[index]);
             }
         }
+
+        if (initial.getID().Equals(node.getID()))
+            initial = null;
+
         /*if( nodes.contains( node ) ) {
             node = nodes.get( nodes.indexOf( node ) );
             for( int i = 0; i < sides.size( ); ) {
