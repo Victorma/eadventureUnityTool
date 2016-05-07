@@ -692,47 +692,47 @@ public class EditorWindowBase : EditorWindow, DialogReceiverInterface
         }
         GUILayout.EndHorizontal();
         // Item sublist Conversation
-        if (openedWindow == EditorWindowType.Conversations)
-        {
-            GUI.skin = leftSubMenuSkin;
-            for (int i = 0;
-                i < Controller.getInstance().getCharapterList().getSelectedChapterData().getConversations().Count;
-                i++)
-            {
-                //if (i == GameRources.GetInstance().selectedCu)
-                //{
-                //    GUI.skin = leftSubMenuConcreteItemSkin;
-                //}
+        //if (openedWindow == EditorWindowType.Conversations)
+        //{
+        //    GUI.skin = leftSubMenuSkin;
+        //    for (int i = 0;
+        //        i < Controller.getInstance().getCharapterList().getSelectedChapterData().getConversations().Count;
+        //        i++)
+        //    {
+        //        //if (i == GameRources.GetInstance().selectedCu)
+        //        //{
+        //        //    GUI.skin = leftSubMenuConcreteItemSkin;
+        //        //}
 
-                if (
-                    GUILayout.Button(
-                        Controller.getInstance().getCharapterList().getSelectedChapterData().getConversations()[i].getId
-                            ()))
-                {
-                    //  conversationWindow
-                }
+        //        if (
+        //            GUILayout.Button(
+        //                Controller.getInstance().getCharapterList().getSelectedChapterData().getConversations()[i].getId
+        //                    ()))
+        //        {
+        //            //  conversationWindow
+        //        }
 
-                //if (i == GameRources.GetInstance().selectedSceneIndex)
-                //{
-                //    GUILayout.BeginHorizontal();
-                //    if (GUILayout.Button("Rename"))
-                //    {
-                //        Debug.Log("Rename");
-                //    }
-                //    if (GUILayout.Button(duplicateImg))
-                //    {
-                //        Debug.Log("duplicateImg");
-                //    }
-                //    if (GUILayout.Button(deleteImg))
-                //    {
-                //        Debug.Log("deleteImg");
-                //    }
-                //    GUILayout.EndHorizontal();
-                //    GUI.skin = leftSubMenuSkin;
-                //}
-            }
-            GUI.skin = defaultGUISkin;
-        }
+        //        //if (i == GameRources.GetInstance().selectedSceneIndex)
+        //        //{
+        //        //    GUILayout.BeginHorizontal();
+        //        //    if (GUILayout.Button("Rename"))
+        //        //    {
+        //        //        Debug.Log("Rename");
+        //        //    }
+        //        //    if (GUILayout.Button(duplicateImg))
+        //        //    {
+        //        //        Debug.Log("duplicateImg");
+        //        //    }
+        //        //    if (GUILayout.Button(deleteImg))
+        //        //    {
+        //        //        Debug.Log("deleteImg");
+        //        //    }
+        //        //    GUILayout.EndHorizontal();
+        //        //    GUI.skin = leftSubMenuSkin;
+        //        //}
+        //    }
+        //    GUI.skin = defaultGUISkin;
+        //}
 
 
         // Button event player
@@ -903,9 +903,7 @@ public class EditorWindowBase : EditorWindow, DialogReceiverInterface
 
     void AddConversation(string name)
     {
-        //TODO:????
-        Controller.getInstance().getSelectedChapterDataControl().getConversationsList().addElement(Controller.CONVERSATIONS_LIST, name);
-        //conversationWindow.ShowBaseWindowView();
+        Controller.getInstance().getSelectedChapterDataControl().getConversationsList().addElement(Controller.CONVERSATION_GRAPH, name);
         Debug.Log("ADD conversation");
     }
 

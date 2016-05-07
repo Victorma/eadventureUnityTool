@@ -32,6 +32,10 @@ public class GlobalStateDataControl : DataControl
 
         return globalState.getId();
     }
+    public void setId(string val)
+    {
+        globalState.setId(val);
+    }
 
     /**
      * @return the controller

@@ -33,6 +33,10 @@ public class MacroDataControl : DataControl
         return macro.getId();
     }
 
+    public void setId(string val)
+    {
+         macro.setId(val);
+    }
     /**
      * @return the controller
      */
