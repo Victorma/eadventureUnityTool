@@ -20,6 +20,11 @@ public class ExitsEditor : BaseAreaEditablePopup
 
     private int calledExitIndexRef;
 
+    private Rect currentRect;
+    private bool dragging;
+    private Vector2 startPos;
+    private Vector2 currentPos;
+
     public void Init(DialogReceiverInterface e, SceneDataControl scene, int exitIndex)
     {
         sceneRef = scene;
@@ -47,7 +52,27 @@ public class ExitsEditor : BaseAreaEditablePopup
     }
 
     void OnGUI()
-    {
+    {    
+        // Dragging events
+        if (Event.current.type == EventType.mouseDrag)
+        {
+            if (currentRect.Contains(Event.current.mousePosition))
+            {
+                if (!dragging)
+                {
+                    dragging = true;
+                    startPos = currentPos;
+                }
+            }
+            currentPos = Event.current.mousePosition;
+        }
+
+        if (Event.current.type == EventType.mouseUp)
+        {
+            dragging = false;
+        }
+
+
         scrollPosition = GUILayout.BeginScrollView(scrollPosition);
 
         GUI.DrawTexture(imageBackgroundRect, backgroundPreviewTex);
@@ -76,9 +101,19 @@ public class ExitsEditor : BaseAreaEditablePopup
 
             // Frame around current area
             if (calledExitIndexRef == i)
+            {
+                currentRect = eRect;
                 GUI.DrawTexture(eRect, selectedExitTex);
+            }
         }
 
+        /*
+         *HANDLE EVENTS
+         */
+        if (dragging)
+        {
+            OnBeingDragged();
+        }
         GUILayout.EndScrollView();
 
         GUILayout.BeginHorizontal();
@@ -152,5 +187,13 @@ public class ExitsEditor : BaseAreaEditablePopup
         heightStringLast = val;
         sceneRef.getExitsList().getExitsList()[calledExitIndexRef].setValues(int.Parse(xString), int.Parse(yString),
             int.Parse(widthString), int.Parse(heightString));
+    }
+
+    private void OnBeingDragged()
+    {
+        xStringLast = xString = ((int)currentPos.x - (int)(0.5f * int.Parse(widthString))).ToString();
+        yStringLast = yString = ((int)currentPos.y - (int)(0.5f * int.Parse(heightString))).ToString();
+        sceneRef.getExitsList().getExitsList()[calledExitIndexRef].setValues(int.Parse(xString),
+            int.Parse(yString), int.Parse(widthString), int.Parse(heightString));
     }
 }

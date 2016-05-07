@@ -18,6 +18,11 @@ public class ObjectInSceneRefrencesEditor : BaseAreaEditablePopup
 
     private int calledItemIndexRef;
 
+    private Rect currentRect;
+    private bool dragging;
+    private Vector2 startPos;
+    private Vector2 currentPos;
+
     public void Init(DialogReceiverInterface e, SceneDataControl scene, int areaIndex)
     {
         sceneRef = scene;
@@ -54,7 +59,6 @@ public class ObjectInSceneRefrencesEditor : BaseAreaEditablePopup
                 Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
                     GameRources.GetInstance().selectedSceneIndex].getReferencesList().getAllReferencesDataControl())
         {
-            Debug.Log("Chuj");
             objectsTex.Add(element.getImage());
         }
 
@@ -63,6 +67,26 @@ public class ObjectInSceneRefrencesEditor : BaseAreaEditablePopup
 
     void OnGUI()
     {
+        // Dragging events
+        if (Event.current.type == EventType.mouseDrag)
+        {
+            if (currentRect.Contains(Event.current.mousePosition))
+            {
+                if (!dragging)
+                {
+                    dragging = true;
+                    startPos = currentPos;
+                }
+            }
+            currentPos = Event.current.mousePosition;
+        }
+
+        if (Event.current.type == EventType.mouseUp)
+        {
+            dragging = false;
+        }
+
+
         scrollPosition = GUILayout.BeginScrollView(scrollPosition);
         GUI.DrawTexture(imageBackgroundRect, backgroundPreviewTex);
         for (int i = 0;
@@ -81,9 +105,19 @@ public class ObjectInSceneRefrencesEditor : BaseAreaEditablePopup
 
             // Frame around current area
             if (calledItemIndexRef == i)
+            {
+                currentRect = aRect;
                 GUI.DrawTexture(aRect, selectedObjectTex);
+            }
         }
         GUILayout.EndScrollView();
+        /*
+          *HANDLE EVENTS
+          */
+        if (dragging)
+        {
+            OnBeingDragged();
+        }
 
         GUILayout.BeginHorizontal();
         GUILayout.Box("X", GUILayout.Width(0.33f*backgroundPreviewTex.width));
@@ -143,5 +177,13 @@ public class ObjectInSceneRefrencesEditor : BaseAreaEditablePopup
         scaleStringLast = val;
         sceneRef.getReferencesList().getAllReferencesDataControl()[calledItemIndexRef].getErdc()
             .setElementScale(float.Parse(scaleString));
+    }
+
+    private void OnBeingDragged()
+    {
+        xStringLast = xString = ((int)currentPos.x - (int)(0.5f * currentRect.width)).ToString();
+        yStringLast = yString = ((int)currentPos.y - (int)(0.5f * currentRect.height)).ToString();
+        sceneRef.getReferencesList().getAllReferencesDataControl()[calledItemIndexRef].getErdc()
+            .setElementPosition(int.Parse(xString), int.Parse(yString));
     }
 }
