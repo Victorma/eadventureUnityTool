@@ -733,6 +733,13 @@ public class EditorWindowBase : EditorWindow, DialogReceiverInterface
             }
             GUI.skin = defaultGUISkin;
         }
+
+
+        // Button event player
+        if (GUILayout.Button(leftMenuContentAdvanced))
+        {
+            OnWindowTypeChanged(EditorWindowType.AdvancedFeatures);
+        }
         //TODO: end with datamodel + reactive objects
         //// Button event
         //if (GUILayout.Button(leftMenuContentAdvanced))

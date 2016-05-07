@@ -3,82 +3,86 @@ using System.Collections;
 
 public class AdvencedFeaturesWindow : LayoutWindow
 {
-    private enum AdvencedFeaturesWindowType { GlobalStates, ListOfTimers, Macros }
+    private enum AdvencedFeaturesWindowType
+    {
+        GlobalStates,
+        ListOfTimers,
+        Macros
+    }
+
+    private static GUISkin selectedButtonSkin;
+    private static GUISkin defaultSkin;
 
     private static AdvencedFeaturesWindowType openedWindow = AdvencedFeaturesWindowType.ListOfTimers;
-  
+
     private static AdvencedFeaturesWindowGlobalStates advencedFeaturesWindowGlobalStates;
     private static AdvencedFeaturesWindowListOfTimers advencedFeaturesWindowListOfTimers;
     private static AdvencedFeaturesWindowMacros advencedFeaturesWindowMacros;
 
-
-    // Two methods responsible for showing right window content 
-    // - concrete item info or base window view
-    public void ShowBaseWindowView()
-    {
-        isConcreteItemVisible = false;
-    }
-
-    // TODO - change Object to adequate class
-    public void ShowItemWindowView(Object o)
-    {
-        isConcreteItemVisible = true;
-        // TODO - set desire object reference
-    }
-
-    // Flag determining visibility of concrete item information
-    private bool isConcreteItemVisible = false;
-
-    public AdvencedFeaturesWindow(Rect aStartPos, GUIContent aContent, GUIStyle aStyle, params GUILayoutOption[] aOptions)
+    public AdvencedFeaturesWindow(Rect aStartPos, GUIContent aContent, GUIStyle aStyle,
+        params GUILayoutOption[] aOptions)
         : base(aStartPos, aContent, aStyle, aOptions)
     {
-        advencedFeaturesWindowGlobalStates = new AdvencedFeaturesWindowGlobalStates(aStartPos, new GUIContent(Language.GetText("GLOBAL_STATES")), "Window");
-        advencedFeaturesWindowListOfTimers = new AdvencedFeaturesWindowListOfTimers(aStartPos, new GUIContent(Language.GetText("LIST_OF_TIMERS")), "Window");
-        advencedFeaturesWindowMacros = new AdvencedFeaturesWindowMacros(aStartPos, new GUIContent(Language.GetText("MACROS")), "Window");
+        advencedFeaturesWindowGlobalStates = new AdvencedFeaturesWindowGlobalStates(aStartPos,
+            new GUIContent(Language.GetText("GLOBAL_STATES")), "Window");
+        advencedFeaturesWindowListOfTimers = new AdvencedFeaturesWindowListOfTimers(aStartPos,
+            new GUIContent(Language.GetText("LIST_OF_TIMERS")), "Window");
+        advencedFeaturesWindowMacros = new AdvencedFeaturesWindowMacros(aStartPos,
+            new GUIContent(Language.GetText("MACROS")), "Window");
+        selectedButtonSkin = (GUISkin)Resources.Load("Editor/ButtonSelected", typeof(GUISkin));
     }
 
 
     public override void Draw(int aID)
     {
-        // Show information of concrete item
-        if (isConcreteItemVisible)
-        {
-            /**
+
+        /**
             UPPER MENU
             */
-            GUILayout.BeginHorizontal();
-            if (GUILayout.Button(Language.GetText("GLOBAL_STATES")))
-            {
-                OnWindowTypeChanged(AdvencedFeaturesWindowType.GlobalStates);
-            }
-            if (GUILayout.Button(Language.GetText("LIST_OF_TIMERS")))
-            {
-                OnWindowTypeChanged(AdvencedFeaturesWindowType.ListOfTimers);
-            }
-            if (GUILayout.Button(Language.GetText("MACROS")))
-            {
-                OnWindowTypeChanged(AdvencedFeaturesWindowType.Macros);
-            }
-            GUILayout.EndHorizontal();
+        GUILayout.BeginHorizontal();
 
-            switch (openedWindow)
-            {
-                case AdvencedFeaturesWindowType.GlobalStates:
-                    advencedFeaturesWindowGlobalStates.Draw(aID);
-                    break;
-                case AdvencedFeaturesWindowType.ListOfTimers:
-                    advencedFeaturesWindowListOfTimers.Draw(aID);
-                    break;
-                case AdvencedFeaturesWindowType.Macros:
-                    advencedFeaturesWindowMacros.Draw(aID);
-                    break;
-            }
-        }
-        else
+        if (openedWindow == AdvencedFeaturesWindowType.ListOfTimers)
+            GUI.skin = selectedButtonSkin;
+        if (GUILayout.Button(Language.GetText("LIST_OF_TIMERS")))
         {
-            GUILayout.Label("AdvencedFeaturesWindow");
+            OnWindowTypeChanged(AdvencedFeaturesWindowType.ListOfTimers);
+        }
+        if (openedWindow == AdvencedFeaturesWindowType.ListOfTimers)
+            GUI.skin = defaultSkin;
+
+        if (openedWindow == AdvencedFeaturesWindowType.GlobalStates)
+            GUI.skin = selectedButtonSkin;
+        if (GUILayout.Button(Language.GetText("GLOBAL_STATES")))
+        {
+            OnWindowTypeChanged(AdvencedFeaturesWindowType.GlobalStates);
+        }
+        if (openedWindow == AdvencedFeaturesWindowType.GlobalStates)
+            GUI.skin = defaultSkin;
+
+        if (openedWindow == AdvencedFeaturesWindowType.Macros)
+            GUI.skin = selectedButtonSkin;
+        if (GUILayout.Button(Language.GetText("MACROS")))
+        {
+            OnWindowTypeChanged(AdvencedFeaturesWindowType.Macros);
+        }
+        if (openedWindow == AdvencedFeaturesWindowType.Macros)
+            GUI.skin = defaultSkin;
+        GUILayout.EndHorizontal();
+
+        switch (openedWindow)
+        {
+            case AdvencedFeaturesWindowType.GlobalStates:
+                advencedFeaturesWindowGlobalStates.Draw(aID);
+                break;
+            case AdvencedFeaturesWindowType.ListOfTimers:
+                advencedFeaturesWindowListOfTimers.Draw(aID);
+                break;
+            case AdvencedFeaturesWindowType.Macros:
+                advencedFeaturesWindowMacros.Draw(aID);
+                break;
         }
     }
+
 
     void OnWindowTypeChanged(AdvencedFeaturesWindowType type_)
     {

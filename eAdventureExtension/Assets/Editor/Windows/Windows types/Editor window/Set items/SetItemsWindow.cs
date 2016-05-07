@@ -14,6 +14,9 @@ public class SetItemsWindow : LayoutWindow
     // Flag determining visibility of concrete item information
     private bool isConcreteItemVisible = false;
 
+    private static GUISkin selectedButtonSkin;
+    private static GUISkin defaultSkin;
+
     public SetItemsWindow(Rect aStartPos, GUIContent aContent, GUIStyle aStyle, params GUILayoutOption[] aOptions)
         : base(aStartPos, aContent, aStyle, aOptions)
     {
@@ -24,6 +27,7 @@ public class SetItemsWindow : LayoutWindow
         windowHeight = aStartPos.height;
 
         thisRect = aStartPos;
+        selectedButtonSkin = (GUISkin)Resources.Load("Editor/ButtonSelected", typeof(GUISkin));
     }
 
 
@@ -36,14 +40,23 @@ public class SetItemsWindow : LayoutWindow
              UPPER MENU
             */
             GUILayout.BeginHorizontal();
+            if (openedWindow == SetItemsWindowType.Appearance)
+                GUI.skin = selectedButtonSkin;
             if (GUILayout.Button(Language.GetText("APPEARANCE")))
             {
                 OnWindowTypeChanged(SetItemsWindowType.Appearance);
             }
+            if (openedWindow == SetItemsWindowType.Appearance)
+                GUI.skin = defaultSkin;
+
+            if (openedWindow == SetItemsWindowType.Documentation)
+                GUI.skin = selectedButtonSkin;
             if (GUILayout.Button(Language.GetText("DOCUMENTATION")))
             {
                 OnWindowTypeChanged(SetItemsWindowType.Documentation);
             }
+            if (openedWindow == SetItemsWindowType.Documentation)
+                GUI.skin = defaultSkin;
             GUILayout.EndHorizontal();
 
             switch (openedWindow)

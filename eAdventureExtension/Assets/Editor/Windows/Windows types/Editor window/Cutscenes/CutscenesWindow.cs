@@ -18,6 +18,9 @@ public class CutscenesWindow : LayoutWindow
 
     private static Rect thisRect;
 
+    private static GUISkin selectedButtonSkin;
+    private static GUISkin defaultSkin;
+
     public CutscenesWindow(Rect aStartPos, GUIContent aContent, GUIStyle aStyle, params GUILayoutOption[] aOptions)
         : base(aStartPos, aContent, aStyle, aOptions)
     {
@@ -30,6 +33,7 @@ public class CutscenesWindow : LayoutWindow
         windowHeight = aStartPos.height;
 
         thisRect = aStartPos;
+        selectedButtonSkin = (GUISkin)Resources.Load("Editor/ButtonSelected", typeof(GUISkin));
     }
 
 
@@ -42,18 +46,32 @@ public class CutscenesWindow : LayoutWindow
             UPPER MENU
             */
             GUILayout.BeginHorizontal();
+            if (openedWindow == CutscenesWindowType.Appearance)
+                GUI.skin = selectedButtonSkin;
             if (GUILayout.Button(Language.GetText("APPEARANCE")))
             {
                 OnWindowTypeChanged(CutscenesWindowType.Appearance);
             }
+            if (openedWindow == CutscenesWindowType.Appearance)
+                GUI.skin = defaultSkin;
+
+            if (openedWindow == CutscenesWindowType.Documentation)
+                GUI.skin = selectedButtonSkin;
             if (GUILayout.Button(Language.GetText("DOCUMENTATION")))
             {
                 OnWindowTypeChanged(CutscenesWindowType.Documentation);
             }
+            if (openedWindow == CutscenesWindowType.Documentation)
+                GUI.skin = defaultSkin;
+
+            if (openedWindow == CutscenesWindowType.EndConfiguration)
+                GUI.skin = selectedButtonSkin;
             if (GUILayout.Button(Language.GetText("CUTSCENES_AND_CONFIGURATION")))
             {
                 OnWindowTypeChanged(CutscenesWindowType.EndConfiguration);
             }
+            if (openedWindow == CutscenesWindowType.EndConfiguration)
+                GUI.skin = defaultSkin;
             GUILayout.EndHorizontal();
 
             switch (openedWindow)

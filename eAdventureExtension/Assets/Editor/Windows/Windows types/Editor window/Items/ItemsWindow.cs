@@ -17,6 +17,9 @@ public class ItemsWindow : LayoutWindow
     // Flag determining visibility of concrete item information
     private bool isConcreteItemVisible = false;
 
+    private static GUISkin selectedButtonSkin;
+    private static GUISkin defaultSkin;
+
     public ItemsWindow(Rect aStartPos, GUIContent aContent, GUIStyle aStyle, params GUILayoutOption[] aOptions)
         : base(aStartPos, aContent, aStyle, aOptions)
     {
@@ -28,6 +31,7 @@ public class ItemsWindow : LayoutWindow
         windowHeight = aStartPos.height;
 
         thisRect = aStartPos;
+        selectedButtonSkin = (GUISkin)Resources.Load("Editor/ButtonSelected", typeof(GUISkin));
     }
 
 
@@ -40,18 +44,33 @@ public class ItemsWindow : LayoutWindow
             UPPER MENU
             */
             GUILayout.BeginHorizontal();
+            if (openedWindow == ItemsWindowType.Appearance)
+                GUI.skin = selectedButtonSkin;
             if (GUILayout.Button(Language.GetText("APPEARANCE")))
             {
                 OnWindowTypeChanged(ItemsWindowType.Appearance);
             }
+            if (openedWindow == ItemsWindowType.Appearance)
+                GUI.skin = defaultSkin;
+
+            if (openedWindow == ItemsWindowType.Actions)
+                GUI.skin = selectedButtonSkin;
             if (GUILayout.Button(Language.GetText("ACTIONS")))
             {
                 OnWindowTypeChanged(ItemsWindowType.Actions);
             }
+            if (openedWindow == ItemsWindowType.Actions)
+                GUI.skin = defaultSkin;
+
+            if (openedWindow == ItemsWindowType.DescriptionConfig)
+                GUI.skin = selectedButtonSkin;
             if (GUILayout.Button(Language.GetText("DESCRIPTION_AND_CONFIG")))
             {
                 OnWindowTypeChanged(ItemsWindowType.DescriptionConfig);
             }
+            if (openedWindow == ItemsWindowType.DescriptionConfig)
+                GUI.skin = defaultSkin;
+
             GUILayout.EndHorizontal();
 
             switch (openedWindow)

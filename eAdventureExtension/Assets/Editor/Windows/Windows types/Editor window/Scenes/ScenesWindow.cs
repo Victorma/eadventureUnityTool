@@ -33,6 +33,9 @@ public class ScenesWindow : LayoutWindow
     // Flag determining visibility of concrete item information
     private bool isConcreteItemVisible = false;
 
+    private static GUISkin selectedButtonSkin;
+    private static GUISkin defaultSkin;
+
     public ScenesWindow(Rect aStartPos, GUIContent aContent, GUIStyle aStyle, params GUILayoutOption[] aOptions)
         : base(aStartPos, aContent, aStyle, aOptions)
     {
@@ -54,6 +57,8 @@ public class ScenesWindow : LayoutWindow
         windowWidth = aStartPos.width;
         windowHeight = aStartPos.height;
 
+        selectedButtonSkin = (GUISkin)Resources.Load("Editor/ButtonSelected", typeof(GUISkin));
+
         GenerateToggleList();
     }
 
@@ -67,37 +72,70 @@ public class ScenesWindow : LayoutWindow
             UPPER MENU
             */
             GUILayout.BeginHorizontal();
+            if (openedWindow == ScenesWindowType.Appearance)
+                GUI.skin = selectedButtonSkin;
             if (GUILayout.Button(Language.GetText("APPEARANCE")))
             {
                 OnWindowTypeChanged(ScenesWindowType.Appearance);
             }
+            if (openedWindow == ScenesWindowType.Appearance)
+                GUI.skin = defaultSkin;
+
+            if (openedWindow == ScenesWindowType.Documentation)
+                GUI.skin = selectedButtonSkin;
             if (GUILayout.Button(Language.GetText("DOCUMENTATION")))
             {
                 OnWindowTypeChanged(ScenesWindowType.Documentation);
             }
+            if (openedWindow == ScenesWindowType.Documentation)
+                GUI.skin = defaultSkin;
+
+            if (openedWindow == ScenesWindowType.ElementRefrence)
+                GUI.skin = selectedButtonSkin;
             if (GUILayout.Button(Language.GetText("ELEMENT_REFERENCES")))
             {
                 OnWindowTypeChanged(ScenesWindowType.ElementRefrence);
             }
+            if (openedWindow == ScenesWindowType.ElementRefrence)
+                GUI.skin = defaultSkin;
+
+            if (openedWindow == ScenesWindowType.ActiveAreas)
+                GUI.skin = selectedButtonSkin;
             if (GUILayout.Button(Language.GetText("ACTIVE_AREAS")))
             {
                 OnWindowTypeChanged(ScenesWindowType.ActiveAreas);
             }
+            if (openedWindow == ScenesWindowType.ActiveAreas)
+                GUI.skin = defaultSkin;
+
+            if (openedWindow == ScenesWindowType.Exits)
+                GUI.skin = selectedButtonSkin;
             if (GUILayout.Button(Language.GetText("EXITS")))
             {
                 OnWindowTypeChanged(ScenesWindowType.Exits);
             }
+            if (openedWindow == ScenesWindowType.Exits)
+                GUI.skin = defaultSkin;
             // Only visible for 3rd person
             if (Controller.getInstance().playerMode() == DescriptorData.MODE_PLAYER_3RDPERSON)
             {
+                if (openedWindow == ScenesWindowType.Barriers)
+                    GUI.skin = selectedButtonSkin;
                 if (GUILayout.Button("Barriers"))
                 {
                     OnWindowTypeChanged(ScenesWindowType.Barriers);
                 }
+                if (openedWindow == ScenesWindowType.Barriers)
+                    GUI.skin = defaultSkin;
+
+                if (openedWindow == ScenesWindowType.PlayerMovement)
+                    GUI.skin = selectedButtonSkin;
                 if (GUILayout.Button("Player movement"))
                 {
                     OnWindowTypeChanged(ScenesWindowType.PlayerMovement);
                 }
+                if (openedWindow == ScenesWindowType.PlayerMovement)
+                    GUI.skin = defaultSkin;
             }
             GUILayout.EndHorizontal();
 

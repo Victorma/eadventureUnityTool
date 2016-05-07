@@ -17,6 +17,9 @@ public class CharactersWindow : LayoutWindow
     // Flag determining visibility of concrete item information
     private bool isConcreteItemVisible = false;
 
+    private static GUISkin selectedButtonSkin;
+    private static GUISkin defaultSkin;
+
     public CharactersWindow(Rect aStartPos, GUIContent aContent, GUIStyle aStyle, params GUILayoutOption[] aOptions)
         : base(aStartPos, aContent, aStyle, aOptions)
     {
@@ -29,6 +32,7 @@ public class CharactersWindow : LayoutWindow
         windowHeight = aStartPos.height;
 
         thisRect = aStartPos;
+        selectedButtonSkin = (GUISkin)Resources.Load("Editor/ButtonSelected", typeof(GUISkin));
     }
 
 
@@ -41,22 +45,43 @@ public class CharactersWindow : LayoutWindow
             UPPER MENU
             */
             GUILayout.BeginHorizontal();
+
+            if (openedWindow == CharactersWindowType.Appearance)
+                GUI.skin = selectedButtonSkin;
             if (GUILayout.Button(Language.GetText("APPEARANCE")))
             {
                 OnWindowTypeChanged(CharactersWindowType.Appearance);
             }
+            if (openedWindow == CharactersWindowType.Appearance)
+                GUI.skin = defaultSkin;
+
+
+            if (openedWindow == CharactersWindowType.Documentation)
+                GUI.skin = selectedButtonSkin;
             if (GUILayout.Button(Language.GetText("DOCUMENTATION")))
             {
                 OnWindowTypeChanged(CharactersWindowType.Documentation);
             }
+            if (openedWindow == CharactersWindowType.Documentation)
+                GUI.skin = defaultSkin;
+
+            if (openedWindow == CharactersWindowType.DialogConfiguration)
+                GUI.skin = selectedButtonSkin;
             if (GUILayout.Button(Language.GetText("DIALOG_CONFIGURATION")))
             {
                 OnWindowTypeChanged(CharactersWindowType.DialogConfiguration);
             }
+            if (openedWindow == CharactersWindowType.DialogConfiguration)
+                GUI.skin = defaultSkin;
+
+            if (openedWindow == CharactersWindowType.Action)
+                GUI.skin = selectedButtonSkin;
             if (GUILayout.Button(Language.GetText("ACTIONS")))
             {
                 OnWindowTypeChanged(CharactersWindowType.Action);
             }
+            if (openedWindow == CharactersWindowType.Action)
+                GUI.skin = defaultSkin;
             GUILayout.EndHorizontal();
 
             switch (openedWindow)

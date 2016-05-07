@@ -10,6 +10,8 @@ public class PlayerWindowDocumentation : LayoutWindow
         : base(aStartPos, aContent, aStyle, aOptions)
     {
         documentation = documentationLast = Controller.getInstance().getCharapterList().getSelectedChapterData().getPlayer().getDocumentation();
+        if (documentation == null)
+            documentation = documentationLast = "";
         windowHeight = aStartPos.height;
     }
 
