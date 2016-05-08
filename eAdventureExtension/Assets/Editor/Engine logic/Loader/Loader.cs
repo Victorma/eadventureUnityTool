@@ -419,7 +419,7 @@ public class Loader
     public static Animation loadAnimation(InputStreamCreator isCreator, string filename, ImageLoaderFactory imageloader)
     {
 
-        AnimationHandler animationHandler = new AnimationHandler(isCreator, imageloader);
+        AnimationHandler_ animationHandler = new AnimationHandler_(isCreator, imageloader);
 
         // Create a new factory
         //factory.setValidating(false);
