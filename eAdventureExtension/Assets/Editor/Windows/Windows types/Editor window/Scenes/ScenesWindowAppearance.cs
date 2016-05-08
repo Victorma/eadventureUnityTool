@@ -39,13 +39,24 @@ public class ScenesWindowAppearance : LayoutWindow, DialogReceiverInterface
         windowHeight = aStartPos.height;
 
         if(GameRources.GetInstance().selectedSceneIndex >= 0)
+        {
             backgroundPath =
                 Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
                     GameRources.GetInstance().selectedSceneIndex].getPreviewBackground();
+
+            foregroundMaskPath =
+                Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
+                    GameRources.GetInstance().selectedSceneIndex].getPreviewForeground();
+
+            musicPath =
+                Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
+                    GameRources.GetInstance().selectedSceneIndex].getPreviewMusic();
+        }
+
         //foregroundMaskPath = Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[GameRources.GetInstance().selectedSceneIndex].
         //musicPath = "";
         if(backgroundPath != null && !backgroundPath.Equals(""))
-            backgroundPreview = (Texture2D)Resources.Load(backgroundPath.Substring(0, backgroundPath.LastIndexOf(".")), typeof(Texture2D));
+        {   backgroundPreview = (Texture2D)Resources.Load(backgroundPath.Substring(0, backgroundPath.LastIndexOf(".")), typeof(Texture2D)); }
 
         noBackgroundSkin = (GUISkin)Resources.Load("Editor/EditorNoBackgroundSkin", typeof(GUISkin));
 
@@ -177,12 +188,20 @@ public class ScenesWindowAppearance : LayoutWindow, DialogReceiverInterface
         {
             case BaseFileOpenDialog.FileType.SCENE_BACKGROUND:
                 backgroundPath = message;
+                Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
+                   GameRources.GetInstance().selectedSceneIndex].setPreviewBackground(message);
+                if (backgroundPath != null && !backgroundPath.Equals(""))
+                    backgroundPreview = (Texture2D)Resources.Load(backgroundPath.Substring(0, backgroundPath.LastIndexOf(".")), typeof(Texture2D));
                 break;
             case BaseFileOpenDialog.FileType.SCENE_FOREGROUND:
                 foregroundMaskPath = message;
+                Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
+                   GameRources.GetInstance().selectedSceneIndex].setPreviewForeground(message);
                 break;
             case BaseFileOpenDialog.FileType.SCENE_MUSIC:
                 musicPath = message;
+                Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
+                   GameRources.GetInstance().selectedSceneIndex].setPreviewMusic(message);
                 break;
             default:
                 break;

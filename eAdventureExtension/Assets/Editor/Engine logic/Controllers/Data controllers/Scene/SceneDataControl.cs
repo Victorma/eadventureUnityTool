@@ -112,12 +112,38 @@ public class SceneDataControl : DataControlWithResources
      * 
      * @return Path to the image, null if not present
      */
+    
     public string getPreviewBackground()
     {
 
         return resourcesDataControlList[selectedResources].getAssetPath("background");
     }
 
+    public void setPreviewBackground(string path)
+    {
+        resourcesDataControlList[selectedResources].addAsset("background", path);
+    }
+
+    public string getPreviewForeground()
+    {
+
+        return resourcesDataControlList[selectedResources].getAssetPath("foreground");
+    }
+
+    public void setPreviewForeground(string path)
+    {
+        resourcesDataControlList[selectedResources].addAsset("foreground", path);
+    }
+
+    public string getPreviewMusic()
+    {
+        return resourcesDataControlList[selectedResources].getAssetPath("bgmusic");
+    }
+
+    public void setPreviewMusic(string path)
+    {
+        resourcesDataControlList[selectedResources].addAsset("bgmusic", path);
+    }
     /**
      * Returns the id of the scene.
      * 

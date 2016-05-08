@@ -103,6 +103,10 @@ public class BookDataControl : DataControlWithResources
     {
         return resourcesDataControlList[selectedResources].getAssetPath("background");
     }
+    public void setPreviewImage(string path)
+    {
+        resourcesDataControlList[selectedResources].addAsset("background", path);
+    }
 
     public const int ARROW_LEFT = 0,
                       ARROW_RIGHT = 1,
@@ -141,6 +145,32 @@ public class BookDataControl : DataControlWithResources
         return resourcesDataControlList[selectedResources].getAssetPath(asset);
     }
 
+    public void setArrowImagePath(int arrowOrientation, int arrowState, string path)
+    {
+
+        string asset = "";
+        switch (arrowOrientation)
+        {
+            case ARROW_LEFT:
+                asset += "arrowLeft";
+                break;
+            case ARROW_RIGHT:
+                asset += "arrowRight";
+                break;
+        }
+
+        switch (arrowState)
+        {
+            case ARROW_NORMAL:
+                asset += "Normal";
+                break;
+            case ARROW_OVER:
+                asset += "Over";
+                break;
+        }
+
+        resourcesDataControlList[selectedResources].addAsset(asset, path);
+    }
     /**
      * Get the path of image for the specified arrow.
      * @param arrowOrientation Arrow orientation. It can be <i>ARROW_LEFT</i> or <i>ARROW_RIGHT</i>

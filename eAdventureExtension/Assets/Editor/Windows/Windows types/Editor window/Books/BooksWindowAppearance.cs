@@ -219,26 +219,40 @@ public class BooksWindowAppearance : LayoutWindow, DialogReceiverInterface
     private void OnBackgroundChange(string val)
     {
         backgroundPath = val;
-        //TODO: set value to data model
+        Controller.getInstance().getSelectedChapterDataControl().getBooksList().getBooks()[
+                GameRources.GetInstance().selectedBookIndex].setPreviewImage(val);
+        if (backgroundPath != null && !backgroundPath.Equals(""))
+            backgroundPreview =
+                (Texture2D)
+                    Resources.Load(backgroundPath.Substring(0, backgroundPath.LastIndexOf(".")), typeof(Texture2D));
     }
     private void OnArrowLeftNormalChange(string val)
     {
         leftNormalArrowPath = val;
-        //TODO: set value to data model
+        Controller.getInstance().getSelectedChapterDataControl().getBooksList().getBooks()[
+               GameRources.GetInstance().selectedBookIndex].setArrowImagePath(BookDataControl.ARROW_LEFT,
+                   BookDataControl.ARROW_NORMAL, val);
+
     }
     private void OnArrowRightNormalChange(string val)
     {
         rightNormalArrowPath = val;
-        //TODO: set value to data model
+        Controller.getInstance().getSelectedChapterDataControl().getBooksList().getBooks()[
+               GameRources.GetInstance().selectedBookIndex].setArrowImagePath(BookDataControl.ARROW_RIGHT,
+                   BookDataControl.ARROW_NORMAL, val);
     }
     private void OnArrowLeftOverChange(string val)
     {
         leftOverArrowPath = val;
-        //TODO: set value to data model
+        Controller.getInstance().getSelectedChapterDataControl().getBooksList().getBooks()[
+               GameRources.GetInstance().selectedBookIndex].setArrowImagePath(BookDataControl.ARROW_LEFT,
+                   BookDataControl.ARROW_OVER, val);
     }
     private void OnArrowRightOverChange(string val)
     {
         rightOverArrowPath = val;
-        //TODO: set value to data model
+        Controller.getInstance().getSelectedChapterDataControl().getBooksList().getBooks()[
+               GameRources.GetInstance().selectedBookIndex].setArrowImagePath(BookDataControl.ARROW_RIGHT,
+                   BookDataControl.ARROW_OVER, val);
     }
 }
