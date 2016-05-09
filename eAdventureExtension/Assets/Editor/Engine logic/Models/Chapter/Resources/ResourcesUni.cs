@@ -126,7 +126,7 @@ public class ResourcesUni : ICloneable
 
     public string getAssetPath(string type)
     {
-        Debug.Log(CollectionPrinter.PrintCollection(assets));
+
         if (assets.ContainsKey(type))
             return assets[type];
         else

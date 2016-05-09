@@ -364,7 +364,7 @@ public class ImportChapterMenuItem : IMenuItem
     }
 }
 
-public class EditFlagsVariablesMenuItem : IMenuItem
+public class EditFlagsVariablesMenuItem : IMenuItem, DialogReceiverInterface
 {
     public EditFlagsVariablesMenuItem(string name_)
     {
@@ -378,7 +378,19 @@ public class EditFlagsVariablesMenuItem : IMenuItem
 
     public void OnCliked()
     {
-        Debug.Log(Language.GetText(Label));
+        ChapterVarAndFlagsEditor falgsVarEditor =
+        (ChapterVarAndFlagsEditor)ScriptableObject.CreateInstance(typeof(ChapterVarAndFlagsEditor));
+        falgsVarEditor.Init(this);
+    }
+
+    public void OnDialogOk(string message, object workingObject = null, object workingObjectSecond = null)
+    {
+
+    }
+
+    public void OnDialogCanceled(object workingObject = null)
+    {
+        
     }
 }
 
