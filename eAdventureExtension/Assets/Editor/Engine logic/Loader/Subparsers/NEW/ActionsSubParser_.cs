@@ -72,29 +72,108 @@ public class ActionsSubParser_ : Subparser_
 
     public override void ParseElement(XmlElement element)
     {
-        XmlNodeList
-            examines = element.SelectNodes("examines"),
-            grabs = element.SelectNodes("grabs"),
-            uses = element.SelectNodes("use"),
-            talksto = element.SelectNodes("talk-to"),
-            useswith = element.SelectNodes("use-with"),
-            givesto = element.SelectNodes("give-to"),
-            dragsto = element.SelectNodes("drag-to"),
-            customs = element.SelectNodes("custom"),
-            resourcess = element.SelectNodes("resources"),
-            assets = element.SelectNodes("asset"),
-            conditions = element.SelectNodes("condition"),
-            effects = element.SelectNodes("effect"),
-            notseffect = element.SelectNodes("not-effect"),
-            clickseffect = element.SelectNodes("click-effect"),
-            customsinteract = element.SelectNodes("custom-interact");
-
         string tmpArgVal;
+        XmlElement tmpXmlEl;
 
-        if (element.SelectSingleNode("documentation") != null)
-            this.element.setDocumentation(element.SelectSingleNode("documentation").InnerText);
+        if (element.SelectSingleNode ("documentation") != null) {
+            this.element.setDocumentation (element.SelectSingleNode ("documentation").InnerText);
+            element.RemoveChild (element.SelectSingleNode ("documentation"));
+        }
 
-        foreach (XmlElement el in examines)
+        foreach (XmlElement action in element.ChildNodes) {
+            //First we parse the elements every action haves:
+            tmpArgVal = action.GetAttribute("needsGoTo");
+            if (!string.IsNullOrEmpty(tmpArgVal))
+            {
+                currentNeedsGoTo = tmpArgVal.Equals("yes");
+            }
+            tmpArgVal = action.GetAttribute("keepDistance");
+            if (!string.IsNullOrEmpty(tmpArgVal))
+            {
+                currentKeepDistance = int.Parse(tmpArgVal);
+            }
+            tmpArgVal = action.GetAttribute("not-effects");
+            if (!string.IsNullOrEmpty(tmpArgVal))
+            {
+                activateNotEffects = tmpArgVal.Equals("yes");
+            }
+            tmpArgVal = action.GetAttribute("click-effects");
+
+            if (!string.IsNullOrEmpty(tmpArgVal))
+            {
+                activateClickEffects = tmpArgVal.Equals("yes");
+            }
+            tmpArgVal = action.GetAttribute("idTarget");
+            if (!string.IsNullOrEmpty(tmpArgVal))
+            {
+                currentIdTarget = tmpArgVal;
+            }
+
+            currentConditions = new Conditions();
+            currentEffects = new Effects();
+            currentNotEffects = new Effects();
+            currentClickEffects = new Effects();
+            tmpXmlEl = (XmlElement) action.SelectSingleNode ("condition");
+            if (tmpXmlEl != null)
+                new ConditionSubParser_ (currentConditions, chapter).ParseElement (tmpXmlEl);
+            tmpXmlEl = (XmlElement) action.SelectSingleNode ("effect");
+            if (tmpXmlEl != null)
+                new EffectSubParser_ (currentEffects, chapter).ParseElement (tmpXmlEl);
+
+            tmpXmlEl = (XmlElement) action.SelectSingleNode ("click-effect");
+            if (tmpXmlEl != null)
+                new EffectSubParser_ (currentClickEffects, chapter).ParseElement (tmpXmlEl);
+
+            tmpXmlEl = (XmlElement) action.SelectSingleNode ("not-effect");
+            if (tmpXmlEl != null)
+                new EffectSubParser_ (currentNotEffects, chapter).ParseElement (tmpXmlEl);
+
+            //Then we instantiate the correct action by name.
+            //We also parse the elements that are unique of that action.
+            Action currentAction = new Action(0);
+            switch (action.Name) {
+            case "examines":        currentAction = new Action(Action.EXAMINE, currentConditions, currentEffects, currentNotEffects); break;
+            case "grabs":           currentAction = new Action(Action.GRAB, currentConditions, currentEffects, currentNotEffects); break;
+            case "use":             currentAction = new Action(Action.USE, currentConditions, currentEffects, currentNotEffects); break;
+            case "talk-to":         currentAction = new Action(Action.TALK_TO, currentConditions, currentEffects, currentNotEffects); break;
+            case "use-with":        currentAction = new Action(Action.USE_WITH, currentIdTarget, currentConditions, currentEffects, currentNotEffects, currentClickEffects); break;
+            case "give-to":         currentAction = new Action(Action.GIVE_TO, currentIdTarget, currentConditions, currentEffects, currentNotEffects, currentClickEffects); break;
+            case "drag-to":         currentAction = new Action (Action.DRAG_TO, currentIdTarget, currentConditions, currentEffects, currentNotEffects, currentClickEffects); break;
+            case "custom":
+            case "custom-interact":
+                CustomAction customAction = new CustomAction ((action.Name == "custom") ? Action.CUSTOM : Action.CUSTOM_INTERACT); 
+
+                tmpArgVal = action.GetAttribute ("name");
+                if (!string.IsNullOrEmpty (tmpArgVal)) {
+                    currentName = tmpArgVal;
+                }
+                customAction.setName (currentName);
+
+                tmpXmlEl = (XmlElement) action.SelectSingleNode ("resources");
+                if (tmpXmlEl != null)
+                    customAction.addResources (parseResources (tmpXmlEl));
+                
+                currentAction = customAction;
+                break;
+            }
+
+            //Finally we set al the attributes to the action;
+            currentAction.setConditions(currentConditions);
+            currentAction.setEffects(currentEffects);
+            currentAction.setNotEffects(currentNotEffects);
+            currentAction.setKeepDistance(currentKeepDistance);
+            currentAction.setNeedsGoTo(currentNeedsGoTo);
+            currentAction.setActivatedNotEffects(activateNotEffects);
+            currentAction.setClickEffects(currentClickEffects);
+            currentAction.setActivatedClickEffects(activateClickEffects);
+
+            this.element.addAction(currentAction);
+        }
+       
+
+
+
+        /*foreach (XmlElement el in examines)
         {
             tmpArgVal = el.GetAttribute("needsGoTo");
             if (!string.IsNullOrEmpty(tmpArgVal))
@@ -214,11 +293,6 @@ public class ActionsSubParser_ : Subparser_
 
         foreach (XmlElement el in useswith)
         {
-            tmpArgVal = el.GetAttribute("idTarget");
-            if (!string.IsNullOrEmpty(tmpArgVal))
-            {
-                currentIdTarget = tmpArgVal;
-            }
             tmpArgVal = el.GetAttribute("needsGoTo");
             if (!string.IsNullOrEmpty(tmpArgVal))
             {
@@ -235,10 +309,17 @@ public class ActionsSubParser_ : Subparser_
                 activateNotEffects = tmpArgVal.Equals("yes");
             }
             tmpArgVal = el.GetAttribute("click-effects");
+
             if (!string.IsNullOrEmpty(tmpArgVal))
             {
                 activateClickEffects = tmpArgVal.Equals("yes");
             }
+            tmpArgVal = el.GetAttribute("idTarget");
+            if (!string.IsNullOrEmpty(tmpArgVal))
+            {
+                currentIdTarget = tmpArgVal;
+            }
+
             currentConditions = new Conditions();
             currentEffects = new Effects();
             currentNotEffects = new Effects();
@@ -370,10 +451,28 @@ public class ActionsSubParser_ : Subparser_
             {
                 activateClickEffects = tmpArgVal.Equals("yes");
             }
+
+
             currentConditions = new Conditions();
             currentEffects = new Effects();
             currentNotEffects = new Effects();
             currentClickEffects = new Effects();
+            tmpXmlEl = el.SelectSingleNode ("condition");
+            if (tmpXmlEl != null)
+                new ConditionSubParser_ (currentConditions, chapter).ParseElement (tmpXmlEl);
+
+            tmpXmlEl = el.SelectSingleNode ("effect");
+            if (tmpXmlEl != null)
+                new EffectSubParser_ (currentEffects, chapter).ParseElement (tmpXmlEl);
+
+            tmpXmlEl = el.SelectSingleNode ("click-effect");
+            if (tmpXmlEl != null)
+                new EffectSubParser_ (currentClickEffects, chapter).ParseElement (tmpXmlEl);
+
+            tmpXmlEl = el.SelectSingleNode ("not-effect");
+            if (tmpXmlEl != null)
+                new EffectSubParser_ (currentNotEffects, chapter).ParseElement (tmpXmlEl);
+
             currentCustomAction = new CustomAction(Action.CUSTOM);
 
             currentCustomAction.setName(currentName);
@@ -385,7 +484,9 @@ public class ActionsSubParser_ : Subparser_
             currentCustomAction.setActivatedNotEffects(activateNotEffects);
             currentCustomAction.setClickEffects(currentClickEffects);
             currentCustomAction.setActivatedClickEffects(activateClickEffects);
-            //				customAction.addResources(currentResources);
+            XmlElement res = (XmlElement) el.SelectSingleNode ("resources");
+            if (res != null)
+                currentCustomAction.addResources(parseResources(res));
             this.element.addAction(currentCustomAction);
             currentCustomAction = null;
         }
@@ -438,49 +539,13 @@ public class ActionsSubParser_ : Subparser_
             currentCustomAction.setActivatedNotEffects(activateNotEffects);
             currentCustomAction.setClickEffects(currentClickEffects);
             currentCustomAction.setActivatedClickEffects(activateClickEffects);
-            //				customAction.addResources(currentResources);
+
+            XmlElement res = (XmlElement) el.SelectSingleNode ("resources");
+            if (res != null)
+                currentCustomAction.addResources(parseResources(res));
+            
             this.element.addAction(currentCustomAction);
             currentCustomAction = null;
-        }
-
-
-        foreach (XmlElement el in resourcess)
-        {
-            currentResources = new ResourcesUni();
-            tmpArgVal = el.GetAttribute("name");
-            if (!string.IsNullOrEmpty(tmpArgVal))
-            {
-                currentResources.setName(el.GetAttribute(tmpArgVal));
-            }
-
-            assets = el.SelectNodes("asset");
-            foreach (XmlElement ell in assets)
-            {
-                string type = "";
-                string path = "";
-
-                tmpArgVal = ell.GetAttribute("type");
-                if (!string.IsNullOrEmpty(tmpArgVal))
-                {
-                    type = tmpArgVal;
-                }
-                tmpArgVal = ell.GetAttribute("uri");
-                if (!string.IsNullOrEmpty(tmpArgVal))
-                {
-                    path = tmpArgVal;
-                }
-                currentResources.addAsset(type, path);
-            }
-
-            conditions = el.SelectNodes("condition");
-            foreach (XmlElement ell in conditions)
-            {
-                currentConditions = new Conditions();
-                new ConditionSubParser_(currentConditions, chapter).ParseElement(ell);
-                currentResources.setConditions(currentConditions);
-            }
-
-            this.element.addResources(currentResources);
         }
 
         foreach (XmlElement el in effects)
@@ -497,8 +562,51 @@ public class ActionsSubParser_ : Subparser_
         {
             currentClickEffects = new Effects();
             new EffectSubParser_(currentClickEffects, chapter).ParseElement(el);
-        }
+        }*/
 
     }
 
+
+    private ResourcesUni parseResources(XmlElement resources){
+        XmlNodeList assets, conditions;
+        string tmpArgVal = "";
+
+        currentResources = new ResourcesUni();
+
+        tmpArgVal = resources.GetAttribute("name");
+        if (!string.IsNullOrEmpty(tmpArgVal))
+        {
+            currentResources.setName(tmpArgVal);
+        }
+
+        assets = resources.SelectNodes("asset");
+        foreach (XmlElement asset in assets)
+        {
+            string type = "";
+            string path = "";
+
+            tmpArgVal = asset.GetAttribute("type");
+            if (!string.IsNullOrEmpty(tmpArgVal))
+            {
+                type = tmpArgVal;
+            }
+            tmpArgVal = asset.GetAttribute("uri");
+            if (!string.IsNullOrEmpty(tmpArgVal))
+            {
+                path = tmpArgVal;
+            }
+            currentResources.addAsset(type, path);
+        }
+
+        conditions = resources.SelectNodes("condition");
+        foreach (XmlElement condition in conditions)
+        {
+            currentConditions = new Conditions();
+            new ConditionSubParser_(currentConditions, chapter).ParseElement(condition);
+            currentResources.setConditions(currentConditions);
+        }
+
+           
+        return currentResources;
+    }
 }

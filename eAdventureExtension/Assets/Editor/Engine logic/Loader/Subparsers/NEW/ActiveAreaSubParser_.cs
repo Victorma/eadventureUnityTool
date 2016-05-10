@@ -142,12 +142,12 @@ public class ActiveAreaSubParser_ : Subparser_
             {
                 int x_ = 0, y_ = 0;
 
-                tmpArgVal = element.GetAttribute("x");
+                tmpArgVal = el.GetAttribute("x");
                 if (!string.IsNullOrEmpty(tmpArgVal))
                 {
                     x_ = int.Parse(tmpArgVal);
                 }
-                tmpArgVal = element.GetAttribute("y");
+                tmpArgVal = el.GetAttribute("y");
                 if (!string.IsNullOrEmpty(tmpArgVal))
                 {
                     y_ = int.Parse(tmpArgVal);

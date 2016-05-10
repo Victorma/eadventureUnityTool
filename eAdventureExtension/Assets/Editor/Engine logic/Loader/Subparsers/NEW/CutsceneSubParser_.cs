@@ -85,7 +85,6 @@ public class CutsceneSubParser_ : Subparser_
         tmpArgVal = element.GetAttribute("transitionType");
         if (!string.IsNullOrEmpty(tmpArgVal))
         {
-            Debug.Log(tmpArgVal);
             transitionType = int.Parse(tmpArgVal);
         }
         tmpArgVal = element.GetAttribute("transitionTime");
@@ -120,6 +119,13 @@ public class CutsceneSubParser_ : Subparser_
              cutscene.setName(element.SelectSingleNode("name").InnerText);
         if (element.SelectSingleNode("documentation") != null)
             cutscene.setDocumentation(element.SelectSingleNode("documentation").InnerText);
+
+        foreach (XmlElement ell in effects)
+        {
+            currentEffects = new Effects();
+            new EffectSubParser_(currentEffects, chapter).ParseElement(ell);
+            cutscene.setEffects(currentEffects);
+        }
 
 
         if (cutscene is Videoscene)

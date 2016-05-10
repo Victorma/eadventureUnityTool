@@ -62,15 +62,15 @@ public class SceneSubParser_ : Subparser_
             postseffects,
             notseffect,
             defaultsinitialsposition = element.SelectNodes("default-initial-position"),
-            exits = element.SelectNodes("exits"),
+            exits = element.SelectNodes("exits/exit"),
             exitslook,
             nextsscene = element.SelectNodes("next-scene"),
             points,
             objectsrefs = element.SelectNodes("objects/object-ref"),
             charactersrefs = element.SelectNodes("characters/character-ref"),
             atrezzosrefs = element.SelectNodes("atrezzo/atrezzo-ref"),
-            activesareas = element.SelectNodes("active-area"),
-            barriers = element.SelectNodes("barriers/barrier"),
+            activesareas = element.SelectNodes("active-areas/active-area"),
+            barriers = element.SelectNodes("barrier"),
             trajectorys = element.SelectNodes("trajectory");
 
         string tmpArgVal;
@@ -310,7 +310,7 @@ public class SceneSubParser_ : Subparser_
             if (el.SelectSingleNode("documentation") != null)
                 currentExit.setDocumentation(el.SelectSingleNode("documentation").InnerText);
 
-            points = element.SelectNodes("point");
+            points = el.SelectNodes("point");
             foreach (XmlElement ell in points)
             {
                 int x_ = 0;
@@ -348,7 +348,7 @@ public class SceneSubParser_ : Subparser_
             }
 
             notseffect = el.SelectNodes("not-effect");
-            foreach (XmlElement ell in effects)
+            foreach (XmlElement ell in notseffect)
             {
                 currentEffects = new Effects();
                 new EffectSubParser_(currentEffects, chapter).ParseElement(ell);
@@ -356,7 +356,7 @@ public class SceneSubParser_ : Subparser_
             }
 
             postseffects = el.SelectNodes("post-effect");
-            foreach (XmlElement ell in effects)
+            foreach (XmlElement ell in postseffects)
             {
                 currentEffects = new Effects();
                 new EffectSubParser_(currentEffects, chapter).ParseElement(ell);

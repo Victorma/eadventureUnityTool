@@ -51,7 +51,7 @@ public class ConditionSubParser_ : Subparser_
                 lesssequalssthan_e = el.SelectNodes("less-equals-than"),
                 equalss_e = el.SelectNodes("equals"),
                 notsequals_e = el.SelectNodes("not-equals"),
-                globalsstatesref_e = el.SelectNodes("global -state-ref");
+                globalsstatesref_e = el.SelectNodes("global-state-ref");
 
             foreach (XmlElement ell in actives_e)
             {
