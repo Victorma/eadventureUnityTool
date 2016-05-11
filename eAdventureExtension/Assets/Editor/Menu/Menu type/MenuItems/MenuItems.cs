@@ -310,7 +310,7 @@ public class DeleteUnusedDataMenuItem : IMenuItem
     }
 }
 
-public class AddChapterMenuItem : IMenuItem
+public class AddChapterMenuItem : IMenuItem, DialogReceiverInterface
 {
     public AddChapterMenuItem(string name_)
     {
@@ -324,11 +324,24 @@ public class AddChapterMenuItem : IMenuItem
 
     public void OnCliked()
     {
-        Debug.Log(Language.GetText(Label));
+        ChapterNewNameInputPopup window = (ChapterNewNameInputPopup)ScriptableObject.CreateInstance(typeof(ChapterNewNameInputPopup));
+        window.Init(this, "chapter");
+    }
+
+    public void OnDialogOk(string message, object workingObject = null, object workingObjectSecond = null)
+    {
+        if (workingObject is ChapterNewNameInputPopup)
+        {
+            Controller.getInstance().addChapter(message);
+        }
+    }
+
+    public void OnDialogCanceled(object workingObject = null)
+    {
     }
 }
 
-public class DeleteChapterMenuItem : IMenuItem
+public class DeleteChapterMenuItem : IMenuItem, DialogReceiverInterface
 {
     public DeleteChapterMenuItem(string name_)
     {
@@ -342,7 +355,22 @@ public class DeleteChapterMenuItem : IMenuItem
 
     public void OnCliked()
     {
-        Debug.Log(Language.GetText(Label));
+        ConfirmationDialog window = (ConfirmationDialog)ScriptableObject.CreateInstance(typeof(ConfirmationDialog));
+        window.Init(this, "Delete chapter: " + Controller.getInstance().getCharapterList().getChapterTitles()[Controller.getInstance().getCharapterList().getSelectedChapter()]);
+    }
+
+    public void OnDialogOk(string message, object workingObject = null, object workingObjectSecond = null)
+    {
+        if (workingObject is ConfirmationDialog)
+        {
+            Controller.getInstance().deleteChapter();
+            Controller.getInstance().RefreshView();
+            ChaptersMenu.getInstance().RefreshMenuItems();
+        }
+    }
+
+    public void OnDialogCanceled(object workingObject = null)
+    {
     }
 }
 

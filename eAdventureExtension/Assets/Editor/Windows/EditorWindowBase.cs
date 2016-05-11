@@ -208,6 +208,12 @@ public class EditorWindowBase : EditorWindow, DialogReceiverInterface
         leftMenuContentAssessment.text = Language.GetText("ASSESMENT_PROFILES");
     }
 
+    public static void RefreshChapter()
+    {
+        chapterWindow = new ChapterWindow(windowRect, new GUIContent(Language.GetText("CHAPTER")), "Window");
+        openedWindow = EditorWindowType.Chapter;
+    }
+
     void OnGUI()
     {
         /**

@@ -13,9 +13,9 @@ public class AddChapterTool : Tool
 
     private string chapterTitle;
 
-    public AddChapterTool(ChapterListDataControl chaptersController)
+    public AddChapterTool(ChapterListDataControl chaptersController, string chapterName)
     {
-
+        this.chapterTitle = chapterName;
         this.chaptersController = chaptersController;
         this.controller = Controller.getInstance();
     }
@@ -40,10 +40,6 @@ public class AddChapterTool : Tool
     
     public override bool doTool()
     {
-
-        // Show a dialog asking for the chapter title
-        chapterTitle = controller.showInputDialog(TC.get("Operation.AddChapterTitle"), TC.get("Operation.AddChapterMessage"), TC.get("Operation.AddChapterDefaultValue"));
-
         // If some value was typed
         if (chapterTitle != null)
         {
@@ -54,6 +50,7 @@ public class AddChapterTool : Tool
                 chaptersController.addChapterDataControl(newChapter);
                 index = chaptersController.getSelectedChapter();
 
+                Debug.Log("ADD index: " + index);
                 //controller.reloadData();
                 return true;
             }

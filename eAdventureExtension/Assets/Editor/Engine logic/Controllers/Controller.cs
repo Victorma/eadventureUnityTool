@@ -3170,9 +3170,9 @@ public class Controller
      * the chapter to the user, and updates the view of the application if a new
      * chapter was added.
      */
-    public void addChapter()
+    public void addChapter(string val)
     {
-        addTool(new AddChapterTool(chaptersController));
+        addTool(new AddChapterTool(chaptersController, val));
     }
 
     ///**
@@ -3195,15 +3195,15 @@ public class Controller
 
     //}
 
-    ///**
-    // * Deletes the selected chapter from the adventure. This method asks the
-    // * user for confirmation, and updates the view if needed.
-    // */
-    //public void deleteChapter()
-    //{
+    /**
+     * Deletes the selected chapter from the adventure. This method asks the
+     * user for confirmation, and updates the view if needed.
+     */
+    public void deleteChapter()
+    {
 
-    //    addTool(new DeleteChapterTool(chaptersController));
-    //}
+        addTool(new DeleteChapterTool(chaptersController));
+    }
 
     ///**
     // * Moves the selected chapter to the previous position of the chapter's
@@ -4619,4 +4619,9 @@ public class Controller
 
 
     //}
+
+    public void RefreshView()
+    {
+        EditorWindowBase.RefreshChapter();
+    }
 }

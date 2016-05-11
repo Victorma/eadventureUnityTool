@@ -123,7 +123,6 @@ public class ChapterWindow : LayoutWindow
 
     private void ChangeSelectedInitialScene(int i)
     {
-        //TODO:
         selInitialSceneLast = i;
         Controller.getInstance()
             .getCharapterList()

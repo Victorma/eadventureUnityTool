@@ -465,7 +465,8 @@ public class AssetsController
     {
         Sprite image = null;
         Debug.Log(imagePath);
-        image = (Sprite) Resources.Load(imagePath.Substring(0, imagePath.LastIndexOf('.')), typeof (Sprite));
+        if(!string.IsNullOrEmpty(imagePath))
+            image = (Sprite) Resources.Load(imagePath.Substring(0, imagePath.LastIndexOf('.')), typeof (Sprite));
 
         return image;
     }

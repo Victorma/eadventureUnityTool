@@ -443,7 +443,9 @@ public class Loader
             if (descriptorIS == null) {
             	descriptorIS = AssetsController.getInputStream(filename);
             }*/
-            descriptorIS = isCreator.buildInputStream("Assets/Resources/" + filename+".eaa");
+            descriptorIS = isCreator.buildInputStream("Assets/Resources/" + filename);
+            if (!descriptorIS.EndsWith(".eaa"))
+                descriptorIS += ".eaa";
             animationHandler.Parse(descriptorIS);
             //saxParser.parse(descriptorIS, animationHandler);
             //descriptorIS.close();
