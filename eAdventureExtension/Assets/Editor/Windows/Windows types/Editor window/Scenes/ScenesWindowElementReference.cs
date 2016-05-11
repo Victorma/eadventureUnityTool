@@ -80,39 +80,60 @@ public class ScenesWindowElementReference : LayoutWindow, DialogReceiverInterfac
                 GameRources.GetInstance().selectedSceneIndex].getReferencesList().getAllReferencesDataControl().Count;
             i++)
         {
+            Debug.Log(i + " " + selectedElement);
             if (i == selectedElement)
                 GUI.skin = selectedElementSkin;
 
             GUILayout.BeginHorizontal();
 
-            if (GUILayout.Button(Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
-                GameRources.GetInstance().selectedSceneIndex].getReferencesList().getAllReferencesDataControl()[i]
-                .getLayer().ToString(),
-                GUILayout.Width(windowWidth*0.12f)))
+            if (
+                GUILayout.Button(
+                    Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
+                        GameRources.GetInstance().selectedSceneIndex].getReferencesList()
+                        .getAllReferencesDataControl()[i]
+                        .getLayer().ToString(),
+                    GUILayout.Width(windowWidth*0.12f)))
             {
                 selectedElement = i;
             }
 
-
-            Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
-                GameRources.GetInstance().selectedSceneIndex].getReferencesList().getAllReferencesDataControl()[i]
-                .getErdc()
-                .setVisible(
-                    GUILayout.Toggle(
+            if (Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
+                GameRources.GetInstance().selectedSceneIndex].getReferencesList()
+                .getAllReferencesDataControl()[i].getErdc() != null)
+            {
+                // FOR ELEMENT ERDC
+                Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
+                    GameRources.GetInstance().selectedSceneIndex].getReferencesList().getAllReferencesDataControl()[i]
+                    .getErdc().setVisible(
+                        GUILayout.Toggle(
+                            Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
+                                GameRources.GetInstance().selectedSceneIndex].getReferencesList()
+                                .getAllReferencesDataControl()[i].getErdc().isVisible(), "",
+                            GUILayout.Width(windowWidth*0.06f)));
+                if (
+                    GUILayout.Button(
                         Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
                             GameRources.GetInstance().selectedSceneIndex].getReferencesList()
-                            .getAllReferencesDataControl()[i].getErdc().isVisible(), "",
-                        GUILayout.Width(windowWidth*0.06f)));
+                            .getAllReferencesDataControl()[i]
+                            .getErdc().getElementId(), GUILayout.Width(windowWidth*0.39f)))
+                {
+                    selectedElement = i;
+                }
+            }
+            else
             {
-                selectedElement = i;
+                if (
+                    GUILayout.Button("", GUILayout.Width(windowWidth*0.06f)))
+                {
+                    selectedElement = i;
+                }
+                if (
+                    GUILayout.Button("", GUILayout.Width(windowWidth*0.39f)))
+                {
+                    selectedElement = i;
+                }
             }
 
-            if (GUILayout.Button(Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
-                GameRources.GetInstance().selectedSceneIndex].getReferencesList().getAllReferencesDataControl()[i]
-                .getErdc().getElementId(), GUILayout.Width(windowWidth*0.39f)))
-            {
-                selectedElement = i;
-            }
             if (GUILayout.Button(conditionTex, GUILayout.Width(windowWidth*0.29f)))
             {
                 selectedElement = i;

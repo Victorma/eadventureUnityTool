@@ -94,20 +94,23 @@ public class ObjectInSceneRefrencesEditor : BaseAreaEditablePopup
             sceneRef.getReferencesList().getAllReferencesDataControl().Count;
             i++)
         {
-            Rect aRect = new Rect(sceneRef.getReferencesList().getAllReferencesDataControl()[i].getErdc().getElementX(),
-                sceneRef.getReferencesList().getAllReferencesDataControl()[i].getErdc().getElementX(),
-                sceneRef.getReferencesList().getAllReferencesDataControl()[i].getErdc().getElementScale()*
-                backgroundPreviewTex.width,
-                sceneRef.getReferencesList().getAllReferencesDataControl()[i].getErdc().getElementScale()*
-                backgroundPreviewTex.height);
-            if(objectsTex[i] != null)
-                GUI.DrawTexture(aRect, objectsTex[i].texture);
-
-            // Frame around current area
-            if (calledItemIndexRef == i)
+            if (sceneRef.getReferencesList().getAllReferencesDataControl()[i].getErdc() != null)
             {
-                currentRect = aRect;
-                GUI.DrawTexture(aRect, selectedObjectTex);
+                Rect aRect = new Rect(sceneRef.getReferencesList().getAllReferencesDataControl()[i].getErdc().getElementX(),
+                    sceneRef.getReferencesList().getAllReferencesDataControl()[i].getErdc().getElementX(),
+                    sceneRef.getReferencesList().getAllReferencesDataControl()[i].getErdc().getElementScale() *
+                    backgroundPreviewTex.width,
+                    sceneRef.getReferencesList().getAllReferencesDataControl()[i].getErdc().getElementScale() *
+                    backgroundPreviewTex.height);
+                if (objectsTex[i] != null)
+                    GUI.DrawTexture(aRect, objectsTex[i].texture);
+
+                // Frame around current area
+                if (calledItemIndexRef == i)
+                {
+                    currentRect = aRect;
+                    GUI.DrawTexture(aRect, selectedObjectTex);
+                }
             }
         }
         GUILayout.EndScrollView();
