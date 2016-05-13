@@ -203,6 +203,11 @@ public class ConditionsController
      * Conditions data.
      */
     private Conditions conditions;
+    public Conditions Conditions
+    {
+        get { return conditions; }
+        set { this.conditions = value; }
+    }
 
     // Constructors
 
@@ -535,24 +540,24 @@ public class ConditionsController
      *            State of the condition
      */
 
-    //public bool addCondition(int index1, int index2, string conditionType, string conditionId, string conditionState,
-    //    string value)
-    //{
+    public bool addCondition(int index1, int index2, string conditionType, string conditionId, string conditionState,
+        string value)
+    {
 
-    //    if (index1 < 0 || index1 > conditions.size())
-    //        return false;
+        if (index1 < 0 || index1 > conditions.size())
+            return false;
 
-    //    if (conditionType == null || conditionId == null || conditionState == null)
-    //        return false;
+        if (conditionType == null || conditionId == null || conditionState == null)
+            return false;
 
-    //    if (conditionType.Equals(ConditionsController.CONDITION_TYPE_VAR) && value == null)
-    //        return false;
+        if (conditionType.Equals(ConditionsController.CONDITION_TYPE_VAR) && value == null)
+            return false;
 
-    //    return
-    //        Controller.getInstance()
-    //            .addTool(new AddConditionTool(conditions, index1, index2, conditionType, conditionId, conditionState,
-    //                value));
-    //}
+        return
+            Controller.getInstance()
+                .addTool(new AddConditionTool(conditions, index1, index2, conditionType, conditionId, conditionState,
+                    value));
+    }
 
     /**
      * Sets the evaluation function at the given index

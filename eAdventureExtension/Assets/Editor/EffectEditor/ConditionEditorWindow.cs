@@ -7,15 +7,20 @@ public class ConditionEditorWindow : EditorWindow
 {
     private static ConditionEditorWindow editor;
 
-    [MenuItem("eAdventure/Open condition editor")]
-    public static void Init()
+    public void Init(ConditionsController con)
     {
         editor = EditorWindow.GetWindow<ConditionEditorWindow>();
         editor.s = Color.black;
 
-        Conditions e = new Conditions();
+        editor.Conditions = con.Conditions;
+    }
 
-        editor.Conditions = e;
+    public void Init(Conditions con)
+    {
+        editor = EditorWindow.GetWindow<ConditionEditorWindow>();
+        editor.s = Color.black;
+
+        editor.Conditions = con;
     }
 
     private Conditions conditions;

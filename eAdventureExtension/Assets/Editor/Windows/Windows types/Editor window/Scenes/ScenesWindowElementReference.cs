@@ -80,7 +80,6 @@ public class ScenesWindowElementReference : LayoutWindow, DialogReceiverInterfac
                 GameRources.GetInstance().selectedSceneIndex].getReferencesList().getAllReferencesDataControl().Count;
             i++)
         {
-            Debug.Log(i + " " + selectedElement);
             if (i == selectedElement)
                 GUI.skin = selectedElementSkin;
 
@@ -119,6 +118,16 @@ public class ScenesWindowElementReference : LayoutWindow, DialogReceiverInterfac
                 {
                     selectedElement = i;
                 }
+
+                if (GUILayout.Button(conditionTex, GUILayout.Width(windowWidth * 0.29f)))
+                {
+                    selectedElement = i;
+                    ConditionEditorWindow window =
+                         (ConditionEditorWindow)ScriptableObject.CreateInstance(typeof(ConditionEditorWindow));
+                    window.Init(Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
+                                GameRources.GetInstance().selectedSceneIndex].getReferencesList()
+                                .getAllReferencesDataControl()[i].getErdc().getConditions());
+                }
             }
             else
             {
@@ -132,12 +141,13 @@ public class ScenesWindowElementReference : LayoutWindow, DialogReceiverInterfac
                 {
                     selectedElement = i;
                 }
+
+                if (GUILayout.Button(conditionTex, GUILayout.Width(windowWidth * 0.29f)))
+                {
+                    selectedElement = i;
+                }
             }
 
-            if (GUILayout.Button(conditionTex, GUILayout.Width(windowWidth*0.29f)))
-            {
-                selectedElement = i;
-            }
 
             GUILayout.EndHorizontal();
             GUI.skin = defaultSkin;

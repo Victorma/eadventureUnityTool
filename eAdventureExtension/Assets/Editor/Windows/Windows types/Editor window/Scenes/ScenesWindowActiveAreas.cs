@@ -96,6 +96,10 @@ public class ScenesWindowActiveAreas : LayoutWindow, DialogReceiverInterface
             if (GUILayout.Button(conditionTex, GUILayout.Width(windowWidth*0.14f)))
             {
                 selectedArea = i;
+                ConditionEditorWindow window =
+                    (ConditionEditorWindow)ScriptableObject.CreateInstance(typeof(ConditionEditorWindow));
+                window.Init(Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
+                GameRources.GetInstance().selectedSceneIndex].getActiveAreasList().getActiveAreasList()[i].getConditions());
             }
             if (GUILayout.Button("Edit actions", GUILayout.Width(windowWidth*0.09f)))
             {

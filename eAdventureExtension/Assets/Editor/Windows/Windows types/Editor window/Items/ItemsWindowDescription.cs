@@ -163,6 +163,13 @@ public class ItemsWindowDescription : LayoutWindow, DialogReceiverInterface
                 {
                     //TODO: condition editor
                     Debug.Log("SHOW editor");
+                    ConditionEditorWindow window =
+                        (ConditionEditorWindow) ScriptableObject.CreateInstance(typeof (ConditionEditorWindow));
+                    window.Init(
+                        Controller.getInstance().getSelectedChapterDataControl().getItemsList().getItems()[
+                            GameRources.GetInstance().selectedItemIndex].getDescriptionController()
+                            .getDescriptionController(i)
+                            .getConditionsController());
                 }
             }
             else

@@ -137,6 +137,10 @@ public class CharactersWindowActions : LayoutWindow
                 {
                     //TODO: condition editor
                     Debug.Log("SHOW editor");
+                    ConditionEditorWindow window =
+                     (ConditionEditorWindow)ScriptableObject.CreateInstance(typeof(ConditionEditorWindow));
+                    window.Init(Controller.getInstance().getSelectedChapterDataControl().getNPCsList().getNPCs()[
+                            GameRources.GetInstance().selectedCharacterIndex].getActionsList().getActions()[i].getConditions());
                 }
             }
             else

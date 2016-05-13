@@ -139,6 +139,10 @@ public class ItemsWindowActions : LayoutWindow
                 {
                     //TODO: condition editor
                     Debug.Log("SHOW editor");
+                    ConditionEditorWindow window =
+                     (ConditionEditorWindow)ScriptableObject.CreateInstance(typeof(ConditionEditorWindow));
+                    window.Init(Controller.getInstance().getSelectedChapterDataControl().getItemsList().getItems()[
+                            GameRources.GetInstance().selectedItemIndex].getActionsList().getActions()[i].getConditions());
                 }
             }
             else

@@ -92,6 +92,10 @@ public class ScenesWindowBarriers : LayoutWindow, DialogReceiverInterface
             if (GUILayout.Button(conditionTex, GUILayout.Width(windowWidth * 0.44f)))
             {
                 selectedArea = i;
+                ConditionEditorWindow window =
+                     (ConditionEditorWindow)ScriptableObject.CreateInstance(typeof(ConditionEditorWindow));
+                window.Init(Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
+                GameRources.GetInstance().selectedSceneIndex].getBarriersList().getBarriersList()[i].getConditions());
             }
 
             GUILayout.EndHorizontal();
