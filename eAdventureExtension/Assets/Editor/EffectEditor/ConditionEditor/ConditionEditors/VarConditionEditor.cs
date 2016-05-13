@@ -33,4 +33,7 @@ public class VarConditionEditor : ConditionEditor {
     public Condition InstanceManagedCondition(){
         return new VarCondition ("",4,0);
     }
+
+    public bool Collapsed { get; set; }
+    public Rect Window { get; set; }
 }

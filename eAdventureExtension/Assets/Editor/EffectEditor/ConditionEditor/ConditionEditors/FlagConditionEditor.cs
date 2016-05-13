@@ -31,4 +31,7 @@ public class FlagConditionEditor : ConditionEditor {
     public Condition InstanceManagedCondition(){
         return new FlagCondition ("");
     }
+
+    public bool Collapsed { get; set; }
+    public Rect Window { get; set; }
 }

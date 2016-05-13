@@ -83,7 +83,23 @@ public class GlobalStateListDataControl : DataControl
         return globalStatesInfo;
     }
 
-    
+    public string[] getGlobalStatesIds()
+    {
+
+        string[]globalStatesInfo = null;
+
+        // Create the list for the globalStates
+        globalStatesInfo = new string[globalStatesList.Count];
+
+        // Fill the array with the info
+        for (int i = 0; i < globalStatesList.Count; i++)
+        {
+            globalStatesInfo[i] = globalStatesList[i].getId();
+        }
+
+        return globalStatesInfo;
+    }
+
     public override System.Object getContent()
     {
 
