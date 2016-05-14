@@ -21,6 +21,7 @@ public class BooksListDataControl : DataControl
      * @param booksList
      *            List of books
      */
+
     public BooksListDataControl(List<Book> booksList)
     {
 
@@ -37,6 +38,7 @@ public class BooksListDataControl : DataControl
      * 
      * @return Book controllers
      */
+
     public List<BookDataControl> getBooks()
     {
 
@@ -48,27 +50,28 @@ public class BooksListDataControl : DataControl
      * 
      * @return Last book controller
      */
+
     public BookDataControl getLastBook()
     {
 
         return booksDataControlList[booksDataControlList.Count - 1];
     }
 
-    
+
     public override System.Object getContent()
     {
 
         return booksList;
     }
 
-    
+
     public override int[] getAddableElements()
     {
 
-        return new int[] { Controller.BOOK };
+        return new int[] {Controller.BOOK};
     }
 
-    
+
     public override bool canAddElement(int type)
     {
 
@@ -76,28 +79,37 @@ public class BooksListDataControl : DataControl
         return type == Controller.BOOK;
     }
 
-    
+
     public override bool canBeDeleted()
     {
 
         return false;
     }
 
-    
+
     public override bool canBeMoved()
     {
 
         return false;
     }
 
-    
+
     public override bool canBeRenamed()
     {
 
         return false;
     }
 
-    
+    public string[] getBooksIDs()
+    {
+        string[] tmp = new string[booksList.Count];
+
+        for (int i = 0; i < booksList.Count; i++)
+            tmp[i] = booksList[i].getId();
+
+        return tmp;
+    }
+
     public override bool addElement(int type, string bookId)
     {
 

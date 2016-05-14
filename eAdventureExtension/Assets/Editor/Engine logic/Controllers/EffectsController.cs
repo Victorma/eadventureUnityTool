@@ -641,7 +641,7 @@ public class EffectsController
                 newEffect = new WaitTimeEffect(time);
                 break;
             case EffectType.SHOW_TEXT:
-                newEffect = new ShowTextEffect(text, x, y, frontColor, borderColor);
+                newEffect = new ShowTextEffect(text, x, y, frontColor.ToString(), borderColor.ToString());
                 ((ShowTextEffect) newEffect).setAudioPath(path);
                 break;
             case EffectType.HIGHLIGHT_ITEM:

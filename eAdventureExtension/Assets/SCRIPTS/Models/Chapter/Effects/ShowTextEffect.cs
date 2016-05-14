@@ -29,12 +29,12 @@ public class ShowTextEffect : AbstractEffect
     /**
      * The text front color in RGB format
      */
-    private int rgbFrontColor;
+    private string rgbFrontColor;
 
     /**
      * The text border color in RGB fotrmat
      */
-    private int rgbBorderColor;
+    private string rgbBorderColor;
 
     /**
      * Constructor
@@ -45,7 +45,7 @@ public class ShowTextEffect : AbstractEffect
      * @param front
      * @param border
      */
-    public ShowTextEffect(string text, int x, int y, int front, int border) : base()
+    public ShowTextEffect(string text, int x, int y, string front, string border) : base()
     {
         this.text = text;
         this.x = x;
@@ -131,7 +131,7 @@ public class ShowTextEffect : AbstractEffect
     /**
      * @return the rgbFrontColor
      */
-    public int getRgbFrontColor()
+    public string getRgbFrontColor()
     {
 
         return rgbFrontColor;
@@ -141,7 +141,7 @@ public class ShowTextEffect : AbstractEffect
      * @param rgbFrontColor
      *            the rgbFrontColor to set
      */
-    public void setRgbFrontColor(int rgbFrontColor)
+    public void setRgbFrontColor(string rgbFrontColor)
     {
 
         this.rgbFrontColor = rgbFrontColor;
@@ -150,7 +150,7 @@ public class ShowTextEffect : AbstractEffect
     /**
      * @return the rgbBorderColor
      */
-    public int getRgbBorderColor()
+    public string getRgbBorderColor()
     {
 
         return rgbBorderColor;
@@ -160,7 +160,7 @@ public class ShowTextEffect : AbstractEffect
      * @param rgbBorderColor
      *            the rgbBorderColor to set
      */
-    public void setRgbBorderColor(int rgbBorderColor)
+    public void setRgbBorderColor(string rgbBorderColor)
     {
 
         this.rgbBorderColor = rgbBorderColor;

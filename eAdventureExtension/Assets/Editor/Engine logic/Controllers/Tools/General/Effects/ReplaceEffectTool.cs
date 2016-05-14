@@ -164,8 +164,8 @@ public class ReplaceEffectTool : Tool
                     ShowTextEffect showTextEffect = (ShowTextEffect)effect;
                     showTextEffect.setText((string)newProperties[EffectsController.EFFECT_PROPERTY_TEXT]);
                     showTextEffect.setTextPosition(int.Parse((string)newProperties[EffectsController.EFFECT_PROPERTY_X]), int.Parse((string)newProperties[EffectsController.EFFECT_PROPERTY_Y]));
-                    showTextEffect.setRgbFrontColor(int.Parse((string)newProperties[EffectsController.EFFECT_PROPERTY_FRONT_COLOR]));
-                    showTextEffect.setRgbBorderColor(int.Parse((string)newProperties[EffectsController.EFFECT_PROPERTY_BORDER_COLOR]));
+                    showTextEffect.setRgbFrontColor((string)newProperties[EffectsController.EFFECT_PROPERTY_FRONT_COLOR]);
+                    showTextEffect.setRgbBorderColor((string)newProperties[EffectsController.EFFECT_PROPERTY_BORDER_COLOR]);
                     showTextEffect.setAudioPath((string)newProperties[EffectsController.EFFECT_PROPERTY_PATH]);
                     break;
                 case EffectType.HIGHLIGHT_ITEM:

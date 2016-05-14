@@ -21,6 +21,7 @@ public class DecrementVarEffectEditor : EffectEditor
             else window = value;
         }
     }
+
     private string[] vars;
 
     private DecrementVarEffect effect;
@@ -38,7 +39,7 @@ public class DecrementVarEffectEditor : EffectEditor
         EditorGUILayout.LabelField("Variable to decrement: ");
 
         effect.setTargetId(vars[EditorGUILayout.Popup(Array.IndexOf(vars, effect.getTargetId()), vars)]);
-
+        effect.setDecrement(EditorGUILayout.IntField(effect.getDecrement()));
         EditorGUILayout.EndHorizontal();
 
         EditorGUILayout.HelpBox("Variable will be decrement.", MessageType.Info);

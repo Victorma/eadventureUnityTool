@@ -330,7 +330,7 @@ public class EffectSubParser_ : Subparser_
                 }
 
                 // Add the new ShowTextEffect
-                currentEffect = new ShowTextEffect(effect.InnerText.ToString().Trim(), x, y, frontColor, borderColor);
+                currentEffect = new ShowTextEffect(effect.InnerText.ToString().Trim(), x, y, frontColor.ToString(), borderColor.ToString());
                 ((ShowTextEffect) currentEffect).setAudioPath(audioPath);
                 break;
             case "highlight-item":

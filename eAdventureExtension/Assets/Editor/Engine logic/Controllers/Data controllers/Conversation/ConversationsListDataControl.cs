@@ -58,7 +58,15 @@ public class ConversationsListDataControl : DataControl
         return conversationsDataControlList[conversationsDataControlList.Count - 1];
     }
 
-    
+    public string[] getConversationsIDs()
+    {
+        string [] tmp = new string[conversationsList.Count];
+        for (int i = 0; i < conversationsList.Count; i++)
+            tmp[i] = conversationsList[i].getId();
+
+        return tmp;
+    }
+
     public override System.Object getContent()
     {
 

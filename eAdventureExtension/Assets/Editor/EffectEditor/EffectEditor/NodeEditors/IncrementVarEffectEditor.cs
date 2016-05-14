@@ -39,7 +39,7 @@ public class IncrementVarEffectEditor : EffectEditor
         EditorGUILayout.LabelField("Variable to increment: ");
 
         effect.setTargetId(vars[EditorGUILayout.Popup(Array.IndexOf(vars, effect.getTargetId()), vars)]);
-
+        effect.setIncrement(EditorGUILayout.IntField(effect.getIncrement()));
         EditorGUILayout.EndHorizontal();
 
         EditorGUILayout.HelpBox("Variable will be increment.", MessageType.Info);

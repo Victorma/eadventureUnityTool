@@ -593,7 +593,7 @@ public class EffectSubParser : SubParser
             else if (qName.Equals("show-text"))
             {
                 // Add the new ShowTextEffect
-                newEffect = new ShowTextEffect(currentstring.ToString().Trim(), x, y, frontColor, borderColor);
+                newEffect = new ShowTextEffect(currentstring.ToString().Trim(), x, y, frontColor.ToString(), borderColor.ToString());
                 ((ShowTextEffect)newEffect).setAudioPath(audioPath);
             }
 

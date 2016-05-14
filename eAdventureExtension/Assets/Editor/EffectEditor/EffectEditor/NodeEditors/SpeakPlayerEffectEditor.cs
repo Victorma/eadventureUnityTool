@@ -2,7 +2,8 @@
 using UnityEditor;
 using System.Collections;
 
-public class SpeakPlayerEffectEditor : EffectEditor {
+public class SpeakPlayerEffectEditor : EffectEditor
+{
     private bool collapsed = false;
     public bool Collapsed { get { return collapsed; } set { collapsed = value; } }
     private Rect window = new Rect(0, 0, 300, 0);
@@ -33,7 +34,7 @@ public class SpeakPlayerEffectEditor : EffectEditor {
 
         EditorGUILayout.EndHorizontal ();
 
-        EditorGUILayout.HelpBox("Player will show de line.",MessageType.Info);
+        EditorGUILayout.HelpBox("Player will show the line.",MessageType.Info);
     }
 
     public AbstractEffect Effect { get{ return effect; } set { effect = value as SpeakPlayerEffect; } }
