@@ -34,7 +34,9 @@ public abstract class BaseFileOpenDialog : EditorWindow
         NPC_DESCRIPTION_BRIEF_SOUND,
         NPC_DESCRIPTION_DETAILED_SOUND,
         SET_ITEM_IMAGE,
-        CHARACTER_ANIM
+        CHARACTER_ANIM,
+        PLAY_SOUND_EFFECT,
+        PLAY_ANIMATION_EFFECT
     };
 
     protected const string DIR_PREFIX = "Assets/Resources";
@@ -108,6 +110,7 @@ public abstract class BaseFileOpenDialog : EditorWindow
             case FileType.NPC_DESCRIPTION_NAME_SOUND:
             case FileType.NPC_DESCRIPTION_BRIEF_SOUND:
             case FileType.NPC_DESCRIPTION_DETAILED_SOUND:
+            case FileType.PLAY_SOUND_EFFECT:
                 assetTypeDir = AssetsController.CATEGORY_AUDIO_PATH;
                 break;
             case FileType.EXIT_ICON:
@@ -118,6 +121,7 @@ public abstract class BaseFileOpenDialog : EditorWindow
                 break;
             case FileType.CUTSCENE_SLIDES:
             case FileType.CHARACTER_ANIM:
+            case FileType.PLAY_ANIMATION_EFFECT:
                 //TODO: copy all assets files (slides, music)
                 assetTypeDir = AssetsController.CATEGORY_ANIMATION_FOLDER;
                 break;

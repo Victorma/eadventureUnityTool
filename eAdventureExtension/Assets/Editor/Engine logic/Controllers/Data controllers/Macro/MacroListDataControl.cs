@@ -80,7 +80,24 @@ public class MacroListDataControl : DataControl
         return macrosInfo;
     }
 
-    
+    public string[] getMacrosIDs()
+    {
+
+        string[] macrosInfo = null;
+
+        // Create the list for the macros
+        macrosInfo = new string[macrosList.Count];
+
+        // Fill the array with the info
+        for (int i = 0; i < macrosList.Count; i++)
+        {
+            Macro macro = macrosList[i];
+            macrosInfo[i] = macro.getId();
+        }
+
+        return macrosInfo;
+    }
+
     public override System.Object getContent()
     {
 
