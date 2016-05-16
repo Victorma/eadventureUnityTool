@@ -112,7 +112,13 @@ public class CutscenesWindowEndConfiguration : LayoutWindow
             if(selectedSceneNext != selectedSceneNextLast)
                 ChangeSelectedNextScene(selectedSceneNext);
 
-            GUILayout.Button("Edit effects");
+            if (GUILayout.Button("Edit effects"))
+            {
+                EffectEditorWindow window =
+                        (EffectEditorWindow)ScriptableObject.CreateInstance(typeof(EffectEditorWindow));
+                window.Init(Controller.getInstance().getSelectedChapterDataControl().getCutscenesList().getCutscenes()[
+                        GameRources.GetInstance().selectedCutsceneIndex].getEffects());
+            }
             GUILayout.EndHorizontal();
 
 

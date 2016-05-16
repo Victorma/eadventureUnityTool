@@ -27,6 +27,7 @@ public class TriggerConversationEffectEditor : EffectEditor
     public TriggerConversationEffectEditor()
     {
         conversations = Controller.getInstance().getSelectedChapterDataControl().getConversationsList().getConversationsIDs();
+        Debug.Log(conversations.Length);
         this.effect = new TriggerConversationEffect(conversations[0]);
     }
 

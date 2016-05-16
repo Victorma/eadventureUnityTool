@@ -207,6 +207,8 @@ public class ItemsWindowActions : LayoutWindow
                 GameRources.GetInstance().selectedItemIndex].getActionsList()
                 .deleteElement(Controller.getInstance().getSelectedChapterDataControl().getItemsList().getItems()[
                     GameRources.GetInstance().selectedItemIndex].getActionsList().getActions()[selectedAction], false);
+            if (selectedAction >= 0)
+                selectedAction--;
         }
         GUI.skin = defaultSkin;
         GUILayout.EndArea();
@@ -220,12 +222,17 @@ public class ItemsWindowActions : LayoutWindow
         GUILayout.EndArea();
 
         GUILayout.BeginArea(effectsRect);
+        if (selectedAction < 0)
+            GUI.enabled = false;
         if (GUILayout.Button("Show effects editor"))
         {
-            Debug.Log("Show effect editor");
+            EffectEditorWindow window =
+                           (EffectEditorWindow)ScriptableObject.CreateInstance(typeof(EffectEditorWindow));
+            window.Init(Controller.getInstance().getSelectedChapterDataControl().getItemsList().getItems()[
+                    GameRources.GetInstance().selectedItemIndex].getActionsList().getActions()[selectedAction].getEffects());
         }
+        GUI.enabled = true;
         GUILayout.EndArea();
-
     }
 
     private void OnActionSelectionChange(int i)

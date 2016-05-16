@@ -129,7 +129,7 @@ public class ExitsListDataControl : DataControl
 
             if (generalScenes.Length > 0)
             {
-                string selectedScene = controller.showInputDialog(TC.get("Operation.AddNextSceneTitle"), TC.get("Operation.AddNextSceneMessage"), generalScenes);
+                string selectedScene = id;
                 if (selectedScene != null)
                 {
                     Exit newExit = new Exit(true, 240, 240, 100, 100);

@@ -34,7 +34,10 @@ public class ConditionEditorFactoryImp : ConditionEditorFactory {
         }
 
         foreach (System.Type t in types)
+        {
+            Debug.Log(t.Name);
             this.editors.Add((ConditionEditor) System.Activator.CreateInstance(t));
+        }
     }
 
     public override string[] CurrentConditionEditors {

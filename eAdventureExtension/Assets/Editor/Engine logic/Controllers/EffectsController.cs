@@ -13,121 +13,139 @@ public class EffectsController
     /**
     * Constant for effect property. Refers to target elements.
     */
+
     public const
-    int EFFECT_PROPERTY_TARGET = 0;
+        int EFFECT_PROPERTY_TARGET = 0;
 
     /**
      * Constant for effect property. Refers to an asset path.
      */
+
     public const
-    int EFFECT_PROPERTY_PATH = 1;
+        int EFFECT_PROPERTY_PATH = 1;
 
     /**
      * Constant for effect property. Refers to text content.
      */
+
     public const
-    int EFFECT_PROPERTY_TEXT = 2;
+        int EFFECT_PROPERTY_TEXT = 2;
 
     /**
      * Constant for effect property. Refers to X coordinate.
      */
+
     public const
-    int EFFECT_PROPERTY_X = 3;
+        int EFFECT_PROPERTY_X = 3;
 
     /**
      * Constant for effect property. Refers to Y coordinate.
      */
+
     public const
-    int EFFECT_PROPERTY_Y = 4;
+        int EFFECT_PROPERTY_Y = 4;
 
     /**
      * Constant for effect property. Refers to "Play in background" flag.
      */
+
     public const
-    int EFFECT_PROPERTY_BACKGROUND = 5;
+        int EFFECT_PROPERTY_BACKGROUND = 5;
 
     /**
      * Constant for effect property. Refers to "Play in background" flag.
      */
+
     public const
-    int EFFECT_PROPERTY_PROBABILITY = 6;
+        int EFFECT_PROPERTY_PROBABILITY = 6;
 
     /**
      * Constant for effect property. Refers to "Value" flag.
      */
+
     public const
-    int EFFECT_PROPERTY_VALUE = 7;
+        int EFFECT_PROPERTY_VALUE = 7;
 
     /**
      * Constant for effect property. Refers to time value for WaitTimeEffect.
      */
+
     public const
-    int EFFECT_PROPERTY_TIME = 8;
+        int EFFECT_PROPERTY_TIME = 8;
 
     /**
      * Constant for effect property. Refers to text front color .
      */
+
     public const
-    int EFFECT_PROPERTY_FRONT_COLOR = 9;
+        int EFFECT_PROPERTY_FRONT_COLOR = 9;
 
     /**
      * Constant for effect property. Refers to text border color.
      */
+
     public const
-    int EFFECT_PROPERTY_BORDER_COLOR = 10;
+        int EFFECT_PROPERTY_BORDER_COLOR = 10;
 
     /**
      * Constant for effect property. Refers to type (ACTIVATE | DEACTIVATE |
      * MOVE-NPC...).
      */
+
     public const
-    int EFFECT_PROPERTY_TYPE = 11;
+        int EFFECT_PROPERTY_TYPE = 11;
 
     /**
      * Constant for effect property. Refers to first effect (RandomEffect).
      */
+
     public const
-    int EFFECT_PROPERTY_FIRST_EFFECT = 12;
+        int EFFECT_PROPERTY_FIRST_EFFECT = 12;
 
     /**
      * Constant for effect property. Refers to second effect (RandomEffect).
      */
+
     public const
-    int EFFECT_PROPERTY_SECOND_EFFECT = 13;
+        int EFFECT_PROPERTY_SECOND_EFFECT = 13;
 
     /**
      * Constant for effect property. Refers to the type of the highlight (none, blue, green, ...)
      */
+
     public const
-    int EFFECT_PROPERTY_HIGHLIGHT_TYPE = 14;
+        int EFFECT_PROPERTY_HIGHLIGHT_TYPE = 14;
 
     /**
      * Constant for effect property. Refers to "animated" flag of the highlight
      */
-    public const
-    int EFFECT_PROPERTY_ANIMATED = 15;
 
     public const
-    int EFFECT_PROPERTY_SCALE = 16;
+        int EFFECT_PROPERTY_ANIMATED = 15;
 
     public const
-    int EFFECT_PROPERTY_TRANSLATION_SPEED = 17;
+        int EFFECT_PROPERTY_SCALE = 16;
 
     public const
-    int EFFECT_PROPERTY_SCALE_SPEED = 18;
+        int EFFECT_PROPERTY_TRANSLATION_SPEED = 17;
+
+    public const
+        int EFFECT_PROPERTY_SCALE_SPEED = 18;
 
 
     /**
      * Constant to filter the selection of an asset. Used for animations.
      */
+
     public const
-    int ASSET_ANIMATION = 0;
+        int ASSET_ANIMATION = 0;
 
     /**
      * Constant to filter the selection of an asset. Used for sounds.
      */
+
     public const
-    int ASSET_SOUND = 1;
+        int ASSET_SOUND = 1;
 
     /**
      * Link to the main controller.
@@ -158,7 +176,7 @@ public class EffectsController
         conditionsList = new List<ConditionsController>();
         // create the list of effects controllers
         foreach (AbstractEffect effect in
-        effects.getEffects())
+            effects.getEffects())
         {
             conditionsList.Add(new ConditionsController(effect.getConditions(), Controller.EFFECT, getEffectInfo(effect)));
         }
@@ -225,92 +243,96 @@ public class EffectsController
             switch (effect.getType())
             {
                 case EffectType.ACTIVATE:
-                    icon = (Sprite)Resources.Load("img/icons/effects/16x16/activate.png", typeof(Sprite));
+                    icon = (Sprite) Resources.Load("img/icons/effects/16x16/activate.png", typeof (Sprite));
                     break;
                 case EffectType.DEACTIVATE:
-                    icon = (Sprite)Resources.Load("img/icons/effects/16x16/deactivate.png", typeof(Sprite));
+                    icon = (Sprite) Resources.Load("img/icons/effects/16x16/deactivate.png", typeof (Sprite));
                     break;
                 case EffectType.SET_VALUE:
-                    icon = (Sprite)Resources.Load("img/icons/effects/16x16/set-value.png", typeof(Sprite));
+                    icon = (Sprite) Resources.Load("img/icons/effects/16x16/set-value.png", typeof (Sprite));
                     break;
                 case EffectType.INCREMENT_VAR:
-                    icon = (Sprite)Resources.Load("img/icons/effects/16x16/increment.png", typeof(Sprite));
+                    icon = (Sprite) Resources.Load("img/icons/effects/16x16/increment.png", typeof (Sprite));
                     break;
                 case EffectType.DECREMENT_VAR:
-                    icon = (Sprite)Resources.Load("img/icons/effects/16x16/decrement.png", typeof(Sprite));
+                    icon = (Sprite) Resources.Load("img/icons/effects/16x16/decrement.png", typeof (Sprite));
                     break;
                 case EffectType.MACRO_REF:
-                    icon = (Sprite)Resources.Load("img/icons/effects/16x16/macro.png", typeof(Sprite));
+                    icon = (Sprite) Resources.Load("img/icons/effects/16x16/macro.png", typeof (Sprite));
                     break;
                 case EffectType.CONSUME_OBJECT:
-                    icon = (Sprite)Resources.Load("img/icons/effects/16x16/consume-object.png", typeof(Sprite));
+                    icon = (Sprite) Resources.Load("img/icons/effects/16x16/consume-object.png", typeof (Sprite));
                     break;
                 case EffectType.GENERATE_OBJECT:
-                    icon = (Sprite)Resources.Load("img/icons/effects/16x16/generate-object.png", typeof(Sprite));
+                    icon = (Sprite) Resources.Load("img/icons/effects/16x16/generate-object.png", typeof (Sprite));
                     break;
                 case EffectType.CANCEL_ACTION:
-                    icon = (Sprite)Resources.Load("img/icons/effects/16x16/cancel-action.png", typeof(Sprite));
+                    icon = (Sprite) Resources.Load("img/icons/effects/16x16/cancel-action.png", typeof (Sprite));
                     break;
                 case EffectType.SPEAK_PLAYER:
-                    icon = (Sprite)Resources.Load("img/icons/effects/16x16/activate.png", typeof(Sprite));
+                    icon = (Sprite) Resources.Load("img/icons/effects/16x16/activate.png", typeof (Sprite));
                     if (((SpeakPlayerEffect) effect).getAudioPath() != null &&
                         !((SpeakPlayerEffect) effect).getAudioPath().Equals(""))
-                        icon = (Sprite)Resources.Load("img/icons/effects/16x16/speak-player-withsound.png", typeof(Sprite));
+                        icon =
+                            (Sprite)
+                                Resources.Load("img/icons/effects/16x16/speak-player-withsound.png", typeof (Sprite));
                     else
-                     icon = (Sprite)Resources.Load("img/icons/effects/16x16/speak-player.png", typeof(Sprite));
+                        icon = (Sprite) Resources.Load("img/icons/effects/16x16/speak-player.png", typeof (Sprite));
                     break;
                 case EffectType.SPEAK_CHAR:
                     if (((SpeakCharEffect) effect).getAudioPath() != null &&
                         !((SpeakCharEffect) effect).getAudioPath().Equals(""))
-                        icon = (Sprite)Resources.Load("img/icons/effects/16x16/speak-npc-withsound.png", typeof(Sprite));
+                        icon =
+                            (Sprite) Resources.Load("img/icons/effects/16x16/speak-npc-withsound.png", typeof (Sprite));
                     else
-                    icon = (Sprite)Resources.Load("img/icons/effects/16x16/speak-npc.png", typeof(Sprite));
+                        icon = (Sprite) Resources.Load("img/icons/effects/16x16/speak-npc.png", typeof (Sprite));
                     break;
                 case EffectType.TRIGGER_BOOK:
-                    icon = (Sprite)Resources.Load("img/icons/effects/16x16/trigger-book.png", typeof(Sprite));
+                    icon = (Sprite) Resources.Load("img/icons/effects/16x16/trigger-book.png", typeof (Sprite));
                     break;
                 case EffectType.PLAY_SOUND:
-                    icon = (Sprite)Resources.Load("img/icons/effects/16x16/play-sound.png", typeof(Sprite));
+                    icon = (Sprite) Resources.Load("img/icons/effects/16x16/play-sound.png", typeof (Sprite));
                     break;
                 case EffectType.PLAY_ANIMATION:
-                    icon = (Sprite)Resources.Load("img/icons/effects/16x16/play-animation.png", typeof(Sprite));
+                    icon = (Sprite) Resources.Load("img/icons/effects/16x16/play-animation.png", typeof (Sprite));
                     break;
                 case EffectType.MOVE_PLAYER:
-                    icon = (Sprite)Resources.Load("img/icons/effects/16x16/move-player.png", typeof(Sprite));
+                    icon = (Sprite) Resources.Load("img/icons/effects/16x16/move-player.png", typeof (Sprite));
                     break;
                 case EffectType.MOVE_NPC:
-                    icon = (Sprite)Resources.Load("img/icons/effects/16x16/move-npc.png", typeof(Sprite));
+                    icon = (Sprite) Resources.Load("img/icons/effects/16x16/move-npc.png", typeof (Sprite));
                     break;
                 case EffectType.TRIGGER_CONVERSATION:
-                    icon = (Sprite)Resources.Load("img/icons/effects/16x16/trigger-conversation.png", typeof(Sprite));
+                    icon = (Sprite) Resources.Load("img/icons/effects/16x16/trigger-conversation.png", typeof (Sprite));
                     break;
                 case EffectType.TRIGGER_CUTSCENE:
-                    icon = (Sprite)Resources.Load("img/icons/effects/16x16/trigger-cutscene.png", typeof(Sprite));
+                    icon = (Sprite) Resources.Load("img/icons/effects/16x16/trigger-cutscene.png", typeof (Sprite));
                     break;
                 case EffectType.TRIGGER_SCENE:
-                    icon = (Sprite)Resources.Load("img/icons/effects/16x16/trigger-scene.png", typeof(Sprite));
+                    icon = (Sprite) Resources.Load("img/icons/effects/16x16/trigger-scene.png", typeof (Sprite));
                     break;
                 case EffectType.TRIGGER_LAST_SCENE:
-                    icon = (Sprite)Resources.Load("img/icons/effects/16x16/trigger-last-scene.png", typeof(Sprite));
+                    icon = (Sprite) Resources.Load("img/icons/effects/16x16/trigger-last-scene.png", typeof (Sprite));
                     break;
                 case EffectType.RANDOM_EFFECT:
-                    icon = (Sprite)Resources.Load("img/icons/effects/16x16/random-effect.png", typeof(Sprite));
+                    icon = (Sprite) Resources.Load("img/icons/effects/16x16/random-effect.png", typeof (Sprite));
                     break;
                 case EffectType.WAIT_TIME:
-                    icon = (Sprite)Resources.Load("img/icons/effects/16x16/wait.png", typeof(Sprite));
+                    icon = (Sprite) Resources.Load("img/icons/effects/16x16/wait.png", typeof (Sprite));
                     break;
                 case EffectType.SHOW_TEXT:
                     if (((ShowTextEffect) effect).getAudioPath() != null &&
                         !((ShowTextEffect) effect).getAudioPath().Equals(""))
-                        icon = (Sprite)Resources.Load("img/icons/effects/16x16/show-text-withsound.png", typeof(Sprite));
+                        icon =
+                            (Sprite) Resources.Load("img/icons/effects/16x16/show-text-withsound.png", typeof (Sprite));
                     else
-                    icon = (Sprite)Resources.Load("img/icons/effects/16x16/show-text.png", typeof(Sprite));
+                        icon = (Sprite) Resources.Load("img/icons/effects/16x16/show-text.png", typeof (Sprite));
                     break;
                 case EffectType.HIGHLIGHT_ITEM:
-                    icon = (Sprite)Resources.Load("img/icons/effects/16x16/highlight-item.png", typeof(Sprite));
+                    icon = (Sprite) Resources.Load("img/icons/effects/16x16/highlight-item.png", typeof (Sprite));
                     break;
                 case EffectType.MOVE_OBJECT:
-                    icon = (Sprite)Resources.Load("img/icons/effects/16x16/move-object.png", typeof(Sprite));
+                    icon = (Sprite) Resources.Load("img/icons/effects/16x16/move-object.png", typeof (Sprite));
                     break;
             }
 
@@ -331,11 +353,11 @@ public class EffectsController
                 break;
             case EffectType.DEACTIVATE:
                 DeactivateEffect deactivateEffect = (DeactivateEffect) effect;
-                effectInfo = "Effect.DeactivateInfo"+ deactivateEffect.getTargetId();
+                effectInfo = "Effect.DeactivateInfo" + deactivateEffect.getTargetId();
                 break;
             case EffectType.SET_VALUE:
                 SetValueEffect setValueEffect = (SetValueEffect) effect;
-                effectInfo = "Effect.SetValueInfo" + setValueEffect.getTargetId() + setValueEffect.getValue().ToString() ;
+                effectInfo = "Effect.SetValueInfo" + setValueEffect.getTargetId() + setValueEffect.getValue().ToString();
                 break;
             case EffectType.INCREMENT_VAR:
                 IncrementVarEffect incrementEffect = (IncrementVarEffect) effect;
@@ -382,7 +404,8 @@ public class EffectsController
                 break;
             case EffectType.MOVE_PLAYER:
                 MovePlayerEffect movePlayerEffect = (MovePlayerEffect) effect;
-                effectInfo = "Effect.MovePlayerInfo" + movePlayerEffect.getX().ToString() + movePlayerEffect.getY().ToString();
+                effectInfo = "Effect.MovePlayerInfo" + movePlayerEffect.getX().ToString() +
+                             movePlayerEffect.getY().ToString();
                 break;
             case EffectType.MOVE_NPC:
                 MoveNPCEffect moveNPCEffect = (MoveNPCEffect) effect;
@@ -412,7 +435,8 @@ public class EffectsController
                     posInfo = getEffectInfo(randomEffect.getPositiveEffect());
                 if (randomEffect.getNegativeEffect() != null)
                     negInfo = getEffectInfo(randomEffect.getNegativeEffect());
-                effectInfo = "Effect.RandomInfo" + randomEffect.getProbability() + " " + (100 - randomEffect.getProbability()) + " " + posInfo + " " + negInfo;
+                effectInfo = "Effect.RandomInfo" + randomEffect.getProbability() + " " +
+                             (100 - randomEffect.getProbability()) + " " + posInfo + " " + negInfo;
                 break;
             case EffectType.WAIT_TIME:
                 WaitTimeEffect waitTimeEffect = (WaitTimeEffect) effect;
@@ -420,7 +444,8 @@ public class EffectsController
                 break;
             case EffectType.SHOW_TEXT:
                 ShowTextEffect showTextInfo = (ShowTextEffect) effect;
-                effectInfo = "Effect.ShowTextInfo" + showTextInfo.getText() + " " + showTextInfo.getX() + " " + showTextInfo.getY();
+                effectInfo = "Effect.ShowTextInfo" + showTextInfo.getText() + " " + showTextInfo.getX() + " " +
+                             showTextInfo.getY();
                 break;
             case EffectType.HIGHLIGHT_ITEM:
                 HighlightItemEffect highlightItemEffect = (HighlightItemEffect) effect;
@@ -451,7 +476,12 @@ public class EffectsController
         return effects.getEffects();
     }
 
-    /**
+    public Effects getEffectsDirectly()
+    {
+        return effects;
+    }
+
+/**
      * Starts Adding a new condition to the block.
      * 
      * @return True if an effect was added, false otherwise

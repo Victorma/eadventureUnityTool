@@ -206,6 +206,8 @@ public class CharactersWindowActions : LayoutWindow
                 .deleteElement(Controller.getInstance().getSelectedChapterDataControl().getNPCsList().getNPCs()[
                     GameRources.GetInstance().selectedCharacterIndex].getActionsList().getActions()[selectedAction],
                     false);
+            if(selectedAction>=0)
+                selectedAction--;
         }
         GUI.skin = defaultSkin;
         GUILayout.EndArea();
@@ -219,10 +221,16 @@ public class CharactersWindowActions : LayoutWindow
         GUILayout.EndArea();
 
         GUILayout.BeginArea(effectsRect);
+        if (selectedAction < 0)
+            GUI.enabled = false;
         if (GUILayout.Button("Show effects editor"))
         {
-            Debug.Log("Show effect editor");
+            EffectEditorWindow window =
+                        (EffectEditorWindow)ScriptableObject.CreateInstance(typeof(EffectEditorWindow));
+            window.Init(Controller.getInstance().getSelectedChapterDataControl().getNPCsList().getNPCs()[
+                    GameRources.GetInstance().selectedCharacterIndex].getActionsList().getActions()[selectedAction].getEffects());
         }
+        GUI.enabled = true;
         GUILayout.EndArea();
     }
 

@@ -33,8 +33,56 @@ public class EffectEditorFactoryImp : EffectEditorFactory {
             types.Remove(typeof(EffectEditor));
         }
 
-        foreach (System.Type t in types)
-            this.effectEditors.Add((EffectEditor) System.Activator.CreateInstance(t));
+	    foreach (System.Type t in types)
+	    {
+	        if (t == typeof (ActivateEffectEditor) || t == typeof (DeactivateEffectEditor))
+	        {
+                if (Controller.getInstance().getVarFlagSummary().getVarCount() > 0)
+                    this.effectEditors.Add((EffectEditor)System.Activator.CreateInstance(t));
+            }
+            else if (t == typeof (ConsumeObjectEffectEditor) || t == typeof (GenerateObjectEffectEditor) ||
+                     t == typeof (HighlightItemEffectEditor) || t == typeof(MoveObjectEffectEditor))
+            {
+                if (Controller.getInstance().getSelectedChapterDataControl().getItemsList().getItemsIDs().Length > 0)
+                    this.effectEditors.Add((EffectEditor)System.Activator.CreateInstance(t));
+            }
+            else if (t == typeof (IncrementVarEffectEditor) || t == typeof (DecrementVarEffectEditor) ||
+                     t == typeof (SetValueEffectEditor))
+            {
+                if (Controller.getInstance().getVarFlagSummary().getFlagCount()>0)
+                    this.effectEditors.Add((EffectEditor)System.Activator.CreateInstance(t));
+            }
+            else if (t == typeof (MacroReferenceEffectEditor))
+            {
+                if (Controller.getInstance().getAdvancedFeaturesController().getMacrosListDataControl().getMacrosIDs().Length > 0)
+                    this.effectEditors.Add((EffectEditor)System.Activator.CreateInstance(t));
+
+            }
+            else if (t == typeof (MoveNPCEffectEditor) || t == typeof(SpeakCharEffectEditor))
+            {
+                if (Controller.getInstance().getSelectedChapterDataControl().getNPCsList().getNPCsIDs().Length > 0)
+                    this.effectEditors.Add((EffectEditor)System.Activator.CreateInstance(t));
+            }
+            else if (t == typeof (TriggerBookEffectEditor))
+            {
+                if (Controller.getInstance().getSelectedChapterDataControl().getBooksList().getBooksIDs().Length > 0)
+                    this.effectEditors.Add((EffectEditor)System.Activator.CreateInstance(t));
+            }
+            else if (t == typeof(TriggerConversationEffectEditor))
+            {
+                if (Controller.getInstance().getSelectedChapterDataControl().getConversationsList().getConversationsIDs().Length > 0)
+                    this.effectEditors.Add((EffectEditor)System.Activator.CreateInstance(t));
+            }
+            else if (t == typeof (TriggerCutsceneEffectEditor))
+            {
+                if (Controller.getInstance().getSelectedChapterDataControl().getCutscenesList().getCutscenesIDs().Length > 0)
+                    this.effectEditors.Add((EffectEditor)System.Activator.CreateInstance(t));
+            }
+            else
+            {
+                this.effectEditors.Add((EffectEditor)System.Activator.CreateInstance(t));
+            }
+	    }
 	}
 	
 	public override string[] CurrentEffectEditors {
@@ -49,12 +97,13 @@ public class EffectEditorFactoryImp : EffectEditorFactory {
 	
 	public override EffectEditor createEffectEditorFor (string effectName)
 	{
+        Debug.Log("Create: " + effectName);
 		foreach (EffectEditor effectEditor in effectEditors) {
 			if(effectEditor.EffectName.ToLower() == effectName.ToLower()){
 				return effectEditor.clone();
 			}
-		}
-		return null;
+        }
+        return null;
 	}
 
     public override EffectEditor createEffectEditorFor (AbstractEffect effect)
@@ -62,7 +111,7 @@ public class EffectEditorFactoryImp : EffectEditorFactory {
         foreach (EffectEditor effectEditor in effectEditors) 
             if(effectEditor.manages(effect))    
                 return effectEditor.clone();
-
+        
         return null;
     }
 

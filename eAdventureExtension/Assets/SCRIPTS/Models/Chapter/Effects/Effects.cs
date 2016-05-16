@@ -104,6 +104,14 @@ public class Effects : ICloneable
         return effects;
     }
 
+    public void addEffectsRange(List<AbstractEffect> e)
+    {
+        foreach (AbstractEffect effect in e)
+        {
+            this.add(effect);
+        }
+    }
+
     /**
      * Checks if there is any cancel action effect in the list
      */

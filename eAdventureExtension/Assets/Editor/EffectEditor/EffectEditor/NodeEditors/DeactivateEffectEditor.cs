@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using System.Collections;
+using System;
 
 public class DeactivateEffectEditor : EffectEditor {
     private bool collapsed = false;
     public bool Collapsed { get { return collapsed; } set { collapsed = value; } }
     private Rect window = new Rect(0, 0, 300, 0);
+    private string[] flags;
     public Rect Window
     {
         get {
@@ -20,8 +22,10 @@ public class DeactivateEffectEditor : EffectEditor {
 
     private DeactivateEffect effect;
 
-    public DeactivateEffectEditor(){
-        this.effect = new DeactivateEffect ("");
+    public DeactivateEffectEditor()
+    {
+        flags = Controller.getInstance().getVarFlagSummary().getFlags();
+        this.effect = new DeactivateEffect (flags[0]);
     }
 
     public void draw(){
@@ -29,9 +33,7 @@ public class DeactivateEffectEditor : EffectEditor {
         EditorGUILayout.BeginHorizontal ();
         EditorGUILayout.LabelField ("Flag ID: ");
 
-        string tid = effect.getTargetId ();
-        EditorGUILayout.TextField (tid);
-        effect.setTargetId (tid);
+        effect.setTargetId(flags[EditorGUILayout.Popup(Array.IndexOf(flags, effect.getTargetId()), flags)]);
 
         EditorGUILayout.EndHorizontal ();
 
