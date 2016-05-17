@@ -195,7 +195,6 @@ public class SceneDOMWriter
                     }
                 }
 
-                Debug.Log("SceneDOM base: " + exit.getEffects().getEffects().Count + " " + exit.getPostEffects().getEffects().Count + " " + exit.getNotEffects().getEffects().Count);
                 if (exit.getConditions() != null && !exit.getConditions().isEmpty())
                 {
                     XmlNode conditionsNode = ConditionsDOMWriter.buildDOM(exit.getConditions());

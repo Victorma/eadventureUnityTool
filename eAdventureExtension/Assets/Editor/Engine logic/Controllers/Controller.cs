@@ -395,7 +395,7 @@ public class Controller
      * The complete path to the current open ZIP file.
      */
     //TODO: implement init method
-    private string currentZipFile = "C:\\Users\\dijks\\Desktop\\Eadventure projects\\Fire";
+    private string currentZipFile = "";
 
     /**
      * The path to the folder that holds the open file.
@@ -517,12 +517,12 @@ public class Controller
     //    /**
     //     * Initializing function.
     //     */
-    public void init(string arg)
+    public void init(string loadProjectPath)
     {
 
         ConfigData.loadFromXML(ReleaseFolders.configFileEditorRelativePath());
         // Load the configuration
-        ProjectConfigData.init();
+        //ProjectConfigData.init();
         //SCORMConfigData.init();
 
         // Create necessary folders if no created befor
@@ -566,9 +566,9 @@ public class Controller
         //// mainWindow.setExtendedState(JFrame.ICONIFIED | mainWindow.getExtendedState());
         //mainWindow.setVisible(false);
 
-        if (arg != null)
+        if (loadProjectPath != null)
         {
-            FileInfo projectFile = new FileInfo(arg);
+            FileInfo projectFile = new FileInfo(loadProjectPath);
             if (projectFile.Exists)
             {
                 if (projectFile.FullName.ToLower().EndsWith(".eap"))
@@ -581,7 +581,7 @@ public class Controller
             }
         }
         //TODO: implement
-        else if (ConfigData.showStartDialog())
+        else 
         {
             //int op = start.showOpenDialog( mainWindow );
             //int op = start.showStartDialog();
@@ -596,7 +596,7 @@ public class Controller
             }
             else
             {
-                newAdventureFile(FILE_ADVENTURE_3RDPERSON_PLAYER);
+                newFile(FILE_ADVENTURE_3RDPERSON_PLAYER);
             }
             //else if (op == StartDialog.OPEN_FILE_OPTION)
             //{
@@ -1130,9 +1130,9 @@ public class Controller
                 playerMode = DescriptorData.MODE_PLAYER_3RDPERSON;
             else if (fileType == FILE_ADVENTURE_1STPERSON_PLAYER)
                 playerMode = DescriptorData.MODE_PLAYER_1STPERSON;
-            adventureDataControl = new AdventureDataControl(TC.get("DefaultValue.AdventureTitle"),
-                TC.get("DefaultValue.ChapterTitle"), TC.get("DefaultValue.SceneId"), playerMode);
-
+            //adventureDataControl = new AdventureDataControl(TC.get("DefaultValue.AdventureTitle"),
+            //    TC.get("DefaultValue.ChapterTitle"), TC.get("DefaultValue.SceneId"), playerMode);
+            adventureDataControl = new AdventureDataControl(TC.get("DefaultValue.AdventureTitle"), "ChapterTitle", TC.get("DefaultValue.SceneId"), playerMode);
             // Clear the list of data controllers and refill it
             chaptersController = new ChapterListDataControl(adventureDataControl.getChapters());
 
@@ -1750,7 +1750,7 @@ public class Controller
             //loadingScreen.setVisible( true );
             string completeFilePath = null;
             //completeFilePath = mainWindow.showSaveDialog(getCurrentLoadFolder(), new FolderFileFilter(false, false, null));
-            completeFilePath = "C:\\Users\\dijks\\Desktop\\Export" + "\\test1";
+            completeFilePath = currentZipPath;
 
             // If some file was selected set the new file
             if (completeFilePath != null)
@@ -2203,7 +2203,7 @@ public class Controller
 
     public bool exportGame()
     {
-        return exportGame("C:\\Users\\dijks\\Desktop\\Export" + "\\test.ead");
+        return exportGame("Games\\" + currentZipName);
     }
 
     //    /**
@@ -2274,9 +2274,9 @@ public class Controller
             //    selectedPath = mainWindow.showSaveDialog(getCurrentExportSaveFolder(), new EADFileFilter());
             if (selectedPath != null)
             {
-                if (!selectedPath.ToLower().EndsWith(".ead"))
-                    selectedPath = selectedPath + ".ead";
-
+                if (!selectedPath.ToLower().EndsWith(".eap"))
+                    selectedPath = selectedPath + ".eap";
+                AssetsController.copyAllFiles(currentZipFile, new DirectoryInfo(targetFilePath).FullName);
                 FileInfo destinyFile = new FileInfo(selectedPath);
 
                 // Check the destinyFile is not in the project folder

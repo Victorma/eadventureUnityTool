@@ -70,7 +70,6 @@ public class EffectsDOMWriter{
 
     public static void appendEffects(XmlDocument doc, XmlNode effectsNode, Effects effects)
     {
-        Debug.Log("APpend effects: " + effects.getEffects().Count);
         // Add every effect
         foreach (AbstractEffect effect in effects.getEffects())
         {
@@ -115,7 +114,6 @@ public class EffectsDOMWriter{
 
     private static XmlElement buildEffectNode(AbstractEffect effect, XmlDocument doc)
     {
-        Debug.Log(effect.getType().ToString());
         XmlElement effectElement = null;
 
         switch (effect.getType())

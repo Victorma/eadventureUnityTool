@@ -867,7 +867,6 @@ public class AssetsController
         if (assets.Exists)
         {
             DirectoryInfo destinyAssets = new DirectoryInfo(destinyFile + "\\assets");
-            Debug.Log(assets.FullName + "   " + destinyAssets.FullName);
             if (destinyAssets.Exists)
             {
                 destinyAssets.Delete(true);
@@ -884,6 +883,16 @@ public class AssetsController
             }
             DirectoryCopy(gui.FullName, destinyGui.FullName, true);
         }
+    }
+
+    public static void copyAllFiles(string sourceFile, string destinyFile)
+    {
+        DirectoryInfo dest = new DirectoryInfo(destinyFile);
+        if (dest.Exists)
+        {
+            dest.Delete(true);
+        }
+        DirectoryCopy(sourceFile, destinyFile, true);
     }
 
     public static void copyAssetsWithoutDeleteCurrentFiles(string sourceFile, string destinyFile)

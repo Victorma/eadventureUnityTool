@@ -391,7 +391,7 @@ public class ConversationDOMWriter
 
                     // Create a child tag, and set it the index of the child
                     XmlElement childElement = doc.CreateElement("child");
-                    childElement.SetAttribute("nodeindex", node.getChild(j).ToString());
+                    childElement.SetAttribute("nodeindex", nodes.IndexOf(node.getChild(j)).ToString());
 
                     // Insert the text line in the option node
                     nodeElement.AppendChild(lineElement);

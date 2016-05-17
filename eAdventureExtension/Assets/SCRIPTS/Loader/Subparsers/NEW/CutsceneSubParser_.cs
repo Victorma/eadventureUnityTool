@@ -85,7 +85,11 @@ public class CutsceneSubParser_ : Subparser_
         tmpArgVal = element.GetAttribute("transitionType");
         if (!string.IsNullOrEmpty(tmpArgVal))
         {
-            transitionType = int.Parse(tmpArgVal);
+            int res;
+            if (int.TryParse(tmpArgVal, out res))
+                transitionType = res;
+            else
+                transitionType = 0;
         }
         tmpArgVal = element.GetAttribute("transitionTime");
         if (!string.IsNullOrEmpty(tmpArgVal))
