@@ -19,6 +19,8 @@ public class AnimationWriter
         bool dataSaved = false;
 
         XmlDocument doc = Writer.GetDoc();
+        if(doc == null)
+            doc = new XmlDocument();
 
         XmlElement mainNode = doc.CreateElement("animation");
         //mainNode.AppendChild(doc.createAttribute("id").setNodeValue(animation.getId()));
@@ -46,7 +48,7 @@ public class AnimationWriter
 
         doc.ImportNode(mainNode, true);
         doc.AppendChild(mainNode);
-
+        doc.Save("Assets/Resources/" + filename);
         //TODO: implementation?
         //transformer = tf.newTransformer();
         //transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, "animation.dtd");

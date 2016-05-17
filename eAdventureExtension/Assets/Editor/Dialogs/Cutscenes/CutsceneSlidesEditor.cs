@@ -38,8 +38,11 @@ public class CutsceneSlidesEditor : BaseCreatorPopup, DialogReceiverInterface
 
     private string[] transitionTypes;
     private int selectedTransition, selectedTransitonLast ;
+
+    private string cutscenePath;
     public void Init(DialogReceiverInterface e, string cutsceneFilePath)
     {
+        cutscenePath = cutsceneFilePath;
         clearImg = (Texture2D) Resources.Load("EAdventureData/img/icons/deleteContent", typeof (Texture2D));
         addTexture = (Texture2D) Resources.Load("EAdventureData/img/icons/addNode", typeof (Texture2D));
         moveLeft = (Texture2D) Resources.Load("EAdventureData/img/icons/moveNodeLeft", typeof (Texture2D));
@@ -145,9 +148,11 @@ public class CutsceneSlidesEditor : BaseCreatorPopup, DialogReceiverInterface
         }
         if (GUILayout.Button(clearImg))
         {
-            if (--selectedFrame < 0)
-                selectedFrame = 0;
-            workingAnimation.removeFrame(selectedFrame);
+            if (selectedFrame >= 0)
+            {
+                workingAnimation.removeFrame(selectedFrame);
+                selectedFrame--;
+            }
         }
         if (GUILayout.Button(addTexture))
         {
@@ -228,6 +233,7 @@ public class CutsceneSlidesEditor : BaseCreatorPopup, DialogReceiverInterface
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("OK"))
         {
+            AnimationWriter.writeAnimation(cutscenePath, workingAnimation);
             reference.OnDialogOk("", this);
             this.Close();
         }
