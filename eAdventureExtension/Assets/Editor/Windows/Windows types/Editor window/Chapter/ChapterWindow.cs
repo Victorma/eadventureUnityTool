@@ -24,11 +24,11 @@ public class ChapterWindow : LayoutWindow
         selStringsAdapatation = new string[] { "none", "test1 Adaptation", "test2 Adaptation", "test3 Adaptation", "test4 Adaptation", "test5 Adaptation" };
         selStringsAssesment = new string[] { "none", "test1 Assesment", "test2 Assesment" };
 
-        int amountOfScenes = Controller.getInstance().getCharapterList().getSelectedChapterData().getCutscenes().Count;
+        int amountOfScenes = Controller.getInstance().getCharapterList().getSelectedChapterData().getScenes().Count;
         selStringsInitialScene = new string[amountOfScenes];
         for (int i = 0; i < amountOfScenes; i++)
         {
-            selStringsInitialScene[i] = Controller.getInstance().getCharapterList().getSelectedChapterData().getCutscenes()[i].getId();
+            selStringsInitialScene[i] = Controller.getInstance().getCharapterList().getSelectedChapterData().getScenes()[i].getId();
             // Set index for selction grid
             if (selStringsInitialScene[i] == Controller.getInstance().getCharapterList().getSelectedChapterDataControl().getInitialScene())
                 selInitialScene = i;

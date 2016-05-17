@@ -1023,6 +1023,7 @@ public class Controller
         // if( folderSelector.showOpenDialog( mainWindow ) == JFileChooser.APPROVE_OPTION ) {
 
         Stream myStream = null;
+        sfd = new System.Windows.Forms.SaveFileDialog();
         sfd.InitialDirectory = "c:\\";
         sfd.Filter = "ead files (*.ead) | *.ead |eap files (*.eap) | *.eap";
         sfd.FilterIndex = 2;
@@ -1108,10 +1109,10 @@ public class Controller
                         create = false;
                     }
                 }
+                myStream.Dispose();
             }
-
         }
-        myStream.Dispose();
+
         // Create the new project?
         //LoadingScreen loadingScreen = new LoadingScreen(TextConstants.getText( "Operation.CreateProject" ), getLoadingImage( ), mainWindow);
 

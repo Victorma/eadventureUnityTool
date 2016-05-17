@@ -48,9 +48,9 @@ public class OpenGameWindow : LayoutWindow
                     EditorWindowBase window = (EditorWindowBase)EditorWindow.GetWindow(typeof(EditorWindowBase));
                     window.Show();
                 }
+                myStream.Dispose();
             }
 
         }
-        myStream.Dispose();
     }
 }

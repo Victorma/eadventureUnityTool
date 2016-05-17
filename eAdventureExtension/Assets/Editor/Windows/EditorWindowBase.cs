@@ -279,6 +279,7 @@ public class EditorWindowBase : EditorWindow, DialogReceiverInterface
         // Button event chapter
         if (GUILayout.Button(Language.GetText("CHAPTER")))
         {
+            chapterWindow = new ChapterWindow(windowRect, new GUIContent(Language.GetText("CHAPTER")), "Window");
             OnWindowTypeChanged(EditorWindowType.Chapter);
         }
 
