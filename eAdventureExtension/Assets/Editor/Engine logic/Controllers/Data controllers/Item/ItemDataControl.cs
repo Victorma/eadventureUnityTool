@@ -72,6 +72,11 @@ public class ItemDataControl : DataControlWithResources
         return resourcesDataControlList[selectedResources].getAssetPath("image");
     }
 
+    public void setPreviewImage(string val)
+    {
+         resourcesDataControlList[selectedResources].addAsset("image", val);
+    }
+
     /**
    * Returns the path to the selected preview image.
    * 
@@ -81,7 +86,10 @@ public class ItemDataControl : DataControlWithResources
     {
         return resourcesDataControlList[selectedResources].getAssetPath("icon");
     }
-
+    public void setIconImage(string val)
+    {
+        resourcesDataControlList[selectedResources].addAsset("icon", val);
+    }
     /**
    * Returns the path to the selected preview image.
    * 
@@ -90,6 +98,10 @@ public class ItemDataControl : DataControlWithResources
     public string getMouseOverImage()
     {
         return resourcesDataControlList[selectedResources].getAssetPath("imageover");
+    }
+    public void setMouseOverImage(string val)
+    {
+        resourcesDataControlList[selectedResources].addAsset("imageover", val);
     }
 
     /**

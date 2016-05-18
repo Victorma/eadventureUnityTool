@@ -37,7 +37,6 @@ public class CutscenesWindowAppearance : LayoutWindow, DialogReceiverInterface
             slidesPath =
                 Controller.getInstance().getSelectedChapterDataControl().getCutscenesList().getCutscenes()[
                     GameRources.GetInstance().selectedCutsceneIndex].getPathToSlides();
-            Debug.Log(slidesPath);
             slidesPathPreview =
                 Controller.getInstance().getSelectedChapterDataControl().getCutscenesList().getCutscenes()[
                     GameRources.GetInstance().selectedCutsceneIndex].getPreviewImage();

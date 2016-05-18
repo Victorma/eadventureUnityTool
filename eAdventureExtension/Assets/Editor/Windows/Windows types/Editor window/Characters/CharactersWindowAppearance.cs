@@ -834,6 +834,7 @@ public class CharactersWindowAppearance : LayoutWindow, DialogReceiverInterface
 
     public void OnDialogOk(string message, object workingObject = null, object workingObjectSecond = null)
     {
+        Debug.Log(message);
         // After new cutscene name was choosed
         if (workingObject is CutsceneNameInputPopup)
         {

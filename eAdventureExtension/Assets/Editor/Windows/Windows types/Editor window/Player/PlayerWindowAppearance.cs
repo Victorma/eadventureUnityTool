@@ -819,6 +819,7 @@ public class PlayerWindowAppearance : LayoutWindow, DialogReceiverInterface
         if (workingObject is CutsceneNameInputPopup)
         {
             CharacterAnimationType type = (CharacterAnimationType)workingObjectSecond;
+            Debug.Log(type);
             //TODO: create file?
             switch (type)
             {

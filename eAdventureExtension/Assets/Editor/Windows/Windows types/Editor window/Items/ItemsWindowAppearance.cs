@@ -242,12 +242,18 @@ public class ItemsWindowAppearance : LayoutWindow, DialogReceiverInterface
             {
                 case BaseFileOpenDialog.FileType.ITEM_IMAGE:
                     imagePath = message;
+                    Controller.getInstance().getSelectedChapterDataControl().getItemsList().getItems()[
+                        GameRources.GetInstance().selectedItemIndex].setPreviewImage(imagePath);
                     break;
                 case BaseFileOpenDialog.FileType.ITEM_ICON:
                     inventoryIconPath = message;
+                    Controller.getInstance().getSelectedChapterDataControl().getItemsList().getItems()[
+                        GameRources.GetInstance().selectedItemIndex].setIconImage(inventoryIconPath);
                     break;
                 case BaseFileOpenDialog.FileType.ITEM_IMAGE_OVER:
                     imageWhenOverPath = message;
+                    Controller.getInstance().getSelectedChapterDataControl().getItemsList().getItems()[
+                        GameRources.GetInstance().selectedItemIndex].setMouseOverImage(imageWhenOverPath);
                     break;
                 default:
                     break;

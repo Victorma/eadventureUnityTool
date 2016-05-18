@@ -12,7 +12,7 @@ public class CutsceneNameInputPopup : BaseInputPopup
         if (characterAnimType is CharactersWindowAppearance.CharacterAnimationType)
         {
             isCharacterCutscene = true;
-            type = (CharactersWindowAppearance.CharacterAnimationType) type;
+            type = (CharactersWindowAppearance.CharacterAnimationType)characterAnimType;
         }
 
         base.Init(e, startTextContent);
@@ -29,9 +29,14 @@ public class CutsceneNameInputPopup : BaseInputPopup
 
         GUILayout.Space(30);
 
+        if (!Controller.getInstance().isElementIdValid(textContent, false))
+        {
+            GUI.enabled = false;
+        }
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("OK"))
         {
+            textContent = "assets/animation/" + textContent + ".eaa";
             if (isCharacterCutscene)
                 reference.OnDialogOk(textContent, this, type);
             else
@@ -39,6 +44,7 @@ public class CutsceneNameInputPopup : BaseInputPopup
 
             this.Close();
         }
+        GUI.enabled = true;
         if (GUILayout.Button("Cancel"))
         {
             reference.OnDialogCanceled();

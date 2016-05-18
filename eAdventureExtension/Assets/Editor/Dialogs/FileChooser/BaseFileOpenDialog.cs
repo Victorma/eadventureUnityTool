@@ -156,6 +156,9 @@ public abstract class BaseFileOpenDialog : EditorWindow
 
         File.Copy(selectedAssetPath, Path.Combine(path.FullName, nameOnly), true);
 
+        if (fileType == FileType.CUTSCENE_SLIDES || fileType == FileType.CHARACTER_ANIM || fileType == FileType.PLAY_ANIMATION_EFFECT)
+            AssetsController.copyAllFiles(Path.GetDirectoryName(selectedAssetPath), path.FullName);
+
         returnPath = assetTypeDir + "/" + nameOnly;
     }
 
