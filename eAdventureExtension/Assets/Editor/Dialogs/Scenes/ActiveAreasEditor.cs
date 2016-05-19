@@ -1,7 +1,4 @@
-﻿using System;
-using UnityEngine;
-using System.Collections;
-using System.Text.RegularExpressions;
+﻿using UnityEngine;
 using UnityEditor;
 
 public class ActiveAreasEditor : BaseAreaEditablePopup
@@ -15,8 +12,7 @@ public class ActiveAreasEditor : BaseAreaEditablePopup
     private Rect imageBackgroundRect;
     private Vector2 scrollPosition;
 
-    private string xString, yString, widthString, heightString;
-    private string xStringLast, yStringLast, widthStringLast, heightStringLast;
+    private int x, y, width, heigth;
 
     private int calledAreaIndexRef;
 
@@ -43,12 +39,10 @@ public class ActiveAreasEditor : BaseAreaEditablePopup
 
         imageBackgroundRect = new Rect(0f, 0f, backgroundPreviewTex.width, backgroundPreviewTex.height);
 
-        xString = xStringLast = sceneRef.getActiveAreasList().getActiveAreasList()[areaIndex].getX().ToString();
-        yString = yStringLast = sceneRef.getActiveAreasList().getActiveAreasList()[areaIndex].getY().ToString();
-        widthString =
-            widthStringLast = sceneRef.getActiveAreasList().getActiveAreasList()[areaIndex].getWidth().ToString();
-        heightString =
-            heightStringLast = sceneRef.getActiveAreasList().getActiveAreasList()[areaIndex].getHeight().ToString();
+        x = sceneRef.getActiveAreasList().getActiveAreasList()[areaIndex].getX();
+        y = sceneRef.getActiveAreasList().getActiveAreasList()[areaIndex].getY();
+        width = sceneRef.getActiveAreasList().getActiveAreasList()[areaIndex].getWidth();
+        heigth = sceneRef.getActiveAreasList().getActiveAreasList()[areaIndex].getHeight();
 
         base.Init(e, backgroundPreviewTex.width, backgroundPreviewTex.height);
     }
@@ -126,25 +120,15 @@ public class ActiveAreasEditor : BaseAreaEditablePopup
 
         GUILayout.BeginHorizontal();
 
-        xString = GUILayout.TextField(xString, GUILayout.Width(0.25f*backgroundPreviewTex.width));
-        xString = (Regex.Match(xString, "^[0-9]{1,4}$").Success ? xString : xStringLast);
-        if (!xString.Equals(xStringLast))
-            OnChangeX(xString);
-
-        yString = GUILayout.TextField(yString, GUILayout.Width(0.25f*backgroundPreviewTex.width));
-        yString = (Regex.Match(yString, "^[0-9]{1,4}$").Success ? yString : yStringLast);
-        if (!yString.Equals(yStringLast))
-            OnChangeY(yString);
-
-        widthString = GUILayout.TextField(widthString, GUILayout.Width(0.25f*backgroundPreviewTex.width));
-        widthString = (Regex.Match(widthString, "^[0-9]{1,4}$").Success ? widthString : widthStringLast);
-        if (!widthString.Equals(widthStringLast))
-            OnChangeWidth(widthString);
-
-        heightString = GUILayout.TextField(heightString, GUILayout.Width(0.25f*backgroundPreviewTex.width));
-        heightString = (Regex.Match(heightString, "^[0-9]{1,4}$").Success ? heightString : heightStringLast);
-        if (!heightString.Equals(heightStringLast))
-            OnChangeHeight(heightString);
+        x = EditorGUILayout.IntField(sceneRef.getActiveAreasList().getActiveAreasList()[calledAreaIndexRef].getX(),
+         GUILayout.Width(0.25f * backgroundPreviewTex.width));
+        y = EditorGUILayout.IntField(sceneRef.getActiveAreasList().getActiveAreasList()[calledAreaIndexRef].getY(),
+            GUILayout.Width(0.25f * backgroundPreviewTex.width));
+        width = EditorGUILayout.IntField(sceneRef.getActiveAreasList().getActiveAreasList()[calledAreaIndexRef].getWidth(),
+            GUILayout.Width(0.25f * backgroundPreviewTex.width));
+        heigth = EditorGUILayout.IntField(sceneRef.getActiveAreasList().getActiveAreasList()[calledAreaIndexRef].getHeight(),
+            GUILayout.Width(0.25f * backgroundPreviewTex.width));
+        sceneRef.getActiveAreasList().getActiveAreasList()[calledAreaIndexRef].setValues(x, y, width, heigth);
 
         GUILayout.EndHorizontal();
 
@@ -162,39 +146,10 @@ public class ActiveAreasEditor : BaseAreaEditablePopup
         GUILayout.EndHorizontal();
     }
 
-    void OnChangeX(string val)
-    {
-        xStringLast = val;
-        sceneRef.getActiveAreasList().getActiveAreasList()[calledAreaIndexRef].setValues(int.Parse(xString),
-            int.Parse(yString), int.Parse(widthString), int.Parse(heightString));
-    }
-
-    void OnChangeY(string val)
-    {
-        yStringLast = val;
-        sceneRef.getActiveAreasList().getActiveAreasList()[calledAreaIndexRef].setValues(int.Parse(xString),
-            int.Parse(yString), int.Parse(widthString), int.Parse(heightString));
-    }
-
-    void OnChangeWidth(string val)
-    {
-        widthStringLast = val;
-        sceneRef.getActiveAreasList().getActiveAreasList()[calledAreaIndexRef].setValues(int.Parse(xString),
-            int.Parse(yString), int.Parse(widthString), int.Parse(heightString));
-    }
-
-    void OnChangeHeight(string val)
-    {
-        heightStringLast = val;
-        sceneRef.getActiveAreasList().getActiveAreasList()[calledAreaIndexRef].setValues(int.Parse(xString),
-            int.Parse(yString), int.Parse(widthString), int.Parse(heightString));
-    }
-
     private void OnBeingDragged()
     {
-        xStringLast = xString = ((int) currentPos.x - (int) (0.5f*int.Parse(widthString))).ToString();
-        yStringLast = yString = ((int) currentPos.y - (int) (0.5f*int.Parse(heightString))).ToString();
-        sceneRef.getActiveAreasList().getActiveAreasList()[calledAreaIndexRef].setValues(int.Parse(xString),
-            int.Parse(yString), int.Parse(widthString), int.Parse(heightString));
+        x = (int)currentPos.x - (int)(0.5f * sceneRef.getActiveAreasList().getActiveAreasList()[calledAreaIndexRef].getWidth());
+        y = (int)currentPos.y - (int)(0.5f * sceneRef.getActiveAreasList().getActiveAreasList()[calledAreaIndexRef].getHeight());
+        sceneRef.getActiveAreasList().getActiveAreasList()[calledAreaIndexRef].setValues(x, y, width, heigth);
     }
 }

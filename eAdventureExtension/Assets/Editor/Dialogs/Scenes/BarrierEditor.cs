@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System.Text.RegularExpressions;
+using UnityEditor;
 
 public class BarrierEditor : BaseAreaEditablePopup
 {
@@ -12,8 +11,7 @@ public class BarrierEditor : BaseAreaEditablePopup
     private Rect imageBackgroundRect;
     private Vector2 scrollPosition;
 
-    private string xString, yString, widthString, heightString;
-    private string xStringLast, yStringLast, widthStringLast, heightStringLast;
+    private int x, y, width, heigth;
 
     private int calledBarrierIndexRef;
 
@@ -40,10 +38,10 @@ public class BarrierEditor : BaseAreaEditablePopup
 
         imageBackgroundRect = new Rect(0f, 0f, backgroundPreviewTex.width, backgroundPreviewTex.height);
 
-        xString = xStringLast = sceneRef.getBarriersList().getBarriersList()[areaIndex].getX().ToString();
-        yString = yStringLast = sceneRef.getBarriersList().getBarriersList()[areaIndex].getY().ToString();
-        widthString = widthStringLast = sceneRef.getBarriersList().getBarriersList()[areaIndex].getWidth().ToString();
-        heightString = heightStringLast = sceneRef.getBarriersList().getBarriersList()[areaIndex].getHeight().ToString();
+        x = sceneRef.getBarriersList().getBarriersList()[areaIndex].getX();
+        y = sceneRef.getBarriersList().getBarriersList()[areaIndex].getY();
+        width = sceneRef.getBarriersList().getBarriersList()[areaIndex].getWidth();
+        heigth = sceneRef.getBarriersList().getBarriersList()[areaIndex].getHeight();
 
         base.Init(e, backgroundPreviewTex.width, backgroundPreviewTex.height);
     }
@@ -113,25 +111,15 @@ public class BarrierEditor : BaseAreaEditablePopup
 
         GUILayout.BeginHorizontal();
 
-        xString = GUILayout.TextField(xString, GUILayout.Width(0.25f*backgroundPreviewTex.width));
-        xString = (Regex.Match(xString, "^[0-9]{1,4}$").Success ? xString : xStringLast);
-        if (!xString.Equals(xStringLast))
-            OnChangeX(xString);
-
-        yString = GUILayout.TextField(yString, GUILayout.Width(0.25f*backgroundPreviewTex.width));
-        yString = (Regex.Match(yString, "^[0-9]{1,4}$").Success ? yString : yStringLast);
-        if (!yString.Equals(yStringLast))
-            OnChangeY(yString);
-
-        widthString = GUILayout.TextField(widthString, GUILayout.Width(0.25f*backgroundPreviewTex.width));
-        widthString = (Regex.Match(widthString, "^[0-9]{1,4}$").Success ? widthString : widthStringLast);
-        if (!widthString.Equals(widthStringLast))
-            OnChangeWidth(widthString);
-
-        heightString = GUILayout.TextField(heightString, GUILayout.Width(0.25f*backgroundPreviewTex.width));
-        heightString = (Regex.Match(heightString, "^[0-9]{1,4}$").Success ? heightString : heightStringLast);
-        if (!heightString.Equals(heightStringLast))
-            OnChangeHeight(heightString);
+        x = EditorGUILayout.IntField(sceneRef.getBarriersList().getBarriersList()[calledBarrierIndexRef].getX(),
+            GUILayout.Width(0.25f * backgroundPreviewTex.width));
+        y = EditorGUILayout.IntField(sceneRef.getBarriersList().getBarriersList()[calledBarrierIndexRef].getY(),
+            GUILayout.Width(0.25f * backgroundPreviewTex.width));
+        width = EditorGUILayout.IntField(sceneRef.getBarriersList().getBarriersList()[calledBarrierIndexRef].getWidth(),
+            GUILayout.Width(0.25f * backgroundPreviewTex.width));
+        heigth = EditorGUILayout.IntField(sceneRef.getBarriersList().getBarriersList()[calledBarrierIndexRef].getHeight(),
+            GUILayout.Width(0.25f * backgroundPreviewTex.width));
+        sceneRef.getBarriersList().getBarriersList()[calledBarrierIndexRef].setValues(x, y, width, heigth);
 
         GUILayout.EndHorizontal();
 
@@ -149,39 +137,10 @@ public class BarrierEditor : BaseAreaEditablePopup
         GUILayout.EndHorizontal();
     }
 
-    void OnChangeX(string val)
-    {
-        xStringLast = val;
-        sceneRef.getBarriersList().getBarriersList()[calledBarrierIndexRef].setValues(int.Parse(xString),
-            int.Parse(yString), int.Parse(widthString), int.Parse(heightString));
-    }
-
-    void OnChangeY(string val)
-    {
-        yStringLast = val;
-        sceneRef.getBarriersList().getBarriersList()[calledBarrierIndexRef].setValues(int.Parse(xString),
-            int.Parse(yString), int.Parse(widthString), int.Parse(heightString));
-    }
-
-    void OnChangeWidth(string val)
-    {
-        widthStringLast = val;
-        sceneRef.getBarriersList().getBarriersList()[calledBarrierIndexRef].setValues(int.Parse(xString),
-            int.Parse(yString), int.Parse(widthString), int.Parse(heightString));
-    }
-
-    void OnChangeHeight(string val)
-    {
-        heightStringLast = val;
-        sceneRef.getBarriersList().getBarriersList()[calledBarrierIndexRef].setValues(int.Parse(xString),
-            int.Parse(yString), int.Parse(widthString), int.Parse(heightString));
-    }
-
     private void OnBeingDragged()
     {
-        xStringLast = xString = ((int) currentPos.x - (int) (0.5f*int.Parse(widthString))).ToString();
-        yStringLast = yString = ((int) currentPos.y - (int) (0.5f*int.Parse(heightString))).ToString();
-        sceneRef.getBarriersList().getBarriersList()[calledBarrierIndexRef].setValues(int.Parse(xString),
-            int.Parse(yString), int.Parse(widthString), int.Parse(heightString));
+        x = (int)currentPos.x - (int)(0.5f * sceneRef.getBarriersList().getBarriersList()[calledBarrierIndexRef].getWidth());
+        y = (int)currentPos.y - (int)(0.5f * sceneRef.getBarriersList().getBarriersList()[calledBarrierIndexRef].getHeight());
+        sceneRef.getBarriersList().getBarriersList()[calledBarrierIndexRef].setValues(x, y, width, heigth);
     }
 }

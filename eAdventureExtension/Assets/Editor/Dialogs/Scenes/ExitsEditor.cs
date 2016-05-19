@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System.Text.RegularExpressions;
+using UnityEditor;
 
 public class ExitsEditor : BaseAreaEditablePopup
 {
@@ -15,8 +14,10 @@ public class ExitsEditor : BaseAreaEditablePopup
     private Rect imageBackgroundRect;
     private Vector2 scrollPosition;
 
-    private string xString, yString, widthString, heightString;
-    private string xStringLast, yStringLast, widthStringLast, heightStringLast;
+    //private string xString, yString, widthString, heightString;
+    //private string xStringLast, yStringLast, widthStringLast, heightStringLast;
+
+    private int x, y, width, heigth;
 
     private int calledExitIndexRef;
 
@@ -43,16 +44,16 @@ public class ExitsEditor : BaseAreaEditablePopup
 
         imageBackgroundRect = new Rect(0f, 0f, backgroundPreviewTex.width, backgroundPreviewTex.height);
 
-        xString = xStringLast = sceneRef.getExitsList().getExitsList()[exitIndex].getX().ToString();
-        yString = yStringLast = sceneRef.getExitsList().getExitsList()[exitIndex].getY().ToString();
-        widthString = widthStringLast = sceneRef.getExitsList().getExitsList()[exitIndex].getWidth().ToString();
-        heightString = heightStringLast = sceneRef.getExitsList().getExitsList()[exitIndex].getHeight().ToString();
+        x = sceneRef.getExitsList().getExitsList()[exitIndex].getX();
+        y = sceneRef.getExitsList().getExitsList()[exitIndex].getY();
+        width = sceneRef.getExitsList().getExitsList()[exitIndex].getWidth();
+        heigth = sceneRef.getExitsList().getExitsList()[exitIndex].getHeight();
 
         base.Init(e, backgroundPreviewTex.width, backgroundPreviewTex.height);
     }
 
     void OnGUI()
-    {    
+    {
         // Dragging events
         if (Event.current.type == EventType.mouseDrag)
         {
@@ -95,7 +96,8 @@ public class ExitsEditor : BaseAreaEditablePopup
             i++)
         {
             Rect eRect = new Rect(sceneRef.getExitsList().getExitsList()[i].getX(),
-                sceneRef.getExitsList().getExitsList()[i].getY(), sceneRef.getExitsList().getExitsList()[i].getWidth(),
+                sceneRef.getExitsList().getExitsList()[i].getY(), 
+                sceneRef.getExitsList().getExitsList()[i].getWidth(),
                 sceneRef.getExitsList().getExitsList()[i].getHeight());
             GUI.DrawTexture(eRect, exitTex);
 
@@ -125,25 +127,15 @@ public class ExitsEditor : BaseAreaEditablePopup
 
         GUILayout.BeginHorizontal();
 
-        xString = GUILayout.TextField(xString, GUILayout.Width(0.25f*backgroundPreviewTex.width));
-        xString = (Regex.Match(xString, "^[0-9]{1,4}$").Success ? xString : xStringLast);
-        if (!xString.Equals(xStringLast))
-            OnChangeX(xString);
-
-        yString = GUILayout.TextField(yString, GUILayout.Width(0.25f*backgroundPreviewTex.width));
-        yString = (Regex.Match(yString, "^[0-9]{1,4}$").Success ? yString : yStringLast);
-        if (!yString.Equals(yStringLast))
-            OnChangeY(yString);
-
-        widthString = GUILayout.TextField(widthString, GUILayout.Width(0.25f*backgroundPreviewTex.width));
-        widthString = (Regex.Match(widthString, "^[0-9]{1,4}$").Success ? widthString : widthStringLast);
-        if (!widthString.Equals(widthStringLast))
-            OnChangeWidth(widthString);
-
-        heightString = GUILayout.TextField(heightString, GUILayout.Width(0.25f*backgroundPreviewTex.width));
-        heightString = (Regex.Match(heightString, "^[0-9]{1,4}$").Success ? heightString : heightStringLast);
-        if (!heightString.Equals(heightStringLast))
-            OnChangeHeight(heightString);
+        x = EditorGUILayout.IntField(sceneRef.getExitsList().getExitsList()[calledExitIndexRef].getX(),
+            GUILayout.Width(0.25f * backgroundPreviewTex.width));
+        y = EditorGUILayout.IntField(sceneRef.getExitsList().getExitsList()[calledExitIndexRef].getY(),
+            GUILayout.Width(0.25f * backgroundPreviewTex.width));
+        width = EditorGUILayout.IntField(sceneRef.getExitsList().getExitsList()[calledExitIndexRef].getWidth(),
+            GUILayout.Width(0.25f * backgroundPreviewTex.width));
+        heigth = EditorGUILayout.IntField(sceneRef.getExitsList().getExitsList()[calledExitIndexRef].getHeight(),
+            GUILayout.Width(0.25f * backgroundPreviewTex.width));
+        sceneRef.getExitsList().getExitsList()[calledExitIndexRef].setValues(x, y, width, heigth);
 
         GUILayout.EndHorizontal();
 
@@ -161,39 +153,10 @@ public class ExitsEditor : BaseAreaEditablePopup
         GUILayout.EndHorizontal();
     }
 
-    void OnChangeX(string val)
-    {
-        xStringLast = val;
-        sceneRef.getExitsList().getExitsList()[calledExitIndexRef].setValues(int.Parse(xString), int.Parse(yString),
-            int.Parse(widthString), int.Parse(heightString));
-    }
-
-    void OnChangeY(string val)
-    {
-        yStringLast = val;
-        sceneRef.getExitsList().getExitsList()[calledExitIndexRef].setValues(int.Parse(xString), int.Parse(yString),
-            int.Parse(widthString), int.Parse(heightString));
-    }
-
-    void OnChangeWidth(string val)
-    {
-        widthStringLast = val;
-        sceneRef.getExitsList().getExitsList()[calledExitIndexRef].setValues(int.Parse(xString), int.Parse(yString),
-            int.Parse(widthString), int.Parse(heightString));
-    }
-
-    void OnChangeHeight(string val)
-    {
-        heightStringLast = val;
-        sceneRef.getExitsList().getExitsList()[calledExitIndexRef].setValues(int.Parse(xString), int.Parse(yString),
-            int.Parse(widthString), int.Parse(heightString));
-    }
-
     private void OnBeingDragged()
     {
-        xStringLast = xString = ((int)currentPos.x - (int)(0.5f * int.Parse(widthString))).ToString();
-        yStringLast = yString = ((int)currentPos.y - (int)(0.5f * int.Parse(heightString))).ToString();
-        sceneRef.getExitsList().getExitsList()[calledExitIndexRef].setValues(int.Parse(xString),
-            int.Parse(yString), int.Parse(widthString), int.Parse(heightString));
+        x = (int) currentPos.x - (int) (0.5f*sceneRef.getExitsList().getExitsList()[calledExitIndexRef].getWidth());
+        y = (int) currentPos.y - (int) (0.5f*sceneRef.getExitsList().getExitsList()[calledExitIndexRef].getHeight());
+        sceneRef.getExitsList().getExitsList()[calledExitIndexRef].setValues(x, y, width, heigth);
     }
 }

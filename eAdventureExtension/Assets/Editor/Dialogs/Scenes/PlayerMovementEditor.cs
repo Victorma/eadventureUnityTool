@@ -1,8 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEditor;
-using System;
-using System.Text.RegularExpressions;
 
 public class PlayerMovementEditor : BaseAreaEditablePopup
 {
@@ -34,8 +31,8 @@ public class PlayerMovementEditor : BaseAreaEditablePopup
     private bool useTrajectory;
     private bool useInitialPosition, useInitialPositionLast;
 
-    private string xStringInitialPos, yStringInitialPos, scaleInitialPos;
-    private string xStringInitialPosLast, yStringInitialPosLast, scaleInitialPosLast;
+    private int x, y;
+
 
     // Wrzucić do listy?
     private Rect playerRect;
@@ -92,11 +89,10 @@ public class PlayerMovementEditor : BaseAreaEditablePopup
 
         trajectory = sceneRef.getTrajectory().GetTrajectory();
 
-        xStringInitialPos = xStringInitialPosLast = sceneRef.getDefaultInitialPositionX().ToString();
-        yStringInitialPos = yStringInitialPosLast = sceneRef.getDefaultInitialPositionY().ToString();
-        scaleInitialPos = scaleInitialPosLast = sceneRef.getPlayerScale().ToString();
+        x = sceneRef.getDefaultInitialPositionX();
+        y = sceneRef.getDefaultInitialPositionY();
 
-        playerRect = new Rect(float.Parse(xStringInitialPos), float.Parse(yStringInitialPos), playerTex.width,
+        playerRect = new Rect(x, y, playerTex.width,
             playerTex.height);
 
         base.Init(e, backgroundPreviewTex.width, backgroundPreviewTex.height);
@@ -166,6 +162,7 @@ public class PlayerMovementEditor : BaseAreaEditablePopup
                 OnBeingDragged();
             }
 
+            playerRect = new Rect(x, y, playerTex.width, playerTex.height);
             GUI.DrawTexture(playerRect, playerTex);
 
             GUILayout.BeginHorizontal();
@@ -176,26 +173,18 @@ public class PlayerMovementEditor : BaseAreaEditablePopup
 
 
             GUILayout.BeginHorizontal();
-            xStringInitialPos = GUILayout.TextField(xStringInitialPos, GUILayout.Width(0.33f*backgroundPreviewTex.width));
-            xStringInitialPos = (Regex.Match(xStringInitialPos, "^[0-9]{1,4}$").Success
-                ? xStringInitialPos
-                : xStringInitialPosLast);
-            if (!xStringInitialPos.Equals(xStringInitialPosLast))
-                OnChangeXInitialPos(xStringInitialPos);
+            x = EditorGUILayout.IntField(
+                    sceneRef.getDefaultInitialPositionX(),
+                    GUILayout.Width(0.33f*backgroundPreviewTex.width));
+            y = EditorGUILayout.IntField(
+                    sceneRef.getDefaultInitialPositionY(),
+                    GUILayout.Width(0.33f*backgroundPreviewTex.width));
 
-            yStringInitialPos = GUILayout.TextField(yStringInitialPos, GUILayout.Width(0.33f*backgroundPreviewTex.width));
-            yStringInitialPos = (Regex.Match(yStringInitialPos, "^[0-9]{1,4}$").Success
-                ? yStringInitialPos
-                : yStringInitialPosLast);
-            if (!yStringInitialPos.Equals(yStringInitialPosLast))
-                OnChangeYInitialPos(yStringInitialPos);
+            sceneRef.setDefaultInitialPosition(x,y);
 
-            scaleInitialPos = GUILayout.TextField(scaleInitialPos, GUILayout.Width(0.33f*backgroundPreviewTex.width));
-            scaleInitialPos = (Regex.Match(scaleInitialPos, "^(\\d+[\\.]\\d*$)").Success
-                ? scaleInitialPos
-                : scaleInitialPosLast);
-            if (!scaleInitialPos.Equals(scaleInitialPosLast) && !scaleInitialPos.EndsWith("."))
-                OnChangeScaleInitialPos(scaleInitialPos);
+            sceneRef.setPlayerScale(
+                EditorGUILayout.FloatField(
+                    sceneRef.getPlayerScale(), GUILayout.Width(0.33f*backgroundPreviewTex.width)));
             GUILayout.EndHorizontal();
         }
         /*
@@ -210,7 +199,9 @@ public class PlayerMovementEditor : BaseAreaEditablePopup
 
                 for (int i = 0; i < trajectory.getNodes().Count; i++)
                 {
-                    if (trajectory.getNodes()[i].getEditorRect(playerTex.width, playerTex.height).Contains(Event.current.mousePosition))
+                    if (
+                        trajectory.getNodes()[i].getEditorRect(playerTex.width, playerTex.height)
+                            .Contains(Event.current.mousePosition))
                         clickedIndex = i;
                 }
 
@@ -221,12 +212,12 @@ public class PlayerMovementEditor : BaseAreaEditablePopup
                 }
                 else if (trajectoryTool == TrajectoryToolType.DELETE_NODE)
                 {
-                    if (clickedIndex!= -1)
+                    if (clickedIndex != -1)
                         DeleteNode(clickedIndex);
                 }
                 else if (trajectoryTool == TrajectoryToolType.INIT_NODE)
                 {
-                    if(clickedIndex!= -1)
+                    if (clickedIndex != -1)
                         SetInitNode(clickedIndex);
                 }
                 else if (trajectoryTool == TrajectoryToolType.EDIT_SIDE)
@@ -257,8 +248,10 @@ public class PlayerMovementEditor : BaseAreaEditablePopup
             if (trajectoryTool == TrajectoryToolType.EDIT_SIDE)
             {
                 // If selected begin of side
-                if(beginSideIndex != -1)
-                  DrawLine(new Vector2(trajectory.getNodes()[beginSideIndex].getX(), trajectory.getNodes()[beginSideIndex].getY()), Event.current.mousePosition, 2);
+                if (beginSideIndex != -1)
+                    DrawLine(
+                        new Vector2(trajectory.getNodes()[beginSideIndex].getX(),
+                            trajectory.getNodes()[beginSideIndex].getY()), Event.current.mousePosition, 2);
             }
 
             // DRAW NODES
@@ -270,12 +263,17 @@ public class PlayerMovementEditor : BaseAreaEditablePopup
             // DRAW SIDES
             foreach (Trajectory.Side side in trajectory.getSides())
             {
-                DrawLine(new Vector2(trajectory.getNodeForId(side.getIDStart()).getX(), trajectory.getNodeForId(side.getIDStart()).getY()), new Vector2(trajectory.getNodeForId(side.getIDEnd()).getX(), trajectory.getNodeForId(side.getIDEnd()).getY()), 2);
+                DrawLine(
+                    new Vector2(trajectory.getNodeForId(side.getIDStart()).getX(),
+                        trajectory.getNodeForId(side.getIDStart()).getY()),
+                    new Vector2(trajectory.getNodeForId(side.getIDEnd()).getX(),
+                        trajectory.getNodeForId(side.getIDEnd()).getY()), 2);
             }
 
             // DRAW INITIAL NODE
-            if(trajectory.getInitial() != null)
-                GUI.DrawTexture(trajectory.getInitial().getEditorRect(initialNodeTex.width, initialNodeTex.height), initialNodeTex);
+            if (trajectory.getInitial() != null)
+                GUI.DrawTexture(trajectory.getInitial().getEditorRect(initialNodeTex.width, initialNodeTex.height),
+                    initialNodeTex);
 
             // BUTTONS
             GUILayout.BeginHorizontal();
@@ -322,12 +320,12 @@ public class PlayerMovementEditor : BaseAreaEditablePopup
 
     private void UpdatePlayerRect()
     {
-        float scale = float.Parse(scaleInitialPos);
+        float scale = sceneRef.getPlayerScale();
         float newX = Mathf.Clamp(currentPos.x - 0.5f*playerTex.width*scale, -0.5f*playerTex.width*scale,
             backgroundPreviewTex.width + 0.5f*playerTex.width*scale);
         float newY = Mathf.Clamp(currentPos.y - 0.5f*playerTex.height*scale, -0.5f*playerTex.height*scale,
             backgroundPreviewTex.height + 0.5f*playerTex.height*scale);
-        playerRect = new Rect(newX, newY, playerTex.width*scale, playerTex.height*scale);
+        sceneRef.setDefaultInitialPosition((int)newX, (int)newY);
     }
 
     private void OnMovementTypeChange(bool val)
@@ -359,40 +357,12 @@ public class PlayerMovementEditor : BaseAreaEditablePopup
     {
         if (useInitialPosition)
         {
+            x = (int) currentPos.x;
+            y = (int) currentPos.y;
             sceneRef.setDefaultInitialPosition((int)currentPos.x, (int)currentPos.y);
-            xStringInitialPos = xStringInitialPosLast = sceneRef.getDefaultInitialPositionX().ToString();
-            yStringInitialPos = yStringInitialPosLast = sceneRef.getDefaultInitialPositionY().ToString();
 
             UpdatePlayerRect();
         }
-    }
-
-    void OnChangeXInitialPos(string val)
-    {
-        xStringInitialPosLast = val;
-        sceneRef.setDefaultInitialPosition(int.Parse(xStringInitialPos), int.Parse(yStringInitialPos));
-
-        float y = currentPos.y;
-        currentPos = new Vector2(float.Parse(xStringInitialPos), y);
-        UpdatePlayerRect();
-    }
-
-    void OnChangeYInitialPos(string val)
-    {
-        yStringInitialPosLast = val;
-        sceneRef.setDefaultInitialPosition(int.Parse(xStringInitialPos), int.Parse(yStringInitialPos));
-
-        float x = currentPos.x;
-        currentPos = new Vector2(x, float.Parse(yStringInitialPos));
-        UpdatePlayerRect();
-    }
-
-    void OnChangeScaleInitialPos(string val)
-    {
-        scaleInitialPosLast = val;
-        sceneRef.setPlayerScale(float.Parse(scaleInitialPos));
-
-        UpdatePlayerRect();
     }
 
 
