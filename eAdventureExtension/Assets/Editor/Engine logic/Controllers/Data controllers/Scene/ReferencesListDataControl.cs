@@ -380,6 +380,7 @@ public class ReferencesListDataControl : DataControl {
     {
 
         bool elementAdded = false;
+        string selectedItem = id;
 
         if (type == Controller.ITEM_REFERENCE)
         {
@@ -388,7 +389,6 @@ public class ReferencesListDataControl : DataControl {
             // If the list has elements, show the dialog with the options
             if (items.Length > 0)
             {
-                string selectedItem = controller.showInputDialog(TC.get("Operation.AddItemReferenceTitle"), TC.get("Operation.AddItemReferenceMessage"), items);
 
                 // If some value was selected
                 if (selectedItem != null)
@@ -414,7 +414,6 @@ public class ReferencesListDataControl : DataControl {
             // If the list has elements, show the dialog with the options
             if (items.Length > 0)
             {
-                string selectedItem = controller.showInputDialog(TC.get("Operation.AddAtrezzoReferenceTitle"), TC.get("Operation.AddAtrezzoReferenceMessage"), items);
                 if (selectedItem != null)
                 {
                     ElementReference newElementReference = new ElementReference(selectedItem, 50, 50);
@@ -436,7 +435,6 @@ public class ReferencesListDataControl : DataControl {
             string[] items = controller.getIdentifierSummary().getNPCIds();
             if (items.Length > 0)
             {
-                string selectedItem = controller.showInputDialog(TC.get("Operation.AddNPCReferenceTitle"), TC.get("Operation.AddNPCReferenceMessage"), items);
                 if (selectedItem != null)
                 {
                     ElementReference newElementReference = new ElementReference(selectedItem, 50, 50);

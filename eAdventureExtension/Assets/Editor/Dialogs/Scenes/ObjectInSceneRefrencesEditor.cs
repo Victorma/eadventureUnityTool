@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using UnityEditor;
 
 public class ObjectInSceneRefrencesEditor : BaseAreaEditablePopup
 {
@@ -13,15 +14,14 @@ public class ObjectInSceneRefrencesEditor : BaseAreaEditablePopup
     private Rect imageBackgroundRect;
     private Vector2 scrollPosition;
 
-    private string xString, yString, scaleString;
-    private string xStringLast, yStringLast, scaleStringLast;
-
     private int calledItemIndexRef;
 
     private Rect currentRect;
     private bool dragging;
     private Vector2 startPos;
     private Vector2 currentPos;
+
+    private int x, y;
 
     public void Init(DialogReceiverInterface e, SceneDataControl scene, int areaIndex)
     {
@@ -39,26 +39,13 @@ public class ObjectInSceneRefrencesEditor : BaseAreaEditablePopup
 
         imageBackgroundRect = new Rect(0f, 0f, backgroundPreviewTex.width, backgroundPreviewTex.height);
 
-        xString = xStringLast = Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
-            GameRources.GetInstance().selectedSceneIndex].getReferencesList().getAllReferencesDataControl()[
-                calledItemIndexRef]
-            .getErdc().getElementX().ToString();
-        yString = yStringLast = Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
-            GameRources.GetInstance().selectedSceneIndex].getReferencesList().getAllReferencesDataControl()[
-                calledItemIndexRef]
-            .getErdc().getElementY().ToString();
-        scaleString =
-            scaleStringLast = Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
-                GameRources.GetInstance().selectedSceneIndex].getReferencesList().getAllReferencesDataControl()[
-                    calledItemIndexRef]
-                .getErdc().getElementScale().ToString();
-
         objectsTex = new List<Sprite>();
         foreach (
             ElementContainer element in
                 Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
                     GameRources.GetInstance().selectedSceneIndex].getReferencesList().getAllReferencesDataControl())
         {
+            Debug.Log(element.getImage());
             objectsTex.Add(element.getImage());
         }
 
@@ -96,12 +83,13 @@ public class ObjectInSceneRefrencesEditor : BaseAreaEditablePopup
         {
             if (sceneRef.getReferencesList().getAllReferencesDataControl()[i].getErdc() != null)
             {
-                Rect aRect = new Rect(sceneRef.getReferencesList().getAllReferencesDataControl()[i].getErdc().getElementX(),
-                    sceneRef.getReferencesList().getAllReferencesDataControl()[i].getErdc().getElementX(),
-                    sceneRef.getReferencesList().getAllReferencesDataControl()[i].getErdc().getElementScale() *
-                    backgroundPreviewTex.width,
-                    sceneRef.getReferencesList().getAllReferencesDataControl()[i].getErdc().getElementScale() *
-                    backgroundPreviewTex.height);
+                Rect aRect =
+                    new Rect(sceneRef.getReferencesList().getAllReferencesDataControl()[i].getErdc().getElementX(),
+                        sceneRef.getReferencesList().getAllReferencesDataControl()[i].getErdc().getElementY(),
+                        sceneRef.getReferencesList().getAllReferencesDataControl()[i].getErdc().getElementScale()*
+                        objectsTex[i].texture.width,
+                        sceneRef.getReferencesList().getAllReferencesDataControl()[i].getErdc().getElementScale()*
+                        objectsTex[i].texture.height);
                 if (objectsTex[i] != null)
                     GUI.DrawTexture(aRect, objectsTex[i].texture);
 
@@ -130,20 +118,22 @@ public class ObjectInSceneRefrencesEditor : BaseAreaEditablePopup
 
         GUILayout.BeginHorizontal();
 
-        xString = GUILayout.TextField(xString, GUILayout.Width(0.33f*backgroundPreviewTex.width));
-        xString = (Regex.Match(xString, "^[0-9]{1,4}$").Success ? xString : xStringLast);
-        if (!xString.Equals(xStringLast))
-            OnChangeX(xString);
+        x =
+            EditorGUILayout.IntField(
+                sceneRef.getReferencesList().getAllReferencesDataControl()[calledItemIndexRef].getErdc().getElementX(),
+                GUILayout.Width(0.33f*backgroundPreviewTex.width));
+        y =
+            EditorGUILayout.IntField(
+                sceneRef.getReferencesList().getAllReferencesDataControl()[calledItemIndexRef].getErdc().getElementY(),
+                GUILayout.Width(0.33f*backgroundPreviewTex.width));
+        sceneRef.getReferencesList().getAllReferencesDataControl()[calledItemIndexRef].getErdc()
+            .setElementPosition(x, y);
 
-        yString = GUILayout.TextField(yString, GUILayout.Width(0.33f*backgroundPreviewTex.width));
-        yString = (Regex.Match(yString, "^[0-9]{1,4}$").Success ? yString : yStringLast);
-        if (!yString.Equals(yStringLast))
-            OnChangeY(yString);
-
-        scaleString = GUILayout.TextField(scaleString, GUILayout.Width(0.33f*backgroundPreviewTex.width));
-        scaleString = (Regex.Match(scaleString, "^(\\d+[\\.]\\d*$)").Success ? scaleString : scaleStringLast);
-        if (!scaleString.Equals(scaleStringLast) && !scaleString.EndsWith("."))
-            OnChangeScale(scaleString);
+        sceneRef.getReferencesList().getAllReferencesDataControl()[calledItemIndexRef].getErdc()
+            .setElementScale(
+                EditorGUILayout.FloatField(
+                    sceneRef.getReferencesList().getAllReferencesDataControl()[calledItemIndexRef].getErdc()
+                        .getElementScale(), GUILayout.Width(0.33f*backgroundPreviewTex.width)));
 
         GUILayout.EndHorizontal();
 
@@ -161,32 +151,12 @@ public class ObjectInSceneRefrencesEditor : BaseAreaEditablePopup
         GUILayout.EndHorizontal();
     }
 
-    void OnChangeX(string val)
-    {
-        xStringLast = val;
-        sceneRef.getReferencesList().getAllReferencesDataControl()[calledItemIndexRef].getErdc()
-            .setElementPosition(int.Parse(xString), int.Parse(yString));
-    }
-
-    void OnChangeY(string val)
-    {
-        yStringLast = val;
-        sceneRef.getReferencesList().getAllReferencesDataControl()[calledItemIndexRef].getErdc()
-            .setElementPosition(int.Parse(xString), int.Parse(yString));
-    }
-
-    void OnChangeScale(string val)
-    {
-        scaleStringLast = val;
-        sceneRef.getReferencesList().getAllReferencesDataControl()[calledItemIndexRef].getErdc()
-            .setElementScale(float.Parse(scaleString));
-    }
 
     private void OnBeingDragged()
     {
-        xStringLast = xString = ((int)currentPos.x - (int)(0.5f * currentRect.width)).ToString();
-        yStringLast = yString = ((int)currentPos.y - (int)(0.5f * currentRect.height)).ToString();
+        x = (int) currentPos.x - (int) (0.5f*currentRect.width);
+        y = (int) currentPos.y - (int) (0.5f*currentRect.height);
         sceneRef.getReferencesList().getAllReferencesDataControl()[calledItemIndexRef].getErdc()
-            .setElementPosition(int.Parse(xString), int.Parse(yString));
+            .setElementPosition(x, y);
     }
 }

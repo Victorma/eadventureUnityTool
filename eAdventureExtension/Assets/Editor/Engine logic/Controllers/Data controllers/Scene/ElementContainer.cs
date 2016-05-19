@@ -120,7 +120,36 @@ public class ElementContainer
 
     public Sprite getImage()
     {
+        if (erdc != null)
+        {
+            int type = erdc.getType();
+            string imagePath = string.Empty;
 
+            if (type == Controller.ITEM_REFERENCE)
+                imagePath =
+                    Controller.getInstance().getSelectedChapterDataControl().getItemsList().getItems()[
+                        Controller.getInstance()
+                            .getSelectedChapterDataControl()
+                            .getItemsList()
+                            .getItemIndexByID(erdc.getElementId())].getPreviewImage();
+            else if (type == Controller.ATREZZO_REFERENCE)
+                imagePath =
+                    Controller.getInstance().getSelectedChapterDataControl().getAtrezzoList().getAtrezzoList()[
+                        Controller.getInstance()
+                            .getSelectedChapterDataControl()
+                            .getAtrezzoList()
+                            .getAtrezzoIndexByID(erdc.getElementId())].getPreviewImage();
+            else if (type == Controller.NPC_REFERENCE)
+                imagePath =
+                    Controller.getInstance().getSelectedChapterDataControl().getNPCsList().getNPCs()[
+                        Controller.getInstance()
+                            .getSelectedChapterDataControl()
+                            .getNPCsList()
+                            .getNPCIndexByID(erdc.getElementId())].getPreviewImage();
+
+            if (!string.IsNullOrEmpty(imagePath))
+                image = Resources.Load<Sprite>(imagePath.Substring(0, imagePath.LastIndexOf(".")));
+        }
         return image;
     }
 

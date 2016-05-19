@@ -205,7 +205,9 @@ public class ScenesWindowElementReference : LayoutWindow, DialogReceiverInterfac
             GUILayout.BeginArea(infoPreviewRect);
             // Show preview dialog
             // Button visible only is there is at least 1 object
-            if (selectedElement != -1)
+            if (selectedElement != -1 && Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
+                    GameRources.GetInstance().selectedSceneIndex].getReferencesList().getAllReferencesDataControl()[
+                        selectedElement].getErdc() != null)
             {
                 if (GUILayout.Button("Show preview/edit window"))
                 {

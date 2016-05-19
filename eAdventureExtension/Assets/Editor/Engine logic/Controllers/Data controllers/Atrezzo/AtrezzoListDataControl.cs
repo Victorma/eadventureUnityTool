@@ -91,6 +91,15 @@ public class AtrezzoListDataControl : DataControl
         return atrezzoInfo;
     }
 
+    public int getAtrezzoIndexByID(string id)
+    {
+        for (int i = 0; i < atrezzoList.Count; i++)
+        {
+            if (atrezzoList[i].getId().Equals(id))
+                return i;
+        }
+        return -1;
+    }
 
     public override bool addElement(int type, string atrezzoId)
     {
