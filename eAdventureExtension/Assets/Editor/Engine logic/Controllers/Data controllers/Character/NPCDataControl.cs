@@ -74,9 +74,10 @@ public class NPCDataControl : DataControlWithResources
     {
 
         string previewImagePath = getExistingPreviewImagePath();
-
         // Add the extension of the frame
-        if (previewImagePath != null && !previewImagePath.ToLower().EndsWith(".eaa"))
+        if (previewImagePath != null && !previewImagePath.ToLower().EndsWith(".eaa")
+            //HACK?
+            && previewImagePath.Equals(EMPTY_ANIMATION))
             previewImagePath += "_01.png";
         else if (previewImagePath != null)
         {

@@ -1143,6 +1143,7 @@ public class Controller
 
             AssetsController.createFolderStructure();
             AssetsController.addSpecialAssets();
+            AssetsController.copyAssets(currentZipFile, new DirectoryInfo("Assets\\Resources").FullName);
 
             // Check the consistency of the chapters
             bool valid = chaptersController.isValid(null, null);
@@ -1751,8 +1752,9 @@ public class Controller
             //loadingScreen.setVisible( true );
             string completeFilePath = null;
             //completeFilePath = mainWindow.showSaveDialog(getCurrentLoadFolder(), new FolderFileFilter(false, false, null));
-            completeFilePath = currentZipPath;
+            completeFilePath = currentZipName;
 
+            Debug.Log("SAVE AS " + completeFilePath);
             // If some file was selected set the new file
             if (completeFilePath != null)
             {
@@ -1772,15 +1774,17 @@ public class Controller
                 // Check the selectedFolder is not inside a forbidden one
                 if (isValidTargetProject(newFile))
                 {
+                    Debug.Log("TEST0");
                     //if (FolderFileFilter.checkCharacters(newFolder.getName()))
                     //{
 
                     // If the file doesn't exist, or if the user confirms the writing in the file and the file it is not the current path of the project
-                    if ((this.currentZipFile == null ||
-                         !newFolder.FullName.ToLower().Equals(this.currentZipFile.ToLower())) &&
-                        ((!newFile.Exists && !newFolder.Exists) || !newFolder.Exists ||
-                         newFolder.GetFiles().Length == 0))
-                    {
+                    //if ((this.currentZipFile == null ||
+                    //     !newFolder.FullName.ToLower().Equals(this.currentZipFile.ToLower())) &&
+                    //    ((!newFile.Exists && !newFolder.Exists) || !newFolder.Exists ||
+                    //     newFolder.GetFiles().Length == 0))
+                    //{
+                        Debug.Log("TEST1");
                         // If the file exists, delete it so it's clean in the first save
                         //if( newFile.exists( ) )
                         //	newFile.delete( );
@@ -1789,20 +1793,22 @@ public class Controller
                             System.IO.File.Create(newFile.FullName).Close();
 
                         // If this is a "Save as" operation, copy the assets from the old file to the new one
-                        if (saveAs)
-                        {
-                            //loadingScreen.setMessage(TC.get("Operation.SaveProjectAs"));
-                            //loadingScreen.setVisible(true);
-                            AssetsController.copyAssets(currentZipFile, newFolder.FullName);
-                        }
+                    if (saveAs)
+                    {
+                        //loadingScreen.setMessage(TC.get("Operation.SaveProjectAs"));
+                        //loadingScreen.setVisible(true);
+                        AssetsController.copyAssets(new DirectoryInfo("Assets\\Resources").FullName, currentZipFile);
+                        AssetsController.copyAssets(currentZipFile, newFolder.FullName);
+                        Debug.Log("TEST2");
+                    }
 
-                        // Set the new file and path
-                        currentZipFile = newFolder.FullName;
-                        currentZipPath = newFolder.Parent.FullName;
-                        currentZipName = newFolder.Name;
+                    // Set the new file and path
+                        //currentZipFile = newFolder.FullName;
+                        //currentZipPath = newFolder.Parent.FullName;
+                        //currentZipName = newFolder.Name;
 
                         AssetsController.createFolderStructure();
-                    }
+                    //}
 
                     // If the file was not overwritten, don't save the data
                     //TODO: test if it is working

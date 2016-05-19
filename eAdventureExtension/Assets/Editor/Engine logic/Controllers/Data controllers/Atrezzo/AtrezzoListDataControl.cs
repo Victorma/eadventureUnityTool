@@ -78,7 +78,20 @@ public class AtrezzoListDataControl : DataControl
         return atrezzoInfo;
     }
 
-    
+    public string[] getItemIDs()
+    {
+        string[]atrezzoInfo = null;
+
+        // Create the list for the items
+        atrezzoInfo = new string[atrezzoList.Count];
+
+        // Fill the array with the info
+        for (int i = 0; i < atrezzoList.Count; i++)
+            atrezzoInfo[i] = atrezzoList[i].getId();
+        return atrezzoInfo;
+    }
+
+
     public override bool addElement(int type, string atrezzoId)
     {
 

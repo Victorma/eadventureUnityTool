@@ -36,6 +36,8 @@ public class ProjectConfigData{
 
     public static void storeToXML()
     {
+        if(properties == null)
+            properties = new Properties(Controller.getInstance().getProjectFolder() + "/" + FILE_NAME);
         properties.Save();
     }
 

@@ -149,6 +149,7 @@ public class AssetsController
     public static void createFolderStructure()
     {
         DirectoryInfo projectDir = new DirectoryInfo(Controller.getInstance().getProjectFolder());
+        Debug.Log("CREATE: "  + projectDir.FullName);
         string[] folders = categoryFolders();
         for (int i = 0; i < folders.Length; i++)
         {
@@ -863,13 +864,14 @@ public class AssetsController
 
     public static void copyAssets(string sourceFile, string destinyFile)
     {
+        Debug.Log("KOPIUJĘ: " + sourceFile + " | " + destinyFile);
         DirectoryInfo assets = new DirectoryInfo(sourceFile + "\\assets");
         if (assets.Exists)
         {
             DirectoryInfo destinyAssets = new DirectoryInfo(destinyFile + "\\assets");
             if (destinyAssets.Exists)
             {
-                destinyAssets.Delete(true);
+                Directory.Delete(destinyFile + "\\assets", true);
             }
             DirectoryCopy(assets.FullName, destinyAssets.FullName, true);
         }
@@ -879,7 +881,7 @@ public class AssetsController
             DirectoryInfo destinyGui = new DirectoryInfo(destinyFile + "\\gui");
             if (destinyGui.Exists)
             {
-                destinyGui.Delete(true);
+                Directory.Delete(destinyFile + "\\gui", true);
             }
             DirectoryCopy(gui.FullName, destinyGui.FullName, true);
         }
@@ -890,7 +892,8 @@ public class AssetsController
         DirectoryInfo dest = new DirectoryInfo(destinyFile);
         if (dest.Exists)
         {
-            dest.Delete(true);
+            Directory.Delete(destinyFile, true);
+           // dest.Delete(true);
         }
         DirectoryCopy(sourceFile, destinyFile, true);
     }

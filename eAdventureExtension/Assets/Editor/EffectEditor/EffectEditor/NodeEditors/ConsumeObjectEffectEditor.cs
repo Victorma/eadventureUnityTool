@@ -28,7 +28,7 @@ public class ConsumeObjectEffectEditor : EffectEditor
     public ConsumeObjectEffectEditor()
     {
         items = Controller.getInstance().getSelectedChapterDataControl().getItemsList().getItemsIDs();
-        this.effect = new ConsumeObjectEffect("");
+        this.effect = new ConsumeObjectEffect(items[0]);
     }
 
     public void draw()
