@@ -28,6 +28,8 @@ public class ConversationWindow : LayoutWindow
             if (GUILayout.Button("Edit conversation", GUILayout.MaxWidth(windowWidth * 0.3f)))
             {
                 Debug.Log("SHOW EDITOR");
+                ConversationEditorWindow window = (ConversationEditorWindow)ScriptableObject.CreateInstance(typeof(ConversationEditorWindow));
+                window.Init((GraphConversation) Controller.getInstance().getCharapterList().getSelectedChapterData().getConversations()[i]);
             }
 
             GUILayout.EndHorizontal();
