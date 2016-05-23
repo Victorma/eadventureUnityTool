@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using System;
+using System.Collections.Generic;
 
 public class SetValueEffectEditor : EffectEditor
 {
@@ -26,7 +27,11 @@ public class SetValueEffectEditor : EffectEditor
 
     public SetValueEffectEditor()
     {
-        vars = Controller.getInstance().getVarFlagSummary().getVars();
+        List<string> tmp = new List<string> ();
+        tmp.Add ("");
+        tmp.AddRange(Controller.getInstance().getVarFlagSummary().getVars());
+        vars = tmp.ToArray ();
+
         this.effect = new SetValueEffect(vars[0], 1);
     }
 

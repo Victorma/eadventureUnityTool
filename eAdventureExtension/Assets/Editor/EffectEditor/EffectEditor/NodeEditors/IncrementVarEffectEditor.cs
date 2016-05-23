@@ -2,6 +2,7 @@
 using UnityEditor;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 public class IncrementVarEffectEditor : EffectEditor
 {
@@ -27,8 +28,12 @@ public class IncrementVarEffectEditor : EffectEditor
 
     public IncrementVarEffectEditor()
     {
-        vars = Controller.getInstance().getVarFlagSummary().getVars();
-        this.effect = new IncrementVarEffect(vars[0], 1);
+        List<string> tmp = new List<string> ();
+        tmp.Add ("");
+        tmp.AddRange(Controller.getInstance().getVarFlagSummary().getVars());
+        vars = tmp.ToArray ();
+
+        this.effect = new IncrementVarEffect (vars [0], 1);
     }
 
     public void draw()

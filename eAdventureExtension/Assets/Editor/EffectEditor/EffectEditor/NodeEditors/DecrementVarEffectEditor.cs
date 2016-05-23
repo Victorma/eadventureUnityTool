@@ -2,6 +2,7 @@
 using UnityEditor;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 public class DecrementVarEffectEditor : EffectEditor
 {
@@ -28,8 +29,12 @@ public class DecrementVarEffectEditor : EffectEditor
 
     public DecrementVarEffectEditor()
     {
-        vars = Controller.getInstance().getVarFlagSummary().getVars();
-        this.effect = new DecrementVarEffect(vars[0], 1);
+        List<string> tmp = new List<string> ();
+        tmp.Add ("");
+        tmp.AddRange(Controller.getInstance().getVarFlagSummary().getVars());
+        vars = tmp.ToArray ();
+
+        this.effect = new DecrementVarEffect (vars [0], 1);
     }
 
     public void draw()
