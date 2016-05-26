@@ -60,9 +60,9 @@ public class ScenesWindowAppearance : LayoutWindow, DialogReceiverInterface
 
         noBackgroundSkin = (GUISkin)Resources.Load("Editor/EditorNoBackgroundSkin", typeof(GUISkin));
 
-        appearanceTableRect = new Rect(0f, 0.1f * windowHeight, 0.9f * windowWidth, 0.2f * windowHeight);
-        rightPanelRect = new Rect(0.9f * windowWidth, 0.1f * windowHeight, 0.08f * windowWidth, 0.2f * windowHeight);
-        propertiesTable = new Rect(0f, 0.3f * windowHeight, 0.95f * windowWidth, 0.2f * windowHeight);
+        appearanceTableRect = new Rect(0f, 0.1f * windowHeight, 0.9f * windowWidth, 0.15f * windowHeight);
+        rightPanelRect = new Rect(0.9f * windowWidth, 0.1f * windowHeight, 0.08f * windowWidth, 0.15f * windowHeight);
+        propertiesTable = new Rect(0f, 0.25f * windowHeight, windowWidth, 0.25f * windowHeight);
         previewRect = new Rect(0f, 0.5f * windowHeight, windowWidth, windowHeight * 0.45f);
     }
 
@@ -126,6 +126,7 @@ public class ScenesWindowAppearance : LayoutWindow, DialogReceiverInterface
         GUILayout.EndHorizontal();
 
         // Foreground chooser
+        GUILayout.Label("Foreground mask of the scene");
         GUILayout.BeginHorizontal();
         if (GUILayout.Button(clearImg, GUILayout.Width(0.1f * windowWidth)))
         {
@@ -139,6 +140,7 @@ public class ScenesWindowAppearance : LayoutWindow, DialogReceiverInterface
         GUILayout.EndHorizontal();
 
         // Music chooser
+        GUILayout.Label("Background music");
         GUILayout.BeginHorizontal();
         if (GUILayout.Button(clearImg, GUILayout.Width(0.1f * windowWidth)))
         {

@@ -162,7 +162,7 @@ public class PlayerMovementEditor : BaseAreaEditablePopup
                 OnBeingDragged();
             }
 
-            playerRect = new Rect(x, y, playerTex.width, playerTex.height);
+            playerRect = new Rect(x, y, playerTex.width * sceneRef.getPlayerScale(), playerTex.height * sceneRef.getPlayerScale());
             GUI.DrawTexture(playerRect, playerTex);
 
             GUILayout.BeginHorizontal();
