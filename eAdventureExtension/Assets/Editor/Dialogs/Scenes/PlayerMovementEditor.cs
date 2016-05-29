@@ -338,12 +338,14 @@ public class PlayerMovementEditor : BaseAreaEditablePopup
             {
                 trajectory = new Trajectory();
                 sceneRef.setTrajectoryDataControl(new TrajectoryDataControl(sceneRef, trajectory));
+                sceneRef.setTrajectory(trajectory);
             }
             beginSideIndex = -1;
         }
         else
         {
             sceneRef.setTrajectoryDataControl(new TrajectoryDataControl(sceneRef, null));
+            sceneRef.setTrajectory(null);
             beginSideIndex = -1;
         }
     }
