@@ -373,7 +373,7 @@ public class PlayerMovementEditor : BaseAreaEditablePopup
     {
         if (useTrajectory)
         {
-            trajectory.getNodes()[nodeIndex].setValues((int)currentPos.x, (int)currentPos.y, trajectory.getNodes()[nodeIndex].getScale());
+            trajectory.getNodes()[nodeIndex].setValues((int)currentPos.x, (int)(currentPos.y + 0.5f* playerRect.height * trajectory.getNodes()[nodeIndex].getScale()), trajectory.getNodes()[nodeIndex].getScale());
         }
     }
 

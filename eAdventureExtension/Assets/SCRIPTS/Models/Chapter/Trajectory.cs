@@ -203,7 +203,7 @@ public class Trajectory : ICloneable
 
         public Rect getEditorRect(float nodeWidth, float nodeHeight )
         {
-            return new Rect(x - 0.5f*nodeWidth*scale, y - 0.5f*nodeHeight*scale, nodeWidth*scale, nodeHeight*scale);
+            return new Rect(x - 0.5f*nodeWidth*scale, y - nodeHeight*scale, nodeWidth*scale, nodeHeight*scale);
         }
 
     /*

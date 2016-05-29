@@ -84,8 +84,10 @@ public class ObjectInSceneRefrencesEditor : BaseAreaEditablePopup
             if (sceneRef.getReferencesList().getAllReferencesDataControl()[i].getErdc() != null)
             {
                 Rect aRect =
-                    new Rect(sceneRef.getReferencesList().getAllReferencesDataControl()[i].getErdc().getElementX(),
-                        sceneRef.getReferencesList().getAllReferencesDataControl()[i].getErdc().getElementY(),
+                    new Rect(sceneRef.getReferencesList().getAllReferencesDataControl()[i].getErdc().getElementX() - sceneRef.getReferencesList().getAllReferencesDataControl()[i].getErdc().getElementScale() *
+                        objectsTex[i].texture.width,
+                        sceneRef.getReferencesList().getAllReferencesDataControl()[i].getErdc().getElementY()- sceneRef.getReferencesList().getAllReferencesDataControl()[i].getErdc().getElementScale() *
+                        objectsTex[i].texture.height,
                         sceneRef.getReferencesList().getAllReferencesDataControl()[i].getErdc().getElementScale()*
                         objectsTex[i].texture.width,
                         sceneRef.getReferencesList().getAllReferencesDataControl()[i].getErdc().getElementScale()*
@@ -154,8 +156,8 @@ public class ObjectInSceneRefrencesEditor : BaseAreaEditablePopup
 
     private void OnBeingDragged()
     {
-        x = (int) currentPos.x - (int) (0.5f*currentRect.width);
-        y = (int) currentPos.y - (int) (0.5f*currentRect.height);
+        x = (int) currentPos.x + (int) (0.5f*currentRect.width);
+        y = (int) currentPos.y + (int) (0.5f*currentRect.height);
         sceneRef.getReferencesList().getAllReferencesDataControl()[calledItemIndexRef].getErdc()
             .setElementPosition(x, y);
     }
