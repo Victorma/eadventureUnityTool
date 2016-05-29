@@ -127,22 +127,42 @@ public class ItemsWindowActions : LayoutWindow
                         GUILayout.Width(windowWidth*0.39f));
                 }
 
-                //TODO: distinguish between first/third person
 
-                //Controller.getInstance().getSelectedChapterDataControl().getItemsList().getItems()[
-                //GameRources.GetInstance().selectedItemIndex].getActionsList().getActions()[i].getNeedsGoTo().ToString()
-                if (GUILayout.Button("Not relevant", GUILayout.Width(windowWidth*0.39f)))
+                if (Controller.getInstance().playerMode() == Controller.FILE_ADVENTURE_1STPERSON_PLAYER)
                 {
-                    OnActionSelectionChange(i);
+                    if (GUILayout.Button("Not relevant", GUILayout.Width(windowWidth*0.39f)))
+                    {
+                        OnActionSelectionChange(i);
+                    }
                 }
+                else
+                {
+                    GUILayout.BeginHorizontal(GUILayout.Width(windowWidth * 0.39f));
+
+                    Controller.getInstance().getSelectedChapterDataControl().getItemsList().getItems()[
+                        GameRources.GetInstance().selectedItemIndex].getActionsList().getActions()[i].setNeedsGoTo(
+                            GUILayout.Toggle(
+                                Controller.getInstance().getSelectedChapterDataControl().getItemsList().getItems()[
+                                    GameRources.GetInstance().selectedItemIndex].getActionsList().getActions()[i]
+                                    .getNeedsGoTo(), ""));
+                    Controller.getInstance().getSelectedChapterDataControl().getItemsList().getItems()[
+                        GameRources.GetInstance().selectedItemIndex].getActionsList().getActions()[i].setKeepDistance(
+                            EditorGUILayout.IntField(
+                                Controller.getInstance().getSelectedChapterDataControl().getItemsList().getItems()[
+                                    GameRources.GetInstance().selectedItemIndex].getActionsList().getActions()[i]
+                                    .getKeepDistance()));
+
+                    GUILayout.EndHorizontal();
+                }
+
                 if (GUILayout.Button(tmpTex, GUILayout.Width(windowWidth*0.1f)))
                 {
                     //TODO: condition editor
                     Debug.Log("SHOW editor");
                     ConditionEditorWindow window =
-                     (ConditionEditorWindow)ScriptableObject.CreateInstance(typeof(ConditionEditorWindow));
+                        (ConditionEditorWindow) ScriptableObject.CreateInstance(typeof (ConditionEditorWindow));
                     window.Init(Controller.getInstance().getSelectedChapterDataControl().getItemsList().getItems()[
-                            GameRources.GetInstance().selectedItemIndex].getActionsList().getActions()[i].getConditions());
+                        GameRources.GetInstance().selectedItemIndex].getActionsList().getActions()[i].getConditions());
                 }
             }
             else
@@ -154,13 +174,24 @@ public class ItemsWindowActions : LayoutWindow
                     OnActionSelectionChange(i);
                 }
 
-                //TODO: distinguish between first/third person
 
-                //Controller.getInstance().getSelectedChapterDataControl().getItemsList().getItems()[
-                //GameRources.GetInstance().selectedItemIndex].getActionsList().getActions()[i].getNeedsGoTo().ToString()
-                if (GUILayout.Button("Not relevant", GUILayout.Width(windowWidth*0.39f)))
+                if (Controller.getInstance().playerMode() == Controller.FILE_ADVENTURE_1STPERSON_PLAYER)
                 {
-                    OnActionSelectionChange(i);
+                    if (GUILayout.Button("Not relevant", GUILayout.Width(windowWidth*0.39f)))
+                    {
+                        OnActionSelectionChange(i);
+                    }
+                }
+                else
+                {
+                    if (
+                        GUILayout.Button(
+                            Controller.getInstance().getSelectedChapterDataControl().getItemsList().getItems()[
+                                GameRources.GetInstance().selectedItemIndex].getActionsList().getActions()[i]
+                                .getNeedsGoTo().ToString(), GUILayout.Width(windowWidth*0.39f)))
+                    {
+                        OnActionSelectionChange(i);
+                    }
                 }
                 if (GUILayout.Button(tmpTex, GUILayout.Width(windowWidth*0.1f)))
                 {
@@ -227,9 +258,9 @@ public class ItemsWindowActions : LayoutWindow
         if (GUILayout.Button("Show effects editor"))
         {
             EffectEditorWindow window =
-                           (EffectEditorWindow)ScriptableObject.CreateInstance(typeof(EffectEditorWindow));
+                (EffectEditorWindow) ScriptableObject.CreateInstance(typeof (EffectEditorWindow));
             window.Init(Controller.getInstance().getSelectedChapterDataControl().getItemsList().getItems()[
-                    GameRources.GetInstance().selectedItemIndex].getActionsList().getActions()[selectedAction].getEffects());
+                GameRources.GetInstance().selectedItemIndex].getActionsList().getActions()[selectedAction].getEffects());
         }
         GUI.enabled = true;
         GUILayout.EndArea();

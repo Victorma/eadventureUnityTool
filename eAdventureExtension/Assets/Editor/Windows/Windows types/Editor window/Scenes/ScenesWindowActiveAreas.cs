@@ -209,15 +209,43 @@ public class ScenesWindowActiveAreas : LayoutWindow, DialogReceiverInterface
                                 selectedArea
                             ].getActionsList().getActions()[i].getTypeName(),
                         GUILayout.Width(windowWidth*0.39f));
-
-                    //TODO: distinguish between first/third person
-
-                    //Controller.getInstance().getSelectedChapterDataControl().getItemsList().getItems()[
-                    //GameRources.GetInstance().selectedItemIndex].getActionsList().getActions()[i].getNeedsGoTo().ToString()
-                    if (GUILayout.Button("Not relevant", GUILayout.Width(windowWidth*0.39f)))
+                    if (Controller.getInstance().playerMode() == Controller.FILE_ADVENTURE_1STPERSON_PLAYER)
                     {
-                        selectedAction = i;
+                        if (GUILayout.Button("Not relevant", GUILayout.Width(windowWidth*0.39f)))
+                        {
+                            selectedAction = i;
+                        }
                     }
+                    else
+                    {
+                        GUILayout.BeginHorizontal(GUILayout.Width(windowWidth * 0.39f));
+                        Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
+                            GameRources.GetInstance().selectedSceneIndex].getActiveAreasList().getActiveAreas()[
+                                selectedArea].getActionsList().getActions()[i].setNeedsGoTo(
+                                    GUILayout.Toggle(
+                                        Controller.getInstance()
+                                            .getSelectedChapterDataControl()
+                                            .getScenesList()
+                                            .getScenes()[
+                                                GameRources.GetInstance().selectedSceneIndex].getActiveAreasList()
+                                            .getActiveAreas()[selectedArea].getActionsList().getActions()[i]
+                                            .getNeedsGoTo(), ""));
+                        Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
+                            GameRources.GetInstance().selectedSceneIndex].getActiveAreasList().getActiveAreas()[
+                                selectedArea].getActionsList().getActions()[i].setKeepDistance(
+                                    EditorGUILayout.IntField(
+                                        Controller.getInstance()
+                                            .getSelectedChapterDataControl()
+                                            .getScenesList()
+                                            .getScenes()[
+                                                GameRources.GetInstance().selectedSceneIndex].getActiveAreasList()
+                                            .getActiveAreas()[selectedArea].getActionsList().getActions()[i]
+                                            .getKeepDistance()));
+
+                        GUILayout.EndHorizontal();
+                    }
+
+
                     GUILayout.BeginVertical();
                     if (GUILayout.Button("Conditons", GUILayout.Width(windowWidth*0.1f)))
                     {
@@ -263,17 +291,24 @@ public class ScenesWindowActiveAreas : LayoutWindow, DialogReceiverInterface
                         selectedAction = i;
                     }
 
-                    //TODO: distinguish between first/third person
-
-                    //Controller.getInstance().getSelectedChapterDataControl().getItemsList().getItems()[
-                    //GameRources.GetInstance().selectedItemIndex].getActionsList().getActions()[i].getNeedsGoTo().ToString()
-                    if (GUILayout.Button("Not relevant", GUILayout.Width(windowWidth*0.39f)))
+                    if (Controller.getInstance().playerMode() == Controller.FILE_ADVENTURE_1STPERSON_PLAYER)
                     {
-                        selectedAction = i;
+                        if (GUILayout.Button("Not relevant", GUILayout.Width(windowWidth*0.39f)))
+                        {
+                            selectedAction = i;
+                        }
                     }
-                    if (GUILayout.Button("Edit", GUILayout.Width(windowWidth*0.1f)))
+                    else
                     {
-                        selectedAction = i;
+                        if (
+                            GUILayout.Button(
+                                Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
+                                    GameRources.GetInstance().selectedSceneIndex].getActiveAreasList().getActiveAreas()[
+                                        selectedArea].getActionsList().getActions()[i].getNeedsGoTo().ToString(),
+                                GUILayout.Width(windowWidth*0.39f)))
+                        {
+                            selectedAction = i;
+                        }
                     }
                 }
                 GUILayout.EndHorizontal();

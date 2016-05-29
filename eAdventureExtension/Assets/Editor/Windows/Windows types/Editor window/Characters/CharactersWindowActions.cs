@@ -125,14 +125,34 @@ public class CharactersWindowActions : LayoutWindow
                             .getTypeName(), GUILayout.Width(windowWidth*0.39f));
                 }
 
-                //TODO: distinguish between first/third person
-
-                //Controller.getInstance().getSelectedChapterDataControl().getNPCsList().getNPCs()[
-                //GameRources.GetInstance().selectedCharacterIndex].getActionsList().getActions()[i].getNeedsGoTo().ToString()
-                if (GUILayout.Button("Not relevant", GUILayout.Width(windowWidth*0.39f)))
+                if (Controller.getInstance().playerMode() == Controller.FILE_ADVENTURE_1STPERSON_PLAYER)
                 {
-                    OnActionSelectionChange(i);
+                    if (GUILayout.Button("Not relevant", GUILayout.Width(windowWidth*0.39f)))
+                    {
+                        OnActionSelectionChange(i);
+                    }
                 }
+                else
+                {
+                    GUILayout.BeginHorizontal(GUILayout.Width(windowWidth * 0.39f));
+
+                    Controller.getInstance().getSelectedChapterDataControl().getNPCsList().getNPCs()[
+                        GameRources.GetInstance().selectedCharacterIndex].getActionsList().getActions()[i].setNeedsGoTo(
+                            GUILayout.Toggle(
+                                Controller.getInstance().getSelectedChapterDataControl().getNPCsList().getNPCs()[
+                                    GameRources.GetInstance().selectedCharacterIndex].getActionsList().getActions()[i]
+                                    .getNeedsGoTo(), ""));
+                    Controller.getInstance().getSelectedChapterDataControl().getNPCsList().getNPCs()[
+                        GameRources.GetInstance().selectedCharacterIndex].getActionsList().getActions()[i]
+                        .setKeepDistance(
+                            EditorGUILayout.IntField(
+                                Controller.getInstance().getSelectedChapterDataControl().getNPCsList().getNPCs()[
+                                    GameRources.GetInstance().selectedCharacterIndex].getActionsList().getActions()[i]
+                                    .getKeepDistance()));
+
+                    GUILayout.EndHorizontal();
+                }
+
                 if (GUILayout.Button(tmpTex, GUILayout.Width(windowWidth*0.1f)))
                 {
                     //TODO: condition editor
@@ -153,13 +173,22 @@ public class CharactersWindowActions : LayoutWindow
                     OnActionSelectionChange(i);
                 }
 
-                //TODO: distinguish between first/third person
-
-                //Controller.getInstance().getSelectedChapterDataControl().getNPCsList().getNPCs()[
-                //GameRources.GetInstance().selectedCharacterIndex].getActionsList().getActions()[i].getNeedsGoTo().ToString()
-                if (GUILayout.Button("Not relevant", GUILayout.Width(windowWidth*0.39f)))
+                if (Controller.getInstance().playerMode() == Controller.FILE_ADVENTURE_1STPERSON_PLAYER)
                 {
-                    OnActionSelectionChange(i);
+                    if (GUILayout.Button("Not relevant", GUILayout.Width(windowWidth*0.39f)))
+                    {
+                        OnActionSelectionChange(i);
+                    }
+                }
+                else
+                {
+                    if (
+                        GUILayout.Button(
+                            Controller.getInstance().getSelectedChapterDataControl().getNPCsList().getNPCs()[
+                                GameRources.GetInstance().selectedCharacterIndex].getActionsList().getActions()[i].getNeedsGoTo().ToString(), GUILayout.Width(windowWidth*0.39f)))
+                    {
+                        OnActionSelectionChange(i);
+                    }
                 }
                 if (GUILayout.Button(tmpTex, GUILayout.Width(windowWidth*0.1f)))
                 {
