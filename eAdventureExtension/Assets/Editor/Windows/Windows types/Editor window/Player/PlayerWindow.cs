@@ -10,7 +10,7 @@ public class PlayerWindow : LayoutWindow
         Documentation
     }
 
-    private static PlayerWindowType openedWindow = PlayerWindowType.Appearance;
+    private static PlayerWindowType openedWindow = PlayerWindowType.DialogConfiguration;
     private static PlayerWindowAppearance playerWindowAppearance;
     private static PlayerWindowDialogConfiguration playerWindowDialogConfiguration;
     private static PlayerWindowDocumentation playerWindowDocumentation;
@@ -37,14 +37,17 @@ public class PlayerWindow : LayoutWindow
     {
 
         GUILayout.BeginHorizontal();
-        if (openedWindow == PlayerWindowType.Appearance)
-            GUI.skin = selectedButtonSkin;
-        if (GUILayout.Button(Language.GetText("APPEARANCE")))
+        if (Controller.getInstance().playerMode() == Controller.FILE_ADVENTURE_3RDPERSON_PLAYER)
         {
-            OnWindowTypeChanged(PlayerWindowType.Appearance);
+            if (openedWindow == PlayerWindowType.Appearance)
+                GUI.skin = selectedButtonSkin;
+            if (GUILayout.Button(Language.GetText("APPEARANCE")))
+            {
+                OnWindowTypeChanged(PlayerWindowType.Appearance);
+            }
+            if (openedWindow == PlayerWindowType.Appearance)
+                GUI.skin = defaultSkin;
         }
-        if (openedWindow == PlayerWindowType.Appearance)
-            GUI.skin = defaultSkin;
 
         if (openedWindow == PlayerWindowType.DialogConfiguration)
             GUI.skin = selectedButtonSkin;

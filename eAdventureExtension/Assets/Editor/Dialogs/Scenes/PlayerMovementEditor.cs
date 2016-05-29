@@ -86,7 +86,6 @@ public class PlayerMovementEditor : BaseAreaEditablePopup
 
         useTrajectory = sceneRef.getTrajectory().hasTrajectory();
         useInitialPosition = useInitialPositionLast = !useTrajectory;
-
         trajectory = sceneRef.getTrajectory().GetTrajectory();
 
         x = sceneRef.getDefaultInitialPositionX();
@@ -331,20 +330,20 @@ public class PlayerMovementEditor : BaseAreaEditablePopup
     private void OnMovementTypeChange(bool val)
     {
         useInitialPositionLast = val;
-
+        useTrajectory = !val;
         if (useTrajectory)
         {
             trajectory = sceneRef.getTrajectory().GetTrajectory();
             if (trajectory == null)
             {
                 trajectory = new Trajectory();
-                sceneRef.setTrajectory(trajectory);
+                sceneRef.setTrajectoryDataControl(new TrajectoryDataControl(sceneRef, trajectory));
             }
             beginSideIndex = -1;
         }
         else
         {
-            sceneRef.setTrajectory(null);
+            sceneRef.setTrajectoryDataControl(new TrajectoryDataControl(sceneRef, null));
             beginSideIndex = -1;
         }
     }

@@ -541,7 +541,7 @@ public class NPCDataControl : DataControlWithResources
 
     public void addAnimationPath(string animation, string path)
     {
-        resourcesDataControlList[selectedResources].addAsset(animation, path.Substring(0, path.LastIndexOf(".eaa")));
+        resourcesDataControlList[selectedResources].addAsset(animation, path);
     }
 
 

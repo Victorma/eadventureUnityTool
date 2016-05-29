@@ -62,7 +62,7 @@ public class CharactersWindowDocumentation : LayoutWindow, DialogReceiverInterfa
         noAudioTexture = (Texture2D)Resources.Load("EAdventureData/img/icons/noAudio", typeof(Texture2D));
         audioTexture = (Texture2D)Resources.Load("EAdventureData/img/icons/audio", typeof(Texture2D));
 
-        descriptionRect = new Rect(0f, 0.1f * windowHeight, windowWidth, 0.2f * windowHeight);
+        descriptionRect = new Rect(0, 0.1f * windowHeight, windowWidth, 0.2f * windowHeight);
         rightPanelRect = new Rect(0.9f * windowWidth, 0.3f * windowHeight, 0.08f * windowWidth, 0.15f * windowHeight);
         descriptionTableRect = new Rect(0f, 0.3f * windowHeight, 0.9f * windowWidth, 0.15f * windowHeight);
         settingsTable = new Rect(0f, 0.45f * windowHeight, windowWidth, windowHeight * 0.5f);
@@ -84,7 +84,7 @@ public class CharactersWindowDocumentation : LayoutWindow, DialogReceiverInterfa
     {
         GUILayout.BeginArea(descriptionRect);
         GUILayout.Label("Full description of the character");
-        fullCharacterDescription = GUILayout.TextArea(fullCharacterDescription, GUILayout.MinHeight(0.2f));
+        fullCharacterDescription = GUILayout.TextArea(fullCharacterDescription, GUILayout.MinHeight(0.2f * windowHeight));
         if (!fullCharacterDescription.Equals(fullCharacterDescriptionLast))
             OnCharacterDescriptionChanged(fullCharacterDescription);
         GUILayout.EndArea();

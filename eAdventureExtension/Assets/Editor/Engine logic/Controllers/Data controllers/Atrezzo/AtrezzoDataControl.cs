@@ -48,7 +48,7 @@ public class AtrezzoDataControl : DataControlWithResources
 
     public void setImage(string path)
     {
-        resourcesDataControlList[selectedResources].addAsset("image", path.Substring(0, path.LastIndexOf(".")));
+        resourcesDataControlList[selectedResources].addAsset("image", path);
     }
 
     /**

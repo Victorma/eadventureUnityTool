@@ -300,8 +300,6 @@ public class ItemsWindowDescription : LayoutWindow, DialogReceiverInterface
         GUILayout.FlexibleSpace();
 
         GUILayout.Label("Behaviour (response to mouse clicks)");
-        GUILayout.Box(
-            "If the checkbox below is activated, the item will return to its original position after being dragged to a different element. If it is not checked, it will remain on the location where it was dropped.");
         GUILayout.BeginHorizontal();
         selectedBehaviourType = EditorGUILayout.Popup(selectedBehaviourType, behaviourTypes,
             GUILayout.MaxWidth(0.2f*windowWidth));

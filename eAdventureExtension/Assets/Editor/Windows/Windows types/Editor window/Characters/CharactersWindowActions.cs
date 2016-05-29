@@ -138,9 +138,10 @@ public class CharactersWindowActions : LayoutWindow
                     //TODO: condition editor
                     Debug.Log("SHOW editor");
                     ConditionEditorWindow window =
-                     (ConditionEditorWindow)ScriptableObject.CreateInstance(typeof(ConditionEditorWindow));
+                        (ConditionEditorWindow) ScriptableObject.CreateInstance(typeof (ConditionEditorWindow));
                     window.Init(Controller.getInstance().getSelectedChapterDataControl().getNPCsList().getNPCs()[
-                            GameRources.GetInstance().selectedCharacterIndex].getActionsList().getActions()[i].getConditions());
+                        GameRources.GetInstance().selectedCharacterIndex].getActionsList().getActions()[i].getConditions
+                        ());
                 }
             }
             else
@@ -206,7 +207,7 @@ public class CharactersWindowActions : LayoutWindow
                 .deleteElement(Controller.getInstance().getSelectedChapterDataControl().getNPCsList().getNPCs()[
                     GameRources.GetInstance().selectedCharacterIndex].getActionsList().getActions()[selectedAction],
                     false);
-            if(selectedAction>=0)
+            if (selectedAction >= 0)
                 selectedAction--;
         }
         GUI.skin = defaultSkin;
@@ -226,9 +227,10 @@ public class CharactersWindowActions : LayoutWindow
         if (GUILayout.Button("Show effects editor"))
         {
             EffectEditorWindow window =
-                        (EffectEditorWindow)ScriptableObject.CreateInstance(typeof(EffectEditorWindow));
+                (EffectEditorWindow) ScriptableObject.CreateInstance(typeof (EffectEditorWindow));
             window.Init(Controller.getInstance().getSelectedChapterDataControl().getNPCsList().getNPCs()[
-                    GameRources.GetInstance().selectedCharacterIndex].getActionsList().getActions()[selectedAction].getEffects());
+                GameRources.GetInstance().selectedCharacterIndex].getActionsList().getActions()[selectedAction]
+                .getEffects());
         }
         GUI.enabled = true;
         GUILayout.EndArea();
@@ -318,10 +320,8 @@ public class CharactersWindowActions : LayoutWindow
     {
         private AddUseAction useAction;
         private AddExamineAction examineAction;
-        private AddGrabAction grabAction;
         private AddCustomAction customAction;
-        private AddUseWithAction useWithAction;
-        private AddGiveToAction giveToAction;
+        private AddTalkToAction talkToAction;
         private AddDragToAction dragToAction;
 
         public AddCharacterActionMenu()
@@ -335,14 +335,10 @@ public class CharactersWindowActions : LayoutWindow
                 useAction.OnCliked();
             else if ((obj as AddExamineAction) != null)
                 examineAction.OnCliked();
-            else if ((obj as AddGrabAction) != null)
-                grabAction.OnCliked();
             else if ((obj as AddCustomAction) != null)
                 customAction.OnCliked();
-            else if ((obj as AddUseWithAction) != null)
-                useWithAction.OnCliked();
-            else if ((obj as AddGiveToAction) != null)
-                giveToAction.OnCliked();
+            else if ((obj as AddTalkToAction) != null)
+                talkToAction.OnCliked();
             else if ((obj as AddDragToAction) != null)
                 dragToAction.OnCliked();
         }
@@ -353,18 +349,14 @@ public class CharactersWindowActions : LayoutWindow
 
             useAction = new AddUseAction("Add \"Use\" action");
             examineAction = new AddExamineAction("Add \"Examine\" action");
-            grabAction = new AddGrabAction("Add \"Grab\" action");
             customAction = new AddCustomAction("Add \"Custom\" action");
-            useWithAction = new AddUseWithAction("Add \"Use with...\" action");
-            giveToAction = new AddGiveToAction("Add \"Give to...\" action");
+            talkToAction = new AddTalkToAction("Add \"Talk to...\" action");
             dragToAction = new AddDragToAction("Add \"Drag to..\" action");
 
             menu.AddItem(new GUIContent(useAction.Label), false, Callback, useAction);
             menu.AddItem(new GUIContent(examineAction.Label), false, Callback, examineAction);
-            menu.AddItem(new GUIContent(grabAction.Label), false, Callback, grabAction);
             menu.AddItem(new GUIContent(customAction.Label), false, Callback, customAction);
-            menu.AddItem(new GUIContent(useWithAction.Label), false, Callback, useWithAction);
-            menu.AddItem(new GUIContent(giveToAction.Label), false, Callback, giveToAction);
+            menu.AddItem(new GUIContent(talkToAction.Label), false, Callback, talkToAction);
             menu.AddItem(new GUIContent(dragToAction.Label), false, Callback, dragToAction);
         }
     }
@@ -402,23 +394,6 @@ public class CharactersWindowActions : LayoutWindow
         }
     }
 
-    class AddGrabAction : IMenuItem
-    {
-        public AddGrabAction(string name_)
-        {
-            this.Label = name_;
-        }
-
-        public string Label { get; set; }
-
-        public void OnCliked()
-        {
-            Controller.getInstance().getSelectedChapterDataControl().getNPCsList().getNPCs()[
-                GameRources.GetInstance().selectedCharacterIndex].getActionsList()
-                .addElement(Controller.ACTION_GRAB, "");
-        }
-    }
-
     class AddCustomAction : IMenuItem
     {
         public AddCustomAction(string name_)
@@ -436,9 +411,9 @@ public class CharactersWindowActions : LayoutWindow
         }
     }
 
-    class AddUseWithAction : IMenuItem
+    class AddTalkToAction : IMenuItem
     {
-        public AddUseWithAction(string name_)
+        public AddTalkToAction(string name_)
         {
             this.Label = name_;
         }
@@ -449,24 +424,7 @@ public class CharactersWindowActions : LayoutWindow
         {
             Controller.getInstance().getSelectedChapterDataControl().getNPCsList().getNPCs()[
                 GameRources.GetInstance().selectedCharacterIndex].getActionsList()
-                .addElement(Controller.ACTION_USE_WITH, "");
-        }
-    }
-
-    class AddGiveToAction : IMenuItem
-    {
-        public AddGiveToAction(string name_)
-        {
-            this.Label = name_;
-        }
-
-        public string Label { get; set; }
-
-        public void OnCliked()
-        {
-            Controller.getInstance().getSelectedChapterDataControl().getNPCsList().getNPCs()[
-                GameRources.GetInstance().selectedCharacterIndex].getActionsList()
-                .addElement(Controller.ACTION_GIVE_TO, "");
+                .addElement(Controller.ACTION_TALK_TO, "");
         }
     }
 

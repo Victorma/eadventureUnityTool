@@ -19,6 +19,8 @@ public class ExitsEditor : BaseAreaEditablePopup
 
     private int x, y, width, heigth;
 
+    private int HALF_WIDTH, HALF_HEIGHT;
+
     private int calledExitIndexRef;
 
     private Rect currentRect;
@@ -48,6 +50,9 @@ public class ExitsEditor : BaseAreaEditablePopup
         y = sceneRef.getExitsList().getExitsList()[exitIndex].getY();
         width = sceneRef.getExitsList().getExitsList()[exitIndex].getWidth();
         heigth = sceneRef.getExitsList().getExitsList()[exitIndex].getHeight();
+        HALF_WIDTH = (int) (0.5f*sceneRef.getExitsList().getExitsList()[calledExitIndexRef].getWidth());
+        HALF_HEIGHT = (int) (0.5f*sceneRef.getExitsList().getExitsList()[calledExitIndexRef].getHeight());
+
 
         base.Init(e, backgroundPreviewTex.width, backgroundPreviewTex.height);
     }
@@ -135,6 +140,10 @@ public class ExitsEditor : BaseAreaEditablePopup
             GUILayout.Width(0.25f * backgroundPreviewTex.width));
         heigth = EditorGUILayout.IntField(sceneRef.getExitsList().getExitsList()[calledExitIndexRef].getHeight(),
             GUILayout.Width(0.25f * backgroundPreviewTex.width));
+
+        HALF_WIDTH = (int)(0.5f * sceneRef.getExitsList().getExitsList()[calledExitIndexRef].getWidth());
+        HALF_HEIGHT = (int)(0.5f * sceneRef.getExitsList().getExitsList()[calledExitIndexRef].getHeight());
+
         sceneRef.getExitsList().getExitsList()[calledExitIndexRef].setValues(x, y, width, heigth);
 
         GUILayout.EndHorizontal();
@@ -155,8 +164,8 @@ public class ExitsEditor : BaseAreaEditablePopup
 
     private void OnBeingDragged()
     {
-        x = (int) currentPos.x - (int) (0.5f*sceneRef.getExitsList().getExitsList()[calledExitIndexRef].getWidth());
-        y = (int) currentPos.y - (int) (0.5f*sceneRef.getExitsList().getExitsList()[calledExitIndexRef].getHeight());
+        x = (int) currentPos.x - HALF_WIDTH;
+        y = (int) currentPos.y - HALF_HEIGHT;
         sceneRef.getExitsList().getExitsList()[calledExitIndexRef].setValues(x, y, width, heigth);
     }
 }

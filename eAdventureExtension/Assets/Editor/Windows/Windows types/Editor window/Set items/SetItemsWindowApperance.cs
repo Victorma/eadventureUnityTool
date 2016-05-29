@@ -65,6 +65,8 @@ public class SetItemsWindowApperance : LayoutWindow, DialogReceiverInterface
 
     void OnImageChanged(string val)
     {
+        Debug.Log("PATH: " + val + "\n " + Controller.getInstance().getSelectedChapterDataControl().getAtrezzoList().getAtrezzoList()[
+            GameRources.GetInstance().selectedSetItemIndex].getPreviewImage() );
         pathToImg = val;
         Controller.getInstance().getSelectedChapterDataControl().getAtrezzoList().getAtrezzoList()[
             GameRources.GetInstance().selectedSetItemIndex].setImage(val);

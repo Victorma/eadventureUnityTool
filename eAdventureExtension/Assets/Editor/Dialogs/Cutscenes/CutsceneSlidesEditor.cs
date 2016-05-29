@@ -255,6 +255,12 @@ public class CutsceneSlidesEditor : BaseCreatorPopup, DialogReceiverInterface
         animationDurationString = animationDurationStringLast = workingAnimation.getFrames()[i].getTime().ToString();
 
         documentationTextContent = animationDurationStringLast = workingAnimation.getFrames()[i].getDocumentation();
+
+        animationDurationString =
+            animationDurationStringLast = workingAnimation.getFrames()[selectedFrame].getTime().ToString();
+        transitionDurationString =
+            transitionDurationStringLast = workingAnimation.getTransitions()[selectedFrame + 1].getTime().ToString();
+        selectedTransition = selectedTransitonLast = workingAnimation.getTransitions()[selectedFrame + 1].getType();
     }
 
     private void OnSlidesAnimationFlagLastChanged(bool val)

@@ -18,7 +18,10 @@ public class AnimationWriter
 
         bool dataSaved = false;
         XmlDocument doc = doc = new XmlDocument();
-
+        XmlDeclaration declaration = doc.CreateXmlDeclaration("1.0", "UTF-8", "no");
+        XmlDocumentType typeDescriptor = doc.CreateDocumentType("animation", "SYSTEM", "animation.dtd", null);
+        doc.AppendChild(declaration);
+        doc.AppendChild(typeDescriptor);
         XmlElement mainNode = doc.CreateElement("animation");
         //mainNode.AppendChild(doc.createAttribute("id").setNodeValue(animation.getId()));
         mainNode.SetAttribute("id", animation.getId());
