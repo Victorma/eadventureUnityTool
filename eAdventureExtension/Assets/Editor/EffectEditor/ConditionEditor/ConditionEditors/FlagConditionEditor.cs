@@ -1,11 +1,27 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using System.Collections;
+using System;
 
 public class FlagConditionEditor : ConditionEditor {
     FlagCondition condition = new FlagCondition("");
     string[] types = { "Active", "Inactive" };
     string name = "Flag";
+    private string[] flags;
+
+    public FlagConditionEditor()
+    {
+        flags = Controller.getInstance().getVarFlagSummary().getFlags();
+        if (flags == null || flags.Length == 0)
+        {
+            Avaiable = false;
+        }
+        else
+        {
+            Avaiable = true;
+            condition = new FlagCondition(flags[0]);
+        }
+    }
 
     public void draw(Condition c){
         condition = c as FlagCondition;
@@ -13,9 +29,16 @@ public class FlagConditionEditor : ConditionEditor {
         EditorGUILayout.BeginHorizontal ();
         EditorGUILayout.LabelField ("Flag ID: ");
 
-        c.setId (EditorGUILayout.TextField (c.getId ()));
-
-        c.setState(EditorGUILayout.Popup (c.getState(), types));
+        if (Avaiable)
+        {
+            int index = Array.IndexOf(flags, c.getId());
+            c.setId(flags[EditorGUILayout.Popup(index >= 0 ? index:0, flags)]);
+            c.setState(EditorGUILayout.Popup(c.getState(), types));
+        }
+        else
+        {
+            EditorGUILayout.HelpBox("No flag in chapter! Add new flag!", MessageType.Error);
+        }
 
         EditorGUILayout.EndHorizontal ();
     }
@@ -34,4 +57,5 @@ public class FlagConditionEditor : ConditionEditor {
 
     public bool Collapsed { get; set; }
     public Rect Window { get; set; }
+    public bool Avaiable { get; set; }
 }

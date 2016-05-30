@@ -7,6 +7,6 @@ public interface ConditionEditor {
     string conditionName();
     Condition InstanceManagedCondition();
     bool Collapsed { get; set; }
-
+    bool Avaiable { get; set; }
     Rect Window { get; set; }
 }
