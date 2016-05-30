@@ -220,7 +220,11 @@ public class AdvencedFeaturesWindowListOfTimers : LayoutWindow
             GUILayout.Label("Conditions to start the timer");
             if (GUILayout.Button("Edit init condition"))
             {
-
+                ConditionEditorWindow window =
+                       (ConditionEditorWindow)ScriptableObject.CreateInstance(typeof(ConditionEditorWindow));
+                window.Init(Controller.getInstance()
+                    .getSelectedChapterDataControl()
+                    .getTimersList().getTimers()[selectedTimer].getInitConditions());
             }
 
 
@@ -241,6 +245,11 @@ public class AdvencedFeaturesWindowListOfTimers : LayoutWindow
                 GUI.enabled = false;
             if (GUILayout.Button("Edit end condition"))
             {
+                ConditionEditorWindow window =
+                       (ConditionEditorWindow)ScriptableObject.CreateInstance(typeof(ConditionEditorWindow));
+                window.Init(Controller.getInstance()
+                    .getSelectedChapterDataControl()
+                    .getTimersList().getTimers()[selectedTimer].getEndConditions());
 
             }
             GUI.enabled = true;
@@ -256,9 +265,19 @@ public class AdvencedFeaturesWindowListOfTimers : LayoutWindow
             GUILayout.BeginHorizontal();
             if (GUILayout.Button("Edit effects", GUILayout.Width(0.45f*windowWidth)))
             {
+                EffectEditorWindow window =
+                (EffectEditorWindow)ScriptableObject.CreateInstance(typeof(EffectEditorWindow));
+                window.Init(Controller.getInstance()
+                    .getSelectedChapterDataControl()
+                    .getTimersList().getTimers()[selectedTimer].getEffects());
             }
             if (GUILayout.Button("Edit post effects", GUILayout.Width(0.45f*windowWidth)))
             {
+                EffectEditorWindow window =
+                (EffectEditorWindow)ScriptableObject.CreateInstance(typeof(EffectEditorWindow));
+                window.Init(Controller.getInstance()
+                    .getSelectedChapterDataControl()
+                    .getTimersList().getTimers()[selectedTimer].getPostEffects());
             }
             GUILayout.EndHorizontal();
 

@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using System;
+using System.Linq;
 
 public class ExitNewLinkTo : BaseChooseObjectPopup
 {
 
     public override void Init(DialogReceiverInterface e)
     {
-        elements = Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenesIDs();
+        elements = Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenesIDs().Concat(Controller.getInstance().getSelectedChapterDataControl().getCutscenesList().getCutscenesIDs()).ToArray();
         selectedElementID = elements[0];
 
         base.Init(e);

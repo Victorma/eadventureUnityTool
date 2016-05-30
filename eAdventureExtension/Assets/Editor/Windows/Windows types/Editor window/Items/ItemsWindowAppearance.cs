@@ -109,8 +109,10 @@ public class ItemsWindowAppearance : LayoutWindow, DialogReceiverInterface
                 }
                 if (GUILayout.Button(tmpTex, GUILayout.Width(windowWidth * 0.44f)))
                 {
-                    //TODO: condition editor
-                    Debug.Log("SHOW editor");
+                    ConditionEditorWindow window =
+                         (ConditionEditorWindow)ScriptableObject.CreateInstance(typeof(ConditionEditorWindow));
+                    window.Init(Controller.getInstance().getSelectedChapterDataControl().getItemsList().getItems()[
+               GameRources.GetInstance().selectedItemIndex].getResources()[i].getConditions());
                 }
             }
             else
