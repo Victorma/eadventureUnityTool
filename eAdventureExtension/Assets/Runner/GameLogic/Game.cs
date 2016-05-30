@@ -15,6 +15,12 @@ public class Game : MonoBehaviour {
         get{ return instance; }
     }
 
+	static string gameToLoad = "";
+	public static string GameToLoad {
+		get{ return gameToLoad; }
+		set{ gameToLoad = value; }
+	}
+
     //###########################################################################
     //########################### GAME STATE HANDLING ###########################
     //###########################################################################
@@ -116,6 +122,11 @@ public class Game : MonoBehaviour {
     //##########################################################################
     //##########################################################################
 
+	public bool useSystemIO = true;
+
+	public ResourceManager.LoadingType getLoadingType(){
+		return (useSystemIO ? ResourceManager.LoadingType.SYSTEM_IO : ResourceManager.LoadingType.RESOURCES_LOAD);
+	}
 
     private GUISkin style;
     public GUISkin Style {
@@ -126,40 +137,65 @@ public class Game : MonoBehaviour {
     void Awake(){
         Game.instance = this;
         style = Resources.Load("basic") as GUISkin;
+		optionlabel = new GUIStyle(style.label);
     }
 
-    public string gamePath = "c:/Games/";
-    public string gameName = "Fire";
-    private string selected_game;
-    private string selected_path;
+	public string getGameName(){
+		return gameName;
+	}
 
-    public string getSelectedGame(){
-        return selected_game;
-    }
-    public string getSelectedPath(){
-        return selected_path;
-    }
+	public string gamePath = "c:/Games/";
+	public string gameName = "Fire";
+	private string selected_game;
+	private string selected_path;
 
-    public bool forceScene = false;
-    public string scene_name = "";
-    public GameObject Scene_Prefab;
-    private GUIProvider guiprovider;
+	public string getSelectedGame(){
+		return selected_game;
+	}
+	public string getSelectedPath(){
+		return selected_path;
+	}
 
-	
-    AdventureData data;
-    MenuMB menu;
+	public bool forceScene = false;
+	public string scene_name = "";
+	public GameObject Scene_Prefab;
+	public GameObject Blur_Prefab;
+	private GUIProvider guiprovider;
 
-    int current_chapter = 0;
+
+	AdventureData data;
+	MenuMB menu;
+
+	int current_chapter = 0;
 	void Start () {
-        selected_path = gamePath + gameName;
-        selected_game = selected_path + "/";
+		if (Game.GameToLoad != "") {
+			gameName = Game.GameToLoad;
+			gamePath = ResourceManager.Instance.getCurrentDirectory () + System.IO.Path.DirectorySeparatorChar + "Games" + System.IO.Path.DirectorySeparatorChar;
+			useSystemIO = true;
+		}
+
+		selected_path = gamePath + gameName;
+		selected_game = selected_path + "/";
 
         //Controller.getInstance ().init ("Games/Fire.eap");
         List<Incidence> incidences = new List<Incidence>();
 
         data = new AdventureData ();
         AdventureHandler_ adventure = new AdventureHandler_ (data);
-        adventure.Parse (selected_game + "descriptor.xml");
+		switch (getLoadingType ()) {
+		case ResourceManager.LoadingType.RESOURCES_LOAD:
+			adventure.Parse (gameName +  "/descriptor");
+			break;
+		case ResourceManager.LoadingType.SYSTEM_IO:
+			adventure.Parse (selected_game + "descriptor.xml");
+			break;
+		}
+        
+
+		/*Texture2DHolder holder = new Texture2DHolder (data.getChapters () [0].getScenes () [0].getResources () [0].getAssetPath (Scene.RESOURCE_TYPE_BACKGROUND));
+
+		if (!holder.Loaded ())
+			Debug.Log ("no se ha cargado");*/
 
         if(data.getCursors().Count == 0) loadDefaultCursors ();
 
@@ -183,7 +219,8 @@ public class Game : MonoBehaviour {
                 Interacted ();
             } else if(guistate == guiState.NOTHING){
                 Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-                RaycastHit[] hits = Physics.RaycastAll (ray);
+				List<RaycastHit> hits = new List<RaycastHit>( Physics.RaycastAll (ray));
+				//hits.Reverse ();
 
                 bool no_interaction = true;
                 foreach (RaycastHit hit in hits) {
@@ -200,6 +237,14 @@ public class Game : MonoBehaviour {
         } else if (Input.GetMouseButtonDown (1)) {
             MenuMB.Instance.hide ();
         }
+
+		if (getTalker) {
+			this.guitalkerObject = GameObject.Find(guitalker);
+			if (this.guitalkerObject != null) {
+				getTalker = false;
+				talk (guitext, guitalker);
+			}
+		}
     }
 
     private bool InteractWith(Interactuable interacted){
@@ -229,10 +274,11 @@ public class Game : MonoBehaviour {
 
     private void Interacted(){
         guistate = guiState.NOTHING;
+		GUIManager.Instance.destroyBubbles ();
         if (this.next_interaction != null) {
             Interactuable tmp = next_interaction;
             next_interaction = null;
-            Execute(tmp);
+			Execute(tmp);
         }
     }
 
@@ -326,24 +372,106 @@ public class Game : MonoBehaviour {
         this.clicked_on = position;
     }
 
+	GameObject blur;
     public void showOptions(ConversationNodeHolder options){
         if (options.getNode ().getType () == ConversationNodeViewEnum.OPTION) {
+			blur = GameObject.Instantiate (Blur_Prefab);
+			blur.transform.position = new Vector3 (Camera.main.transform.position.x, Camera.main.transform.position.y, Camera.main.transform.position.z + 1);
             this.guioptions = options;
             this.guistate = guiState.ANSWERS_MENU;
         }
     }
 
+	bool getTalker = false;
     public void talk(string text, string character){
         if (character == null || character == Player.IDENTIFIER){
+			this.guitalker = "Player";
             this.guitext = text.Replace("[]","["+playerName+"]");
             this.guistate = guiState.TALK_PLAYER;
+			Vector2 position;
+
+			if (isFirstPerson ()) {
+				GUIManager.Instance.ShowBubble (
+					new BubbleData (
+						guitext
+					, new Vector2 (40, 60)
+					, new Vector2 (40, 45)
+					, Color.white
+					, Color.blue
+					, Color.white
+					, Color.blue
+					)
+				);
+			} else {
+				this.guitalkerObject = null;
+				this.guitalkerObject = GameObject.Find (guitalker);
+				if (this.guitalkerObject == null) {
+					getTalker = true;
+					return;
+				}
+
+				NPC cha = data.getChapters () [current_chapter].getPlayer ();
+
+				BubbleData bubble = generateBubble (cha);
+
+				position = this.guitalkerObject.transform.localPosition;
+
+				position.y += this.guitalkerObject.transform.localScale.y/2;
+
+				bubble.Destiny = position;
+				bubble.Origin = new Vector2 (position.x, position.y - 10f);
+				GUIManager.Instance.ShowBubble (bubble);
+			}
         }else {
             this.guitext = text;
-            this.guitalkerObject = null;
             this.guitalker = character;
+			this.guitalkerObject = null;
             this.guistate = guiState.TALK_CHARACTER;
+			Vector2 position;
+
+			if (this.guitalkerObject == null) {
+				this.guitalkerObject = GameObject.Find (guitalker);
+				if (this.guitalkerObject == null) {
+					getTalker = true;
+					return;
+				}
+			}
+
+			NPC cha = data.getChapters () [current_chapter].getCharacter (guitalker);
+
+			BubbleData bubble = generateBubble (cha);
+
+			position = this.guitalkerObject.transform.localPosition;
+
+			/*if(position.x <= rectwith/2)
+				position.x = rectwith/2;
+			else if(position.x >= (Screen.width - rectwith/2) )
+				position.x = (Screen.width - rectwith/2);*/
+
+			position.y += this.guitalkerObject.GetComponent<CharacterMB> ().transform.localScale.y/2;
+
+			bubble.Destiny = position;
+			bubble.Origin = new Vector2 (position.x, position.y - 10f);
+			GUIManager.Instance.ShowBubble (bubble);
         }
     }
+
+	private BubbleData generateBubble(NPC cha){
+		BubbleData bubble = new BubbleData (guitext, new Vector2 (40, 60), new Vector2 (40, 45));
+
+		Color textColor, textOutline, background, border;
+		ColorUtility.TryParseHtmlString (cha.getTextFrontColor (), out textColor);
+		ColorUtility.TryParseHtmlString (cha.getTextBorderColor (), out textOutline);
+		ColorUtility.TryParseHtmlString (cha.getBubbleBkgColor (), out background);
+		ColorUtility.TryParseHtmlString (cha.getBubbleBorderColor (), out border);
+
+		bubble.TextColor = textColor;
+		bubble.TextOutlineColor = textOutline;
+		bubble.BaseColor = background;
+		bubble.OutlineColor = border;
+
+		return bubble;
+	}
 
     private Vector2 clicked_on;
     private guiState guistate = guiState.NOTHING;
@@ -353,32 +481,30 @@ public class Game : MonoBehaviour {
     private List<Action> guiactions;
     private ConversationNodeHolder guioptions;
 
+	GUIStyle optionlabel;
+
     void OnGUI () {
         float guiscale = Screen.width/800f;
 
         style.box.fontSize = Mathf.RoundToInt(guiscale * 20);
         style.button.fontSize = Mathf.RoundToInt(guiscale * 20);
-        style.label.fontSize = Mathf.RoundToInt(guiscale * 36);
         style.label.fontSize = Mathf.RoundToInt(guiscale * 20);
+		optionlabel.fontSize = Mathf.RoundToInt (guiscale * 36);
+        //style.label.fontSize = Mathf.RoundToInt(guiscale * 20);
         style.GetStyle("talk_player").fontSize = Mathf.RoundToInt(guiscale * 20);
 
         float rectwith = guiscale * 330;
 
         switch (guistate) {
-        case guiState.TALK_PLAYER:
-            GUILayout.BeginArea (new Rect ((Screen.width/2)-rectwith/2, 50, rectwith, 400));
+		case guiState.TALK_PLAYER:
+            /*GUILayout.BeginArea (new Rect ((Screen.width/2)-rectwith/2, 50, rectwith, 400));
             GUILayout.BeginHorizontal ();
             GUILayout.Box (guitext,style.GetStyle("talk_player"));
             GUILayout.EndHorizontal ();
-            GUILayout.EndArea ();
+            GUILayout.EndArea ();*/
             break;
         case guiState.TALK_CHARACTER:
-            if(Camera.current!=null){
-                Vector2 position;
-                if(this.guitalkerObject == null){
-                    this.guitalkerObject = GameObject.Find(guitalker);
-                }else{
-                    GUIStyle current = new GUIStyle(style.box);
+			/*GUIStyle current = new GUIStyle(style.box);
                     if (this.guitalkerObject != null) {
                         position = Camera.current.WorldToScreenPoint (this.guitalkerObject.transform.position);
                         Color tmp = Color.black;
@@ -409,71 +535,19 @@ public class Game : MonoBehaviour {
                     GUILayout.BeginHorizontal ();
                     GUILayout.Box (guitext,current);
                     GUILayout.EndHorizontal ();
-                    GUILayout.EndArea ();
-                }
-            }
+                    GUILayout.EndArea ();*/
             break;
-        case guiState.OPTIONS_MENU:
-            /*int box_width = 0, box_height = 0;
-            foreach(Action a in guiactions){
-                if(a.getType() == Action.CUSTOM){
-                    CustomAction ca = a as CustomAction;
-                    Texture2D button = null;
-                    foreach (ResourcesUni ru in ca.getResources()) {
-                        if (ConditionChecker.check(ru.getConditions ())) {
-                            button = ResourceManager.Instance.getImage (ru.getAssetPath ("buttonNormal"));
-                        }
-                    }
+		case guiState.ANSWERS_MENU:
+			GUILayout.BeginArea (new Rect (Screen.width * 0.1f, Screen.height * 0.1f, Screen.width * 0.8f, Screen.height * 0.8f));
+			GUILayout.BeginVertical ();
+			OptionConversationNode options = (OptionConversationNode)guioptions.getNode ();
 
-                    if (button != null) {
-                        box_width += button.width;
-                        if (button.height > box_height)
-                            box_height = button.height;
-                    }
-                }else{
-                    box_width += 100;
-                    if(box_height<50)
-                        box_height = 50;
-                }
-            }
-
-            GUILayout.BeginArea (new Rect (clicked_on.x-(box_width/2),(Screen.height - clicked_on.y) -(box_height/2),box_width, box_height));
-            GUILayout.BeginHorizontal ();
-            foreach(Action a in guiactions){
-                switch(a.getType()){
-                case Action.CUSTOM:
-                    CustomAction ca = a as CustomAction;
-                    Texture2D button = null;
-                    foreach (ResourcesUni ru in ca.getResources()) {
-                        if (ConditionChecker.check(ru.getConditions ())) {
-                            button = ResourceManager.Instance.getImage (ru.getAssetPath ("buttonNormal"));
-                        }
-                    }
-                    if(button!=null)
-                        if(GUILayout.Button (button,style.GetStyle("action_with_image"))){
-                            this.guistate = guiState.NOTHING;
-                            //Execute(a);
-                        }
-                    break;
-                default:
-                    if(GUILayout.Button (a.getType().ToString(),style.button)){
-                        this.guistate = guiState.NOTHING;
-                        //Execute(a);
-                    }
-                    break;
-                }
-            }
-            GUILayout.EndHorizontal ();
-            GUILayout.EndArea ();*/
-            break;
-        case guiState.ANSWERS_MENU:
-            GUILayout.BeginArea (new Rect (Screen.width * 0.1f, Screen.height * 0.1f, Screen.width * 0.8f, Screen.height * 0.8f));
-            GUILayout.BeginVertical ();
-            OptionConversationNode options = (OptionConversationNode) guioptions.getNode ();
+			GUILayout.Label (guitext, optionlabel);
             for(int i = 0; i < options.getLineCount(); i++){
                 ConversationLine ono = options.getLine (i);
                 if(ConditionChecker.check(options.getLineConditions(i)))
                     if(GUILayout.Button ((string) ono.getText(),style.button)){
+						GameObject.Destroy (blur);
                         guioptions.clicked(i);
                         Interacted();
                     };

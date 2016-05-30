@@ -1,5 +1,3 @@
 /eAdventureExtension/Games
 /eAdventureExtension/Library
-
-
-*.meta
+/eAdventureExtension/Temp
