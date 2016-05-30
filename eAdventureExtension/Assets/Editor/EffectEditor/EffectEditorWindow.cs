@@ -28,7 +28,7 @@ public class EffectEditorWindow : EditorWindow
 
         InitWindows();
     }
-
+    
     private void InitWindows()
     {
         Rect previous = new Rect(0, 25, 0, 100);

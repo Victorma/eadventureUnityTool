@@ -25,7 +25,7 @@ public class CharacterMB : MonoBehaviour, Interactuable {
                 string path = cr.getAssetPath (NPC.RESOURCE_TYPE_STAND_UP);
 
                 //current_anim = Loader.loadAnimation(AssetsController.InputStreamCreatorEditor.getInputStreamCreator (path),path,new EditorImageLoader());
-                current_anim = new eAnim(path);
+				current_anim = ResourceManager.Instance.getAnimation(path);
 
 				break;
 			}
@@ -84,7 +84,7 @@ public class CharacterMB : MonoBehaviour, Interactuable {
             RaycastHit hit;
             Physics.Raycast ( Camera.main.ScreenPointToRay (Input.mousePosition), out hit);
 
-            if (current_anim.frames [current_frame].Image.GetPixelBilinear (hit.textureCoord.x, hit.textureCoord.y).a > 0f)
+			if (((Texture2D) GetComponent<Renderer>().material.mainTexture).GetPixelBilinear (hit.textureCoord.x, hit.textureCoord.y).a > 0f)
                 showHand (true);
             else
                 showHand (false);
