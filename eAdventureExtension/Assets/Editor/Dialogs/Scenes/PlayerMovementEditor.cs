@@ -161,7 +161,7 @@ public class PlayerMovementEditor : BaseAreaEditablePopup
                 OnBeingDragged();
             }
 
-            playerRect = new Rect(x, y, playerTex.width * sceneRef.getPlayerScale(), playerTex.height * sceneRef.getPlayerScale());
+            playerRect = new Rect(x - 0.5f * playerTex.width * sceneRef.getPlayerScale(), y - playerTex.height * sceneRef.getPlayerScale(), playerTex.width * sceneRef.getPlayerScale(), playerTex.height * sceneRef.getPlayerScale());
             GUI.DrawTexture(playerRect, playerTex);
 
             GUILayout.BeginHorizontal();
@@ -320,9 +320,9 @@ public class PlayerMovementEditor : BaseAreaEditablePopup
     private void UpdatePlayerRect()
     {
         float scale = sceneRef.getPlayerScale();
-        float newX = Mathf.Clamp(currentPos.x - 0.5f*playerTex.width*scale, -0.5f*playerTex.width*scale,
+        float newX = Mathf.Clamp(currentPos.x, -0.5f*playerTex.width*scale,
             backgroundPreviewTex.width + 0.5f*playerTex.width*scale);
-        float newY = Mathf.Clamp(currentPos.y - 0.5f*playerTex.height*scale, -0.5f*playerTex.height*scale,
+        float newY = Mathf.Clamp(currentPos.y, -0.5f*playerTex.height*scale,
             backgroundPreviewTex.height + 0.5f*playerTex.height*scale);
         sceneRef.setDefaultInitialPosition((int)newX, (int)newY);
     }

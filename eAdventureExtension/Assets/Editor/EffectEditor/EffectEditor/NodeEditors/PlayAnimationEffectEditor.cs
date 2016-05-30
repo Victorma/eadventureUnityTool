@@ -73,7 +73,7 @@ public class PlayAnimationEffectEditor : EffectEditor, DialogReceiverInterface
         }
         EditorGUILayout.EndHorizontal();
 
-        EditorGUILayout.HelpBox("Music will be played.", MessageType.Info);
+        EditorGUILayout.HelpBox("Animation will be played.", MessageType.Info);
     }
 
     public AbstractEffect Effect
@@ -84,7 +84,7 @@ public class PlayAnimationEffectEditor : EffectEditor, DialogReceiverInterface
 
     public string EffectName
     {
-        get { return "Play sound effect"; }
+        get { return "Play animation effect"; }
     }
 
     public EffectEditor clone()
