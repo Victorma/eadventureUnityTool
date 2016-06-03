@@ -58,8 +58,8 @@ public class EditorWindowBase : EditorWindow, DialogReceiverInterface
     private static CharactersWindow characterWindow;
     private static ConversationWindow conversationWindow;
     private static AdvencedFeaturesWindow advencedFeaturesWindow;
-    private static AdaptationProfileWindow adapatationProfileWindow;
-    private static AssesmentProfileWindow assesmentProfileWindow;
+    //private static AdaptationProfileWindow adapatationProfileWindow;
+    //private static AssesmentProfileWindow assesmentProfileWindow;
 
     private static Vector2 scrollPosition;
 
@@ -144,73 +144,73 @@ public class EditorWindowBase : EditorWindow, DialogReceiverInterface
         configurationMenu = new ConfigurationMenu();
         aboutMenu = new AboutMenu();
 
-        chapterWindow = new ChapterWindow(windowRect, new GUIContent(Language.GetText("CHAPTER")), "Window");
-        scenesWindow = new ScenesWindow(windowRect, new GUIContent(Language.GetText("SCENES")), "Window");
-        cutscenesWindow = new CutscenesWindow(windowRect, new GUIContent(Language.GetText("CUTSCENES")), "Window");
-        booksWindow = new BooksWindow(windowRect, new GUIContent(Language.GetText("BOOKS")), "Window");
-        itemsWindow = new ItemsWindow(windowRect, new GUIContent(Language.GetText("ITEMS")), "Window");
-        setItemsWindow = new SetItemsWindow(windowRect, new GUIContent(Language.GetText("SET_ITEMS")), "Window");
-        playerWindow = new PlayerWindow(windowRect, new GUIContent(Language.GetText("PLAYER")), "Window");
-        characterWindow = new CharactersWindow(windowRect, new GUIContent(Language.GetText("CHARACTERS")), "Window");
-        conversationWindow = new ConversationWindow(windowRect, new GUIContent(Language.GetText("CONVERSATION")),
+        chapterWindow = new ChapterWindow(windowRect, new GUIContent(TC.get("Element.Name0")), "Window");
+        scenesWindow = new ScenesWindow(windowRect, new GUIContent(TC.get("Element.Name1")), "Window");
+        cutscenesWindow = new CutscenesWindow(windowRect, new GUIContent(TC.get("Element.Name9")), "Window");
+        booksWindow = new BooksWindow(windowRect, new GUIContent(TC.get("Element.Name11")), "Window");
+        itemsWindow = new ItemsWindow(windowRect, new GUIContent(TC.get("Element.Name18")), "Window");
+        setItemsWindow = new SetItemsWindow(windowRect, new GUIContent(TC.get("Element.Name59")), "Window");
+        playerWindow = new PlayerWindow(windowRect, new GUIContent(TC.get("Element.Name26")), "Window");
+        characterWindow = new CharactersWindow(windowRect, new GUIContent(TC.get("Element.Name27")), "Window");
+        conversationWindow = new ConversationWindow(windowRect, new GUIContent(TC.get("Element.Name31")),
             "Window");
         advencedFeaturesWindow = new AdvencedFeaturesWindow(windowRect,
-            new GUIContent(Language.GetText("ADVANCED_FEATURES")), "Window");
-        adapatationProfileWindow = new AdaptationProfileWindow(windowRect,
-            new GUIContent(Language.GetText("ADAPTATION_PROFILES")), "Window");
-        assesmentProfileWindow = new AssesmentProfileWindow(windowRect,
-            new GUIContent(Language.GetText("ASSESMENT_PROFILES")), "Window");
+            new GUIContent(TC.get("AdvancedFeatures.Title")), "Window");
+        //adapatationProfileWindow = new AdaptationProfileWindow(windowRect,
+        //    new GUIContent(Language.GetText("ADAPTATION_PROFILES")), "Window");
+        //assesmentProfileWindow = new AssesmentProfileWindow(windowRect,
+        //    new GUIContent(Language.GetText("ASSESMENT_PROFILES")), "Window");
 
 
         // Left menu buttons
         leftMenuContentScene = new GUIContent();
         leftMenuContentScene.image = (Texture2D) sceneTexture;
-        leftMenuContentScene.text = Language.GetText("SCENES");
+        leftMenuContentScene.text = TC.get("Element.Name1");
 
         leftMenuContentCutscene = new GUIContent();
         leftMenuContentCutscene.image = (Texture2D) cutsceneTexture;
-        leftMenuContentCutscene.text = Language.GetText("CUTSCENES");
+        leftMenuContentCutscene.text = TC.get("Element.Name9");
 
         leftMenuContentBook = new GUIContent();
         leftMenuContentBook.image = (Texture2D) bookTexture;
-        leftMenuContentBook.text = Language.GetText("BOOKS");
+        leftMenuContentBook.text = TC.get("Element.Name11");
 
         leftMenuContentItem = new GUIContent();
         leftMenuContentItem.image = (Texture2D) itemTexture;
-        leftMenuContentItem.text = Language.GetText("ITEMS");
+        leftMenuContentItem.text = TC.get("Element.Name18");
 
         leftMenuContentSetItem = new GUIContent();
         leftMenuContentSetItem.image = (Texture2D) setItemTexture;
-        leftMenuContentSetItem.text = Language.GetText("SET_ITEMS");
+        leftMenuContentSetItem.text = TC.get("Element.Name59");
 
         leftMenuContentPlayer = new GUIContent();
         leftMenuContentPlayer.image = (Texture2D) playerTexture;
-        leftMenuContentPlayer.text = Language.GetText("PLAYER");
+        leftMenuContentPlayer.text = TC.get("Element.Name26");
 
         leftMenuContentCharacter = new GUIContent();
         leftMenuContentCharacter.image = (Texture2D) characterTexture;
-        leftMenuContentCharacter.text = Language.GetText("CHARACTERS");
+        leftMenuContentCharacter.text = TC.get("Element.Name27");
 
         leftMenuContentConversation = new GUIContent();
         leftMenuContentConversation.image = (Texture2D) conversationTexture;
-        leftMenuContentConversation.text = Language.GetText("CONVERSATION");
+        leftMenuContentConversation.text = TC.get("Element.Name31");
 
         leftMenuContentAdvanced = new GUIContent();
         leftMenuContentAdvanced.image = (Texture2D) advancedTexture;
-        leftMenuContentAdvanced.text = Language.GetText("ADVANCED_FEATURES");
+        leftMenuContentAdvanced.text = TC.get("AdvancedFeatures.Title");
 
-        leftMenuContentAdaptation = new GUIContent();
-        leftMenuContentAdaptation.image = (Texture2D) adaptationTexture;
-        leftMenuContentAdaptation.text = Language.GetText("ADAPTATION_PROFILES");
+        //leftMenuContentAdaptation = new GUIContent();
+        //leftMenuContentAdaptation.image = (Texture2D) adaptationTexture;
+        //leftMenuContentAdaptation.text = Language.GetText("ADAPTATION_PROFILES");
 
-        leftMenuContentAssessment = new GUIContent();
-        leftMenuContentAssessment.image = (Texture2D) assessmentTexture;
-        leftMenuContentAssessment.text = Language.GetText("ASSESMENT_PROFILES");
+        //leftMenuContentAssessment = new GUIContent();
+        //leftMenuContentAssessment.image = (Texture2D) assessmentTexture;
+        //leftMenuContentAssessment.text = Language.GetText("ASSESMENT_PROFILES");
     }
 
     public static void RefreshChapter()
     {
-        chapterWindow = new ChapterWindow(windowRect, new GUIContent(Language.GetText("CHAPTER")), "Window");
+        chapterWindow = new ChapterWindow(windowRect, new GUIContent(TC.get("Element.Name0")), "Window");
         openedWindow = EditorWindowType.Chapter;
     }
 
@@ -225,27 +225,27 @@ public class EditorWindowBase : EditorWindow, DialogReceiverInterface
         {
             fileMenu.menu.ShowAsContext();
         }
-        if (GUILayout.Button(Language.GetText("EDIT")))
-        {
-            editMenu.menu.ShowAsContext();
-        }
-        if (GUILayout.Button(Language.GetText("ADVENTURE")))
-        {
-            adventureMenu.menu.ShowAsContext();
-        }
-        if (GUILayout.Button(Language.GetText("CHAPTERS")))
+        //if (GUILayout.Button(Language.GetText("EDIT")))
+        //{
+        //    editMenu.menu.ShowAsContext();
+        //}
+        //if (GUILayout.Button(Language.GetText("ADVENTURE")))
+        //{
+        //    adventureMenu.menu.ShowAsContext();
+        //}
+        if (GUILayout.Button(TC.get("MenuChapters.Title")))
         {
             chaptersMenu.menu.ShowAsContext();
         }
-        if (GUILayout.Button(Language.GetText("RUN")))
-        {
-            runMenu.menu.ShowAsContext();
-        }
-        if (GUILayout.Button(Language.GetText("CONFIGURATION")))
+        //if (GUILayout.Button(Language.GetText("RUN")))
+        //{
+        //    runMenu.menu.ShowAsContext();
+        //}
+        if (GUILayout.Button(TC.get("MenuConfiguration.Title")))
         {
             configurationMenu.menu.ShowAsContext();
         }
-        if (GUILayout.Button(Language.GetText("ABOUT")))
+        if (GUILayout.Button(TC.get("About")))
         {
             aboutMenu.menu.ShowAsContext();
         }
@@ -258,28 +258,28 @@ public class EditorWindowBase : EditorWindow, DialogReceiverInterface
         GUILayout.BeginArea(leftMenuRect);
         GUILayout.BeginVertical();
 
-        GUILayout.BeginHorizontal(GUILayout.MaxWidth(25), GUILayout.MaxHeight(25));
-        if (GUILayout.Button(undoTexture, GUILayout.MaxWidth(25), GUILayout.MaxHeight(25)))
-        {
-            UndoAction();
-        }
+        //GUILayout.BeginHorizontal(GUILayout.MaxWidth(25), GUILayout.MaxHeight(25));
+        //if (GUILayout.Button(undoTexture, GUILayout.MaxWidth(25), GUILayout.MaxHeight(25)))
+        //{
+        //    UndoAction();
+        //}
 
-        GUILayout.Space(5);
+        //GUILayout.Space(5);
 
-        if (GUILayout.Button(redoTexture, GUILayout.MaxWidth(25), GUILayout.MaxHeight(25)))
-        {
-            RedoAction();
-        }
-        GUILayout.EndHorizontal();
+        //if (GUILayout.Button(redoTexture, GUILayout.MaxWidth(25), GUILayout.MaxHeight(25)))
+        //{
+        //    RedoAction();
+        //}
+        //GUILayout.EndHorizontal();
 
-        GUILayout.Space(25);
+        //GUILayout.Space(25);
 
         scrollPosition = GUILayout.BeginScrollView(scrollPosition);
 
         // Button event chapter
-        if (GUILayout.Button(Language.GetText("CHAPTER")))
+        if (GUILayout.Button(TC.get("Element.Name0")))
         {
-            chapterWindow = new ChapterWindow(windowRect, new GUIContent(Language.GetText("CHAPTER")), "Window");
+            chapterWindow = new ChapterWindow(windowRect, new GUIContent(TC.get("Element.Name0")), "Window");
             OnWindowTypeChanged(EditorWindowType.Chapter);
         }
 
@@ -747,7 +747,6 @@ public class EditorWindowBase : EditorWindow, DialogReceiverInterface
         {
             OnWindowTypeChanged(EditorWindowType.AdvancedFeatures);
         }
-        //TODO: end with datamodel + reactive objects
         //// Button event
         //if (GUILayout.Button(leftMenuContentAdvanced))
         //{
@@ -834,12 +833,6 @@ public class EditorWindowBase : EditorWindow, DialogReceiverInterface
             case EditorWindowType.AdvancedFeatures:
                 m_Window1 = advencedFeaturesWindow;
                 break;
-            case EditorWindowType.AdaptationProfiles:
-                m_Window1 = adapatationProfileWindow;
-                break;
-            case EditorWindowType.AssesmentProfiles:
-                m_Window1 = assesmentProfileWindow;
-                break;
         }
 
         if (m_Window1 != null)
@@ -913,17 +906,7 @@ public class EditorWindowBase : EditorWindow, DialogReceiverInterface
         Controller.getInstance().getSelectedChapterDataControl().getConversationsList().addElement(Controller.CONVERSATION_GRAPH, name);
         Debug.Log("ADD conversation");
     }
-
-    void AddAdaptation(string name)
-    {
-        Debug.Log("ADD adaptation");
-    }
-
-    void AddAssessment(string name)
-    {
-        Debug.Log("ADD assessment");
-    }
-
+    
     public void OnDialogOk(string message, System.Object workingObject = null, object workingObjectSecond = null)
     {
         if(((ChapterElementNameInputPopup)workingObject) != null)

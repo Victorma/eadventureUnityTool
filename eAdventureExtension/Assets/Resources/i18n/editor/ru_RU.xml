@@ -150,7 +150,6 @@
 <entry key="Operation.AddNPCMessage">Выбрать идентификатор для нового персонажа</entry>
 <entry key="IMS.Classification.Purpose1">Идея</entry>
 <entry key="IMS.Classification.Purpose0">Предмет</entry>
-<entry key="Conditions.Group.Ide"/>
 <entry key="TreeNode.AddElement49">Добавить временное правило</entry>
 <entry key="TreeNode.AddElement48">Добавить адаптационный профиль</entry>
 <entry key="TreeNode.AddElement47">Добавить проверочный профиль</entry>
@@ -305,7 +304,6 @@
 <entry key="Error.NoVideoFormat.Message">Неподдерживаемый формат</entry>
 <entry key="LOMES.Rights.AccesType0">Универсальный</entry>
 <entry key="TriggerBookEffect.Description">Выбрать книгу для показа</entry>
-<entry key="GlobalStatesList.IDE"/>
 <entry key="Search.LineName">Имя строки</entry>
 <entry key="HelpDialog.Title">Помощь</entry>
 <entry key="BarriersList.Barrier">Граница  </entry>
@@ -1094,7 +1092,6 @@
 <entry key="LOM.Educational.Difficulty0">Очень легкий</entry>
 <entry key="ElementList.Layer">Слой</entry>
 <entry key="TreeNode.DeleteElement">Удалить элемент</entry>
-<entry key="ActiveAreasList.Ide"/>
 <entry key="BookParagraphsList.Title">Параграфу книги</entry>
 <entry key="LOM.Educational.Context3">Другое</entry>
 <entry key="LOM.Educational.Context2">Тренировка</entry>

@@ -607,7 +607,6 @@ Diese art der effekte ausgelöst, wenn der spieler diese aktion im spiel auswäh
 <entry key="Book.App">Aussehen</entry>
 <entry key="Conditions.Flag.Title">Flags Felder</entry>
 <entry key="Search.LMSPropertyValue">Eigenschaft Wert der LMS</entry>
-<entry key="Edition.UndoRedo.Name."/>
 <entry key="Resources.DescriptionActionAnimationLeft">Animation nach der linken Seite, wenn die Aktion ausgeführt ist (optional)</entry>
 <entry key="Search.SMTPPort">SMTP Port</entry>
 <entry key="MenuEdit.Undo">Rückgängig</entry>
@@ -1138,11 +1137,9 @@ Diese art der effekte ausgelöst, wenn der spieler diese aktion im spiel auswäh
 <entry key="Conditions.Context.NoOwner"> Bedingungenliste: </entry>
 <entry key="LOMES.GeneralId.DescriptionName">Beschreibung</entry>
 <entry key="Conversation.Options.PositionTop">Im oberen Teil</entry>
-<entry key="StartDialog.Recent.ColumnHeader2"/>
 <entry key="Operation.LoadProject">Operation: lädt Projekt</entry>
 <entry key="Barrier.MainPanelTitle">Barrier</entry>
 <entry key="StartDialog.Recent.ColumnHeader1">Datei</entry>
-<entry key="StartDialog.Recent.ColumnHeader0"/>
 <entry key="Search.EffectText">Effekt Text</entry>
 <entry key="BackgroundAssets.Preview">Hintergrund Vorschau</entry>
 <entry key="NPC.DocPanelTitle">Information</entry>
@@ -1565,7 +1562,6 @@ Diese art der effekte werden ausgelöst, wenn der spieler nicht das ziel der ma�
 <entry key="Operation.RenameCutsceneMessage">Introduzca un nuevo identificador con el que renombrar la escena intermedia:</entry>
 <entry key="Buttons.Select">Auswählen...</entry>
 <entry key="Conditions.And">Und auch</entry>
-<entry key="GUIStyles.ContextualDescription"/>
 <entry key="Button.use.Description">Benutzen Taste</entry>
 <entry key="DecrementVarEffect.Title">Wirkung Variabel dekrementiert</entry>
 <entry key="Operation.AddAtrezzoReferenceTitle">Schreibe Verweis auf Objekt prop</entry>

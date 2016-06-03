@@ -619,7 +619,6 @@ onde XX é un múmero calquera.</entry>
 <entry key="Book.App">Aparencia</entry>
 <entry key="Conditions.Flag.Title">Campos da condición baseada en flag</entry>
 <entry key="Search.LMSPropertyValue">Valor de propiedade do LMS</entry>
-<entry key="Edition.UndoRedo.Name."/>
 <entry key="Resources.DescriptionActionAnimationLeft">Animación cara á esquerda para cando realiza a acción (opcional)</entry>
 <entry key="Search.SMTPPort">SMTP Port</entry>
 <entry key="MenuEdit.Undo">Desfacer</entry>
@@ -1174,11 +1173,9 @@ Por favor escribe outro nome.</entry>
 <entry key="Conditions.Context.NoOwner"> Esta é a lista de condicións: </entry>
 <entry key="LOMES.GeneralId.DescriptionName">Descrición</entry>
 <entry key="Conversation.Options.PositionTop">Na parte superior</entry>
-<entry key="StartDialog.Recent.ColumnHeader2"/>
 <entry key="Operation.LoadProject">Operación: Cargando proxecto</entry>
 <entry key="Barrier.MainPanelTitle">Barreira</entry>
 <entry key="StartDialog.Recent.ColumnHeader1">Arquivo</entry>
-<entry key="StartDialog.Recent.ColumnHeader0"/>
 <entry key="Search.EffectText">Texto do efecto</entry>
 <entry key="BackgroundAssets.Preview">Previsualización do fondo</entry>
 <entry key="NPC.DocPanelTitle">Información</entry>

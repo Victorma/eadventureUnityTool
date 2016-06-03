@@ -450,7 +450,6 @@
 <entry key="Animation.MoveFrameRight">Mover o quadro selecionado um espaço para a direita</entry>
 <entry key="Flags.ConfirmNewFlag.Text">O nome introduzido parece com outros.  Tem certeza que quer cria-lo?  Caso contrário pode selecionar algum dos similares da lista</entry>
 <entry key="Conversation.OptionAddDialogueNode">Incluir nó de diálogo</entry>
-<entry key="Erro.SpecialAssetNotFound"/>
 <entry key="BookTypes.FormattedDescription">Este tipo suporta conteúdo com formato que pode ser um arquivo RTF ou HTML</entry>
 <entry key="MenuEdit.Redo">Refazer</entry>
 <entry key="GlobalStatesList.DuplicateGlobalState">Duplicar o estado global selecionado</entry>

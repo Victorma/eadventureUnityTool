@@ -422,7 +422,6 @@ public class AdventureHandler : XMLHandler
                 // Set the chapter handler
                 // ChapterHandler chapterParser = new ChapterHandler(isCreator, currentChapter);
                 ChapterHandler_ chapterParser = new ChapterHandler_(currentChapter);
-                Debug.Log(currentChapter.getBooks().Count);
                 //// Create a new factory
                 //SAXParserFactory factory = SAXParserFactory.newInstance();
                 ////factory.setValidating( validate );

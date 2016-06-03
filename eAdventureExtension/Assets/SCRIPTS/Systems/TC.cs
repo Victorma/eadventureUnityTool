@@ -29,7 +29,7 @@ public class TC{
         string serializedLangbase = "";
         try
         {
-            serializedLangbase = File.ReadAllText(languageFile).Replace(Environment.NewLine, "");
+            serializedLangbase = File.ReadAllText(languageFile);
         }
         catch (FileNotFoundException e)
         {
@@ -43,11 +43,9 @@ public class TC{
         {
             for (int i = 0; i < LangTexts.Labels.Count; i++)
             {
-
                 string textToAdd = LangTexts.Labels[i].TextValue
                     .Replace("\n", "")
                     .Replace("  ", "");
-
                 guistrings.Add(
                     LangTexts.Labels[i].AttributeKey,
                     textToAdd
