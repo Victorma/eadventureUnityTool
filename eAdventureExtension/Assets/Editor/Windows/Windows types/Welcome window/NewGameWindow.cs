@@ -86,13 +86,13 @@ public class NewGameWindow : LayoutWindow//, DialogReceiverInterface
         GUILayout.BeginArea(bottomButtonRect);
         GUILayout.BeginHorizontal();
 
-        if (GUILayout.Button(Language.GetText("NEW_GAME")))
+        if (GUILayout.Button(TC.get("GeneralText.New")))
         {
             //NewGameInputPopup window = (NewGameInputPopup) ScriptableObject.CreateInstance(typeof (NewGameInputPopup));
             //window.Init(this, "Game");
             startNewGame();
         }
-        if (GUILayout.Button(Language.GetText("CANCEL")))
+        if (GUILayout.Button(TC.get("GeneralText.Cancel")))
         {
             Debug.Log("Cancel" + selectedGameType);
         }

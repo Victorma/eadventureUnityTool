@@ -304,7 +304,7 @@ public class CutsceneDataControl : DataControlWithResources
             valid &= resourcesDataControlList[i].isValid(resourcesPath, incidences);
         }
 
-        valid &= EffectsController.isValid(currentPath + " >> " + Language.GetText("Element.Effects"), incidences, cutscene.getEffects());
+        valid &= EffectsController.isValid(currentPath + " >> " + TC.get("Element.Effects"), incidences, cutscene.getEffects());
 
         return valid;
     }

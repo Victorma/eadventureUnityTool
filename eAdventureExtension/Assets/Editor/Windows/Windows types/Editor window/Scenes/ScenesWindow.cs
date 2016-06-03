@@ -41,17 +41,17 @@ public class ScenesWindow : LayoutWindow
     {
         thisRect = aStartPos;
         scenesWindowActiveAreas = new ScenesWindowActiveAreas(aStartPos,
-            new GUIContent(Language.GetText("ACTIVE_AREAS")), "Window");
-        scenesWindowAppearance = new ScenesWindowAppearance(aStartPos, new GUIContent(Language.GetText("APPEARANCE")),
+            new GUIContent(TC.get("ActiveAreasList.Title")), "Window");
+        scenesWindowAppearance = new ScenesWindowAppearance(aStartPos, new GUIContent(TC.get("Scene.LookPanelTitle")),
             "Window");
         scenesWindowDocumentation = new ScenesWindowDocumentation(aStartPos,
-            new GUIContent(Language.GetText("DOCUMENTATION")), "Window");
+            new GUIContent(TC.get("Scene.DocPanelTitle")), "Window");
         scenesWindowElementReference = new ScenesWindowElementReference(aStartPos,
-            new GUIContent(Language.GetText("ELEMENT_REFERENCES")), "Window");
-        scenesWindowExits = new ScenesWindowExits(aStartPos, new GUIContent(Language.GetText("EXITS")), "Window");
+            new GUIContent(TC.get("ItemReferencesList.Title")), "Window");
+        scenesWindowExits = new ScenesWindowExits(aStartPos, new GUIContent(TC.get("Element.Name3")), "Window");
 
-        scenesWindowBarriers = new ScenesWindowBarriers(aStartPos, new GUIContent("Barriers"), "Window");
-        scenesWindowPlayerMovement = new ScenesWindowPlayerMovement(aStartPos, new GUIContent("Player movement"), "Window");
+        scenesWindowBarriers = new ScenesWindowBarriers(aStartPos, new GUIContent(TC.get("BarriersList.Title")), "Window");
+        scenesWindowPlayerMovement = new ScenesWindowPlayerMovement(aStartPos, new GUIContent(TC.get("Trajectory.Title")), "Window");
 
 
         windowWidth = aStartPos.width;
@@ -74,7 +74,7 @@ public class ScenesWindow : LayoutWindow
             GUILayout.BeginHorizontal();
             if (openedWindow == ScenesWindowType.Appearance)
                 GUI.skin = selectedButtonSkin;
-            if (GUILayout.Button(Language.GetText("APPEARANCE")))
+            if (GUILayout.Button(TC.get("Scene.LookPanelTitle")))
             {
                 OnWindowTypeChanged(ScenesWindowType.Appearance);
             }
@@ -83,7 +83,7 @@ public class ScenesWindow : LayoutWindow
 
             if (openedWindow == ScenesWindowType.Documentation)
                 GUI.skin = selectedButtonSkin;
-            if (GUILayout.Button(Language.GetText("DOCUMENTATION")))
+            if (GUILayout.Button(TC.get("Scene.DocPanelTitle")))
             {
                 OnWindowTypeChanged(ScenesWindowType.Documentation);
             }
@@ -92,7 +92,7 @@ public class ScenesWindow : LayoutWindow
 
             if (openedWindow == ScenesWindowType.ElementRefrence)
                 GUI.skin = selectedButtonSkin;
-            if (GUILayout.Button(Language.GetText("ELEMENT_REFERENCES")))
+            if (GUILayout.Button(TC.get("ItemReferencesList.Title")))
             {
                 OnWindowTypeChanged(ScenesWindowType.ElementRefrence);
             }
@@ -101,7 +101,7 @@ public class ScenesWindow : LayoutWindow
 
             if (openedWindow == ScenesWindowType.ActiveAreas)
                 GUI.skin = selectedButtonSkin;
-            if (GUILayout.Button(Language.GetText("ACTIVE_AREAS")))
+            if (GUILayout.Button(TC.get("ActiveAreasList.Title")))
             {
                 OnWindowTypeChanged(ScenesWindowType.ActiveAreas);
             }
@@ -110,7 +110,7 @@ public class ScenesWindow : LayoutWindow
 
             if (openedWindow == ScenesWindowType.Exits)
                 GUI.skin = selectedButtonSkin;
-            if (GUILayout.Button(Language.GetText("EXITS")))
+            if (GUILayout.Button(TC.get("Element.Name3")))
             {
                 OnWindowTypeChanged(ScenesWindowType.Exits);
             }
@@ -121,7 +121,7 @@ public class ScenesWindow : LayoutWindow
             {
                 if (openedWindow == ScenesWindowType.Barriers)
                     GUI.skin = selectedButtonSkin;
-                if (GUILayout.Button("Barriers"))
+                if (GUILayout.Button(TC.get("BarriersList.Title")))
                 {
                     OnWindowTypeChanged(ScenesWindowType.Barriers);
                 }
@@ -130,7 +130,7 @@ public class ScenesWindow : LayoutWindow
 
                 if (openedWindow == ScenesWindowType.PlayerMovement)
                     GUI.skin = selectedButtonSkin;
-                if (GUILayout.Button("Player movement"))
+                if (GUILayout.Button(TC.get("Trajectory.Title")))
                 {
                     OnWindowTypeChanged(ScenesWindowType.PlayerMovement);
                 }
@@ -167,13 +167,13 @@ public class ScenesWindow : LayoutWindow
         // Show information of whole scenes (global-scene view)
         else
         {
-            GUILayout.Label(Language.GetText("SCENES"));
+            //GUILayout.Label(TC.get("SCENES"));
 
-            GUILayout.BeginHorizontal();
-            GUILayout.Box(Language.GetText("SHOW_?"), GUILayout.MaxWidth(windowWidth*0.2f));
-            GUILayout.Box(Language.GetText("SCENE_ID"), GUILayout.Width(windowWidth*0.55f));
-            GUILayout.Box(Language.GetText("EDIT"), GUILayout.MaxWidth(windowWidth*0.2f));
-            GUILayout.EndHorizontal();
+            //GUILayout.BeginHorizontal();
+            //GUILayout.Box(TC.get("SHOW_?"), GUILayout.MaxWidth(windowWidth*0.2f));
+            //GUILayout.Box(TC.get("SCENE_ID"), GUILayout.Width(windowWidth*0.55f));
+            //GUILayout.Box(TC.get("EDIT"), GUILayout.MaxWidth(windowWidth*0.2f));
+            //GUILayout.EndHorizontal();
 
             for (int i = 0;
                 i < Controller.getInstance().getCharapterList().getSelectedChapterData().getScenes().Count;
@@ -184,7 +184,7 @@ public class ScenesWindow : LayoutWindow
                 GUILayout.Label(
                     Controller.getInstance().getCharapterList().getSelectedChapterData().getScenes()[i].getId(),
                     GUILayout.Width(windowWidth*0.55f));
-                if (GUILayout.Button(Language.GetText("EDIT"), GUILayout.MaxWidth(windowWidth*0.2f)))
+                if (GUILayout.Button(TC.get("GeneralText.Edit"), GUILayout.MaxWidth(windowWidth*0.2f)))
                 {
                     ShowItemWindowView(i);
                 }
@@ -219,21 +219,21 @@ public class ScenesWindow : LayoutWindow
         GenerateToggleList();
 
         // Reload windows for newly selected scene
-        scenesWindowActiveAreas = new ScenesWindowActiveAreas(thisRect, new GUIContent(Language.GetText("ACTIVE_AREAS")),
+        scenesWindowActiveAreas = new ScenesWindowActiveAreas(thisRect, new GUIContent(TC.get("ActiveAreasList.Title")),
             "Window");
-        scenesWindowAppearance = new ScenesWindowAppearance(thisRect, new GUIContent(Language.GetText("APPEARANCE")),
+        scenesWindowAppearance = new ScenesWindowAppearance(thisRect, new GUIContent(TC.get("Scene.LookPanelTitle")),
             "Window");
         scenesWindowDocumentation = new ScenesWindowDocumentation(thisRect,
-            new GUIContent(Language.GetText("DOCUMENTATION")), "Window");
+            new GUIContent(TC.get("Scene.DocPanelTitle")), "Window");
         scenesWindowElementReference = new ScenesWindowElementReference(thisRect,
-            new GUIContent(Language.GetText("ELEMENT_REFERENCES")), "Window");
-        scenesWindowExits = new ScenesWindowExits(thisRect, new GUIContent(Language.GetText("EXITS")), "Window");
+            new GUIContent(TC.get("ItemReferencesList.Title")), "Window");
+        scenesWindowExits = new ScenesWindowExits(thisRect, new GUIContent(TC.get("Element.Name3")), "Window");
 
         // Only visible for 3rd person
         if (Controller.getInstance().playerMode() == DescriptorData.MODE_PLAYER_3RDPERSON)
         {
-            scenesWindowBarriers = new ScenesWindowBarriers(thisRect, new GUIContent("Barriers"), "Window");
-            scenesWindowPlayerMovement = new ScenesWindowPlayerMovement(thisRect, new GUIContent("Player movement"), "Window");
+            scenesWindowBarriers = new ScenesWindowBarriers(thisRect, new GUIContent(TC.get("BarriersList.Title")), "Window");
+            scenesWindowPlayerMovement = new ScenesWindowPlayerMovement(thisRect, new GUIContent(TC.get("Trajectory.Title")), "Window");
         }
     }
 

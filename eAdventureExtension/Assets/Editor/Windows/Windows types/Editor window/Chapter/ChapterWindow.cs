@@ -7,7 +7,7 @@ public class ChapterWindow : LayoutWindow
     private string chapterName, descriptionOfGame, chapterNameLast, descriptionOfGameLast;
     private Texture2D clearImg = null;
     private Vector2 scrollPosition = Vector2.zero;
-    private int selAdaptation, selAssesment, selInitialScene, selAdaptationLast, selAssesmentLast, selInitialSceneLast;
+    private int selInitialScene, selInitialSceneLast;
     private string[] selStringsAdapatation, selStringsAssesment, selStringsInitialScene;
     private float windowHeight;
 
@@ -17,12 +17,8 @@ public class ChapterWindow : LayoutWindow
         Chapter chapter = Controller.getInstance().getCharapterList().getSelectedChapterData();
         chapterName = chapterNameLast = chapter.getTitle();
         descriptionOfGame = descriptionOfGameLast = chapter.getDescription();
-        selAdaptation = selAdaptationLast = 0;
-        selAssesment = selAssesmentLast = 0;
+    
         selInitialScene = selInitialSceneLast = 0;
-
-        selStringsAdapatation = new string[] { "none", "test1 Adaptation", "test2 Adaptation", "test3 Adaptation", "test4 Adaptation", "test5 Adaptation" };
-        selStringsAssesment = new string[] { "none", "test1 Assesment", "test2 Assesment" };
 
         int amountOfScenes = Controller.getInstance().getCharapterList().getSelectedChapterData().getScenes().Count;
         selStringsInitialScene = new string[amountOfScenes];
@@ -44,49 +40,21 @@ public class ChapterWindow : LayoutWindow
     {
         scrollPosition = GUILayout.BeginScrollView(scrollPosition);
 
-        GUILayout.Label(Language.GetText("TITLE_OF_CHAPTER"));
+        GUILayout.Label(TC.get("Chapter.Title"));
         chapterName = GUILayout.TextField(chapterName);
         if(!chapterName.Equals(chapterNameLast))
             ChangeTitle(chapterName);
 
         GUILayout.Space(20);
 
-        GUILayout.Label(Language.GetText("DESCRIPTION_OF_CHAPTER"));
+        GUILayout.Label(TC.get("Chapter.Description"));
         descriptionOfGame = GUILayout.TextArea(descriptionOfGame, GUILayout.MinHeight(0.2f * windowHeight));
         if (!descriptionOfGame.Equals(descriptionOfGameLast))
             ChangeDescription(descriptionOfGame);
 
         GUILayout.Space(20);
 
-        GUILayout.Label(Language.GetText("ASSESMENT_FILE_CHAPTER"));
-        GUILayout.BeginHorizontal();
-        // Change to none
-        if (GUILayout.Button(clearImg))
-        {
-            selAssesment = 0;
-        }
-        selAssesment = EditorGUILayout.Popup(selAssesment, selStringsAssesment);
-        if(selAssesment != selAssesmentLast)
-            ChangeSelectedAssessment(selAssesment);
-        GUILayout.EndHorizontal();
-
-        GUILayout.Space(20);
-
-        GUILayout.Label(Language.GetText("ADAPTATION_FILE_CHAPTER"));
-        GUILayout.BeginHorizontal();
-        // Change to none
-        if (GUILayout.Button(clearImg))
-        {
-            selAdaptation = 0;
-        }
-        selAdaptation = EditorGUILayout.Popup(selAdaptation, selStringsAdapatation);
-        if (selAdaptation != selAdaptationLast)
-            ChangeSelectedAdaptation(selAdaptation);
-        GUILayout.EndHorizontal();
-
-        GUILayout.Space(20);
-
-        GUILayout.Label(Language.GetText("INITIAL_SCENE_CHAPTER"));
+        GUILayout.Label(TC.get("Chapter.InitialScene"));
         selInitialScene = EditorGUILayout.Popup(selInitialScene, selStringsInitialScene);
         if (selInitialScene != selInitialSceneLast)
             ChangeSelectedInitialScene(selInitialScene);
@@ -97,28 +65,12 @@ public class ChapterWindow : LayoutWindow
     {
         Controller.getInstance().getCharapterList().getSelectedChapterDataControl().setTitle(s);
         chapterNameLast = s;
-        Debug.Log("ChangeTitle ");
     }
 
     private void ChangeDescription(string s)
     {
         Controller.getInstance().getCharapterList().getSelectedChapterDataControl().setDescription(s);
         descriptionOfGameLast = s;
-        Debug.Log("ChangeDescription ");
-    }
-
-    private void ChangeSelectedAdaptation(int i)
-    {
-        //TODO:
-        selAdaptationLast = i;
-        Debug.Log("ChangeSelectedAdaptation ");
-    }
-
-    private void ChangeSelectedAssessment(int i)
-    {
-        //TODO:
-        selAssesmentLast = i;
-        Debug.Log("ChangeSelectedAssessment ");
     }
 
     private void ChangeSelectedInitialScene(int i)

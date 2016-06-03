@@ -30,14 +30,14 @@ public class ScenesWindowDocumentation : LayoutWindow
 
     public override void Draw(int aID)
     {
-        GUILayout.Label(Language.GetText("FULL_DESCIPTION_OF_THE_SCENE"));
+        GUILayout.Label(TC.get("Scene.Documentation"));
         descriptionOfScene = GUILayout.TextArea(descriptionOfScene, GUILayout.MinHeight(0.4f * windowHeight));
         if (!descriptionOfScene.Equals(descriptionOfSceneLast))
             ChangeDocumentation(descriptionOfScene);
 
         GUILayout.Space(30);
 
-        GUILayout.Label(Language.GetText("NAME_OF_THE_SCENE"));
+        GUILayout.Label(TC.get("Scene.Name"));
         nameOfScene = GUILayout.TextField(nameOfScene);
         if (!nameOfScene.Equals(nameOfSceneLast))
             ChangeName(nameOfScene);

@@ -23,10 +23,10 @@ public class CharactersWindow : LayoutWindow
     public CharactersWindow(Rect aStartPos, GUIContent aContent, GUIStyle aStyle, params GUILayoutOption[] aOptions)
         : base(aStartPos, aContent, aStyle, aOptions)
     {
-        charactersWindowActions = new CharactersWindowActions(aStartPos, new GUIContent(Language.GetText("ACTIONS")), "Window");
-        charactersWindowAppearance = new CharactersWindowAppearance(aStartPos, new GUIContent(Language.GetText("APPEARANCE")), "Window");
-        charactersWindowDialogConfiguration = new CharactersWindowDialogConfiguration(aStartPos, new GUIContent(Language.GetText("DIALOG_CONFIGURATION")), "Window");
-        charactersWindowDocumentation = new CharactersWindowDocumentation(aStartPos, new GUIContent(Language.GetText("DOCUMENTATION")), "Window");
+        charactersWindowActions = new CharactersWindowActions(aStartPos, new GUIContent(TC.get("NPC.ActionsPanelTitle")), "Window");
+        charactersWindowAppearance = new CharactersWindowAppearance(aStartPos, new GUIContent(TC.get("NPC.LookPanelTitle")), "Window");
+        charactersWindowDialogConfiguration = new CharactersWindowDialogConfiguration(aStartPos, new GUIContent(TC.get("NPC.DialogPanelTitle")), "Window");
+        charactersWindowDocumentation = new CharactersWindowDocumentation(aStartPos, new GUIContent(TC.get("NPC.Documentation")), "Window");
 
         windowWidth = aStartPos.width;
         windowHeight = aStartPos.height;
@@ -48,7 +48,7 @@ public class CharactersWindow : LayoutWindow
 
             if (openedWindow == CharactersWindowType.Appearance)
                 GUI.skin = selectedButtonSkin;
-            if (GUILayout.Button(Language.GetText("APPEARANCE")))
+            if (GUILayout.Button(TC.get("NPC.LookPanelTitle")))
             {
                 OnWindowTypeChanged(CharactersWindowType.Appearance);
             }
@@ -58,7 +58,7 @@ public class CharactersWindow : LayoutWindow
 
             if (openedWindow == CharactersWindowType.Documentation)
                 GUI.skin = selectedButtonSkin;
-            if (GUILayout.Button(Language.GetText("DOCUMENTATION")))
+            if (GUILayout.Button(TC.get("NPC.Documentation")))
             {
                 OnWindowTypeChanged(CharactersWindowType.Documentation);
             }
@@ -67,7 +67,7 @@ public class CharactersWindow : LayoutWindow
 
             if (openedWindow == CharactersWindowType.DialogConfiguration)
                 GUI.skin = selectedButtonSkin;
-            if (GUILayout.Button(Language.GetText("DIALOG_CONFIGURATION")))
+            if (GUILayout.Button(TC.get("NPC.DialogPanelTitle")))
             {
                 OnWindowTypeChanged(CharactersWindowType.DialogConfiguration);
             }
@@ -76,7 +76,7 @@ public class CharactersWindow : LayoutWindow
 
             if (openedWindow == CharactersWindowType.Action)
                 GUI.skin = selectedButtonSkin;
-            if (GUILayout.Button(Language.GetText("ACTIONS")))
+            if (GUILayout.Button(TC.get("NPC.ActionsPanelTitle")))
             {
                 OnWindowTypeChanged(CharactersWindowType.Action);
             }
@@ -107,7 +107,7 @@ public class CharactersWindow : LayoutWindow
             {
                 GUILayout.BeginHorizontal();
                 GUILayout.Box(Controller.getInstance().getCharapterList().getSelectedChapterData().getCharacters()[i].getId(), GUILayout.Width(windowWidth * 0.75f));
-                if (GUILayout.Button(Language.GetText("EDIT"), GUILayout.MaxWidth(windowWidth * 0.2f)))
+                if (GUILayout.Button(TC.get("GeneralText.Edit"), GUILayout.MaxWidth(windowWidth * 0.2f)))
                 {
                     ShowItemWindowView(i);
                 }
@@ -136,10 +136,10 @@ public class CharactersWindow : LayoutWindow
         isConcreteItemVisible = true;
         GameRources.GetInstance().selectedCharacterIndex = o;
 
-        charactersWindowActions = new CharactersWindowActions(thisRect, new GUIContent(Language.GetText("ACTIONS")), "Window");
-        charactersWindowAppearance = new CharactersWindowAppearance(thisRect, new GUIContent(Language.GetText("APPEARANCE")), "Window");
-        charactersWindowDialogConfiguration = new CharactersWindowDialogConfiguration(thisRect, new GUIContent(Language.GetText("DIALOG_CONFIGURATION")), "Window");
-        charactersWindowDocumentation = new CharactersWindowDocumentation(thisRect, new GUIContent(Language.GetText("DOCUMENTATION")), "Window");
+        charactersWindowActions = new CharactersWindowActions(thisRect, new GUIContent(TC.get("NPC.ActionsPanelTitle")), "Window");
+        charactersWindowAppearance = new CharactersWindowAppearance(thisRect, new GUIContent(TC.get("NPC.LookPanelTitle")), "Window");
+        charactersWindowDialogConfiguration = new CharactersWindowDialogConfiguration(thisRect, new GUIContent(TC.get("NPC.DialogPanelTitle")), "Window");
+        charactersWindowDocumentation = new CharactersWindowDocumentation(thisRect, new GUIContent(TC.get("NPC.Documentation")), "Window");
     }
 
 }

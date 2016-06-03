@@ -23,9 +23,9 @@ public class ItemsWindow : LayoutWindow
     public ItemsWindow(Rect aStartPos, GUIContent aContent, GUIStyle aStyle, params GUILayoutOption[] aOptions)
         : base(aStartPos, aContent, aStyle, aOptions)
     {
-        itemsWindowActions = new ItemsWindowActions(aStartPos, new GUIContent(Language.GetText("ACTIONS")), "Window");
-        itemsWindowAppearance = new ItemsWindowAppearance(aStartPos, new GUIContent(Language.GetText("APPEARANCE")), "Window");
-        itemsWindowDescription = new ItemsWindowDescription(aStartPos, new GUIContent(Language.GetText("DESCRIPTION_AND_CONFIG")), "Window");
+        itemsWindowActions = new ItemsWindowActions(aStartPos, new GUIContent(TC.get("Item.ActionsPanelTitle")), "Window");
+        itemsWindowAppearance = new ItemsWindowAppearance(aStartPos, new GUIContent(TC.get("Item.LookPanelTitle")), "Window");
+        itemsWindowDescription = new ItemsWindowDescription(aStartPos, new GUIContent(TC.get("Item.DocPanelTitle")), "Window");
 
         windowWidth = aStartPos.width;
         windowHeight = aStartPos.height;
@@ -46,7 +46,7 @@ public class ItemsWindow : LayoutWindow
             GUILayout.BeginHorizontal();
             if (openedWindow == ItemsWindowType.Appearance)
                 GUI.skin = selectedButtonSkin;
-            if (GUILayout.Button(Language.GetText("APPEARANCE")))
+            if (GUILayout.Button(TC.get("Item.LookPanelTitle")))
             {
                 OnWindowTypeChanged(ItemsWindowType.Appearance);
             }
@@ -55,7 +55,7 @@ public class ItemsWindow : LayoutWindow
 
             if (openedWindow == ItemsWindowType.Actions)
                 GUI.skin = selectedButtonSkin;
-            if (GUILayout.Button(Language.GetText("ACTIONS")))
+            if (GUILayout.Button(TC.get("Item.ActionsPanelTitle")))
             {
                 OnWindowTypeChanged(ItemsWindowType.Actions);
             }
@@ -64,7 +64,7 @@ public class ItemsWindow : LayoutWindow
 
             if (openedWindow == ItemsWindowType.DescriptionConfig)
                 GUI.skin = selectedButtonSkin;
-            if (GUILayout.Button(Language.GetText("DESCRIPTION_AND_CONFIG")))
+            if (GUILayout.Button(TC.get("Item.DocPanelTitle")))
             {
                 OnWindowTypeChanged(ItemsWindowType.DescriptionConfig);
             }
@@ -93,7 +93,7 @@ public class ItemsWindow : LayoutWindow
             {
                 GUILayout.BeginHorizontal();
                 GUILayout.Box(Controller.getInstance().getCharapterList().getSelectedChapterData().getItems()[i].getId(), GUILayout.Width(windowWidth * 0.75f));
-                if (GUILayout.Button(Language.GetText("EDIT"), GUILayout.MaxWidth(windowWidth * 0.2f)))
+                if (GUILayout.Button(TC.get("GeneralText.Edit"), GUILayout.MaxWidth(windowWidth * 0.2f)))
                 {
                     ShowItemWindowView(i);
                 }
@@ -117,9 +117,9 @@ public class ItemsWindow : LayoutWindow
         isConcreteItemVisible = true;
         GameRources.GetInstance().selectedItemIndex = o;
 
-        itemsWindowActions = new ItemsWindowActions(thisRect, new GUIContent(Language.GetText("ACTIONS")), "Window");
-        itemsWindowAppearance = new ItemsWindowAppearance(thisRect, new GUIContent(Language.GetText("APPEARANCE")), "Window");
-        itemsWindowDescription = new ItemsWindowDescription(thisRect, new GUIContent(Language.GetText("DESCRIPTION_AND_CONFIG")), "Window");
+        itemsWindowActions = new ItemsWindowActions(thisRect, new GUIContent(TC.get("Item.ActionsPanelTitle")), "Window");
+        itemsWindowAppearance = new ItemsWindowAppearance(thisRect, new GUIContent(TC.get("Item.LookPanelTitle")), "Window");
+        itemsWindowDescription = new ItemsWindowDescription(thisRect, new GUIContent(TC.get("Item.DocPanelTitle")), "Window");
     }
 
     void OnWindowTypeChanged(ItemsWindowType type_)

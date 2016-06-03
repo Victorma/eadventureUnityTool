@@ -16,7 +16,7 @@ public class WelcomeWindow : EditorWindow {
     private LayoutWindow m_Window1 = null;
     private static NewGameWindow newGameWindow;
     private static OpenGameWindow openGameWindow;
-    private static RecentGameWindow recentGameWindow;
+    //private static RecentGameWindow recentGameWindow;
 
     // Add menu item 
     [MenuItem("eAdventure/Open eAdventure welcome screen")]
@@ -35,9 +35,9 @@ public class WelcomeWindow : EditorWindow {
         buttonsRect = new Rect(0.01f * windowWidth, 0.27f * windowHeight, windowWidth * 0.98f, windowHeight * 0.28f);
         windowRect = new Rect(0.01f * windowWidth, 0.32f * windowHeight, 0.98f * windowWidth, 0.67f * windowHeight);
 
-        newGameWindow = new NewGameWindow(windowRect, new GUIContent(Language.GetText("NEW_GAME")), "Window");
-        openGameWindow = new OpenGameWindow(windowRect, new GUIContent(Language.GetText("OPEN_GAME")), "Window");
-        recentGameWindow = new RecentGameWindow(windowRect, new GUIContent(Language.GetText("RECENT_GAME")), "Window");
+        newGameWindow = new NewGameWindow(windowRect, new GUIContent(TC.get("GeneralText.New")), "Window");
+        openGameWindow = new OpenGameWindow(windowRect, new GUIContent(TC.get("GeneralText.Open")), "Window");
+        //recentGameWindow = new RecentGameWindow(windowRect, new GUIContent(Language.GetText("RECENT_GAME")), "Window");
     }
 
     public void OnGUI()
@@ -47,19 +47,19 @@ public class WelcomeWindow : EditorWindow {
         GUILayout.BeginArea(buttonsRect);
         GUILayout.BeginHorizontal();
 
-        if (GUILayout.Button(Language.GetText("NEW_GAME")))
+        if (GUILayout.Button(TC.get("GeneralText.New")))
         {
             OnWindowTypeChanged(WelcomeWindowType.New);
         }
-        if (GUILayout.Button(Language.GetText("OPEN_GAME")))
+        if (GUILayout.Button(TC.get("GeneralText.Open")))
         {
             OnWindowTypeChanged(WelcomeWindowType.Open);
             openGameWindow.OpenFileDialog();
         }
-        if (GUILayout.Button(Language.GetText("RECENT_GAME")))
-        {
-            OnWindowTypeChanged(WelcomeWindowType.Recent);
-        }
+        //if (GUILayout.Button(Language.GetText("RECENT_GAME")))
+        //{
+        //    OnWindowTypeChanged(WelcomeWindowType.Recent);
+        //}
 
         GUILayout.EndHorizontal();
         GUILayout.EndArea();
@@ -75,9 +75,9 @@ public class WelcomeWindow : EditorWindow {
             case WelcomeWindowType.Open:
                 m_Window1 = openGameWindow;
                 break;
-            case WelcomeWindowType.Recent:
-                m_Window1 = recentGameWindow;
-                break;
+            //case WelcomeWindowType.Recent:
+            //    m_Window1 = recentGameWindow;
+            //    break;
         }
 
         if (m_Window1 != null)

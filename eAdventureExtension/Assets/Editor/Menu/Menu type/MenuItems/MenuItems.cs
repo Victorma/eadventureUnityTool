@@ -16,7 +16,7 @@ public class NewProjectMenuItem : IMenuItem
 
     public void OnCliked()
     {
-        Debug.Log(Language.GetText(Label));
+
     }
 }
 
@@ -34,7 +34,7 @@ public class LoadProjectMenuItem : IMenuItem
 
     public void OnCliked()
     {
-        Debug.Log(Language.GetText(Label));
+
     }
 }
 
@@ -52,7 +52,7 @@ public class SaveProjectMenuItem : IMenuItem
 
     public void OnCliked()
     {
-        Debug.Log(Language.GetText(Label));
+
     }
 }
 
@@ -70,7 +70,7 @@ public class SaveProjectAsMenuItem : IMenuItem
 
     public void OnCliked()
     {
-        Debug.Log(Language.GetText(Label));
+
     }
 }
 
@@ -88,7 +88,7 @@ public class LOMMetadataEditorMenuItem : IMenuItem
 
     public void OnCliked()
     {
-        Debug.Log(Language.GetText(Label));
+
     }
 }
 
@@ -106,7 +106,7 @@ public class LearningObjectPropertiesMenuItem : IMenuItem
 
     public void OnCliked()
     {
-        Debug.Log(Language.GetText(Label));
+
     }
 }
 
@@ -124,7 +124,7 @@ public class LearningObjectPropertiesSCORMMenuItem : IMenuItem
 
     public void OnCliked()
     {
-        Debug.Log(Language.GetText(Label));
+
     }
 }
 
@@ -142,7 +142,7 @@ public class ExportProjectMenuItem : IMenuItem
 
     public void OnCliked()
     {
-        Debug.Log(Language.GetText(Label));
+
     }
 }
 
@@ -160,7 +160,6 @@ public class ExportProjectEadMenuItem : IMenuItem
 
     public void OnCliked()
     {
-        Debug.Log(Language.GetText(Label));
         Controller.getInstance().exportGame();
     }
 }
@@ -179,7 +178,7 @@ public class UndoMenuItem : IMenuItem
 
     public void OnCliked()
     {
-        Debug.Log(Language.GetText(Label));
+
     }
 }
 
@@ -197,7 +196,7 @@ public class RedoMenuItem : IMenuItem
 
     public void OnCliked()
     {
-        Debug.Log(Language.GetText(Label));
+
     }
 }
 
@@ -215,7 +214,7 @@ public class SearchMenuItem : IMenuItem
 
     public void OnCliked()
     {
-        Debug.Log(Language.GetText(Label));
+
     }
 }
 
@@ -233,7 +232,7 @@ public class CheckAdventureConsistencyMenuItem : IMenuItem
 
     public void OnCliked()
     {
-        Debug.Log(Language.GetText(Label));
+
     }
 }
 
@@ -251,7 +250,7 @@ public class EditAdventureDataMenuItem : IMenuItem
 
     public void OnCliked()
     {
-        Debug.Log(Language.GetText(Label));
+
     }
 }
 
@@ -270,7 +269,7 @@ public class VisualisationMenuItem : IMenuItem
 
     public void OnCliked()
     {
-        Debug.Log(Language.GetText(Label));
+
     }
 }
 
@@ -288,7 +287,7 @@ public class ConvertToMenuItem : IMenuItem
 
     public void OnCliked()
     {
-        Debug.Log(Language.GetText(Label));
+
     }
 }
 
@@ -306,7 +305,7 @@ public class DeleteUnusedDataMenuItem : IMenuItem
 
     public void OnCliked()
     {
-        Debug.Log(Language.GetText(Label));
+
     }
 }
 
@@ -374,6 +373,48 @@ public class DeleteChapterMenuItem : IMenuItem, DialogReceiverInterface
     }
 }
 
+public class MoveUpChapterMenuItem : IMenuItem
+{
+    public MoveUpChapterMenuItem(string name_)
+    {
+        this.Label = name_;
+    }
+
+    public string Label
+    {
+        get; set;
+    }
+
+    public void OnCliked()
+    {
+        Controller.getInstance()
+            .getCharapterList()
+            .moveChapterUp(Controller.getInstance().getCharapterList().getSelectedChapter());
+        ChaptersMenu.getInstance().RefreshMenuItems();
+    }
+}
+
+public class MoveDownChapterMenuItem : IMenuItem
+{
+    public MoveDownChapterMenuItem(string name_)
+    {
+        this.Label = name_;
+    }
+
+    public string Label
+    {
+        get; set;
+    }
+
+    public void OnCliked()
+    {
+        Controller.getInstance()
+            .getCharapterList()
+            .moveChapterDown(Controller.getInstance().getCharapterList().getSelectedChapter());
+        ChaptersMenu.getInstance().RefreshMenuItems();
+    }
+}
+
 public class ImportChapterMenuItem : IMenuItem
 {
     public ImportChapterMenuItem(string name_)
@@ -388,7 +429,7 @@ public class ImportChapterMenuItem : IMenuItem
 
     public void OnCliked()
     {
-        Debug.Log(Language.GetText(Label));
+
     }
 }
 
@@ -437,7 +478,7 @@ public class RunMenuItem : IMenuItem
 
     public void OnCliked()
     {
-        Debug.Log(Language.GetText(Label));
+
     }
 }
 
@@ -455,7 +496,7 @@ public class RunNormalMenuItem : IMenuItem
 
     public void OnCliked()
     {
-        Debug.Log(Language.GetText(Label));
+
     }
 }
 
@@ -473,7 +514,7 @@ public class RunDebugMenuItem : IMenuItem
 
     public void OnCliked()
     {
-        Debug.Log(Language.GetText(Label));
+
     }
 }
 
@@ -491,7 +532,7 @@ public class AboutEAMenuItem : IMenuItem
 
     public void OnCliked()
     {
-        Debug.Log(Language.GetText(Label));
+
     }
 }
 
@@ -509,6 +550,6 @@ public class AboutEASendMenuItem : IMenuItem
 
     public void OnCliked()
     {
-        Debug.Log(Language.GetText(Label));
+
     }
 }

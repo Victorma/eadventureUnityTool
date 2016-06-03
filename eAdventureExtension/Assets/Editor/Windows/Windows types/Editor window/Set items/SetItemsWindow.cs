@@ -20,8 +20,8 @@ public class SetItemsWindow : LayoutWindow
     public SetItemsWindow(Rect aStartPos, GUIContent aContent, GUIStyle aStyle, params GUILayoutOption[] aOptions)
         : base(aStartPos, aContent, aStyle, aOptions)
     {
-        setItemsWindowApperance = new SetItemsWindowApperance(aStartPos, new GUIContent(Language.GetText("APPEARANCE")), "Window");
-        setItemsWindowDocumentation = new SetItemsWindowDocumentation(aStartPos, new GUIContent(Language.GetText("DOCUMENTATION")), "Window");
+        setItemsWindowApperance = new SetItemsWindowApperance(aStartPos, new GUIContent(TC.get("Atrezzo.LookPanelTitle")), "Window");
+        setItemsWindowDocumentation = new SetItemsWindowDocumentation(aStartPos, new GUIContent(TC.get("Atrezzo.DocPanelTitle")), "Window");
 
         windowWidth = aStartPos.width;
         windowHeight = aStartPos.height;
@@ -42,7 +42,7 @@ public class SetItemsWindow : LayoutWindow
             GUILayout.BeginHorizontal();
             if (openedWindow == SetItemsWindowType.Appearance)
                 GUI.skin = selectedButtonSkin;
-            if (GUILayout.Button(Language.GetText("APPEARANCE")))
+            if (GUILayout.Button(TC.get("Atrezzo.LookPanelTitle")))
             {
                 OnWindowTypeChanged(SetItemsWindowType.Appearance);
             }
@@ -51,7 +51,7 @@ public class SetItemsWindow : LayoutWindow
 
             if (openedWindow == SetItemsWindowType.Documentation)
                 GUI.skin = selectedButtonSkin;
-            if (GUILayout.Button(Language.GetText("DOCUMENTATION")))
+            if (GUILayout.Button(TC.get("Atrezzo.DocPanelTitle")))
             {
                 OnWindowTypeChanged(SetItemsWindowType.Documentation);
             }
@@ -76,7 +76,7 @@ public class SetItemsWindow : LayoutWindow
             {
                 GUILayout.BeginHorizontal();
                 GUILayout.Box(Controller.getInstance().getCharapterList().getSelectedChapterData().getAtrezzo()[i].getId(), GUILayout.Width(windowWidth * 0.75f));
-                if (GUILayout.Button(Language.GetText("EDIT"), GUILayout.MaxWidth(windowWidth * 0.2f)))
+                if (GUILayout.Button(TC.get("GeneralText.Edit"), GUILayout.MaxWidth(windowWidth * 0.2f)))
                 {
                     ShowItemWindowView(i);
                 }
@@ -104,7 +104,7 @@ public class SetItemsWindow : LayoutWindow
         isConcreteItemVisible = true;
         GameRources.GetInstance().selectedSetItemIndex = o;
 
-        setItemsWindowApperance = new SetItemsWindowApperance(thisRect, new GUIContent(Language.GetText("APPEARANCE")), "Window");
-        setItemsWindowDocumentation = new SetItemsWindowDocumentation(thisRect, new GUIContent(Language.GetText("DOCUMENTATION")), "Window");
+        setItemsWindowApperance = new SetItemsWindowApperance(thisRect, new GUIContent(TC.get("Atrezzo.LookPanelTitle")), "Window");
+        setItemsWindowDocumentation = new SetItemsWindowDocumentation(thisRect, new GUIContent(TC.get("Atrezzo.DocPanelTitle")), "Window");
     }
 }

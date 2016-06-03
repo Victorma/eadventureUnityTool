@@ -24,11 +24,11 @@ public class AdvencedFeaturesWindow : LayoutWindow
         : base(aStartPos, aContent, aStyle, aOptions)
     {
         advencedFeaturesWindowGlobalStates = new AdvencedFeaturesWindowGlobalStates(aStartPos,
-            new GUIContent(Language.GetText("GLOBAL_STATES")), "Window");
+            new GUIContent(TC.get("Element.Name55")), "Window");
         advencedFeaturesWindowListOfTimers = new AdvencedFeaturesWindowListOfTimers(aStartPos,
-            new GUIContent(Language.GetText("LIST_OF_TIMERS")), "Window");
+            new GUIContent(TC.get("TimersList.Title")), "Window");
         advencedFeaturesWindowMacros = new AdvencedFeaturesWindowMacros(aStartPos,
-            new GUIContent(Language.GetText("MACROS")), "Window");
+            new GUIContent(TC.get("Element.Name57")), "Window");
         selectedButtonSkin = (GUISkin)Resources.Load("Editor/ButtonSelected", typeof(GUISkin));
     }
 
@@ -43,7 +43,7 @@ public class AdvencedFeaturesWindow : LayoutWindow
 
         if (openedWindow == AdvencedFeaturesWindowType.ListOfTimers)
             GUI.skin = selectedButtonSkin;
-        if (GUILayout.Button(Language.GetText("LIST_OF_TIMERS")))
+        if (GUILayout.Button(TC.get("TimersList.Title")))
         {
             OnWindowTypeChanged(AdvencedFeaturesWindowType.ListOfTimers);
         }
@@ -52,7 +52,7 @@ public class AdvencedFeaturesWindow : LayoutWindow
 
         if (openedWindow == AdvencedFeaturesWindowType.GlobalStates)
             GUI.skin = selectedButtonSkin;
-        if (GUILayout.Button(Language.GetText("GLOBAL_STATES")))
+        if (GUILayout.Button(TC.get("Element.Name55")))
         {
             OnWindowTypeChanged(AdvencedFeaturesWindowType.GlobalStates);
         }
@@ -61,7 +61,7 @@ public class AdvencedFeaturesWindow : LayoutWindow
 
         if (openedWindow == AdvencedFeaturesWindowType.Macros)
             GUI.skin = selectedButtonSkin;
-        if (GUILayout.Button(Language.GetText("MACROS")))
+        if (GUILayout.Button(TC.get("Element.Name57")))
         {
             OnWindowTypeChanged(AdvencedFeaturesWindowType.Macros);
         }

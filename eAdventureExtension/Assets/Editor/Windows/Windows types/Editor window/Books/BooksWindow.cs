@@ -24,9 +24,9 @@ public class BooksWindow : LayoutWindow
     public BooksWindow(Rect aStartPos, GUIContent aContent, GUIStyle aStyle, params GUILayoutOption[] aOptions)
         : base(aStartPos, aContent, aStyle, aOptions)
     {
-        booksWindowAppearance = new BooksWindowAppearance(aStartPos, new GUIContent(Language.GetText("APPEARANCE")), "Window");
-        booksWindowContents = new BooksWindowContents(aStartPos, new GUIContent(Language.GetText("CONTENTS")), "Window");
-        booksWindowDocumentation = new BooksWindowDocumentation(aStartPos, new GUIContent(Language.GetText("DOCUMENTATION")), "Window");
+        booksWindowAppearance = new BooksWindowAppearance(aStartPos, new GUIContent(TC.get("Book.App")), "Window");
+        booksWindowContents = new BooksWindowContents(aStartPos, new GUIContent(TC.get("Book.Contents")), "Window");
+        booksWindowDocumentation = new BooksWindowDocumentation(aStartPos, new GUIContent(TC.get("Book.Documentation")), "Window");
 
         windowWidth = aStartPos.width;
         windowHeight = aStartPos.height;
@@ -47,7 +47,7 @@ public class BooksWindow : LayoutWindow
             GUILayout.BeginHorizontal();
             if (openedWindow == BookWindowType.Appearance)
                 GUI.skin = selectedButtonSkin;
-            if (GUILayout.Button(Language.GetText("APPEARANCE")))
+            if (GUILayout.Button(TC.get("Book.App")))
             {
                 OnWindowTypeChanged(BookWindowType.Appearance);
             }
@@ -56,7 +56,7 @@ public class BooksWindow : LayoutWindow
 
             if (openedWindow == BookWindowType.Documentation)
                 GUI.skin = selectedButtonSkin;
-            if (GUILayout.Button(Language.GetText("DOCUMENTATION")))
+            if (GUILayout.Button(TC.get("Book.Documentation")))
             {
                 OnWindowTypeChanged(BookWindowType.Documentation);
             }
@@ -65,7 +65,7 @@ public class BooksWindow : LayoutWindow
 
             if (openedWindow == BookWindowType.Content)
                 GUI.skin = selectedButtonSkin;
-            if (GUILayout.Button(Language.GetText("CONTENTS")))
+            if (GUILayout.Button(TC.get("Book.Contents")))
             {
                 OnWindowTypeChanged(BookWindowType.Content);
             }
@@ -94,7 +94,7 @@ public class BooksWindow : LayoutWindow
             {
                 GUILayout.BeginHorizontal();
                 GUILayout.Box(Controller.getInstance().getCharapterList().getSelectedChapterData().getBooks()[i].getId(), GUILayout.Width(windowWidth * 0.75f));
-                if (GUILayout.Button(Language.GetText("EDIT"), GUILayout.MaxWidth(windowWidth * 0.2f)))
+                if (GUILayout.Button(TC.get("EDIT"), GUILayout.MaxWidth(windowWidth * 0.2f)))
                 {
                     ShowItemWindowView(i);
                 }
@@ -124,8 +124,8 @@ public class BooksWindow : LayoutWindow
         GameRources.GetInstance().selectedBookIndex = o;
 
         // Reload windows for newly selected book
-        booksWindowAppearance = new BooksWindowAppearance(thisRect, new GUIContent(Language.GetText("APPEARANCE")), "Window");
-        booksWindowContents = new BooksWindowContents(thisRect, new GUIContent(Language.GetText("CONTENTS")), "Window");
-        booksWindowDocumentation = new BooksWindowDocumentation(thisRect, new GUIContent(Language.GetText("DOCUMENTATION")), "Window");
+        booksWindowAppearance = new BooksWindowAppearance(thisRect, new GUIContent(TC.get("Book.App")), "Window");
+        booksWindowContents = new BooksWindowContents(thisRect, new GUIContent(TC.get("Book.Contents")), "Window");
+        booksWindowDocumentation = new BooksWindowDocumentation(thisRect, new GUIContent(TC.get("Book.Documentation")), "Window");
     }
 }

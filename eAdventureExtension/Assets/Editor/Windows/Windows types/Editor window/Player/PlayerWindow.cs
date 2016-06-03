@@ -24,11 +24,11 @@ public class PlayerWindow : LayoutWindow
         : base(aStartPos, aContent, aStyle, aOptions)
     {
         playerWindowAppearance = new PlayerWindowAppearance(aStartPos,
-            new GUIContent(Language.GetText("APPEARANCE")), "Window");
+            new GUIContent(TC.get("NPC.LookPanelTitle")), "Window");
         playerWindowDialogConfiguration = new PlayerWindowDialogConfiguration(aStartPos,
-            new GUIContent(Language.GetText("DIALOG_CONFIGURATION")), "Window");
+            new GUIContent(TC.get("NPC.DialogPanelTitle")), "Window");
         playerWindowDocumentation = new PlayerWindowDocumentation(aStartPos,
-            new GUIContent(Language.GetText("DOCUMENTATION")), "Window");
+            new GUIContent(TC.get("NPC.Documentation")), "Window");
         selectedButtonSkin = (GUISkin)Resources.Load("Editor/ButtonSelected", typeof(GUISkin));
     }
 
@@ -41,7 +41,7 @@ public class PlayerWindow : LayoutWindow
         {
             if (openedWindow == PlayerWindowType.Appearance)
                 GUI.skin = selectedButtonSkin;
-            if (GUILayout.Button(Language.GetText("APPEARANCE")))
+            if (GUILayout.Button(TC.get("NPC.LookPanelTitle")))
             {
                 OnWindowTypeChanged(PlayerWindowType.Appearance);
             }
@@ -51,7 +51,7 @@ public class PlayerWindow : LayoutWindow
 
         if (openedWindow == PlayerWindowType.DialogConfiguration)
             GUI.skin = selectedButtonSkin;
-        if (GUILayout.Button(Language.GetText("DIALOG_CONFIGURATION")))
+        if (GUILayout.Button(TC.get("NPC.DialogPanelTitle")))
         {
             OnWindowTypeChanged(PlayerWindowType.DialogConfiguration);
         }
@@ -61,7 +61,7 @@ public class PlayerWindow : LayoutWindow
 
         if (openedWindow == PlayerWindowType.Documentation)
             GUI.skin = selectedButtonSkin;
-        if (GUILayout.Button(Language.GetText("DOCUMENTATION")))
+        if (GUILayout.Button(TC.get("NPC.Documentation")))
         {
             OnWindowTypeChanged(PlayerWindowType.Documentation);
         }

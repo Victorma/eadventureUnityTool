@@ -25,9 +25,9 @@ public class CutscenesWindow : LayoutWindow
         : base(aStartPos, aContent, aStyle, aOptions)
     {
 
-        cutscenesWindowAppearance = new CutscenesWindowAppearance(aStartPos, new GUIContent(Language.GetText("APPEARANCE")), "Window");
-        cutscenesWindowDocumentation = new CutscenesWindowDocumentation(aStartPos, new GUIContent(Language.GetText("DOCUMENTATION")), "Window");
-        cutscenesWindowEndConfiguration = new CutscenesWindowEndConfiguration(aStartPos, new GUIContent(Language.GetText("CUTSCENES_AND_CONFIGURATION")), "Window");
+        cutscenesWindowAppearance = new CutscenesWindowAppearance(aStartPos, new GUIContent(TC.get("Cutscene.App")), "Window");
+        cutscenesWindowDocumentation = new CutscenesWindowDocumentation(aStartPos, new GUIContent(TC.get("Cutscene.Doc")), "Window");
+        cutscenesWindowEndConfiguration = new CutscenesWindowEndConfiguration(aStartPos, new GUIContent(TC.get("Cutscene.CutsceneEnd")), "Window");
 
         windowWidth = aStartPos.width;
         windowHeight = aStartPos.height;
@@ -48,7 +48,7 @@ public class CutscenesWindow : LayoutWindow
             GUILayout.BeginHorizontal();
             if (openedWindow == CutscenesWindowType.Appearance)
                 GUI.skin = selectedButtonSkin;
-            if (GUILayout.Button(Language.GetText("APPEARANCE")))
+            if (GUILayout.Button(TC.get("Cutscene.App")))
             {
                 OnWindowTypeChanged(CutscenesWindowType.Appearance);
             }
@@ -57,7 +57,7 @@ public class CutscenesWindow : LayoutWindow
 
             if (openedWindow == CutscenesWindowType.Documentation)
                 GUI.skin = selectedButtonSkin;
-            if (GUILayout.Button(Language.GetText("DOCUMENTATION")))
+            if (GUILayout.Button(TC.get("Cutscene.Doc")))
             {
                 OnWindowTypeChanged(CutscenesWindowType.Documentation);
             }
@@ -66,7 +66,7 @@ public class CutscenesWindow : LayoutWindow
 
             if (openedWindow == CutscenesWindowType.EndConfiguration)
                 GUI.skin = selectedButtonSkin;
-            if (GUILayout.Button(Language.GetText("CUTSCENES_AND_CONFIGURATION")))
+            if (GUILayout.Button(TC.get("Cutscene.CutsceneEnd")))
             {
                 OnWindowTypeChanged(CutscenesWindowType.EndConfiguration);
             }
@@ -94,7 +94,7 @@ public class CutscenesWindow : LayoutWindow
             {
                 GUILayout.BeginHorizontal();
                 GUILayout.Box(Controller.getInstance().getCharapterList().getSelectedChapterData().getCutscenes()[i].getId(), GUILayout.Width(windowWidth * 0.75f));
-                if (GUILayout.Button(Language.GetText("EDIT"), GUILayout.MaxWidth(windowWidth * 0.2f)))
+                if (GUILayout.Button(TC.get("GeneralText.Edit"), GUILayout.MaxWidth(windowWidth * 0.2f)))
                 {
                     ShowItemWindowView(i);
                 }
@@ -126,8 +126,8 @@ public class CutscenesWindow : LayoutWindow
         GameRources.GetInstance().selectedCutsceneIndex = o;
 
         // Reload windows for newly selected scene
-        cutscenesWindowAppearance = new CutscenesWindowAppearance(thisRect, new GUIContent(Language.GetText("APPEARANCE")), "Window");
-        cutscenesWindowDocumentation = new CutscenesWindowDocumentation(thisRect, new GUIContent(Language.GetText("DOCUMENTATION")), "Window");
-        cutscenesWindowEndConfiguration = new CutscenesWindowEndConfiguration(thisRect, new GUIContent(Language.GetText("CUTSCENES_AND_CONFIGURATION")), "Window");
+        cutscenesWindowAppearance = new CutscenesWindowAppearance(thisRect, new GUIContent(TC.get("Cutscene.App")), "Window");
+        cutscenesWindowDocumentation = new CutscenesWindowDocumentation(thisRect, new GUIContent(TC.get("Cutscene.Doc")), "Window");
+        cutscenesWindowEndConfiguration = new CutscenesWindowEndConfiguration(thisRect, new GUIContent(TC.get("Cutscene.CutsceneEnd")), "Window");
     }
 }

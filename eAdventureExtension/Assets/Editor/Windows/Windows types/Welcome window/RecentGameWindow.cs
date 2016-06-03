@@ -25,50 +25,50 @@ public class RecentGameWindow : LayoutWindow
 
     public override void Draw(int aID)
     {
-        GUILayout.BeginVertical();
-        {
-            GUILayout.BeginArea(fileInfoRect);
-            {
-                GUILayout.Label(Language.GetText("FILES"));
-                GUILayout.Box(Language.GetText("EMPTY_STRING"));
-            }
-            GUILayout.EndArea();
+        //GUILayout.BeginVertical();
+        //{
+        //    GUILayout.BeginArea(fileInfoRect);
+        //    {
+        //        GUILayout.Label(Language.GetText("FILES"));
+        //        GUILayout.Box(Language.GetText("EMPTY_STRING"));
+        //    }
+        //    GUILayout.EndArea();
 
-            GUILayout.BeginArea(adventureInfoMainRect);
-            {
-                GUILayout.Label(Language.GetText("ADVENTURE"));
+        //    GUILayout.BeginArea(adventureInfoMainRect);
+        //    {
+        //        GUILayout.Label(Language.GetText("ADVENTURE"));
 
-                //GUILayout.BeginArea(adventureInfoTitleRect);
-                //{
-                GUILayout.Label(Language.GetText("ADVENTURE_TITLE"));
-                GUILayout.Box(Language.GetText("EMPTY_STRING"));
-                //}
-                //GUILayout.EndArea();
+        //        //GUILayout.BeginArea(adventureInfoTitleRect);
+        //        //{
+        //        GUILayout.Label(Language.GetText("ADVENTURE_TITLE"));
+        //        GUILayout.Box(Language.GetText("EMPTY_STRING"));
+        //        //}
+        //        //GUILayout.EndArea();
 
-                //GUILayout.BeginArea(adventureInfoPathRect);
-                //{
-                GUILayout.Label(Language.GetText("ADVENTURE_PATH"));
-                GUILayout.Box(Language.GetText("EMPTY_STRING"));
-                //}
-                //GUILayout.EndArea();
+        //        //GUILayout.BeginArea(adventureInfoPathRect);
+        //        //{
+        //        GUILayout.Label(Language.GetText("ADVENTURE_PATH"));
+        //        GUILayout.Box(Language.GetText("EMPTY_STRING"));
+        //        //}
+        //        //GUILayout.EndArea();
 
-                //GUILayout.BeginArea(adventureInfoDescriptionRect);
-                //{
-                GUILayout.Label(Language.GetText("ADVENTURE_DESCRIPTION"));
-                GUILayout.Box(Language.GetText("EMPTY_STRING"));
-                //}
-                //GUILayout.EndArea();
+        //        //GUILayout.BeginArea(adventureInfoDescriptionRect);
+        //        //{
+        //        GUILayout.Label(Language.GetText("ADVENTURE_DESCRIPTION"));
+        //        GUILayout.Box(Language.GetText("EMPTY_STRING"));
+        //        //}
+        //        //GUILayout.EndArea();
 
-                //GUILayout.BeginArea(adventureInfoPlayerModeRect);
-                //{
-                GUILayout.Label(Language.GetText("ADVENTURE_MODE"));
-                GUILayout.Box(Language.GetText("ADVENTURE_MODE_1ST"));
-                //}
-                //GUILayout.EndArea();
-            }
-            GUILayout.EndArea();
-        }
-        GUILayout.EndHorizontal();
+        //        //GUILayout.BeginArea(adventureInfoPlayerModeRect);
+        //        //{
+        //        GUILayout.Label(Language.GetText("ADVENTURE_MODE"));
+        //        GUILayout.Box(Language.GetText("ADVENTURE_MODE_1ST"));
+        //        //}
+        //        //GUILayout.EndArea();
+        //    }
+        //    GUILayout.EndArea();
+        //}
+        //GUILayout.EndHorizontal();
     }
 
 }

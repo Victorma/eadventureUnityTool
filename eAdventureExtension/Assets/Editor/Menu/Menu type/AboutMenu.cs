@@ -23,10 +23,10 @@ public class AboutMenu : WindowMenuContainer
     {
         menu = new GenericMenu();
 
-        about = new AboutEAMenuItem("ABOUT_EADVENTURE");
-        send = new AboutEASendMenuItem("ABOUT_SEND");
+        about = new AboutEAMenuItem("Menu.AboutEAD");
+        send = new AboutEASendMenuItem("Menu.SendComments");
 
-        menu.AddItem(new GUIContent(Language.GetText(about.Label)), false, Callback, about);
-        menu.AddItem(new GUIContent(Language.GetText(send.Label)), false, Callback, send);
+        menu.AddItem(new GUIContent(TC.get(about.Label)), false, Callback, about);
+        menu.AddItem(new GUIContent(TC.get(send.Label)), false, Callback, send);
     }
 }

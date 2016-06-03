@@ -221,7 +221,7 @@ public class EditorWindowBase : EditorWindow, DialogReceiverInterface
         */
         GUILayout.BeginArea(buttonMenuRect);
         GUILayout.BeginHorizontal();
-        if (GUILayout.Button(Language.GetText("FILE")))
+        if (GUILayout.Button(TC.get("MenuFile.Title")))
         {
             fileMenu.menu.ShowAsContext();
         }
