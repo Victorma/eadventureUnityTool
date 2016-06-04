@@ -70,7 +70,7 @@ public class OptionNodeEditor : ConversationNodeEditor {
 
         EditorGUILayout.BeginVertical();
 
-        EditorGUILayout.HelpBox("You have to add at least one", MessageType.None);
+        EditorGUILayout.HelpBox(TC.get("ConversationEditor.AtLeastOne"), MessageType.None);
         bool infoShown = false;
         if(myNode.getLineCount() > 0){
             bool isScrolling = false;
@@ -85,8 +85,8 @@ public class OptionNodeEditor : ConversationNodeEditor {
 
                 bool showInfo = false;
 
-                EditorGUIUtility.labelWidth = GUI.skin.label.CalcSize(new GUIContent("Option " + i + ": ")).x;
-                myNode.getLine(i).setText(EditorGUILayout.TextField("Option " + i + ": ", myNode.getLine(i).getText(),GUILayout.Width(200)));
+                EditorGUIUtility.labelWidth = GUI.skin.label.CalcSize(new GUIContent(TC.get("ConversationEditor.Option") + " " + i + ": ")).x;
+                myNode.getLine(i).setText(EditorGUILayout.TextField(TC.get("ConversationEditor.Option") + " " + i + ": ", myNode.getLine(i).getText(),GUILayout.Width(200)));
 
                 tmpTex = (myNode.getLine(i).getConditions().getConditionsList().Count > 0
                     ? conditionsTex
@@ -114,7 +114,7 @@ public class OptionNodeEditor : ConversationNodeEditor {
         }
 
         EditorGUILayout.BeginHorizontal ();
-        GUIContent bttext = new GUIContent("Add Option / Add Child");
+        GUIContent bttext = new GUIContent(TC.get("ConversationEditor.AddOptionChild"));
         Rect btrect = GUILayoutUtility.GetRect(bttext, style);      
         if(GUI.Button(btrect,bttext)){
             myNode.addLine(new ConversationLine("Player",""));

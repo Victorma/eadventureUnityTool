@@ -6,7 +6,7 @@ public class ChapterNewNameInputPopup : BaseInputPopup
 {
     void OnGUI()
     {
-        EditorGUILayout.LabelField("Type the name of new chapter", EditorStyles.wordWrappedLabel);
+        EditorGUILayout.LabelField(TC.get("Operation.AddChapterMessage"), EditorStyles.wordWrappedLabel);
 
         GUILayout.Space(30);
 
@@ -26,7 +26,7 @@ public class ChapterNewNameInputPopup : BaseInputPopup
             this.Close();
         }
         GUI.enabled = true;
-        if (GUILayout.Button("Cancel"))
+        if (GUILayout.Button(TC.get("GeneralText.Cancel")))
         {
             reference.OnDialogCanceled(this);
             this.Close();

@@ -6,7 +6,7 @@ public class ChapterFlagNameInputPopup : BaseInputPopup
 {
     void OnGUI()
     {
-        EditorGUILayout.LabelField("Type the name of variable: ", EditorStyles.wordWrappedLabel);
+        EditorGUILayout.LabelField(TC.get("Flags.AddFlagMessage"), EditorStyles.wordWrappedLabel);
 
         GUILayout.Space(30);
 
@@ -28,7 +28,7 @@ public class ChapterFlagNameInputPopup : BaseInputPopup
             this.Close();
         }
         GUI.enabled = true;
-        if (GUILayout.Button("Cancel"))
+        if (GUILayout.Button(TC.get("GeneralText.Cancel")))
         {
             reference.OnDialogCanceled();
             this.Close();

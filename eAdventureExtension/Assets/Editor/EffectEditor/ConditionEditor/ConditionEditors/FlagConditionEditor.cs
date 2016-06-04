@@ -5,8 +5,8 @@ using System;
 
 public class FlagConditionEditor : ConditionEditor {
     FlagCondition condition = new FlagCondition("");
-    string[] types = { "Active", "Inactive" };
-    string name = "Flag";
+    string[] types = { TC.get("Conditions.Flag.Active"), TC.get("Conditions.Flag.Inactive") };
+    string name = TC.get("Flags.Flag");
     private string[] flags;
 
     public FlagConditionEditor()
@@ -27,7 +27,7 @@ public class FlagConditionEditor : ConditionEditor {
         condition = c as FlagCondition;
 
         EditorGUILayout.BeginHorizontal ();
-        EditorGUILayout.LabelField ("Flag ID: ");
+        EditorGUILayout.LabelField (TC.get("Condition.FlagID"));
 
         if (Avaiable)
         {
@@ -37,7 +37,7 @@ public class FlagConditionEditor : ConditionEditor {
         }
         else
         {
-            EditorGUILayout.HelpBox("No flag in chapter! Add new flag!", MessageType.Error);
+            EditorGUILayout.HelpBox(TC.get("Condition.Flag.Warning"), MessageType.Error);
         }
 
         EditorGUILayout.EndHorizontal ();

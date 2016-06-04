@@ -7,7 +7,7 @@ public class SceneNameInputPopup : BaseInputPopup
 
     void OnGUI()
     {
-        EditorGUILayout.LabelField("Type the name of scene: ", EditorStyles.wordWrappedLabel);
+        EditorGUILayout.LabelField(TC.get("Scene.NewQuestion"), EditorStyles.wordWrappedLabel);
 
         GUILayout.Space(30);
 
@@ -21,7 +21,7 @@ public class SceneNameInputPopup : BaseInputPopup
             reference.OnDialogOk(textContent, this);
             this.Close();
         }
-        if (GUILayout.Button("Cancel"))
+        if (GUILayout.Button(TC.get("GeneralText.Cancel")))
         {
             reference.OnDialogCanceled();
             this.Close();

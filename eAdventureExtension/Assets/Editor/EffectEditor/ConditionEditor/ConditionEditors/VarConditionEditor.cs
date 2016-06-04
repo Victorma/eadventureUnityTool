@@ -6,7 +6,7 @@ using System;
 public class VarConditionEditor : ConditionEditor {
     VarCondition condition = new VarCondition("",4,0);
     string[] types = { " > ", " >= ", " == ", " <= ", " != "};
-    string name = "Variable";
+    string name = TC.get("Vars.Var");
     private string[] vars;
 
     public VarConditionEditor()
@@ -27,7 +27,7 @@ public class VarConditionEditor : ConditionEditor {
         condition = c as VarCondition;
 
         EditorGUILayout.BeginHorizontal ();
-        EditorGUILayout.LabelField ("Flag ID: ");
+        EditorGUILayout.LabelField (TC.get("Condition.VarID"));
 
         if (Avaiable)
         {
@@ -38,7 +38,7 @@ public class VarConditionEditor : ConditionEditor {
         }
         else
         {
-            EditorGUILayout.HelpBox("No vars in chapter! Add new var!", MessageType.Error);
+            EditorGUILayout.HelpBox(TC.get("Condition.Var.Warning"), MessageType.Error);
         }
 
         EditorGUILayout.EndHorizontal ();

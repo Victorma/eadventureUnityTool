@@ -51,7 +51,6 @@ public class ConversationNodeEditorFactoryImp : ConversationNodeEditorFactory {
 
 	public override ConversationNodeEditor createConversationNodeEditorFor (string nodeName)
 	{
-		Debug.Log("Create: " + nodeName);
 		foreach (ConversationNodeEditor nodeEditor in nodeEditors) {
 			if(nodeEditor.NodeName.ToLower() == nodeName.ToLower()){
 				return nodeEditor.clone();

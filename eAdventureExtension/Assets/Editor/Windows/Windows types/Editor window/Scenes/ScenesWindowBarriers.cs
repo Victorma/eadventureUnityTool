@@ -187,6 +187,6 @@ public class ScenesWindowBarriers : LayoutWindow, DialogReceiverInterface
 
     public void OnDialogCanceled(object workingObject = null)
     {
-        Debug.Log("Cancel");
+        Debug.Log(TC.get("GeneralText.Cancel"));
     }
 }

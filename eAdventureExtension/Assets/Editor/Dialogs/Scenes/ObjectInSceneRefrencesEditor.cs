@@ -115,7 +115,7 @@ public class ObjectInSceneRefrencesEditor : BaseAreaEditablePopup
         GUILayout.BeginHorizontal();
         GUILayout.Box("X", GUILayout.Width(0.33f*backgroundPreviewTex.width));
         GUILayout.Box("Y", GUILayout.Width(0.33f*backgroundPreviewTex.width));
-        GUILayout.Box("Scale", GUILayout.Width(0.3f*backgroundPreviewTex.width));
+        GUILayout.Box(TC.get("SceneLocation.Scale"), GUILayout.Width(0.3f*backgroundPreviewTex.width));
         GUILayout.EndHorizontal();
 
         GUILayout.BeginHorizontal();
@@ -145,7 +145,7 @@ public class ObjectInSceneRefrencesEditor : BaseAreaEditablePopup
             reference.OnDialogOk("Applied");
             this.Close();
         }
-        //if (GUILayout.Button("Cancel"))
+        //if (GUILayout.Button(TC.get("GeneralText.Cancel")))
         //{
         //    reference.OnDialogCanceled();
         //    this.Close();

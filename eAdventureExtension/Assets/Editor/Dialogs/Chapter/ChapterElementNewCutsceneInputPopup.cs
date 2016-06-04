@@ -17,14 +17,14 @@ public class ChapterElementNewCutsceneInputPopup : ChapterElementNameInputPopup
 
     void OnGUI()
     {
-        EditorGUILayout.LabelField("Select type of cutscene ");
+        EditorGUILayout.LabelField(TC.get("CutsceneTypes.Title"));
 
-        selectedSlide = GUILayout.Toggle(!selectedVideo, new GUIContent("Slidescene"));
-        selectedVideo = GUILayout.Toggle(!selectedSlide, new GUIContent("Videoscene"));
+        selectedSlide = GUILayout.Toggle(!selectedVideo, new GUIContent(TC.get("CutscenesList.Slidescene")));
+        selectedVideo = GUILayout.Toggle(!selectedSlide, new GUIContent(TC.get("CutsceneTypes.Video")));
 
         GUILayout.Space(50);
 
-        EditorGUILayout.LabelField("Type the name of Cutscene: ", EditorStyles.wordWrappedLabel);
+        EditorGUILayout.LabelField(TC.get("Cutscene.NewQuestion"), EditorStyles.wordWrappedLabel);
 
         GUILayout.Space(30);
 
@@ -49,7 +49,7 @@ public class ChapterElementNewCutsceneInputPopup : ChapterElementNameInputPopup
             this.Close();
         }
         GUI.enabled = true;
-        if (GUILayout.Button("Cancel"))
+        if (GUILayout.Button(TC.get("GeneralText.Cancel")))
         {
             reference.OnDialogCanceled(this);
             this.Close();

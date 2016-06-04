@@ -6,7 +6,7 @@ public class NewGameInputPopup : BaseInputPopup
 {
     void OnGUI()
     {
-        EditorGUILayout.LabelField("Type the name of new game", EditorStyles.boldLabel);
+        EditorGUILayout.LabelField(TC.get("NewGame.Question"), EditorStyles.boldLabel);
 
         GUILayout.Space(30);
 
@@ -15,19 +15,13 @@ public class NewGameInputPopup : BaseInputPopup
         GUILayout.Space(30);
 
         GUILayout.BeginHorizontal();
-        //TODO: validacja
-        // Disable button ok if name is not valid
-        //if (!Controller.getInstance().isElementIdValid(textContent, false))
-        //{
-        //    GUI.enabled = false;
-        //}
         if (GUILayout.Button("Ok"))
         {
             reference.OnDialogOk(textContent, this);
             this.Close();
         }
         GUI.enabled = true;
-        if (GUILayout.Button("Cancel"))
+        if (GUILayout.Button(TC.get("GeneralText.Cancel")))
         {
             reference.OnDialogCanceled(this);
             this.Close();

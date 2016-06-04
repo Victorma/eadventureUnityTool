@@ -53,7 +53,7 @@ public class ExitsAppearance : BaseInputPopup, DialogReceiverInterface
     {
         GUILayout.BeginHorizontal();
 
-        GUILayout.Label("Exit text: ");
+        GUILayout.Label(TC.get("Exit.ExitText"));
 
         GUILayout.Space(10);
 
@@ -78,7 +78,7 @@ public class ExitsAppearance : BaseInputPopup, DialogReceiverInterface
         {
             GUILayout.Label(noAudioTexture);
             GUILayout.Space(5);
-            GUILayout.Label("No audio");
+            GUILayout.Label(TC.get("Conversations.NoAudio"));
         }
         if (GUILayout.Button(TC.get("Buttons.Select")))
         {

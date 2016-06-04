@@ -114,8 +114,8 @@ public class ActiveAreasEditor : BaseAreaEditablePopup
         GUILayout.BeginHorizontal();
         GUILayout.Box("X", GUILayout.Width(0.25f*backgroundPreviewTex.width));
         GUILayout.Box("Y", GUILayout.Width(0.25f*backgroundPreviewTex.width));
-        GUILayout.Box("Width", GUILayout.Width(0.25f*backgroundPreviewTex.width));
-        GUILayout.Box("Height", GUILayout.Width(0.25f*backgroundPreviewTex.width));
+        GUILayout.Box(TC.get("SPEP.Width"), GUILayout.Width(0.25f*backgroundPreviewTex.width));
+        GUILayout.Box(TC.get("SPEP.Height"), GUILayout.Width(0.25f*backgroundPreviewTex.width));
         GUILayout.EndHorizontal();
 
         GUILayout.BeginHorizontal();
@@ -138,7 +138,7 @@ public class ActiveAreasEditor : BaseAreaEditablePopup
             reference.OnDialogOk("Applied");
             this.Close();
         }
-        //if (GUILayout.Button("Cancel"))
+        //if (GUILayout.Button(TC.get("GeneralText.Cancel")))
         //{
         //    reference.OnDialogCanceled();
         //    this.Close();

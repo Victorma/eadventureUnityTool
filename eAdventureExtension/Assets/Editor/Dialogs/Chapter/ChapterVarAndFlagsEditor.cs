@@ -32,8 +32,8 @@ public class ChapterVarAndFlagsEditor : BaseCreatorPopup, DialogReceiverInterfac
         flagsTex = (Texture2D) Resources.Load("EAdventureData/img/icons/flag16", typeof (Texture2D));
         varTex = (Texture2D) Resources.Load("EAdventureData/img/icons/vars", typeof (Texture2D));
 
-        flagContent = new GUIContent("Flags", flagsTex);
-        varContent = new GUIContent("Variables", varTex);
+        flagContent = new GUIContent(TC.get("Flags.Title"), flagsTex);
+        varContent = new GUIContent(TC.get("Vars.Title"), varTex);
 
         selectedButtonSkin = (GUISkin) Resources.Load("Editor/ButtonSelected", typeof (GUISkin));
         noBackgroundSkin = (GUISkin) Resources.Load("Editor/EditorNoBackgroundSkin", typeof (GUISkin));
@@ -81,10 +81,10 @@ public class ChapterVarAndFlagsEditor : BaseCreatorPopup, DialogReceiverInterfac
         GUILayout.Space(10);
         if (openedWindow == WindowType.FLAGS)
         {
-            GUILayout.Label("Flags");
+            GUILayout.Label(TC.get("Flags.Title"));
             GUILayout.BeginHorizontal();
-            GUILayout.Box("Flag name", GUILayout.Width(0.7f*windowWidth));
-            GUILayout.Box("References", GUILayout.Width(0.25f*windowWidth));
+            GUILayout.Box(TC.get("Flags.FlagName"), GUILayout.Width(0.7f*windowWidth));
+            GUILayout.Box(TC.get("Flags.FlagReferences"), GUILayout.Width(0.25f*windowWidth));
             GUILayout.EndHorizontal();
 
             scrollPosition = GUILayout.BeginScrollView(scrollPosition);
@@ -114,10 +114,10 @@ public class ChapterVarAndFlagsEditor : BaseCreatorPopup, DialogReceiverInterfac
         }
         else
         {
-            GUILayout.Label("Variables");
+            GUILayout.Label(TC.get("Vars.Title"));
             GUILayout.BeginHorizontal();
-            GUILayout.Box("Variable name", GUILayout.Width(0.7f*windowWidth));
-            GUILayout.Box("References", GUILayout.Width(0.25f*windowWidth));
+            GUILayout.Box(TC.get("Vars.FlagName"), GUILayout.Width(0.7f*windowWidth));
+            GUILayout.Box(TC.get("Vars.FlagReferences"), GUILayout.Width(0.25f*windowWidth));
             GUILayout.EndHorizontal();
 
             scrollPosition = GUILayout.BeginScrollView(scrollPosition);
@@ -154,24 +154,24 @@ public class ChapterVarAndFlagsEditor : BaseCreatorPopup, DialogReceiverInterfac
         GUILayout.BeginArea(addDeleteButtonRect);
         if (openedWindow == WindowType.FLAGS)
         {
-            if (GUILayout.Button("Add flag"))
+            if (GUILayout.Button(TC.get("Flags.AddFlag")))
             {
                 OnAddCliked();
             }
 
-            if (GUILayout.Button("Delete flag"))
+            if (GUILayout.Button(TC.get("Flags.DeleteFlag")))
             {
                 OnDeleteClicked();
             }
         }
         else
         {
-            if (GUILayout.Button("Add variable"))
+            if (GUILayout.Button(TC.get("Vars.AddVar")))
             {
                 OnAddCliked();
             }
 
-            if (GUILayout.Button("Delete variable"))
+            if (GUILayout.Button(TC.get("Vars.DeleteVar")))
             {
                 OnDeleteClicked();
             }

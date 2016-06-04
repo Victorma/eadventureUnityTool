@@ -25,7 +25,7 @@ public class ConfirmationDialog : EditorWindow
         GUILayout.Space(15);
         EditorGUILayout.LabelField(question, EditorStyles.boldLabel);
         GUILayout.Space(15);
-        EditorGUILayout.LabelField("Are you sure?", EditorStyles.wordWrappedLabel);
+        EditorGUILayout.LabelField("GeneralText.ConfirmationQuestion", EditorStyles.wordWrappedLabel);
 
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("OK"))
@@ -33,7 +33,7 @@ public class ConfirmationDialog : EditorWindow
             reference.OnDialogOk("", this);
             this.Close();
         }
-        if (GUILayout.Button("Cancel"))
+        if (GUILayout.Button(TC.get("GeneralText.Cancel")))
         {
             reference.OnDialogCanceled();
             this.Close();

@@ -16,7 +16,7 @@ public class ChapterElementNameInputPopup : BaseInputPopup
 
     void OnGUI()
     {
-        EditorGUILayout.LabelField("Type the name of " + Enum.GetName(typeof(EditorWindowBase.EditorWindowType), connectedAsssetType) +": ", EditorStyles.wordWrappedLabel);
+        EditorGUILayout.LabelField(TC.get("GeneralText.NameQuestionPrefix") + Enum.GetName(typeof(EditorWindowBase.EditorWindowType), connectedAsssetType) +": ", EditorStyles.wordWrappedLabel);
 
         GUILayout.Space(30);
 
@@ -36,7 +36,7 @@ public class ChapterElementNameInputPopup : BaseInputPopup
             this.Close();
         }
         GUI.enabled = true;
-        if (GUILayout.Button("Cancel"))
+        if (GUILayout.Button(TC.get("GeneralText.Cancel")))
         {
             reference.OnDialogCanceled(this);
             this.Close();

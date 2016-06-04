@@ -393,7 +393,7 @@ public class ScenesWindowActiveAreas : LayoutWindow, DialogReceiverInterface
 
     public void OnDialogCanceled(object workingObject = null)
     {
-        Debug.Log("Cancel");
+        Debug.Log(TC.get("GeneralText.Cancel"));
     }
 
     #region Add item action options

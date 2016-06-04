@@ -96,8 +96,8 @@ public class ConditionEditorWindow : EditorWindow
 
 
         GUILayout.BeginVertical(conditionStyle);
-        GUILayout.Label("CONDITIONS");
-        if (GUILayout.Button("Add Block"))
+        GUILayout.Label(TC.get("Conditions.Title"));
+        if (GUILayout.Button(TC.get("Condition.AddBlock")))
         {
             conditions.add(new FlagCondition(""));
         }

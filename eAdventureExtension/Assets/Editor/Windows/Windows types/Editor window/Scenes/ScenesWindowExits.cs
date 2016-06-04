@@ -271,7 +271,7 @@ public class ScenesWindowExits : LayoutWindow, DialogReceiverInterface
 
     public void OnDialogCanceled(object workingObject = null)
     {
-        Debug.Log("Cancel");
+        Debug.Log(TC.get("GeneralText.Cancel"));
     }
 
     // Event called after change of selected exit

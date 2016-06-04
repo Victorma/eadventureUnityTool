@@ -16,7 +16,7 @@ public class ExitNewLinkTo : BaseChooseObjectPopup
 
     void OnGUI()
     {
-        EditorGUILayout.LabelField("Select exit scene target: ", EditorStyles.boldLabel);
+        EditorGUILayout.LabelField(TC.get("Exit.TargetScene"), EditorStyles.boldLabel);
 
         GUILayout.Space(20);
 
@@ -32,7 +32,7 @@ public class ExitNewLinkTo : BaseChooseObjectPopup
             this.Close();
         }
 
-        if (GUILayout.Button("Cancel"))
+        if (GUILayout.Button(TC.get("GeneralText.Cancel")))
         {
             reference.OnDialogCanceled();
             this.Close();

@@ -6,8 +6,8 @@ using System;
 public class GlobalStatesRefEditor : ConditionEditor
 {
     GlobalStateCondition condition = new GlobalStateCondition("");
-    string[] types = { "is satisfied", "is not satisfied" };
-    string name = "Global state";
+    string[] types = { TC.get("Conditions.ConditionGroup.Satisfied"), TC.get("Conditions.ConditionGroup.NotSatisfied") };
+    string name = TC.get("Element.Name54");
     private string[] states;
 
     public GlobalStatesRefEditor()
@@ -29,7 +29,7 @@ public class GlobalStatesRefEditor : ConditionEditor
         condition = c as GlobalStateCondition;
 
         EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField("Global state ID: ");
+        EditorGUILayout.LabelField(TC.get("Condition.GlobalStateID"));
         if (Avaiable)
         {
             int index = Array.IndexOf(states, c.getId());
@@ -39,7 +39,7 @@ public class GlobalStatesRefEditor : ConditionEditor
         }
         else
         {
-            EditorGUILayout.HelpBox("No global states in chapter! Add new global state!", MessageType.Error);
+            EditorGUILayout.HelpBox(TC.get("Condition.GlobalState.Warning"), MessageType.Error);
         }
         EditorGUILayout.EndHorizontal();
     }

@@ -22,7 +22,7 @@ public class ObjectAddSetItemReference : BaseChooseObjectPopup
 
     void OnGUI()
     {
-        EditorGUILayout.LabelField("Select set item reference: ", EditorStyles.boldLabel);
+        EditorGUILayout.LabelField(TC.get("Operation.AddAtrezzoReferenceMessage"), EditorStyles.boldLabel);
 
         GUILayout.Space(20);
 
@@ -40,7 +40,7 @@ public class ObjectAddSetItemReference : BaseChooseObjectPopup
         }
         GUI.enabled = true;
 
-        if (GUILayout.Button("Cancel"))
+        if (GUILayout.Button(TC.get("GeneralText.Cancel")))
         {
             reference.OnDialogCanceled();
             this.Close();

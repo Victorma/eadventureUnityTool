@@ -94,7 +94,7 @@ public class NewGameWindow : LayoutWindow//, DialogReceiverInterface
         }
         if (GUILayout.Button(TC.get("GeneralText.Cancel")))
         {
-            Debug.Log("Cancel" + selectedGameType);
+            Debug.Log(TC.get("GeneralText.Cancel") + selectedGameType);
         }
         GUILayout.EndHorizontal();
         GUILayout.EndArea();

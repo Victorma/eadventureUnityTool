@@ -6,7 +6,7 @@ public class BarrierNewName : BaseInputPopup
 {
     void OnGUI()
     {
-        EditorGUILayout.LabelField("Type the name of barrier: ", EditorStyles.wordWrappedLabel);
+        EditorGUILayout.LabelField(TC.get("Scene.NewBarrierQuestion"), EditorStyles.wordWrappedLabel);
 
         GUILayout.Space(30);
 
@@ -28,7 +28,7 @@ public class BarrierNewName : BaseInputPopup
             this.Close();
         }
         GUI.enabled = true;
-        if (GUILayout.Button("Cancel"))
+        if (GUILayout.Button(TC.get("GeneralText.Cancel")))
         {
             reference.OnDialogCanceled();
             this.Close();

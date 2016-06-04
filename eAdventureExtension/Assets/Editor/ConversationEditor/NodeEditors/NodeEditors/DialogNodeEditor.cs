@@ -75,7 +75,7 @@ public class DialogNodeEditor : ConversationNodeEditor {
 
         EditorGUILayout.BeginVertical();
 
-		EditorGUILayout.HelpBox("You have to add at least one", MessageType.None);
+		EditorGUILayout.HelpBox(TC.get("ConversationEditor.AtLeastOne"), MessageType.None);
 		bool infoShown = false;
 		if(myNode.getLineCount() > 0){
 			bool isScrolling = false;
@@ -90,11 +90,11 @@ public class DialogNodeEditor : ConversationNodeEditor {
 				//myNode.getLine(i).IsEntityFragment = EditorGUILayout.Toggle("Is entity: ", frg.IsEntityFragment);
 
 				bool showInfo = false;
-                EditorGUIUtility.labelWidth = GUI.skin.label.CalcSize(new GUIContent("Talker")).x;
-                myNode.getLine(i).setName(npc[EditorGUILayout.Popup("Talker",npc.IndexOf(myNode.getLine (i).getName ()), npc.ToArray())]);
+                EditorGUIUtility.labelWidth = GUI.skin.label.CalcSize(new GUIContent(TC.get("ConversationEditor.Speaker"))).x;
+                myNode.getLine(i).setName(npc[EditorGUILayout.Popup(TC.get("ConversationEditor.Speaker"),npc.IndexOf(myNode.getLine (i).getName ()), npc.ToArray())]);
 
-                EditorGUIUtility.labelWidth = GUI.skin.label.CalcSize(new GUIContent("Line")).x;
-                myNode.getLine(i).setText(EditorGUILayout.TextField("Line", myNode.getLine(i).getText(),GUILayout.Width(200)));
+                EditorGUIUtility.labelWidth = GUI.skin.label.CalcSize(new GUIContent(TC.get("ConversationEditor.Line"))).x;
+                myNode.getLine(i).setText(EditorGUILayout.TextField(TC.get("ConversationEditor.Line"), myNode.getLine(i).getText(),GUILayout.Width(200)));
 
                 tmpTex = (myNode.getLine(i).getConditions().getConditionsList().Count > 0
                     ? conditionsTex
@@ -116,25 +116,25 @@ public class DialogNodeEditor : ConversationNodeEditor {
 		}
 
 		
-		GUIContent bttext = new GUIContent("New Line");
+		GUIContent bttext = new GUIContent(TC.get("ConversationLine.DefaultText"));
 		Rect btrect = GUILayoutUtility.GetRect(bttext, style);		
 		if(GUI.Button(btrect,bttext)){
-            myNode.addLine(new ConversationLine("Player",""));
+            myNode.addLine(new ConversationLine(TC.get("ConversationLine.PlayerName"),""));
 		};
 
 
-        EditorGUILayout.HelpBox("Node options", MessageType.None);
+        EditorGUILayout.HelpBox(TC.get("ConversationEditor.NodeOption"), MessageType.None);
 
         EditorGUILayout.BeginHorizontal ();
         GUI.enabled = (myNode.getChildCount () == 0) || myNode.getType() == ConversationNodeViewEnum.OPTION;
-        bttext = new GUIContent ("Create child");
+        bttext = new GUIContent (TC.get("ConversationEditor.CreateChild"));
         btrect = GUILayoutUtility.GetRect (bttext, buttonstyle);      
         if (GUI.Button (btrect, bttext)) {
             parent.addChild (myNode, new DialogueConversationNode ());
         }
         GUI.enabled = true;
 
-        bttext = new GUIContent ("Set child");
+        bttext = new GUIContent (TC.get("ConversationEditor.SetChild"));
         btrect = GUILayoutUtility.GetRect (bttext, buttonstyle);      
         if (GUI.Button (btrect, bttext)){
             parent.startSetChild (this.myNode, 0);

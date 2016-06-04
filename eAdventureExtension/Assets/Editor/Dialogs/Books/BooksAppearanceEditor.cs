@@ -122,8 +122,8 @@ public class BooksAppearanceEditor : BaseAreaEditablePopup
 
 
         GUILayout.BeginHorizontal();
-        GUILayout.Box("Previous page", GUILayout.Width(0.5f*backgroundPreviewTex.width));
-        GUILayout.Box("Next page", GUILayout.Width(0.5f*backgroundPreviewTex.width));
+        GUILayout.Box(TC.get("Book.Previous"), GUILayout.Width(0.5f*backgroundPreviewTex.width));
+        GUILayout.Box(TC.get("Book.Next"), GUILayout.Width(0.5f*backgroundPreviewTex.width));
         GUILayout.EndHorizontal();
 
 

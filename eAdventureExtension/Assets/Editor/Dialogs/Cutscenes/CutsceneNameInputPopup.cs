@@ -20,7 +20,7 @@ public class CutsceneNameInputPopup : BaseInputPopup
 
     void OnGUI()
     {
-        EditorGUILayout.LabelField("Please write filename for the animation (without extension) ",
+        EditorGUILayout.LabelField(TC.get("Animation.AskFilename"),
             EditorStyles.wordWrappedLabel);
 
         GUILayout.Space(30);
@@ -45,7 +45,7 @@ public class CutsceneNameInputPopup : BaseInputPopup
             this.Close();
         }
         GUI.enabled = true;
-        if (GUILayout.Button("Cancel"))
+        if (GUILayout.Button(TC.get("GeneralText.Cancel")))
         {
             reference.OnDialogCanceled();
             this.Close();

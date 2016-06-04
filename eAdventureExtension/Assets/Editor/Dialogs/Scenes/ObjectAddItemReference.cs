@@ -24,7 +24,7 @@ public class ObjectAddItemReference : BaseChooseObjectPopup
 
     void OnGUI()
     {
-        EditorGUILayout.LabelField("Select item reference: ", EditorStyles.boldLabel);
+        EditorGUILayout.LabelField(TC.get("Operation.AddItemReferenceMessage"), EditorStyles.boldLabel);
 
         GUILayout.Space(20);
 
@@ -43,7 +43,7 @@ public class ObjectAddItemReference : BaseChooseObjectPopup
         }
         GUI.enabled = true;
 
-        if (GUILayout.Button("Cancel"))
+        if (GUILayout.Button(TC.get("GeneralText.Cancel")))
         {
             reference.OnDialogCanceled();
             this.Close();

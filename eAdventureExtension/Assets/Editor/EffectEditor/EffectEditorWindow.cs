@@ -95,7 +95,7 @@ public class EffectEditorWindow : EditorWindow
 
         if (editor != null && editor.Collapsed)
         {
-            if (GUILayout.Button("Open"))
+            if (GUILayout.Button(TC.get("GeneralText.Open")))
                 editor.Collapsed = false;
         }
         else

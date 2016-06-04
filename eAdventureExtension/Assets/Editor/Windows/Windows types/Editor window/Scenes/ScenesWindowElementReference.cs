@@ -234,7 +234,7 @@ public class ScenesWindowElementReference : LayoutWindow, DialogReceiverInterfac
 
     public void OnDialogCanceled(object workingObject = null)
     {
-        Debug.Log("Cancel");
+        Debug.Log(TC.get("GeneralText.Cancel"));
     }
 
     #region Add ref action options
@@ -302,7 +302,7 @@ public class ScenesWindowElementReference : LayoutWindow, DialogReceiverInterfac
 
         public void OnDialogCanceled(object workingObject = null)
         {
-            Debug.Log("Cancel");
+            Debug.Log(TC.get("GeneralText.Cancel"));
         }
     }
 
@@ -335,7 +335,7 @@ public class ScenesWindowElementReference : LayoutWindow, DialogReceiverInterfac
 
         public void OnDialogCanceled(object workingObject = null)
         {
-            Debug.Log("Cancel");
+            Debug.Log(TC.get("GeneralText.Cancel"));
         }
     }
 
@@ -367,7 +367,7 @@ public class ScenesWindowElementReference : LayoutWindow, DialogReceiverInterfac
 
         public void OnDialogCanceled(object workingObject = null)
         {
-            Debug.Log("Cancel");
+            Debug.Log(TC.get("GeneralText.Cancel"));
         }
     }
 

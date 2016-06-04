@@ -24,7 +24,7 @@ public class ObjectAddNPCReference : BaseChooseObjectPopup
 
     void OnGUI()
     {
-        EditorGUILayout.LabelField("Select NPC reference: ", EditorStyles.boldLabel);
+        EditorGUILayout.LabelField(TC.get("Operation.AddNPCReferenceMessage"), EditorStyles.boldLabel);
 
         GUILayout.Space(20);
 
@@ -43,7 +43,7 @@ public class ObjectAddNPCReference : BaseChooseObjectPopup
         }
         GUI.enabled = true;
 
-        if (GUILayout.Button("Cancel"))
+        if (GUILayout.Button(TC.get("GeneralText.Cancel")))
         {
             reference.OnDialogCanceled();
             this.Close();

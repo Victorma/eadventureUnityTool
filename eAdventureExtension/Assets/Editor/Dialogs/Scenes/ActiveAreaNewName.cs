@@ -6,7 +6,7 @@ public class ActiveAreaNewName : BaseInputPopup
 {
     void OnGUI()
     {
-        EditorGUILayout.LabelField("Type the name of active area: ", EditorStyles.wordWrappedLabel);
+        EditorGUILayout.LabelField(TC.get("Scene.NewActiveAreaQuestion"), EditorStyles.wordWrappedLabel);
 
         GUILayout.Space(30);
 
@@ -28,7 +28,7 @@ public class ActiveAreaNewName : BaseInputPopup
                 this.Close();
         }
         GUI.enabled = true;
-        if (GUILayout.Button("Cancel"))
+        if (GUILayout.Button(TC.get("GeneralText.Cancel")))
         {
             reference.OnDialogCanceled();
             this.Close();

@@ -92,16 +92,16 @@ public class CutsceneSlidesEditor : BaseCreatorPopup, DialogReceiverInterface
         GUILayout.BeginArea(animInfoRect);
 
         GUILayout.BeginVertical();
-        GUILayout.Label("Documentation ");
+        GUILayout.Label(TC.get("Animation.Documentation"));
         GUILayout.Space(5);
         documentationTextContent = GUILayout.TextField(documentationTextContent);
         GUILayout.EndVertical();
 
         GUILayout.BeginVertical();
-        useTransitonFlag = GUILayout.Toggle(useTransitonFlag, "Use transitions");
+        useTransitonFlag = GUILayout.Toggle(useTransitonFlag, TC.get("Animation.UseTransitions"));
         if (useTransitonFlag != useTransitonFlagLast)
             OnUseTransitonFlagLastChanged(useTransitonFlag);
-        slidesAnimationFlag = GUILayout.Toggle(slidesAnimationFlag, "Slides animation");
+        slidesAnimationFlag = GUILayout.Toggle(slidesAnimationFlag, TC.get("Animation.Slides"));
         if (slidesAnimationFlag != slidesAnimationFlagLast)
             OnSlidesAnimationFlagLastChanged(slidesAnimationFlag);
         GUILayout.EndVertical();
@@ -178,7 +178,7 @@ public class CutsceneSlidesEditor : BaseCreatorPopup, DialogReceiverInterface
         GUILayout.BeginArea(frameInfoRect);
 
         GUILayout.BeginHorizontal();
-        GUILayout.Label("Frame duration (ms)");
+        GUILayout.Label(TC.get("Animation.Duration"));
         animationDurationString = GUILayout.TextField(animationDurationString);
         animationDurationString = (Regex.Match(animationDurationString, "^[0-9]{1,4}$").Success
             ? animationDurationString
@@ -189,7 +189,7 @@ public class CutsceneSlidesEditor : BaseCreatorPopup, DialogReceiverInterface
         GUILayout.EndHorizontal();
 
         GUILayout.BeginHorizontal();
-        GUILayout.Label("Image ");
+        GUILayout.Label(TC.get("Animation.Image"));
         GUILayout.Box(imagePath, GUILayout.MinWidth(0.3f * windowWidth));
         if (GUILayout.Button(TC.get("Buttons.Select")))
         {
@@ -200,7 +200,7 @@ public class CutsceneSlidesEditor : BaseCreatorPopup, DialogReceiverInterface
         GUILayout.EndHorizontal();
 
         GUILayout.BeginHorizontal();
-        GUILayout.Label("Sound ");
+        GUILayout.Label(TC.get("Animation.Sound"));
         GUILayout.Space(5);
         if (GUILayout.Button(clearImg))
         {
@@ -215,7 +215,7 @@ public class CutsceneSlidesEditor : BaseCreatorPopup, DialogReceiverInterface
         GUILayout.EndHorizontal();
         GUILayout.Space(20);
         GUILayout.BeginHorizontal();
-        GUILayout.Label("Transition duration (ms)");
+        GUILayout.Label(TC.get("NextScene.Transition") + " " + TC.get("Animation.Duration"));
         transitionDurationString = GUILayout.TextField(transitionDurationString);
         transitionDurationString = (Regex.Match(transitionDurationString, "^[0-9]{1,4}$").Success
             ? transitionDurationString
@@ -237,7 +237,7 @@ public class CutsceneSlidesEditor : BaseCreatorPopup, DialogReceiverInterface
             reference.OnDialogOk("", this);
             this.Close();
         }
-        if (GUILayout.Button("Cancel"))
+        if (GUILayout.Button(TC.get("GeneralText.Cancel")))
         {
             reference.OnDialogCanceled();
             this.Close();

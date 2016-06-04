@@ -140,10 +140,10 @@ public class PlayerMovementEditor : BaseAreaEditablePopup
         /*
         * Properties part
         */
-        GUILayout.Label("Use trajectory or initial position");
+        GUILayout.Label(TC.get("Scene.UseTrajectoryPanel"));
         GUILayout.Space(5);
-        useTrajectory = GUILayout.Toggle(!useInitialPosition, new GUIContent("Use trajectory"));
-        useInitialPosition = GUILayout.Toggle(!useTrajectory, new GUIContent("Use initial position"));
+        useTrajectory = GUILayout.Toggle(!useInitialPosition, new GUIContent(TC.get("Scene.UseTrajectory")));
+        useInitialPosition = GUILayout.Toggle(!useTrajectory, new GUIContent(TC.get("Scene.UseInitialPosition")));
         if (useInitialPosition != useInitialPositionLast)
             OnMovementTypeChange(useInitialPosition);
         GUILayout.Space(5);
@@ -167,7 +167,7 @@ public class PlayerMovementEditor : BaseAreaEditablePopup
             GUILayout.BeginHorizontal();
             GUILayout.Box("X", GUILayout.Width(0.33f*backgroundPreviewTex.width));
             GUILayout.Box("Y", GUILayout.Width(0.33f*backgroundPreviewTex.width));
-            GUILayout.Box("Scale", GUILayout.Width(0.3f*backgroundPreviewTex.width));
+            GUILayout.Box(TC.get("SceneLocation.Scale"), GUILayout.Width(0.3f*backgroundPreviewTex.width));
             GUILayout.EndHorizontal();
 
 
