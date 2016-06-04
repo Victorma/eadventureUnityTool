@@ -83,7 +83,7 @@ public class ItemsWindowAppearance : LayoutWindow, DialogReceiverInterface
     {
         GUILayout.BeginArea(appearanceTableRect);
         GUILayout.BeginHorizontal();
-        GUILayout.Box("Appearance block", GUILayout.Width(windowWidth * 0.44f));
+        GUILayout.Box(TC.get("Item.LookPanelTitle"), GUILayout.Width(windowWidth * 0.44f));
         GUILayout.Box(TC.get("Conditions.Title"), GUILayout.Width(windowWidth * 0.44f));
         GUILayout.EndHorizontal();
         scrollPosition = GUILayout.BeginScrollView(scrollPosition);
@@ -164,7 +164,7 @@ public class ItemsWindowAppearance : LayoutWindow, DialogReceiverInterface
 
         GUILayout.BeginArea(propertiesTable);
         // Background chooser
-        GUILayout.Label("Image of the item");
+        GUILayout.Label(TC.get("Resources.DescriptionItemImage"));
         GUILayout.BeginHorizontal();
         if (GUILayout.Button(clearTex, GUILayout.Width(0.05f * windowWidth)))
         {
@@ -178,7 +178,7 @@ public class ItemsWindowAppearance : LayoutWindow, DialogReceiverInterface
         GUILayout.EndHorizontal();
 
         // Icon chooser
-        GUILayout.Label("Inventory icon of the item");
+        GUILayout.Label(TC.get("Resources.DescriptionItemIcon"));
         GUILayout.BeginHorizontal();
         if (GUILayout.Button(clearTex, GUILayout.Width(0.05f * windowWidth)))
         {
@@ -192,7 +192,7 @@ public class ItemsWindowAppearance : LayoutWindow, DialogReceiverInterface
         GUILayout.EndHorizontal();
 
         // Image over chooser
-        GUILayout.Label("Image when the mouse is over the item");
+        GUILayout.Label(TC.get("Resources.DescriptionItemImageOver"));
         GUILayout.BeginHorizontal();
         if (GUILayout.Button(clearTex, GUILayout.Width(0.05f * windowWidth)))
         {

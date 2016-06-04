@@ -130,7 +130,7 @@ public class ItemsWindowActions : LayoutWindow
 
                 if (Controller.getInstance().playerMode() == Controller.FILE_ADVENTURE_1STPERSON_PLAYER)
                 {
-                    if (GUILayout.Button("Not relevant", GUILayout.Width(windowWidth*0.39f)))
+                    if (GUILayout.Button(TC.get("ActionsList.NotRelevant"), GUILayout.Width(windowWidth*0.39f)))
                     {
                         OnActionSelectionChange(i);
                     }
@@ -157,8 +157,6 @@ public class ItemsWindowActions : LayoutWindow
 
                 if (GUILayout.Button(tmpTex, GUILayout.Width(windowWidth*0.1f)))
                 {
-                    //TODO: condition editor
-                    Debug.Log("SHOW editor");
                     ConditionEditorWindow window =
                         (ConditionEditorWindow) ScriptableObject.CreateInstance(typeof (ConditionEditorWindow));
                     window.Init(Controller.getInstance().getSelectedChapterDataControl().getItemsList().getItems()[
@@ -177,7 +175,7 @@ public class ItemsWindowActions : LayoutWindow
 
                 if (Controller.getInstance().playerMode() == Controller.FILE_ADVENTURE_1STPERSON_PLAYER)
                 {
-                    if (GUILayout.Button("Not relevant", GUILayout.Width(windowWidth*0.39f)))
+                    if (GUILayout.Button(TC.get("ActionsList.NotRelevant"), GUILayout.Width(windowWidth*0.39f)))
                     {
                         OnActionSelectionChange(i);
                     }
@@ -245,7 +243,7 @@ public class ItemsWindowActions : LayoutWindow
         GUILayout.EndArea();
 
         GUILayout.BeginArea(descriptionRect);
-        GUILayout.Label("Full description of the action");
+        GUILayout.Label(TC.get("Action.Documentation"));
         GUILayout.Space(20);
         documentation = GUILayout.TextArea(documentation);
         if (!documentation.Equals(documentationLast))
@@ -384,16 +382,16 @@ public class ItemsWindowActions : LayoutWindow
 
             useAction = new AddUseAction(TC.get("TreeNode.AddElement23"));
             examineAction = new AddExamineAction(TC.get("TreeNode.AddElement21"));
-            grabAction = new AddGrabAction("Add \"Grab\" action");
+            grabAction = new AddGrabAction(TC.get("TreeNode.AddElement22"));
             customAction = new AddCustomAction("Add \"Custom\" action");
-            useWithAction = new AddUseWithAction("Add \"Use with...\" action");
-            giveToAction = new AddGiveToAction("Add \"Give to...\" action");
+            useWithAction = new AddUseWithAction(TC.get("TreeNode.AddElement24"));
+            giveToAction = new AddGiveToAction(TC.get("TreeNode.AddElement25"));
             dragToAction = new AddDragToAction(TC.get("TreeNode.AddElement251"));
 
             menu.AddItem(new GUIContent(useAction.Label), false, Callback, useAction);
             menu.AddItem(new GUIContent(examineAction.Label), false, Callback, examineAction);
             menu.AddItem(new GUIContent(grabAction.Label), false, Callback, grabAction);
-            menu.AddItem(new GUIContent(customAction.Label), false, Callback, customAction);
+           // menu.AddItem(new GUIContent(customAction.Label), false, Callback, customAction);
             menu.AddItem(new GUIContent(useWithAction.Label), false, Callback, useWithAction);
             menu.AddItem(new GUIContent(giveToAction.Label), false, Callback, giveToAction);
             menu.AddItem(new GUIContent(dragToAction.Label), false, Callback, dragToAction);

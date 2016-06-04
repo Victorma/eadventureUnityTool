@@ -211,7 +211,7 @@ public class ScenesWindowActiveAreas : LayoutWindow, DialogReceiverInterface
                         GUILayout.Width(windowWidth*0.39f));
                     if (Controller.getInstance().playerMode() == Controller.FILE_ADVENTURE_1STPERSON_PLAYER)
                     {
-                        if (GUILayout.Button("Not relevant", GUILayout.Width(windowWidth*0.39f)))
+                        if (GUILayout.Button(TC.get("ActionsList.NotRelevant"), GUILayout.Width(windowWidth*0.39f)))
                         {
                             selectedAction = i;
                         }
@@ -293,7 +293,7 @@ public class ScenesWindowActiveAreas : LayoutWindow, DialogReceiverInterface
 
                     if (Controller.getInstance().playerMode() == Controller.FILE_ADVENTURE_1STPERSON_PLAYER)
                     {
-                        if (GUILayout.Button("Not relevant", GUILayout.Width(windowWidth*0.39f)))
+                        if (GUILayout.Button(TC.get("ActionsList.NotRelevant"), GUILayout.Width(windowWidth*0.39f)))
                         {
                             selectedAction = i;
                         }
@@ -441,7 +441,7 @@ public class ScenesWindowActiveAreas : LayoutWindow, DialogReceiverInterface
 
             useAction = new AddUseAction(TC.get("TreeNode.AddElement23"));
             examineAction = new AddExamineAction(TC.get("TreeNode.AddElement21"));
-            grabAction = new AddGrabAction("Add \"Grab\" action");
+            grabAction = new AddGrabAction(TC.get("TreeNode.AddElement22"));
             customAction = new AddCustomAction("Add \"Custom\" action");
 
 

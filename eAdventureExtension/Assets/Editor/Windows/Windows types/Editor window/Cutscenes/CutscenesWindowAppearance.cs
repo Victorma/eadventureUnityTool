@@ -143,7 +143,7 @@ public class CutscenesWindowAppearance : LayoutWindow, DialogReceiverInterface
 
         GUILayout.Space(30);
 
-        GUILayout.Label("Preview");
+        GUILayout.Label(TC.get("ImageAssets.Preview"));
         if (Controller.getInstance().getSelectedChapterDataControl().getCutscenesList().getCutscenes()[
             GameRources.GetInstance().selectedCutsceneIndex].isVideoscene())
         {

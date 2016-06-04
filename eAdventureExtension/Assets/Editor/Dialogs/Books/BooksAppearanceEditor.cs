@@ -114,7 +114,7 @@ public class BooksAppearanceEditor : BaseAreaEditablePopup
         GUILayout.EndScrollView();
 
         // Default arrow positions
-        if (GUILayout.Button("Default"))
+        if (GUILayout.Button(TC.get("Behaviour.Normal")))
         {
             OnDefaultClicked();
         }

@@ -36,7 +36,7 @@ public class SetItemsWindowApperance : LayoutWindow, DialogReceiverInterface
     public override void Draw(int aID)
     {
         // Background chooser
-        GUILayout.Label("Image of the item");
+        GUILayout.Label(TC.get("Resources.DescriptionItemImage"));
 
         GUILayout.BeginHorizontal();
         if (GUILayout.Button(clearImg, GUILayout.Width(0.1f*windowWidth)))
@@ -54,7 +54,7 @@ public class SetItemsWindowApperance : LayoutWindow, DialogReceiverInterface
 
         GUILayout.FlexibleSpace();
 
-        GUILayout.Label("Preview");
+        GUILayout.Label(TC.get("ImageAssets.Preview"));
 
         if (pathToImg != "")
         {

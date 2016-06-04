@@ -48,12 +48,11 @@ public class ItemsWindowDescription : LayoutWindow, DialogReceiverInterface
     */
     private bool dragdropToogle, dragdropToogleLast;
 
-    private string[] behaviourTypes = {"Default", "First action"};
+    private string[] behaviourTypes = {TC.get("Behaviour.Normal"), TC.get("Behaviour.FirstAction") };
 
     private string[] behaviourTypesDescription =
     {
-        "In this case the object responds to mouse clicks as usual. The actions available or the description (brief) are shown on the screen, depending on the general settings of the adventure (see Adventure settings in the Menu \"Adventure\").",
-        "In this case the object simulates the behaviour of a button. After a click, the first valid action of the object will be triggered. That is, the first action which conditions are met."
+       TC.get("Behaviour.Selection.Normal"), TC.get("Behaviour.Selection.FirstAction")
     };
 
     private int selectedBehaviourType, selectedBehaviourTypeLast;
@@ -111,7 +110,7 @@ public class ItemsWindowDescription : LayoutWindow, DialogReceiverInterface
     public override void Draw(int aID)
     {
         GUILayout.BeginArea(descriptionRect);
-        GUILayout.Label("Full description of the item");
+        GUILayout.Label(TC.get("Item.Documentation"));
         fullItemDescription = GUILayout.TextField(fullItemDescription);
         if (!fullItemDescription.Equals(fullItemDescriptionLast))
             OnItemDescriptionChanged(fullItemDescription);
@@ -161,8 +160,6 @@ public class ItemsWindowDescription : LayoutWindow, DialogReceiverInterface
                 }
                 if (GUILayout.Button(tmpTex, GUILayout.Width(windowWidth*0.44f)))
                 {
-                    //TODO: condition editor
-                    Debug.Log("SHOW editor");
                     ConditionEditorWindow window =
                         (ConditionEditorWindow) ScriptableObject.CreateInstance(typeof (ConditionEditorWindow));
                     window.Init(
@@ -225,7 +222,7 @@ public class ItemsWindowDescription : LayoutWindow, DialogReceiverInterface
         GUILayout.BeginArea(settingsTable);
 
 
-        GUILayout.Label("Name");
+        GUILayout.Label(TC.get("Item.Name"));
         GUILayout.BeginHorizontal();
         descriptionName = GUILayout.TextField(descriptionName, GUILayout.MaxWidth(0.6f*windowWidth));
         if (!descriptionName.Equals(descriptionNameLast))
@@ -246,7 +243,7 @@ public class ItemsWindowDescription : LayoutWindow, DialogReceiverInterface
         }
         GUILayout.EndHorizontal();
 
-        GUILayout.Label(TC.get("NPC.Description"));
+        GUILayout.Label(TC.get("Item.Description"));
         GUILayout.BeginHorizontal();
         briefDescription = GUILayout.TextField(briefDescription, GUILayout.MaxWidth(0.6f * windowWidth));
         if (!briefDescription.Equals(briefDescriptionLast))
@@ -267,7 +264,7 @@ public class ItemsWindowDescription : LayoutWindow, DialogReceiverInterface
         }
         GUILayout.EndHorizontal();
 
-        GUILayout.Label("Detailed description");
+        GUILayout.Label(TC.get("Item.DetailedDescription"));
         GUILayout.BeginHorizontal();
         detailedDescription = GUILayout.TextField(detailedDescription, GUILayout.MaxWidth(0.6f * windowWidth));
         if (!detailedDescription.Equals(detailedDescriptionLast))
@@ -290,16 +287,15 @@ public class ItemsWindowDescription : LayoutWindow, DialogReceiverInterface
 
         GUILayout.FlexibleSpace();
 
-        GUILayout.Label("Drag&Drop: Return to original position");
-        GUILayout.Box(
-            "If the checkbox below is activated, the item will return to its original position after being dragged to a different element. If it is not checked, it will remain on the location where it was dropped.");
-        dragdropToogle = GUILayout.Toggle(dragdropToogle, "Objects returns to its original position after being dragged");
+        GUILayout.Label(TC.get("Item.ReturnsWhenDragged.Title"));
+        GUILayout.Box(TC.get("Item.ReturnsWhenDragged.Description"));
+        dragdropToogle = GUILayout.Toggle(dragdropToogle, TC.get("Item.ReturnsWhenDragged"));
         if (dragdropToogle != dragdropToogleLast)
             OnDragAndDropToogleValueChange(dragdropToogle);
 
         GUILayout.FlexibleSpace();
 
-        GUILayout.Label("Behaviour (response to mouse clicks)");
+        GUILayout.Label(TC.get("Behaviour"));
         GUILayout.BeginHorizontal();
         selectedBehaviourType = EditorGUILayout.Popup(selectedBehaviourType, behaviourTypes,
             GUILayout.MaxWidth(0.2f*windowWidth));
@@ -310,9 +306,8 @@ public class ItemsWindowDescription : LayoutWindow, DialogReceiverInterface
 
         GUILayout.FlexibleSpace();
 
-        GUILayout.Label("Transition when the appearance changes");
-        GUILayout.Box(
-            "Use the control below to adjust the visual transition when the image of the object varies. If the value provided (in milliseconds) is greater than zero, the images are combined for a while to make the transition softer.");
+        GUILayout.Label(TC.get("Resources.TransitionTime"));
+        GUILayout.Box(TC.get("Resources.TransitionTime.Description"));
         transitionTime = GUILayout.TextField(transitionTime);
         transitionTime = (Regex.Match(transitionTime, "^[0-9]{1,3}$").Success ? transitionTime : transitionTimeLast);
         if (!transitionTime.Equals(transitionTimeLast))
