@@ -255,7 +255,7 @@ public class ItemsWindowActions : LayoutWindow
         GUILayout.BeginArea(effectsRect);
         if (selectedAction < 0)
             GUI.enabled = false;
-        if (GUILayout.Button("Show effects editor"))
+        if (GUILayout.Button(TC.get("Element.Effects")))
         {
             EffectEditorWindow window =
                 (EffectEditorWindow) ScriptableObject.CreateInstance(typeof (EffectEditorWindow));

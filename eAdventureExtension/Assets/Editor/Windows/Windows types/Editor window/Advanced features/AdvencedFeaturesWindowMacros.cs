@@ -49,7 +49,7 @@ public class AdvencedFeaturesWindowMacros : LayoutWindow
     public override void Draw(int aID)
     {
         GUILayout.BeginArea(macroTableRect);
-        GUILayout.Box("Macro ID", GUILayout.Width(0.85f * windowWidth));
+        GUILayout.Box(TC.get("MacrosList.ID"), GUILayout.Width(0.85f * windowWidth));
 
         scrollPosition = GUILayout.BeginScrollView(scrollPosition);
         for (int i = 0;
@@ -110,7 +110,7 @@ public class AdvencedFeaturesWindowMacros : LayoutWindow
         {
             GUILayout.Space(10);
             GUILayout.BeginArea(descriptionRect);
-            GUILayout.Label("Full description of the macro");
+            GUILayout.Label(TC.get("Macro.Documentation"));
             GUILayout.Space(10);
             macroDocumentation = GUILayout.TextArea(macroDocumentation, GUILayout.MinHeight(0.15f * windowHeight));
             if (!macroDocumentation.Equals(macroDocumentationLast))
@@ -118,9 +118,13 @@ public class AdvencedFeaturesWindowMacros : LayoutWindow
             GUILayout.EndArea();
 
             GUILayout.BeginArea(effectsRect);
-            if (GUILayout.Button("Show effects editor"))
+            if (GUILayout.Button(TC.get("Element.Effects")))
             {
-                Debug.Log("Show effect editor");
+                EffectEditorWindow window =
+                (EffectEditorWindow)ScriptableObject.CreateInstance(typeof(EffectEditorWindow));
+                window.Init(Controller.getInstance()
+                    .getSelectedChapterDataControl()
+                    .getMacrosListDataControl().getMacros()[selectedMacro].getController());
             }
             GUILayout.EndArea();
         }

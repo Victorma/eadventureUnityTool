@@ -47,7 +47,7 @@ public class AdvencedFeaturesWindowGlobalStates : LayoutWindow
     {
 
         GUILayout.BeginArea(globalStatesTableRect);
-        GUILayout.Box("Global state ID", GUILayout.Width(0.85f * windowWidth));
+        GUILayout.Box(TC.get("GlobalStatesList.ID"), GUILayout.Width(0.85f * windowWidth));
 
         scrollPosition = GUILayout.BeginScrollView(scrollPosition);
         for (int i = 0;
@@ -108,7 +108,7 @@ public class AdvencedFeaturesWindowGlobalStates : LayoutWindow
         {
             GUILayout.Space(10);
             GUILayout.BeginArea(descriptionRect);
-            GUILayout.Label("Full description of the global state");
+            GUILayout.Label(TC.get("GlobalState.Documentation"));
             GUILayout.Space(10);
             globalStateDocumentation = GUILayout.TextArea(globalStateDocumentation, GUILayout.MinHeight(0.15f*windowHeight));
             if (!globalStateDocumentation.Equals(globalStateDocumentationLast))
@@ -116,9 +116,13 @@ public class AdvencedFeaturesWindowGlobalStates : LayoutWindow
             GUILayout.EndArea();
 
             GUILayout.BeginArea(conditionsRect);
-            if (GUILayout.Button("Show conditions editor"))
+            if (GUILayout.Button(TC.get("GlobalState.Conditions")))
             {
-                Debug.Log("Show conditions editor");
+                ConditionEditorWindow window =
+                        (ConditionEditorWindow)ScriptableObject.CreateInstance(typeof(ConditionEditorWindow));
+                window.Init(Controller.getInstance()
+                    .getSelectedChapterDataControl()
+                    .getGlobalStatesListDataControl().getGlobalStates()[selectedGlobalState].getController());
             }
             GUILayout.EndArea();
         }

@@ -152,7 +152,7 @@ public class ScenesWindowExits : LayoutWindow, DialogReceiverInterface
                     window.Init(Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
                         GameRources.GetInstance().selectedSceneIndex].getExitsList().getExitsList()[i].getConditions());
                 }
-                if (GUILayout.Button("Edit effects", GUILayout.Width(windowWidth*0.14f)))
+                if (GUILayout.Button(TC.get("GeneralText.EditEffects"), GUILayout.Width(windowWidth*0.14f)))
                 {
                     EffectEditorWindow window =
                         (EffectEditorWindow) ScriptableObject.CreateInstance(typeof (EffectEditorWindow));

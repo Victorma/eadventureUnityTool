@@ -57,9 +57,9 @@ public class AdvencedFeaturesWindowListOfTimers : LayoutWindow
         GUILayout.BeginArea(timerTableRect);
 
         GUILayout.BeginHorizontal();
-        GUILayout.Box("Timer", GUILayout.MaxWidth(windowWidth*0.3f));
-        GUILayout.Box("Time", GUILayout.MaxWidth(windowWidth*0.3f));
-        GUILayout.Box("Display in game", GUILayout.MaxWidth(windowWidth*0.3f));
+        GUILayout.Box(TC.get("TimersList.Timer"), GUILayout.MaxWidth(windowWidth*0.3f));
+        GUILayout.Box(TC.get("TimersList.Time"), GUILayout.MaxWidth(windowWidth*0.3f));
+        GUILayout.Box(TC.get("TimersList.Display"), GUILayout.MaxWidth(windowWidth*0.3f)); 
         GUILayout.EndHorizontal();
 
         scrollPosition = GUILayout.BeginScrollView(scrollPosition);
@@ -158,7 +158,7 @@ public class AdvencedFeaturesWindowListOfTimers : LayoutWindow
         {
             GUILayout.BeginArea(settingsTable);
 
-            GUILayout.Label("Documentation of timer");
+            GUILayout.Label(TC.get("Timer.Documentation"));
             fullTimerDescription = GUILayout.TextArea(fullTimerDescription, GUILayout.MinHeight(0.1f*windowHeight));
             if (fullTimerDescription != fullTimerDescriptionLast)
                 OnTimerDocumentationChanged(fullTimerDescription);
@@ -167,14 +167,14 @@ public class AdvencedFeaturesWindowListOfTimers : LayoutWindow
             GUILayout.FlexibleSpace();
 
 
-            GUILayout.Label("Time");
+            GUILayout.Label(TC.get("TimersList.Time"));
 
             GUILayout.BeginHorizontal();
             if (
                 !Controller.getInstance().getSelectedChapterDataControl().getTimersList().getTimers()[selectedTimer]
                     .isShowTime())
                 GUI.enabled = false;
-            GUILayout.Label("Display name");
+            GUILayout.Label(TC.get("Timer.DisplayName"));
             displayName = GUILayout.TextField(displayName);
             if (displayName != displayNameLast)
                 OnTimerDisplayNameChanged(displayName);
@@ -183,13 +183,13 @@ public class AdvencedFeaturesWindowListOfTimers : LayoutWindow
                 .getSelectedChapterDataControl()
                 .getTimersList().getTimers()[selectedTimer].setCountDown(GUILayout.Toggle(Controller.getInstance()
                     .getSelectedChapterDataControl()
-                    .getTimersList().getTimers()[selectedTimer].isCountDown(), "Count-down"));
+                    .getTimersList().getTimers()[selectedTimer].isCountDown(), TC.get("Timer.CountDown")));
 
             Controller.getInstance()
                 .getSelectedChapterDataControl()
                 .getTimersList().getTimers()[selectedTimer].setShowWhenStopped(GUILayout.Toggle(Controller.getInstance()
                     .getSelectedChapterDataControl()
-                    .getTimersList().getTimers()[selectedTimer].isShowWhenStopped(), "Show when stoped"));
+                    .getTimersList().getTimers()[selectedTimer].isShowWhenStopped(), TC.get("Timer.ShowWhenStopped")));
             GUI.enabled = true;
             GUILayout.EndHorizontal();
 
@@ -197,28 +197,27 @@ public class AdvencedFeaturesWindowListOfTimers : LayoutWindow
             GUILayout.FlexibleSpace();
 
 
-            GUILayout.Label("Loop control");
+            GUILayout.Label(TC.get("Timer.LoopControl"));
             Controller.getInstance()
                 .getSelectedChapterDataControl()
                 .getTimersList().getTimers()[selectedTimer].setMultipleStarts(GUILayout.Toggle(Controller.getInstance()
                     .getSelectedChapterDataControl()
-                    .getTimersList().getTimers()[selectedTimer].isMultipleStarts(), "Multiple starts"));
-            GUILayout.Label(
-                "Set -> If the timer is stopped, it will start again once the conditions to start are met\nNot set -> Once the timer stops it will not start again even if the conditions to start are met", smallFontStyle);
+                    .getTimersList().getTimers()[selectedTimer].isMultipleStarts(), TC.get("Timer.MultipleStarts")));
+            GUILayout.Label(TC.get("Timer.MultipleStartsDesc"), smallFontStyle);
             Controller.getInstance()
                 .getSelectedChapterDataControl()
                 .getTimersList().getTimers()[selectedTimer].setRunsInLoop(GUILayout.Toggle(Controller.getInstance()
                     .getSelectedChapterDataControl()
-                    .getTimersList().getTimers()[selectedTimer].isRunsInLoop(), "Runs in loops"));
+                    .getTimersList().getTimers()[selectedTimer].isRunsInLoop(), TC.get("Timer.RunsInLoop")));
             GUILayout.Label(
-                "Set -> The timer will run once and again until it is stopped\nNot set->The timer will run once and stop. ", smallFontStyle);
+                 TC.get("Timer.RunsInLoopDesc"), smallFontStyle);
 
 
             GUILayout.FlexibleSpace();
 
 
-            GUILayout.Label("Conditions to start the timer");
-            if (GUILayout.Button("Edit init condition"))
+            GUILayout.Label(TC.get("Timer.InitConditions"));
+            if (GUILayout.Button(TC.get("GeneralText.EditInitConditions")))
             {
                 ConditionEditorWindow window =
                        (ConditionEditorWindow)ScriptableObject.CreateInstance(typeof(ConditionEditorWindow));
@@ -231,19 +230,19 @@ public class AdvencedFeaturesWindowListOfTimers : LayoutWindow
             GUILayout.FlexibleSpace();
 
 
-            GUILayout.Label("Conditions to stop the timer");
+            GUILayout.Label(TC.get("Timer.EndConditions"));
             Controller.getInstance()
                 .getSelectedChapterDataControl()
                 .getTimersList().getTimers()[selectedTimer].setUsesEndCondition(
                     GUILayout.Toggle(Controller.getInstance()
                         .getSelectedChapterDataControl()
                         .getTimersList().getTimers()[selectedTimer].isUsesEndCondition(),
-                        "Uses end conditions (if not, the timer will stop when start condition's aren't met)"));
+                        TC.get("Timer.UsesEndConditionShort")));
             if (
                 !Controller.getInstance().getSelectedChapterDataControl().getTimersList().getTimers()[selectedTimer]
                     .isUsesEndCondition())
                 GUI.enabled = false;
-            if (GUILayout.Button("Edit end condition"))
+            if (GUILayout.Button(TC.get("GeneralText.EditEndConditions")))
             {
                 ConditionEditorWindow window =
                        (ConditionEditorWindow)ScriptableObject.CreateInstance(typeof(ConditionEditorWindow));
@@ -259,11 +258,11 @@ public class AdvencedFeaturesWindowListOfTimers : LayoutWindow
 
 
             GUILayout.BeginHorizontal();
-            GUILayout.Label("Effects to be executed if the timer expires", GUILayout.Width(0.45f*windowWidth));
-            GUILayout.Label("Effects to be executed if the timer is stopped", GUILayout.Width(0.45f*windowWidth));
+            GUILayout.Label(TC.get("Timer.Effects"), GUILayout.Width(0.45f*windowWidth));
+            GUILayout.Label(TC.get("Timer.PostEffects"), GUILayout.Width(0.45f*windowWidth));
             GUILayout.EndHorizontal();
             GUILayout.BeginHorizontal();
-            if (GUILayout.Button("Edit effects", GUILayout.Width(0.45f*windowWidth)))
+            if (GUILayout.Button(TC.get("GeneralText.EditEffects"), GUILayout.Width(0.45f*windowWidth)))
             {
                 EffectEditorWindow window =
                 (EffectEditorWindow)ScriptableObject.CreateInstance(typeof(EffectEditorWindow));
@@ -271,7 +270,7 @@ public class AdvencedFeaturesWindowListOfTimers : LayoutWindow
                     .getSelectedChapterDataControl()
                     .getTimersList().getTimers()[selectedTimer].getEffects());
             }
-            if (GUILayout.Button("Edit post effects", GUILayout.Width(0.45f*windowWidth)))
+            if (GUILayout.Button(TC.get("GeneralText.EditPostEffects"), GUILayout.Width(0.45f*windowWidth)))
             {
                 EffectEditorWindow window =
                 (EffectEditorWindow)ScriptableObject.CreateInstance(typeof(EffectEditorWindow));

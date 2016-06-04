@@ -112,7 +112,7 @@ public class CutscenesWindowEndConfiguration : LayoutWindow
             if(selectedSceneNext != selectedSceneNextLast)
                 ChangeSelectedNextScene(selectedSceneNext);
 
-            if (GUILayout.Button("Edit effects"))
+            if (GUILayout.Button(TC.get("GeneralText.EditEffects")))
             {
                 EffectEditorWindow window =
                         (EffectEditorWindow)ScriptableObject.CreateInstance(typeof(EffectEditorWindow));
