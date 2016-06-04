@@ -110,15 +110,16 @@ public class EditorWindowBase : EditorWindow, DialogReceiverInterface
         windowRect = new Rect(0.16f*windowWidth, 0.12f*windowHeight, windowWidth*0.83f, windowHeight*0.85f);
 
         leftSubMenuSkin = (GUISkin) Resources.Load("Editor/EditorLeftMenuItemSkin", typeof (GUISkin));
-        leftSubMenuConcreteItemSkin = (GUISkin)Resources.Load("Editor/EditorLeftMenuItemSkinConcreteOptions", typeof(GUISkin));
+        leftSubMenuConcreteItemSkin =
+            (GUISkin) Resources.Load("Editor/EditorLeftMenuItemSkinConcreteOptions", typeof (GUISkin));
 
         redoTexture = (Texture2D) Resources.Load("EAdventureData/img/icons/redo", typeof (Texture2D));
         undoTexture = (Texture2D) Resources.Load("EAdventureData/img/icons/undo", typeof (Texture2D));
 
         addTexture = (Texture2D) Resources.Load("EAdventureData/img/icons/addNode", typeof (Texture2D));
 
-        deleteImg = (Texture2D)Resources.Load("EAdventureData/img/icons/deleteContent", typeof(Texture2D));
-        duplicateImg = (Texture2D)Resources.Load("EAdventureData/img/icons/duplicateNode", typeof(Texture2D));
+        deleteImg = (Texture2D) Resources.Load("EAdventureData/img/icons/deleteContent", typeof (Texture2D));
+        duplicateImg = (Texture2D) Resources.Load("EAdventureData/img/icons/duplicateNode", typeof (Texture2D));
 
         sceneTexture = (Texture2D) Resources.Load("EAdventureData/img/icons/scenes", typeof (Texture2D));
         cutsceneTexture = (Texture2D) Resources.Load("EAdventureData/img/icons/cutscenes", typeof (Texture2D));
@@ -295,7 +296,9 @@ public class EditorWindowBase : EditorWindow, DialogReceiverInterface
         {
             if (GUILayout.Button(addTexture))
             {
-                ChapterElementNameInputPopup window = (ChapterElementNameInputPopup)ScriptableObject.CreateInstance(typeof(ChapterElementNameInputPopup));
+                ChapterElementNameInputPopup window =
+                    (ChapterElementNameInputPopup)
+                        ScriptableObject.CreateInstance(typeof (ChapterElementNameInputPopup));
                 window.Init(this, "Scene", EditorWindowType.Scenes);
             }
         }
@@ -330,15 +333,29 @@ public class EditorWindowBase : EditorWindow, DialogReceiverInterface
                     if (GUILayout.Button(duplicateImg))
                     {
                         Controller.getInstance()
-                              .getCharapterList()
-                              .getSelectedChapterDataControl().getScenesList().duplicateElement(Controller.getInstance().getCharapterList().getSelectedChapterDataControl().getScenesList().getScenes()[i]);
+                            .getCharapterList()
+                            .getSelectedChapterDataControl()
+                            .getScenesList()
+                            .duplicateElement(
+                                Controller.getInstance()
+                                    .getCharapterList()
+                                    .getSelectedChapterDataControl()
+                                    .getScenesList()
+                                    .getScenes()[i]);
 
                     }
                     if (GUILayout.Button(deleteImg))
                     {
                         Controller.getInstance()
                             .getCharapterList()
-                            .getSelectedChapterDataControl().getScenesList().deleteElement(Controller.getInstance().getCharapterList().getSelectedChapterDataControl().getScenesList().getScenes()[i], false);
+                            .getSelectedChapterDataControl()
+                            .getScenesList()
+                            .deleteElement(
+                                Controller.getInstance()
+                                    .getCharapterList()
+                                    .getSelectedChapterDataControl()
+                                    .getScenesList()
+                                    .getScenes()[i], false);
                         scenesWindow.ShowBaseWindowView();
                     }
                     GUILayout.EndHorizontal();
@@ -362,7 +379,9 @@ public class EditorWindowBase : EditorWindow, DialogReceiverInterface
         {
             if (GUILayout.Button(addTexture))
             {
-                ChapterElementNewCutsceneInputPopup window = (ChapterElementNewCutsceneInputPopup)ScriptableObject.CreateInstance(typeof(ChapterElementNewCutsceneInputPopup));
+                ChapterElementNewCutsceneInputPopup window =
+                    (ChapterElementNewCutsceneInputPopup)
+                        ScriptableObject.CreateInstance(typeof (ChapterElementNewCutsceneInputPopup));
                 window.Init(this, "Cutscene", EditorWindowType.Cutscenes);
             }
         }
@@ -398,7 +417,14 @@ public class EditorWindowBase : EditorWindow, DialogReceiverInterface
                     {
                         Controller.getInstance()
                             .getCharapterList()
-                            .getSelectedChapterDataControl().getCutscenesList().deleteElement(Controller.getInstance().getCharapterList().getSelectedChapterDataControl().getCutscenesList().getCutscenes()[i], false);
+                            .getSelectedChapterDataControl()
+                            .getCutscenesList()
+                            .deleteElement(
+                                Controller.getInstance()
+                                    .getCharapterList()
+                                    .getSelectedChapterDataControl()
+                                    .getCutscenesList()
+                                    .getCutscenes()[i], false);
                         scenesWindow.ShowBaseWindowView();
                     }
                     GUILayout.EndHorizontal();
@@ -422,7 +448,9 @@ public class EditorWindowBase : EditorWindow, DialogReceiverInterface
         {
             if (GUILayout.Button(addTexture))
             {
-                ChapterElementNameInputPopup window = (ChapterElementNameInputPopup)ScriptableObject.CreateInstance(typeof(ChapterElementNameInputPopup));
+                ChapterElementNameInputPopup window =
+                    (ChapterElementNameInputPopup)
+                        ScriptableObject.CreateInstance(typeof (ChapterElementNameInputPopup));
                 window.Init(this, "Book", EditorWindowType.Books);
             }
         }
@@ -457,15 +485,29 @@ public class EditorWindowBase : EditorWindow, DialogReceiverInterface
                     if (GUILayout.Button(duplicateImg))
                     {
                         Controller.getInstance()
-                              .getCharapterList()
-                              .getSelectedChapterDataControl().getBooksList().duplicateElement(Controller.getInstance().getCharapterList().getSelectedChapterDataControl().getBooksList().getBooks()[i]);
+                            .getCharapterList()
+                            .getSelectedChapterDataControl()
+                            .getBooksList()
+                            .duplicateElement(
+                                Controller.getInstance()
+                                    .getCharapterList()
+                                    .getSelectedChapterDataControl()
+                                    .getBooksList()
+                                    .getBooks()[i]);
 
                     }
                     if (GUILayout.Button(deleteImg))
                     {
                         Controller.getInstance()
                             .getCharapterList()
-                            .getSelectedChapterDataControl().getBooksList().deleteElement(Controller.getInstance().getCharapterList().getSelectedChapterDataControl().getBooksList().getBooks()[i], false);
+                            .getSelectedChapterDataControl()
+                            .getBooksList()
+                            .deleteElement(
+                                Controller.getInstance()
+                                    .getCharapterList()
+                                    .getSelectedChapterDataControl()
+                                    .getBooksList()
+                                    .getBooks()[i], false);
                         scenesWindow.ShowBaseWindowView();
                     }
                     GUILayout.EndHorizontal();
@@ -489,7 +531,9 @@ public class EditorWindowBase : EditorWindow, DialogReceiverInterface
         {
             if (GUILayout.Button(addTexture))
             {
-                ChapterElementNameInputPopup window = (ChapterElementNameInputPopup)ScriptableObject.CreateInstance(typeof(ChapterElementNameInputPopup));
+                ChapterElementNameInputPopup window =
+                    (ChapterElementNameInputPopup)
+                        ScriptableObject.CreateInstance(typeof (ChapterElementNameInputPopup));
                 window.Init(this, "Item", EditorWindowType.Items);
             }
         }
@@ -524,15 +568,29 @@ public class EditorWindowBase : EditorWindow, DialogReceiverInterface
                     if (GUILayout.Button(duplicateImg))
                     {
                         Controller.getInstance()
-                              .getCharapterList()
-                              .getSelectedChapterDataControl().getItemsList().duplicateElement(Controller.getInstance().getCharapterList().getSelectedChapterDataControl().getItemsList().getItems()[i]);
+                            .getCharapterList()
+                            .getSelectedChapterDataControl()
+                            .getItemsList()
+                            .duplicateElement(
+                                Controller.getInstance()
+                                    .getCharapterList()
+                                    .getSelectedChapterDataControl()
+                                    .getItemsList()
+                                    .getItems()[i]);
 
                     }
                     if (GUILayout.Button(deleteImg))
                     {
                         Controller.getInstance()
                             .getCharapterList()
-                            .getSelectedChapterDataControl().getItemsList().deleteElement(Controller.getInstance().getCharapterList().getSelectedChapterDataControl().getItemsList().getItems()[i], false);
+                            .getSelectedChapterDataControl()
+                            .getItemsList()
+                            .deleteElement(
+                                Controller.getInstance()
+                                    .getCharapterList()
+                                    .getSelectedChapterDataControl()
+                                    .getItemsList()
+                                    .getItems()[i], false);
                         scenesWindow.ShowBaseWindowView();
                     }
                     GUILayout.EndHorizontal();
@@ -556,7 +614,9 @@ public class EditorWindowBase : EditorWindow, DialogReceiverInterface
         {
             if (GUILayout.Button(addTexture))
             {
-                ChapterElementNameInputPopup window = (ChapterElementNameInputPopup)ScriptableObject.CreateInstance(typeof(ChapterElementNameInputPopup));
+                ChapterElementNameInputPopup window =
+                    (ChapterElementNameInputPopup)
+                        ScriptableObject.CreateInstance(typeof (ChapterElementNameInputPopup));
                 window.Init(this, "Atrezzo", EditorWindowType.SetItems);
             }
         }
@@ -591,15 +651,29 @@ public class EditorWindowBase : EditorWindow, DialogReceiverInterface
                     if (GUILayout.Button(duplicateImg))
                     {
                         Controller.getInstance()
-                              .getCharapterList()
-                              .getSelectedChapterDataControl().getAtrezzoList().duplicateElement(Controller.getInstance().getCharapterList().getSelectedChapterDataControl().getAtrezzoList().getAtrezzoList()[i]);
+                            .getCharapterList()
+                            .getSelectedChapterDataControl()
+                            .getAtrezzoList()
+                            .duplicateElement(
+                                Controller.getInstance()
+                                    .getCharapterList()
+                                    .getSelectedChapterDataControl()
+                                    .getAtrezzoList()
+                                    .getAtrezzoList()[i]);
 
                     }
                     if (GUILayout.Button(deleteImg))
                     {
                         Controller.getInstance()
-                               .getCharapterList()
-                               .getSelectedChapterDataControl().getAtrezzoList().deleteElement(Controller.getInstance().getCharapterList().getSelectedChapterDataControl().getAtrezzoList().getAtrezzoList()[i], false);
+                            .getCharapterList()
+                            .getSelectedChapterDataControl()
+                            .getAtrezzoList()
+                            .deleteElement(
+                                Controller.getInstance()
+                                    .getCharapterList()
+                                    .getSelectedChapterDataControl()
+                                    .getAtrezzoList()
+                                    .getAtrezzoList()[i], false);
                         scenesWindow.ShowBaseWindowView();
                     }
                     GUILayout.EndHorizontal();
@@ -629,7 +703,9 @@ public class EditorWindowBase : EditorWindow, DialogReceiverInterface
         {
             if (GUILayout.Button(addTexture))
             {
-                ChapterElementNameInputPopup window = (ChapterElementNameInputPopup)ScriptableObject.CreateInstance(typeof(ChapterElementNameInputPopup));
+                ChapterElementNameInputPopup window =
+                    (ChapterElementNameInputPopup)
+                        ScriptableObject.CreateInstance(typeof (ChapterElementNameInputPopup));
                 window.Init(this, "Character", EditorWindowType.Characters);
             }
         }
@@ -664,15 +740,29 @@ public class EditorWindowBase : EditorWindow, DialogReceiverInterface
                     if (GUILayout.Button(duplicateImg))
                     {
                         Controller.getInstance()
-                              .getCharapterList()
-                              .getSelectedChapterDataControl().getNPCsList().duplicateElement(Controller.getInstance().getCharapterList().getSelectedChapterDataControl().getNPCsList().getNPCs()[i]);
+                            .getCharapterList()
+                            .getSelectedChapterDataControl()
+                            .getNPCsList()
+                            .duplicateElement(
+                                Controller.getInstance()
+                                    .getCharapterList()
+                                    .getSelectedChapterDataControl()
+                                    .getNPCsList()
+                                    .getNPCs()[i]);
 
                     }
                     if (GUILayout.Button(deleteImg))
                     {
                         Controller.getInstance()
                             .getCharapterList()
-                            .getSelectedChapterDataControl().getNPCsList().deleteElement(Controller.getInstance().getCharapterList().getSelectedChapterDataControl().getNPCsList().getNPCs()[i], false);
+                            .getSelectedChapterDataControl()
+                            .getNPCsList()
+                            .deleteElement(
+                                Controller.getInstance()
+                                    .getCharapterList()
+                                    .getSelectedChapterDataControl()
+                                    .getNPCsList()
+                                    .getNPCs()[i], false);
                         scenesWindow.ShowBaseWindowView();
                     }
                     GUILayout.EndHorizontal();
@@ -693,53 +783,81 @@ public class EditorWindowBase : EditorWindow, DialogReceiverInterface
         {
             if (GUILayout.Button(addTexture))
             {
-                ChapterElementNameInputPopup window = (ChapterElementNameInputPopup)ScriptableObject.CreateInstance(typeof(ChapterElementNameInputPopup));
+                ChapterElementNameInputPopup window =
+                    (ChapterElementNameInputPopup)
+                        ScriptableObject.CreateInstance(typeof (ChapterElementNameInputPopup));
                 window.Init(this, "Conversation", EditorWindowType.Conversations);
             }
         }
         GUILayout.EndHorizontal();
-        // Item sublist Conversation
-        //if (openedWindow == EditorWindowType.Conversations)
-        //{
-        //    GUI.skin = leftSubMenuSkin;
-        //    for (int i = 0;
-        //        i < Controller.getInstance().getCharapterList().getSelectedChapterData().getConversations().Count;
-        //        i++)
-        //    {
-        //        //if (i == GameRources.GetInstance().selectedCu)
-        //        //{
-        //        //    GUI.skin = leftSubMenuConcreteItemSkin;
-        //        //}
+        // Item sublist book
+        if (openedWindow == EditorWindowType.Conversations)
+        {
+            GUI.skin = leftSubMenuSkin;
+            for (int i = 0;
+                i < Controller.getInstance().getCharapterList().getSelectedChapterData().getConversations().Count;
+                i++)
+            {
+                if (i == GameRources.GetInstance().selectedConversationIndex)
+                {
+                    GUI.skin = leftSubMenuConcreteItemSkin;
 
-        //        if (
-        //            GUILayout.Button(
-        //                Controller.getInstance().getCharapterList().getSelectedChapterData().getConversations()[i].getId
-        //                    ()))
-        //        {
-        //            //  conversationWindow
-        //        }
+                    if (GUILayout.Button(
+                            Controller.getInstance().getCharapterList().getSelectedChapterData().getConversations()[i]
+                                .getId()))
+                    {
+                        ConversationEditorWindow window =
+                            (ConversationEditorWindow)
+                                ScriptableObject.CreateInstance(typeof (ConversationEditorWindow));
+                        window.Init(
+                            (GraphConversation)
+                                Controller.getInstance().getCharapterList().getSelectedChapterData().getConversations()[
+                                    i]);
+                    }
+                    GUILayout.BeginHorizontal();
 
-        //        //if (i == GameRources.GetInstance().selectedSceneIndex)
-        //        //{
-        //        //    GUILayout.BeginHorizontal();
-        //        //    if (GUILayout.Button("Rename"))
-        //        //    {
-        //        //        Debug.Log("Rename");
-        //        //    }
-        //        //    if (GUILayout.Button(duplicateImg))
-        //        //    {
-        //        //        Debug.Log("duplicateImg");
-        //        //    }
-        //        //    if (GUILayout.Button(deleteImg))
-        //        //    {
-        //        //        Debug.Log("deleteImg");
-        //        //    }
-        //        //    GUILayout.EndHorizontal();
-        //        //    GUI.skin = leftSubMenuSkin;
-        //        //}
-        //    }
-        //    GUI.skin = defaultGUISkin;
-        //}
+                    if (GUILayout.Button(duplicateImg))
+                    {
+                        Controller.getInstance()
+                            .getCharapterList()
+                            .getSelectedChapterDataControl()
+                            .getConversationsList()
+                            .duplicateElement(
+                                Controller.getInstance()
+                                    .getCharapterList()
+                                    .getSelectedChapterDataControl()
+                                    .getConversationsList()
+                                    .getConversations()[i]);
+
+                    }
+                    if (GUILayout.Button(deleteImg))
+                    {
+                        Controller.getInstance()
+                            .getCharapterList()
+                            .getSelectedChapterDataControl()
+                            .getConversationsList()
+                            .deleteElement(
+                                Controller.getInstance()
+                                    .getCharapterList()
+                                    .getSelectedChapterDataControl()
+                                    .getConversationsList()
+                                    .getConversations()[i], false);
+                    }
+                    GUILayout.EndHorizontal();
+                    GUI.skin = leftSubMenuSkin;
+                }
+                else
+                {
+                    if (GUILayout.Button(
+                           Controller.getInstance().getCharapterList().getSelectedChapterData().getConversations()[i]
+                               .getId()))
+                    {
+                        GameRources.GetInstance().selectedConversationIndex = i;
+                    }
+                }
+            }
+            GUI.skin = defaultGUISkin;
+        }
 
 
         // Button event player
@@ -747,51 +865,7 @@ public class EditorWindowBase : EditorWindow, DialogReceiverInterface
         {
             OnWindowTypeChanged(EditorWindowType.AdvancedFeatures);
         }
-        //// Button event
-        //if (GUILayout.Button(leftMenuContentAdvanced))
-        //{
-        //    OnWindowTypeChanged(EditorWindowType.AdvancedFeatures);
-        //    advencedFeaturesWindow.ShowBaseWindowView();
-        //}
-        //// Item sublist
-        //if (openedWindow == EditorWindowType.AdvancedFeatures)
-        //{
-        //    GUI.skin = leftSubMenuSkin;
-        //    foreach (AdvencedFeatureModel s in Controller.getInstance().ad)
-        //        if (GUILayout.Button(s.name))
-        //        {
-        //            advencedFeaturesWindow.ShowItemWindowView(new Object());
-        //        }
-        //    GUI.skin = defaultGUISkin;
-        //}
-
-        //// Button event
-        //if (GUILayout.Button(leftMenuContentAdaptation))
-        //{
-        //    OnWindowTypeChanged(EditorWindowType.AdaptationProfiles);
-        //}
-        //// Item sublist
-        //if (openedWindow == EditorWindowType.AdaptationProfiles)
-        //{
-        //    GUI.skin = leftSubMenuSkin;
-        //    foreach (AdaptationProfile s in GameRources.GetInstance().GetAdaptationProfileList())
-        //        GUILayout.Button(s.getName());
-        //    GUI.skin = defaultGUISkin;
-        //}
-
-        //// Button event
-        //if (GUILayout.Button(leftMenuContentAssessment))
-        //{
-        //    OnWindowTypeChanged(EditorWindowType.AssesmentProfiles);
-        //}
-        //// Item sublist
-        //if (openedWindow == EditorWindowType.AssesmentProfiles)
-        //{
-        //    GUI.skin = leftSubMenuSkin;
-        //    foreach (AssessmentProfile s in GameRources.GetInstance().GetAssesmentProfileList())
-        //        GUILayout.Button(s.getName());
-        //    GUI.skin = defaultGUISkin;
-        //}
+     
         GUILayout.EndScrollView();
         GUILayout.EndVertical();
         GUILayout.EndArea();
@@ -866,14 +940,20 @@ public class EditorWindowBase : EditorWindow, DialogReceiverInterface
     void AddCutsceneSlide(string name)
     {
         Debug.Log("Slide");
-        Controller.getInstance().getSelectedChapterDataControl().getCutscenesList().addElement(Controller.CUTSCENE_SLIDES, name);
+        Controller.getInstance()
+            .getSelectedChapterDataControl()
+            .getCutscenesList()
+            .addElement(Controller.CUTSCENE_SLIDES, name);
         cutscenesWindow.ShowBaseWindowView();
     }
 
     void AddCutsceneVideo(string name)
     {
         Debug.Log("Video");
-        Controller.getInstance().getSelectedChapterDataControl().getCutscenesList().addElement(Controller.CUTSCENE_VIDEO, name);
+        Controller.getInstance()
+            .getSelectedChapterDataControl()
+            .getCutscenesList()
+            .addElement(Controller.CUTSCENE_VIDEO, name);
         cutscenesWindow.ShowBaseWindowView();
     }
 
@@ -903,15 +983,18 @@ public class EditorWindowBase : EditorWindow, DialogReceiverInterface
 
     void AddConversation(string name)
     {
-        Controller.getInstance().getSelectedChapterDataControl().getConversationsList().addElement(Controller.CONVERSATION_GRAPH, name);
+        Controller.getInstance()
+            .getSelectedChapterDataControl()
+            .getConversationsList()
+            .addElement(Controller.CONVERSATION_GRAPH, name);
         Debug.Log("ADD conversation");
     }
-    
+
     public void OnDialogOk(string message, System.Object workingObject = null, object workingObjectSecond = null)
     {
-        if(((ChapterElementNameInputPopup)workingObject) != null)
+        if (((ChapterElementNameInputPopup) workingObject) != null)
         {
-            EditorWindowType callbackType = ((ChapterElementNameInputPopup)workingObject).connectedAsssetType;
+            EditorWindowType callbackType = ((ChapterElementNameInputPopup) workingObject).connectedAsssetType;
             switch (callbackType)
             {
                 case EditorWindowType.Scenes:
@@ -920,9 +1003,9 @@ public class EditorWindowBase : EditorWindow, DialogReceiverInterface
                 case EditorWindowType.Cutscenes:
                     int cutsceneType = ((ChapterElementNewCutsceneInputPopup) workingObject).cutsceneType;
 
-                    if(cutsceneType == Controller.CUTSCENE_SLIDES)
+                    if (cutsceneType == Controller.CUTSCENE_SLIDES)
                         AddCutsceneSlide(message);
-                    else if(cutsceneType == Controller.CUTSCENE_VIDEO)
+                    else if (cutsceneType == Controller.CUTSCENE_VIDEO)
                         AddCutsceneVideo(message);
 
                     break;
@@ -943,7 +1026,7 @@ public class EditorWindowBase : EditorWindow, DialogReceiverInterface
                     break;
             }
         }
-       
+
     }
 
     public void OnDialogCanceled(System.Object workingObject = null)

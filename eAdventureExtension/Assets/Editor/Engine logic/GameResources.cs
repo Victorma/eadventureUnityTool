@@ -14,6 +14,7 @@ public class GameRources
     public int selectedItemIndex = -1;
     public int selectedCharacterIndex = -1;
     public int selectedSetItemIndex = -1;
+    public int selectedConversationIndex = -1;
 
     public static GameRources GetInstance()
     {
@@ -33,6 +34,7 @@ public class GameRources
         selectedItemIndex = -1;
         selectedCharacterIndex = -1;
         selectedSetItemIndex = -1;
+        selectedConversationIndex = -1;
          instance = null;
     }
 

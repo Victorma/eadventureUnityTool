@@ -27,7 +27,6 @@ public class ConversationWindow : LayoutWindow
             GUILayout.Box(Controller.getInstance().getCharapterList().getSelectedChapterData().getConversations()[i].getId(), GUILayout.Width(windowWidth * 0.65f));
             if (GUILayout.Button("Edit conversation", GUILayout.MaxWidth(windowWidth * 0.3f)))
             {
-                Debug.Log("SHOW EDITOR");
                 ConversationEditorWindow window = (ConversationEditorWindow)ScriptableObject.CreateInstance(typeof(ConversationEditorWindow));
                 window.Init((GraphConversation) Controller.getInstance().getCharapterList().getSelectedChapterData().getConversations()[i]);
             }
