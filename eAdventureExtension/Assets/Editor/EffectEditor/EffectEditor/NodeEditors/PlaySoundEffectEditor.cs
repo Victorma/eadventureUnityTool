@@ -51,7 +51,7 @@ public class PlaySoundEffectEditor : EffectEditor, DialogReceiverInterface
             effect.setPath(musicPath);
         }
         GUILayout.Box(musicPath);
-        if (GUILayout.Button("Select"))
+        if (GUILayout.Button(TC.get("Buttons.Select")))
         {
             MusicFileOpenDialog musicDialog =
                 (MusicFileOpenDialog) ScriptableObject.CreateInstance(typeof (MusicFileOpenDialog));

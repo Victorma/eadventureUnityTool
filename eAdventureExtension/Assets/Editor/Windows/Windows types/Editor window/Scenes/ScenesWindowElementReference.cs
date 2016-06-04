@@ -73,7 +73,7 @@ public class ScenesWindowElementReference : LayoutWindow, DialogReceiverInterfac
         GUILayout.Box("Layer", GUILayout.Width(windowWidth*0.12f));
         GUILayout.Box("", GUILayout.Width(windowWidth*0.06f));
         GUILayout.Box("Element references", GUILayout.Width(windowWidth*0.39f));
-        GUILayout.Box("Conditions", GUILayout.Width(windowWidth*0.29f));
+        GUILayout.Box(TC.get("Conditions.Title"), GUILayout.Width(windowWidth*0.29f));
         GUILayout.EndHorizontal();
 
         scrollPosition = GUILayout.BeginScrollView(scrollPosition);

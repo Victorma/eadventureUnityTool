@@ -42,26 +42,26 @@ public class CharactersWindowDialogConfiguration : LayoutWindow
 
     public override void Draw(int aID)
     {
-        GUILayout.Label("Color of the character's conversation line");
+        GUILayout.Label(TC.get("Player.TextColor"));
 
         GUILayout.Space(20);
-        shouldShowSpeachBubble = GUILayout.Toggle(shouldShowSpeachBubble, "Show speach bubble");
+        shouldShowSpeachBubble = GUILayout.Toggle(shouldShowSpeachBubble, TC.get("Player.ShowsSpeechBubble"));
         if (shouldShowSpeachBubble != shouldShowSpeachBubbleLast)
             OnShowBubbleChange();
 
         GUILayout.Space(10);
 
-        GUILayout.Label("This is preview text line", previewTextStyle);
+        GUILayout.Label(TC.get("GeneralText.PreviewText"), previewTextStyle);
 
         GUILayout.Space(20);
 
-        fontFrontColor = EditorGUILayout.ColorField("Edit font front color", fontFrontColor);
+        fontFrontColor = EditorGUILayout.ColorField(TC.get("Player.FrontColor"), fontFrontColor);
         if (fontFrontColor != fontFrontColorLast)
         {
             OnFontFrontChange(fontFrontColor);
         }
 
-        fontBorderColor = EditorGUILayout.ColorField("Edit font border color", fontBorderColor);
+        fontBorderColor = EditorGUILayout.ColorField(TC.get("Player.BorderColor"), fontBorderColor);
         if (fontBorderColor != fontBorderColorLast)
         {
             OnFontBorderChange(fontBorderColor);
@@ -70,21 +70,19 @@ public class CharactersWindowDialogConfiguration : LayoutWindow
         if (!shouldShowSpeachBubble)
             GUI.enabled = false;
 
-        bubbleBcgColor = EditorGUILayout.ColorField("Bubble background color", bubbleBcgColor);
+        bubbleBcgColor = EditorGUILayout.ColorField(TC.get("Player.BubbleBkgColor"), bubbleBcgColor);
         if (bubbleBcgColor != bubbleBcgColorLast)
         {
             OnBubbleBcgChange(bubbleBcgColor);
         }
 
-        bubbleBorderColor = EditorGUILayout.ColorField("Bubble border color", bubbleBorderColor);
+        bubbleBorderColor = EditorGUILayout.ColorField(TC.get("Player.BubbleBorderColor"), bubbleBorderColor);
         if (bubbleBorderColor != bubbleBorderColorLast)
         {
             OnBubbleBorderChange(bubbleBorderColor);
         }
 
         GUI.enabled = true;
-
-        //TODO:??? implement voice part
     }
 
     void OnShowBubbleChange()

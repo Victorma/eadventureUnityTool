@@ -50,14 +50,14 @@ public class PlayAnimationEffectEditor : EffectEditor, DialogReceiverInterface
             OnSlidesceneChanged("");
         }
         GUILayout.Box(slidesPath);
-        if (GUILayout.Button("Select"))
+        if (GUILayout.Button(TC.get("Buttons.Select")))
         {
             AnimationFileOpenDialog animationDialog =
                 (AnimationFileOpenDialog)ScriptableObject.CreateInstance(typeof(AnimationFileOpenDialog));
             animationDialog.Init(this, BaseFileOpenDialog.FileType.PLAY_ANIMATION_EFFECT);
         }
         // Create/edit slidescene
-        if (GUILayout.Button("Create/Edit"))
+        if (GUILayout.Button(TC.get("Resources.Create") + "/" + TC.get("Resources.Edit")))
         {
             // For not-existing cutscene - show new cutscene name dialog
             if (slidesPath == null || slidesPath.Equals(""))

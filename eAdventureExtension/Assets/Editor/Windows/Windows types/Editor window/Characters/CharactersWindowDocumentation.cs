@@ -83,7 +83,7 @@ public class CharactersWindowDocumentation : LayoutWindow, DialogReceiverInterfa
     public override void Draw(int aID)
     {
         GUILayout.BeginArea(descriptionRect);
-        GUILayout.Label("Full description of the character");
+        GUILayout.Label(TC.get("NPC.Documentation"));
         fullCharacterDescription = GUILayout.TextArea(fullCharacterDescription, GUILayout.MinHeight(0.2f * windowHeight));
         if (!fullCharacterDescription.Equals(fullCharacterDescriptionLast))
             OnCharacterDescriptionChanged(fullCharacterDescription);
@@ -96,8 +96,8 @@ public class CharactersWindowDocumentation : LayoutWindow, DialogReceiverInterfa
         */
         GUILayout.BeginArea(descriptionTableRect);
         GUILayout.BeginHorizontal();
-        GUILayout.Box("Descriptions", GUILayout.Width(windowWidth * 0.44f));
-        GUILayout.Box("Conditions", GUILayout.Width(windowWidth * 0.44f));
+        GUILayout.Box(TC.get("DescriptionList.Descriptions"), GUILayout.Width(windowWidth * 0.44f));
+        GUILayout.Box(TC.get("Conditions.Title"), GUILayout.Width(windowWidth * 0.44f));
         GUILayout.EndHorizontal();
         scrollPosition = GUILayout.BeginScrollView(scrollPosition);
 
@@ -133,8 +133,7 @@ public class CharactersWindowDocumentation : LayoutWindow, DialogReceiverInterfa
                 }
                 if (GUILayout.Button(tmpTex, GUILayout.Width(windowWidth * 0.44f)))
                 {
-                    //TODO: condition editor
-                    Debug.Log("SHOW editor");
+                    //TODO???: condition editor 
                 }
             }
             else
@@ -201,7 +200,7 @@ public class CharactersWindowDocumentation : LayoutWindow, DialogReceiverInterfa
             audioTextureTmp = noAudioTexture;
         GUILayout.Label(audioTextureTmp);
         GUILayout.Label(descriptionSound);
-        if (GUILayout.Button("Select"))
+        if (GUILayout.Button(TC.get("Buttons.Select")))
         {
             ShowAssetChooser(AssetType.NAME_SOUND);
         }
@@ -211,7 +210,7 @@ public class CharactersWindowDocumentation : LayoutWindow, DialogReceiverInterfa
         }
         GUILayout.EndHorizontal();
 
-        GUILayout.Label("Brief description");
+        GUILayout.Label(TC.get("NPC.Description"));
         GUILayout.BeginHorizontal();
         briefDescription = GUILayout.TextField(briefDescription, GUILayout.MaxWidth(0.6f * windowWidth));
         if (!briefDescription.Equals(briefDescriptionLast))
@@ -222,7 +221,7 @@ public class CharactersWindowDocumentation : LayoutWindow, DialogReceiverInterfa
             audioTextureTmp = noAudioTexture;
         GUILayout.Label(audioTextureTmp);
         GUILayout.Label(briefDescriptionSound);
-        if (GUILayout.Button("Select"))
+        if (GUILayout.Button(TC.get("Buttons.Select")))
         {
             ShowAssetChooser(AssetType.BRIEF_DESCRIPTION_SOUND);
         }
@@ -232,7 +231,7 @@ public class CharactersWindowDocumentation : LayoutWindow, DialogReceiverInterfa
         }
         GUILayout.EndHorizontal();
 
-        GUILayout.Label("Detailed description");
+        GUILayout.Label(TC.get("NPC.DetailedDescription"));
         GUILayout.BeginHorizontal();
         detailedDescription = GUILayout.TextField(detailedDescription, GUILayout.MaxWidth(0.6f * windowWidth));
         if (!detailedDescription.Equals(detailedDescriptionLast))
@@ -243,7 +242,7 @@ public class CharactersWindowDocumentation : LayoutWindow, DialogReceiverInterfa
             audioTextureTmp = noAudioTexture;
         GUILayout.Label(audioTextureTmp);
         GUILayout.Label(detailedDescriptionSound);
-        if (GUILayout.Button("Select"))
+        if (GUILayout.Button(TC.get("Buttons.Select")))
         {
             ShowAssetChooser(AssetType.DETAILED_DESCRIPTION_SOUND);
         }

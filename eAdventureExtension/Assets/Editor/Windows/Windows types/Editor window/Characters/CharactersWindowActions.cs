@@ -76,9 +76,9 @@ public class CharactersWindowActions : LayoutWindow
     {
         GUILayout.BeginArea(actionTableRect);
         GUILayout.BeginHorizontal();
-        GUILayout.Box("Action", GUILayout.Width(windowWidth*0.39f));
-        GUILayout.Box("Needs to go", GUILayout.Width(windowWidth*0.39f));
-        GUILayout.Box("Conditions", GUILayout.Width(windowWidth*0.1f));
+        GUILayout.Box(TC.get("Element.Action"), GUILayout.Width(windowWidth*0.39f));
+        GUILayout.Box(TC.get("ActionsList.NeedsGoTo"), GUILayout.Width(windowWidth*0.39f));
+        GUILayout.Box(TC.get("Conditions.Title"), GUILayout.Width(windowWidth*0.1f));
         GUILayout.EndHorizontal();
         scrollPosition = GUILayout.BeginScrollView(scrollPosition, GUILayout.ExpandWidth(false));
         // Action table
@@ -127,7 +127,7 @@ public class CharactersWindowActions : LayoutWindow
 
                 if (Controller.getInstance().playerMode() == Controller.FILE_ADVENTURE_1STPERSON_PLAYER)
                 {
-                    if (GUILayout.Button("Not relevant", GUILayout.Width(windowWidth*0.39f)))
+                    if (GUILayout.Button(TC.get("ActionsList.NotRelevant"), GUILayout.Width(windowWidth*0.39f)))
                     {
                         OnActionSelectionChange(i);
                     }
@@ -155,8 +155,6 @@ public class CharactersWindowActions : LayoutWindow
 
                 if (GUILayout.Button(tmpTex, GUILayout.Width(windowWidth*0.1f)))
                 {
-                    //TODO: condition editor
-                    Debug.Log("SHOW editor");
                     ConditionEditorWindow window =
                         (ConditionEditorWindow) ScriptableObject.CreateInstance(typeof (ConditionEditorWindow));
                     window.Init(Controller.getInstance().getSelectedChapterDataControl().getNPCsList().getNPCs()[
@@ -175,7 +173,7 @@ public class CharactersWindowActions : LayoutWindow
 
                 if (Controller.getInstance().playerMode() == Controller.FILE_ADVENTURE_1STPERSON_PLAYER)
                 {
-                    if (GUILayout.Button("Not relevant", GUILayout.Width(windowWidth*0.39f)))
+                    if (GUILayout.Button(TC.get("ActionsList.NotRelevant"), GUILayout.Width(windowWidth*0.39f)))
                     {
                         OnActionSelectionChange(i);
                     }
@@ -243,7 +241,7 @@ public class CharactersWindowActions : LayoutWindow
         GUILayout.EndArea();
 
         GUILayout.BeginArea(descriptionRect);
-        GUILayout.Label("Full description of the action");
+        GUILayout.Label(TC.get("Action.Documentation"));
         GUILayout.Space(20);
         documentation = GUILayout.TextArea(documentation);
         if (!documentation.Equals(documentationLast))
@@ -376,15 +374,15 @@ public class CharactersWindowActions : LayoutWindow
         {
             menu = new GenericMenu();
 
-            useAction = new AddUseAction("Add \"Use\" action");
-            examineAction = new AddExamineAction("Add \"Examine\" action");
+            useAction = new AddUseAction(TC.get("TreeNode.AddElement23"));
+            examineAction = new AddExamineAction(TC.get("TreeNode.AddElement21"));
             customAction = new AddCustomAction("Add \"Custom\" action");
-            talkToAction = new AddTalkToAction("Add \"Talk to...\" action");
-            dragToAction = new AddDragToAction("Add \"Drag to..\" action");
+            talkToAction = new AddTalkToAction(TC.get("TreeNode.AddElement231"));
+            dragToAction = new AddDragToAction(TC.get("TreeNode.AddElement251"));
 
             menu.AddItem(new GUIContent(useAction.Label), false, Callback, useAction);
             menu.AddItem(new GUIContent(examineAction.Label), false, Callback, examineAction);
-            menu.AddItem(new GUIContent(customAction.Label), false, Callback, customAction);
+           // menu.AddItem(new GUIContent(customAction.Label), false, Callback, customAction);
             menu.AddItem(new GUIContent(talkToAction.Label), false, Callback, talkToAction);
             menu.AddItem(new GUIContent(dragToAction.Label), false, Callback, dragToAction);
         }

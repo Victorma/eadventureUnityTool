@@ -191,7 +191,7 @@ public class CutsceneSlidesEditor : BaseCreatorPopup, DialogReceiverInterface
         GUILayout.BeginHorizontal();
         GUILayout.Label("Image ");
         GUILayout.Box(imagePath, GUILayout.MinWidth(0.3f * windowWidth));
-        if (GUILayout.Button("Select"))
+        if (GUILayout.Button(TC.get("Buttons.Select")))
         {
             ImageFileOpenDialog imageDialog =
                 (ImageFileOpenDialog) ScriptableObject.CreateInstance(typeof (ImageFileOpenDialog));
@@ -206,7 +206,7 @@ public class CutsceneSlidesEditor : BaseCreatorPopup, DialogReceiverInterface
         {
         }
         GUILayout.Box(soundPath, GUILayout.MinWidth(0.3f * windowWidth));
-        if (GUILayout.Button("Select"))
+        if (GUILayout.Button(TC.get("Buttons.Select")))
         {
             MusicFileOpenDialog musicDialog =
                 (MusicFileOpenDialog) ScriptableObject.CreateInstance(typeof (MusicFileOpenDialog));

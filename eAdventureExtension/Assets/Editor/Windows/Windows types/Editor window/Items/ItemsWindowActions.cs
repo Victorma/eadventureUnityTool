@@ -77,9 +77,9 @@ public class ItemsWindowActions : LayoutWindow
     {
         GUILayout.BeginArea(actionTableRect);
         GUILayout.BeginHorizontal();
-        GUILayout.Box("Action", GUILayout.Width(windowWidth*0.39f));
-        GUILayout.Box("Needs to go", GUILayout.Width(windowWidth*0.39f));
-        GUILayout.Box("Conditions", GUILayout.Width(windowWidth*0.1f));
+        GUILayout.Box(TC.get("Element.Action"), GUILayout.Width(windowWidth*0.39f));
+        GUILayout.Box(TC.get("ActionsList.NeedsGoTo"), GUILayout.Width(windowWidth*0.39f));
+        GUILayout.Box(TC.get("Conditions.Title"), GUILayout.Width(windowWidth*0.1f));
         GUILayout.EndHorizontal();
         scrollPosition = GUILayout.BeginScrollView(scrollPosition, GUILayout.ExpandWidth(false));
 
@@ -382,13 +382,13 @@ public class ItemsWindowActions : LayoutWindow
         {
             menu = new GenericMenu();
 
-            useAction = new AddUseAction("Add \"Use\" action");
-            examineAction = new AddExamineAction("Add \"Examine\" action");
+            useAction = new AddUseAction(TC.get("TreeNode.AddElement23"));
+            examineAction = new AddExamineAction(TC.get("TreeNode.AddElement21"));
             grabAction = new AddGrabAction("Add \"Grab\" action");
             customAction = new AddCustomAction("Add \"Custom\" action");
             useWithAction = new AddUseWithAction("Add \"Use with...\" action");
             giveToAction = new AddGiveToAction("Add \"Give to...\" action");
-            dragToAction = new AddDragToAction("Add \"Drag to..\" action");
+            dragToAction = new AddDragToAction(TC.get("TreeNode.AddElement251"));
 
             menu.AddItem(new GUIContent(useAction.Label), false, Callback, useAction);
             menu.AddItem(new GUIContent(examineAction.Label), false, Callback, examineAction);

@@ -68,7 +68,7 @@ public class BooksWindowAppearance : LayoutWindow, DialogReceiverInterface
         GUILayout.Label("Background image of the book");
         GUILayout.BeginHorizontal();
         GUILayout.Box(backgroundPath, GUILayout.MaxWidth(0.85f*windowWidth));
-        if (GUILayout.Button("Select", GUILayout.MaxWidth(0.15f * windowWidth)))
+        if (GUILayout.Button(TC.get("Buttons.Select"), GUILayout.MaxWidth(0.15f * windowWidth)))
         {
             ImageFileOpenDialog imageDialog =
                 (ImageFileOpenDialog)ScriptableObject.CreateInstance(typeof(ImageFileOpenDialog));
@@ -88,7 +88,7 @@ public class BooksWindowAppearance : LayoutWindow, DialogReceiverInterface
             //TODO: clear
         }
         GUILayout.Box(leftNormalArrowPath, GUILayout.MaxWidth(0.3f*windowWidth));
-        if (GUILayout.Button("Select", GUILayout.MaxWidth(0.1f*windowWidth)))
+        if (GUILayout.Button(TC.get("Buttons.Select"), GUILayout.MaxWidth(0.1f*windowWidth)))
         {
             ImageFileOpenDialog imageDialog =
                 (ImageFileOpenDialog)ScriptableObject.CreateInstance(typeof(ImageFileOpenDialog));
@@ -103,7 +103,7 @@ public class BooksWindowAppearance : LayoutWindow, DialogReceiverInterface
 
         }
         GUILayout.Box(rightNormalArrowPath, GUILayout.MaxWidth(0.3f*windowWidth));
-        if (GUILayout.Button("Select", GUILayout.MaxWidth(0.1f*windowWidth)))
+        if (GUILayout.Button(TC.get("Buttons.Select"), GUILayout.MaxWidth(0.1f*windowWidth)))
         {
             ImageFileOpenDialog imageDialog =
                 (ImageFileOpenDialog)ScriptableObject.CreateInstance(typeof(ImageFileOpenDialog));
@@ -126,7 +126,7 @@ public class BooksWindowAppearance : LayoutWindow, DialogReceiverInterface
             //TODO: clear
         }
         GUILayout.Box(leftOverArrowPath, GUILayout.MaxWidth(0.3f*windowWidth));
-        if (GUILayout.Button("Select", GUILayout.MaxWidth(0.1f*windowWidth)))
+        if (GUILayout.Button(TC.get("Buttons.Select"), GUILayout.MaxWidth(0.1f*windowWidth)))
         {
             ImageFileOpenDialog imageDialog =
                 (ImageFileOpenDialog)ScriptableObject.CreateInstance(typeof(ImageFileOpenDialog));
@@ -141,7 +141,7 @@ public class BooksWindowAppearance : LayoutWindow, DialogReceiverInterface
             //TODO: clear
         }
         GUILayout.Box(rightOverArrowPath, GUILayout.MaxWidth(0.3f*windowWidth));
-        if (GUILayout.Button("Select", GUILayout.MaxWidth(0.1f*windowWidth)))
+        if (GUILayout.Button(TC.get("Buttons.Select"), GUILayout.MaxWidth(0.1f*windowWidth)))
         {
             ImageFileOpenDialog imageDialog =
                 (ImageFileOpenDialog)ScriptableObject.CreateInstance(typeof(ImageFileOpenDialog));

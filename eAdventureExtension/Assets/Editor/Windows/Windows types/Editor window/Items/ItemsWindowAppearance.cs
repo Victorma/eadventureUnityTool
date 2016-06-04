@@ -84,7 +84,7 @@ public class ItemsWindowAppearance : LayoutWindow, DialogReceiverInterface
         GUILayout.BeginArea(appearanceTableRect);
         GUILayout.BeginHorizontal();
         GUILayout.Box("Appearance block", GUILayout.Width(windowWidth * 0.44f));
-        GUILayout.Box("Conditions", GUILayout.Width(windowWidth * 0.44f));
+        GUILayout.Box(TC.get("Conditions.Title"), GUILayout.Width(windowWidth * 0.44f));
         GUILayout.EndHorizontal();
         scrollPosition = GUILayout.BeginScrollView(scrollPosition);
         // Appearance table
@@ -171,7 +171,7 @@ public class ItemsWindowAppearance : LayoutWindow, DialogReceiverInterface
             imagePath = "";
         }
         GUILayout.Box(imagePath, GUILayout.Width(0.7f * windowWidth));
-        if (GUILayout.Button("Select", GUILayout.Width(0.19f * windowWidth)))
+        if (GUILayout.Button(TC.get("Buttons.Select"), GUILayout.Width(0.19f * windowWidth)))
         {
             ShowAssetChooser(AssetType.ITEM);
         }
@@ -185,7 +185,7 @@ public class ItemsWindowAppearance : LayoutWindow, DialogReceiverInterface
             inventoryIconPath = "";
         }
         GUILayout.Box(inventoryIconPath, GUILayout.Width(0.7f * windowWidth));
-        if (GUILayout.Button("Select", GUILayout.Width(0.19f * windowWidth)))
+        if (GUILayout.Button(TC.get("Buttons.Select"), GUILayout.Width(0.19f * windowWidth)))
         {
             ShowAssetChooser(AssetType.ICON);
         }
@@ -199,7 +199,7 @@ public class ItemsWindowAppearance : LayoutWindow, DialogReceiverInterface
             imageWhenOverPath = "";
         }
         GUILayout.Box(imageWhenOverPath, GUILayout.Width(0.7f * windowWidth));
-        if (GUILayout.Button("Select", GUILayout.Width(0.19f * windowWidth)))
+        if (GUILayout.Button(TC.get("Buttons.Select"), GUILayout.Width(0.19f * windowWidth)))
         {
             ShowAssetChooser(AssetType.ITEM_OVER);
         }

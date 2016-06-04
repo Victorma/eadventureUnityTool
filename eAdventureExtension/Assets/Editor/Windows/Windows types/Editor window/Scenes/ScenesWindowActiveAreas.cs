@@ -79,7 +79,7 @@ public class ScenesWindowActiveAreas : LayoutWindow, DialogReceiverInterface
         GUILayout.BeginArea(tableRect);
         GUILayout.BeginHorizontal();
         GUILayout.Box("ID", GUILayout.Width(windowWidth*0.54f));
-        GUILayout.Box("Conditions", GUILayout.Width(windowWidth*0.14f));
+        GUILayout.Box(TC.get("Conditions.Title"), GUILayout.Width(windowWidth*0.14f));
         GUILayout.Box("Documentation", GUILayout.Width(windowWidth*0.18f));
         GUILayout.EndHorizontal();
         scrollPosition = GUILayout.BeginScrollView(scrollPosition);
@@ -180,8 +180,8 @@ public class ScenesWindowActiveAreas : LayoutWindow, DialogReceiverInterface
         */
         GUILayout.BeginArea(actionRect);
         GUILayout.BeginHorizontal();
-        GUILayout.Box("Action", GUILayout.Width(windowWidth*0.39f));
-        GUILayout.Box("Needs to go", GUILayout.Width(windowWidth*0.39f));
+        GUILayout.Box(TC.get("Element.Action"), GUILayout.Width(windowWidth*0.39f));
+        GUILayout.Box(TC.get("ActionsList.NeedsGoTo"), GUILayout.Width(windowWidth*0.39f));
         GUILayout.Box("Effects/conditions", GUILayout.Width(windowWidth*0.1f));
         GUILayout.EndHorizontal();
         scrollPositionAction = GUILayout.BeginScrollView(scrollPositionAction, GUILayout.ExpandWidth(false));
@@ -439,8 +439,8 @@ public class ScenesWindowActiveAreas : LayoutWindow, DialogReceiverInterface
         {
             menu = new GenericMenu();
 
-            useAction = new AddUseAction("Add \"Use\" action");
-            examineAction = new AddExamineAction("Add \"Examine\" action");
+            useAction = new AddUseAction(TC.get("TreeNode.AddElement23"));
+            examineAction = new AddExamineAction(TC.get("TreeNode.AddElement21"));
             grabAction = new AddGrabAction("Add \"Grab\" action");
             customAction = new AddCustomAction("Add \"Custom\" action");
 

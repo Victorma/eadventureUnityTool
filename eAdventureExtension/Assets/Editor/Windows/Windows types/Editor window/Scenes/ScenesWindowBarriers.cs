@@ -68,7 +68,7 @@ public class ScenesWindowBarriers : LayoutWindow, DialogReceiverInterface
         GUILayout.BeginArea(tableRect);
         GUILayout.BeginHorizontal();
         GUILayout.Box("Barrier", GUILayout.Width(windowWidth * 0.45f));
-        GUILayout.Box("Conditions", GUILayout.Width(windowWidth * 0.45f));
+        GUILayout.Box(TC.get("Conditions.Title"), GUILayout.Width(windowWidth * 0.45f));
         GUILayout.EndHorizontal();
         scrollPosition = GUILayout.BeginScrollView(scrollPosition);
         for (int i = 0;

@@ -80,7 +80,7 @@ public class CutscenesWindowAppearance : LayoutWindow, DialogReceiverInterface
                 OnVideosceneChanged("");
             }
             GUILayout.Box(videoscenePath, GUILayout.Width(0.6f*windowWidth));
-            if (GUILayout.Button("Select", GUILayout.Width(0.1f*windowWidth)))
+            if (GUILayout.Button(TC.get("Buttons.Select"), GUILayout.Width(0.1f*windowWidth)))
             {
                 ShowAssetChooser(AssetType.VIDEOSCENE);
             }
@@ -106,12 +106,12 @@ public class CutscenesWindowAppearance : LayoutWindow, DialogReceiverInterface
                 OnSlidesceneChanged("");
             }
             GUILayout.Box(slidesPath, GUILayout.Width(0.6f*windowWidth));
-            if (GUILayout.Button("Select", GUILayout.Width(0.1f*windowWidth)))
+            if (GUILayout.Button(TC.get("Buttons.Select"), GUILayout.Width(0.1f*windowWidth)))
             {
                 ShowAssetChooser(AssetType.SELECT_SLIDES);
             }
             // Create/edit slidescene
-            if (GUILayout.Button("Create/Edit", GUILayout.Width(0.2f*windowWidth)))
+            if (GUILayout.Button(TC.get("Resources.Create") + "/" + TC.get("Resources.Edit"), GUILayout.Width(0.2f*windowWidth)))
             {
                 // For not-existing cutscene - show new cutscene name dialog
                 if (slidesPath == null || slidesPath.Equals(""))
@@ -134,7 +134,7 @@ public class CutscenesWindowAppearance : LayoutWindow, DialogReceiverInterface
                 musicPath = "";
             }
             GUILayout.Box(musicPath, GUILayout.Width(0.7f*windowWidth));
-            if (GUILayout.Button("Select", GUILayout.Width(0.19f*windowWidth)))
+            if (GUILayout.Button(TC.get("Buttons.Select"), GUILayout.Width(0.19f*windowWidth)))
             {
                 ShowAssetChooser(AssetType.MUSIC);
             }

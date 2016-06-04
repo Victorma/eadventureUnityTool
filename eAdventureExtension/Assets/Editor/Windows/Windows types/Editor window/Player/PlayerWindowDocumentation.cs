@@ -19,7 +19,7 @@ public class PlayerWindowDocumentation : LayoutWindow
     public override void Draw(int aID)
     {
         GUILayout.Space(20);
-        GUILayout.Label("Full description of the player");
+        GUILayout.Label(TC.get("NPC.Documentation"));
         GUILayout.Space(20);
         documentation = GUILayout.TextArea(documentation, GUILayout.MinHeight(0.4f * windowHeight));
         if (!documentation.Equals(documentationLast))

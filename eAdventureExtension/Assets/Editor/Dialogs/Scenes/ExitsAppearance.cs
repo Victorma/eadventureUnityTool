@@ -80,7 +80,7 @@ public class ExitsAppearance : BaseInputPopup, DialogReceiverInterface
             GUILayout.Space(5);
             GUILayout.Label("No audio");
         }
-        if (GUILayout.Button("Select"))
+        if (GUILayout.Button(TC.get("Buttons.Select")))
         {
             MusicFileOpenDialog musicDialog =
                 (MusicFileOpenDialog) ScriptableObject.CreateInstance(typeof (MusicFileOpenDialog));
@@ -102,7 +102,7 @@ public class ExitsAppearance : BaseInputPopup, DialogReceiverInterface
         {
             GUILayout.Label(defaultExitTexture);
         }
-        if (GUILayout.Button("Select"))
+        if (GUILayout.Button(TC.get("Buttons.Select")))
         {
             ImageFileOpenDialog imageDialog =
                 (ImageFileOpenDialog) ScriptableObject.CreateInstance(typeof (ImageFileOpenDialog));

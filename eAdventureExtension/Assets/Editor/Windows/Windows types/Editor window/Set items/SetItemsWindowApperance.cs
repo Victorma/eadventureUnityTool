@@ -44,7 +44,7 @@ public class SetItemsWindowApperance : LayoutWindow, DialogReceiverInterface
             OnImageChanged("");
         }
         GUILayout.Box(pathToImg, GUILayout.Width(0.6f*windowWidth));
-        if (GUILayout.Button("Select", GUILayout.Width(0.1f*windowWidth)))
+        if (GUILayout.Button(TC.get("Buttons.Select"), GUILayout.Width(0.1f*windowWidth)))
         {
             ImageFileOpenDialog imgDialog =
                 (ImageFileOpenDialog) ScriptableObject.CreateInstance(typeof (ImageFileOpenDialog));

@@ -140,7 +140,7 @@ public class BooksWindowContents : LayoutWindow, DialogReceiverInterface
                     if (GUILayout.Button(clearTex, GUILayout.MaxWidth(0.09f*windowWidth)))
                     {
                     }
-                    if (GUILayout.Button("Select", GUILayout.MaxWidth(0.20f*windowWidth)))
+                    if (GUILayout.Button(TC.get("Buttons.Select"), GUILayout.MaxWidth(0.20f*windowWidth)))
                     {
                         ImageFileOpenDialog imageDialog =
                             (ImageFileOpenDialog) ScriptableObject.CreateInstance(typeof (ImageFileOpenDialog));

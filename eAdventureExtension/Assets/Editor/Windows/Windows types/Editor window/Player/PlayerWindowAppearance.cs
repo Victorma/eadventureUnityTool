@@ -61,7 +61,7 @@ public class PlayerWindowAppearance : LayoutWindow, DialogReceiverInterface
 
         selectedAnimationGroup = selectedAnimationGroupLast = 0;
         animationGroupNamesList = new string[]
-        {"Standing animations", "Talking animations", "Using animations", "Walking animations"};
+        {TC.get("Resources.StandingAnimations"), TC.get("Resources.SpeakingAnimations"), TC.get("Resources.UsingAnimations"), TC.get("Resources.WalkingAnimations")};
 
             slidesPathLookUp =
                 Controller.getInstance().getSelectedChapterDataControl().getPlayer()
@@ -269,7 +269,7 @@ public class PlayerWindowAppearance : LayoutWindow, DialogReceiverInterface
 
     public override void Draw(int aID)
     {
-        GUILayout.Label("Resources Group");
+        GUILayout.Label(TC.get("Resources.ResourcesGroup"));
         selectedAnimationGroup =
             EditorGUILayout.Popup(selectedAnimationGroup, animationGroupNamesList);
         if (selectedAnimationGroup != selectedAnimationGroupLast)
@@ -278,19 +278,19 @@ public class PlayerWindowAppearance : LayoutWindow, DialogReceiverInterface
         switch (selectedAnimationGroup)
         {
             case LOOK_GROUP:
-                GUILayout.Label("Look up");
+                GUILayout.Label(TC.get("Resources.DescriptionCharacterAnimationStandUp"));
                 GUILayout.BeginHorizontal();
                 if (GUILayout.Button(clearImg, GUILayout.Width(0.1f * windowWidth)))
                 {
                     OnSlidesceneChangedLookUp("");
                 }
                 GUILayout.Box(slidesPathLookUp, GUILayout.Width(0.6f * windowWidth));
-                if (GUILayout.Button("Select", GUILayout.Width(0.1f * windowWidth)))
+                if (GUILayout.Button(TC.get("Buttons.Select"), GUILayout.Width(0.1f * windowWidth)))
                 {
                     ShowAssetChooser(CharacterAnimationType.LOOKING_UP);
                 }
                 // Create/edit slidescene
-                if (GUILayout.Button("Create/Edit", GUILayout.Width(0.2f * windowWidth)))
+                if (GUILayout.Button(TC.get("Resources.Create") + "/" + TC.get("Resources.Edit"), GUILayout.Width(0.2f * windowWidth)))
                 {
                     // For not-existing cutscene - show new cutscene name dialog
                     if (slidesPathLookUp == null || slidesPathLookUp.Equals(""))
@@ -306,19 +306,19 @@ public class PlayerWindowAppearance : LayoutWindow, DialogReceiverInterface
                 }
                 GUILayout.EndHorizontal();
 
-                GUILayout.Label("Look down");
+                GUILayout.Label(TC.get("Resources.DescriptionCharacterAnimationStandDown"));
                 GUILayout.BeginHorizontal();
                 if (GUILayout.Button(clearImg, GUILayout.Width(0.1f * windowWidth)))
                 {
                     OnSlidesceneChangedLookDown("");
                 }
                 GUILayout.Box(slidesPathLookDown, GUILayout.Width(0.6f * windowWidth));
-                if (GUILayout.Button("Select", GUILayout.Width(0.1f * windowWidth)))
+                if (GUILayout.Button(TC.get("Buttons.Select"), GUILayout.Width(0.1f * windowWidth)))
                 {
                     ShowAssetChooser(CharacterAnimationType.LOOKING_DOWN);
                 }
                 // Create/edit slidescene
-                if (GUILayout.Button("Create/Edit", GUILayout.Width(0.2f * windowWidth)))
+                if (GUILayout.Button(TC.get("Resources.Create") + "/" + TC.get("Resources.Edit"), GUILayout.Width(0.2f * windowWidth)))
                 {
                     // For not-existing cutscene - show new cutscene name dialog
                     if (slidesPathLookDown == null || slidesPathLookDown.Equals(""))
@@ -334,19 +334,19 @@ public class PlayerWindowAppearance : LayoutWindow, DialogReceiverInterface
                 }
                 GUILayout.EndHorizontal();
 
-                GUILayout.Label("Look right");
+                GUILayout.Label(TC.get("Resources.DescriptionCharacterAnimationStandRight"));
                 GUILayout.BeginHorizontal();
                 if (GUILayout.Button(clearImg, GUILayout.Width(0.1f * windowWidth)))
                 {
                     OnSlidesceneChangedLookRight("");
                 }
                 GUILayout.Box(slidesPathLookRight, GUILayout.Width(0.6f * windowWidth));
-                if (GUILayout.Button("Select", GUILayout.Width(0.1f * windowWidth)))
+                if (GUILayout.Button(TC.get("Buttons.Select"), GUILayout.Width(0.1f * windowWidth)))
                 {
                     ShowAssetChooser(CharacterAnimationType.LOOKING_RIGHT);
                 }
                 // Create/edit slidescene
-                if (GUILayout.Button("Create/Edit", GUILayout.Width(0.2f * windowWidth)))
+                if (GUILayout.Button(TC.get("Resources.Create") + "/" + TC.get("Resources.Edit"), GUILayout.Width(0.2f * windowWidth)))
                 {
                     // For not-existing cutscene - show new cutscene name dialog
                     if (slidesPathLookRight == null || slidesPathLookRight.Equals(""))
@@ -362,19 +362,19 @@ public class PlayerWindowAppearance : LayoutWindow, DialogReceiverInterface
                 }
                 GUILayout.EndHorizontal();
 
-                GUILayout.Label("Look left");
+                GUILayout.Label(TC.get("Resources.DescriptionCharacterAnimationStandLeft"));
                 GUILayout.BeginHorizontal();
                 if (GUILayout.Button(clearImg, GUILayout.Width(0.1f * windowWidth)))
                 {
                     OnSlidesceneChangedLookLeft("");
                 }
                 GUILayout.Box(slidesPathLookLeft, GUILayout.Width(0.6f * windowWidth));
-                if (GUILayout.Button("Select", GUILayout.Width(0.1f * windowWidth)))
+                if (GUILayout.Button(TC.get("Buttons.Select"), GUILayout.Width(0.1f * windowWidth)))
                 {
                     ShowAssetChooser(CharacterAnimationType.LOOKING_LEFT);
                 }
                 // Create/edit slidescene
-                if (GUILayout.Button("Create/Edit", GUILayout.Width(0.2f * windowWidth)))
+                if (GUILayout.Button(TC.get("Resources.Create") + "/" + TC.get("Resources.Edit"), GUILayout.Width(0.2f * windowWidth)))
                 {
                     // For not-existing cutscene - show new cutscene name dialog
                     if (slidesPathLookLeft == null || slidesPathLookLeft.Equals(""))
@@ -392,10 +392,10 @@ public class PlayerWindowAppearance : LayoutWindow, DialogReceiverInterface
 
                 GUILayout.BeginArea(previewLabelsRect);
                 GUILayout.BeginHorizontal();
-                GUILayout.Label("Looking left", GUILayout.Width(0.25f * windowWidth));
-                GUILayout.Label("Looking right", GUILayout.Width(0.25f * windowWidth));
-                GUILayout.Label("Looking up", GUILayout.Width(0.25f * windowWidth));
-                GUILayout.Label("Looking down", GUILayout.Width(0.25f * windowWidth));
+                GUILayout.Label(TC.get("Resources.DescriptionCharacterAnimationStandLeft"), GUILayout.Width(0.25f * windowWidth));
+                GUILayout.Label(TC.get("Resources.DescriptionCharacterAnimationStandRight"), GUILayout.Width(0.25f * windowWidth));
+                GUILayout.Label(TC.get("Resources.DescriptionCharacterAnimationStandUp"), GUILayout.Width(0.25f * windowWidth));
+                GUILayout.Label(TC.get("Resources.DescriptionCharacterAnimationStandDown"), GUILayout.Width(0.25f * windowWidth));
                 GUILayout.EndHorizontal();
                 GUILayout.EndArea();
 
@@ -411,19 +411,19 @@ public class PlayerWindowAppearance : LayoutWindow, DialogReceiverInterface
 
             case TALK_GROUP:
 
-                GUILayout.Label("Speak up");
+                GUILayout.Label(TC.get("Resources.DescriptionCharacterAnimationSpeakUp") );
                 GUILayout.BeginHorizontal();
                 if (GUILayout.Button(clearImg, GUILayout.Width(0.1f * windowWidth)))
                 {
                     OnSlidesceneChangedSpeakUp("");
                 }
                 GUILayout.Box(slidesPathTalkUp, GUILayout.Width(0.6f * windowWidth));
-                if (GUILayout.Button("Select", GUILayout.Width(0.1f * windowWidth)))
+                if (GUILayout.Button(TC.get("Buttons.Select"), GUILayout.Width(0.1f * windowWidth)))
                 {
                     ShowAssetChooser(CharacterAnimationType.TALKING_UP);
                 }
                 // Create/edit slidescene
-                if (GUILayout.Button("Create/Edit", GUILayout.Width(0.2f * windowWidth)))
+                if (GUILayout.Button(TC.get("Resources.Create") + "/" + TC.get("Resources.Edit"), GUILayout.Width(0.2f * windowWidth)))
                 {
                     // For not-existing cutscene - show new cutscene name dialog
                     if (slidesPathTalkUp == null || slidesPathTalkUp.Equals(""))
@@ -439,19 +439,19 @@ public class PlayerWindowAppearance : LayoutWindow, DialogReceiverInterface
                 }
                 GUILayout.EndHorizontal();
 
-                GUILayout.Label("Speak down");
+                GUILayout.Label(TC.get("Resources.DescriptionCharacterAnimationSpeakDown") );
                 GUILayout.BeginHorizontal();
                 if (GUILayout.Button(clearImg, GUILayout.Width(0.1f * windowWidth)))
                 {
                     OnSlidesceneChangedSpeakDown("");
                 }
                 GUILayout.Box(slidesPathTalkDown, GUILayout.Width(0.6f * windowWidth));
-                if (GUILayout.Button("Select", GUILayout.Width(0.1f * windowWidth)))
+                if (GUILayout.Button(TC.get("Buttons.Select"), GUILayout.Width(0.1f * windowWidth)))
                 {
                     ShowAssetChooser(CharacterAnimationType.TALKING_DOWN);
                 }
                 // Create/edit slidescene
-                if (GUILayout.Button("Create/Edit", GUILayout.Width(0.2f * windowWidth)))
+                if (GUILayout.Button(TC.get("Resources.Create") + "/" + TC.get("Resources.Edit"), GUILayout.Width(0.2f * windowWidth)))
                 {
                     // For not-existing cutscene - show new cutscene name dialog
                     if (slidesPathTalkDown == null || slidesPathTalkDown.Equals(""))
@@ -467,19 +467,19 @@ public class PlayerWindowAppearance : LayoutWindow, DialogReceiverInterface
                 }
                 GUILayout.EndHorizontal();
 
-                GUILayout.Label("Speak right");
+                GUILayout.Label(TC.get("Resources.DescriptionCharacterAnimationSpeakRight") );
                 GUILayout.BeginHorizontal();
                 if (GUILayout.Button(clearImg, GUILayout.Width(0.1f * windowWidth)))
                 {
                     OnSlidesceneChangedSpeakRight("");
                 }
                 GUILayout.Box(slidesPathTalkRight, GUILayout.Width(0.6f * windowWidth));
-                if (GUILayout.Button("Select", GUILayout.Width(0.1f * windowWidth)))
+                if (GUILayout.Button(TC.get("Buttons.Select"), GUILayout.Width(0.1f * windowWidth)))
                 {
                     ShowAssetChooser(CharacterAnimationType.TALKING_RIGHT);
                 }
                 // Create/edit slidescene
-                if (GUILayout.Button("Create/Edit", GUILayout.Width(0.2f * windowWidth)))
+                if (GUILayout.Button(TC.get("Resources.Create") + "/" + TC.get("Resources.Edit"), GUILayout.Width(0.2f * windowWidth)))
                 {
                     // For not-existing cutscene - show new cutscene name dialog
                     if (slidesPathTalkRight == null || slidesPathTalkRight.Equals(""))
@@ -495,19 +495,19 @@ public class PlayerWindowAppearance : LayoutWindow, DialogReceiverInterface
                 }
                 GUILayout.EndHorizontal();
 
-                GUILayout.Label("Speak left");
+                GUILayout.Label(TC.get("Resources.DescriptionCharacterAnimationSpeakLeft") );
                 GUILayout.BeginHorizontal();
                 if (GUILayout.Button(clearImg, GUILayout.Width(0.1f * windowWidth)))
                 {
                     OnSlidesceneChangedSpeakLeft("");
                 }
                 GUILayout.Box(slidesPathTalkLeft, GUILayout.Width(0.6f * windowWidth));
-                if (GUILayout.Button("Select", GUILayout.Width(0.1f * windowWidth)))
+                if (GUILayout.Button(TC.get("Buttons.Select"), GUILayout.Width(0.1f * windowWidth)))
                 {
                     ShowAssetChooser(CharacterAnimationType.TALKING_LEFT);
                 }
                 // Create/edit slidescene
-                if (GUILayout.Button("Create/Edit", GUILayout.Width(0.2f * windowWidth)))
+                if (GUILayout.Button(TC.get("Resources.Create") + "/" + TC.get("Resources.Edit"), GUILayout.Width(0.2f * windowWidth)))
                 {
                     // For not-existing cutscene - show new cutscene name dialog
                     if (slidesPathTalkLeft == null || slidesPathTalkLeft.Equals(""))
@@ -525,10 +525,10 @@ public class PlayerWindowAppearance : LayoutWindow, DialogReceiverInterface
 
                 GUILayout.BeginArea(previewLabelsRect);
                 GUILayout.BeginHorizontal();
-                GUILayout.Label("Speaking left", GUILayout.Width(0.25f * windowWidth));
-                GUILayout.Label("Speaking right", GUILayout.Width(0.25f * windowWidth));
-                GUILayout.Label("Speaking up", GUILayout.Width(0.25f * windowWidth));
-                GUILayout.Label("Speaking down", GUILayout.Width(0.25f * windowWidth));
+                GUILayout.Label(TC.get("Resources.DescriptionCharacterAnimationSpeakLeft"), GUILayout.Width(0.25f * windowWidth));
+                GUILayout.Label(TC.get("Resources.DescriptionCharacterAnimationSpeakRight"), GUILayout.Width(0.25f * windowWidth));
+                GUILayout.Label(TC.get("Resources.DescriptionCharacterAnimationSpeakUp"), GUILayout.Width(0.25f * windowWidth));
+                GUILayout.Label(TC.get("Resources.DescriptionCharacterAnimationSpeakDown"), GUILayout.Width(0.25f * windowWidth));
                 GUILayout.EndHorizontal();
                 GUILayout.EndArea();
 
@@ -542,19 +542,19 @@ public class PlayerWindowAppearance : LayoutWindow, DialogReceiverInterface
 
 
             case USE_GROUP:
-                GUILayout.Label("Use right");
+                GUILayout.Label(TC.get("Resources.DescriptionCharacterAnimationUseRight"));
                 GUILayout.BeginHorizontal();
                 if (GUILayout.Button(clearImg, GUILayout.Width(0.1f * windowWidth)))
                 {
                     OnSlidesceneChangedUseRight("");
                 }
                 GUILayout.Box(slidesPathUseRight, GUILayout.Width(0.6f * windowWidth));
-                if (GUILayout.Button("Select", GUILayout.Width(0.1f * windowWidth)))
+                if (GUILayout.Button(TC.get("Buttons.Select"), GUILayout.Width(0.1f * windowWidth)))
                 {
                     ShowAssetChooser(CharacterAnimationType.USE_TO_RIGHT);
                 }
                 // Create/edit slidescene
-                if (GUILayout.Button("Create/Edit", GUILayout.Width(0.2f * windowWidth)))
+                if (GUILayout.Button(TC.get("Resources.Create") + "/" + TC.get("Resources.Edit"), GUILayout.Width(0.2f * windowWidth)))
                 {
                     // For not-existing cutscene - show new cutscene name dialog
                     if (slidesPathUseRight == null || slidesPathUseRight.Equals(""))
@@ -570,19 +570,19 @@ public class PlayerWindowAppearance : LayoutWindow, DialogReceiverInterface
                 }
                 GUILayout.EndHorizontal();
 
-                GUILayout.Label("Use left");
+                GUILayout.Label(TC.get("Resources.DescriptionCharacterAnimationUseLeft"));
                 GUILayout.BeginHorizontal();
                 if (GUILayout.Button(clearImg, GUILayout.Width(0.1f * windowWidth)))
                 {
                     OnSlidesceneChangedUseLeft("");
                 }
                 GUILayout.Box(slidesPathUseLeft, GUILayout.Width(0.6f * windowWidth));
-                if (GUILayout.Button("Select", GUILayout.Width(0.1f * windowWidth)))
+                if (GUILayout.Button(TC.get("Buttons.Select"), GUILayout.Width(0.1f * windowWidth)))
                 {
                     ShowAssetChooser(CharacterAnimationType.USE_TO_LEFT);
                 }
                 // Create/edit slidescene
-                if (GUILayout.Button("Create/Edit", GUILayout.Width(0.2f * windowWidth)))
+                if (GUILayout.Button(TC.get("Resources.Create") + "/" + TC.get("Resources.Edit"), GUILayout.Width(0.2f * windowWidth)))
                 {
                     // For not-existing cutscene - show new cutscene name dialog
                     if (slidesPathUseLeft == null || slidesPathUseLeft.Equals(""))
@@ -601,8 +601,8 @@ public class PlayerWindowAppearance : LayoutWindow, DialogReceiverInterface
 
                 GUILayout.BeginArea(previewLabelsRect);
                 GUILayout.BeginHorizontal();
-                GUILayout.Label("Object to the left", GUILayout.Width(0.5f * windowWidth));
-                GUILayout.Label("Object to the right", GUILayout.Width(0.5f * windowWidth));
+                GUILayout.Label(TC.get("Resources.DescriptionCharacterAnimationUseLeft"), GUILayout.Width(0.5f * windowWidth));
+                GUILayout.Label(TC.get("Resources.DescriptionCharacterAnimationUseRight"), GUILayout.Width(0.5f * windowWidth));
                 GUILayout.EndHorizontal();
                 GUILayout.EndArea();
 
@@ -616,19 +616,19 @@ public class PlayerWindowAppearance : LayoutWindow, DialogReceiverInterface
 
             case WALK_GROUP:
 
-                GUILayout.Label("Walk up");
+                GUILayout.Label(TC.get("Resources.DescriptionCharacterAnimationWalkUp"));
                 GUILayout.BeginHorizontal();
                 if (GUILayout.Button(clearImg, GUILayout.Width(0.1f * windowWidth)))
                 {
                     OnSlidesceneChangedWalkUp("");
                 }
                 GUILayout.Box(slidesPathWalkUp, GUILayout.Width(0.6f * windowWidth));
-                if (GUILayout.Button("Select", GUILayout.Width(0.1f * windowWidth)))
+                if (GUILayout.Button(TC.get("Buttons.Select"), GUILayout.Width(0.1f * windowWidth)))
                 {
                     ShowAssetChooser(CharacterAnimationType.WALKING_UP);
                 }
                 // Create/edit slidescene
-                if (GUILayout.Button("Create/Edit", GUILayout.Width(0.2f * windowWidth)))
+                if (GUILayout.Button(TC.get("Resources.Create") + "/" + TC.get("Resources.Edit"), GUILayout.Width(0.2f * windowWidth)))
                 {
                     // For not-existing cutscene - show new cutscene name dialog
                     if (slidesPathWalkUp == null || slidesPathWalkUp.Equals(""))
@@ -644,19 +644,19 @@ public class PlayerWindowAppearance : LayoutWindow, DialogReceiverInterface
                 }
                 GUILayout.EndHorizontal();
 
-                GUILayout.Label("Walk down");
+                GUILayout.Label(TC.get("Resources.DescriptionCharacterAnimationWalkDown"));
                 GUILayout.BeginHorizontal();
                 if (GUILayout.Button(clearImg, GUILayout.Width(0.1f * windowWidth)))
                 {
                     OnSlidesceneChangedWalkDown("");
                 }
                 GUILayout.Box(slidesPathWalkDown, GUILayout.Width(0.6f * windowWidth));
-                if (GUILayout.Button("Select", GUILayout.Width(0.1f * windowWidth)))
+                if (GUILayout.Button(TC.get("Buttons.Select"), GUILayout.Width(0.1f * windowWidth)))
                 {
                     ShowAssetChooser(CharacterAnimationType.WALKING_DOWN);
                 }
                 // Create/edit slidescene
-                if (GUILayout.Button("Create/Edit", GUILayout.Width(0.2f * windowWidth)))
+                if (GUILayout.Button(TC.get("Resources.Create") + "/" + TC.get("Resources.Edit"), GUILayout.Width(0.2f * windowWidth)))
                 {
                     // For not-existing cutscene - show new cutscene name dialog
                     if (slidesPathWalkDown == null || slidesPathWalkDown.Equals(""))
@@ -672,19 +672,19 @@ public class PlayerWindowAppearance : LayoutWindow, DialogReceiverInterface
                 }
                 GUILayout.EndHorizontal();
 
-                GUILayout.Label("Walk right");
+                GUILayout.Label(TC.get("Resources.DescriptionCharacterAnimationWalkRight"));
                 GUILayout.BeginHorizontal();
                 if (GUILayout.Button(clearImg, GUILayout.Width(0.1f * windowWidth)))
                 {
                     OnSlidesceneChangedWalkRight("");
                 }
                 GUILayout.Box(slidesPathWalkRight, GUILayout.Width(0.6f * windowWidth));
-                if (GUILayout.Button("Select", GUILayout.Width(0.1f * windowWidth)))
+                if (GUILayout.Button(TC.get("Buttons.Select"), GUILayout.Width(0.1f * windowWidth)))
                 {
                     ShowAssetChooser(CharacterAnimationType.WALKING_RIGHT);
                 }
                 // Create/edit slidescene
-                if (GUILayout.Button("Create/Edit", GUILayout.Width(0.2f * windowWidth)))
+                if (GUILayout.Button(TC.get("Resources.Create") + "/" + TC.get("Resources.Edit"), GUILayout.Width(0.2f * windowWidth)))
                 {
                     // For not-existing cutscene - show new cutscene name dialog
                     if (slidesPathWalkRight == null || slidesPathWalkRight.Equals(""))
@@ -700,19 +700,19 @@ public class PlayerWindowAppearance : LayoutWindow, DialogReceiverInterface
                 }
                 GUILayout.EndHorizontal();
 
-                GUILayout.Label("Walk left");
+                GUILayout.Label(TC.get("Resources.DescriptionCharacterAnimationWalkLeft"));
                 GUILayout.BeginHorizontal();
                 if (GUILayout.Button(clearImg, GUILayout.Width(0.1f * windowWidth)))
                 {
                     OnSlidesceneChangedWalkLeft("");
                 }
                 GUILayout.Box(slidesPathWalkLeft, GUILayout.Width(0.6f * windowWidth));
-                if (GUILayout.Button("Select", GUILayout.Width(0.1f * windowWidth)))
+                if (GUILayout.Button(TC.get("Buttons.Select"), GUILayout.Width(0.1f * windowWidth)))
                 {
                     ShowAssetChooser(CharacterAnimationType.WALKING_LEFT);
                 }
                 // Create/edit slidescene
-                if (GUILayout.Button("Create/Edit", GUILayout.Width(0.2f * windowWidth)))
+                if (GUILayout.Button(TC.get("Resources.Create") + "/" + TC.get("Resources.Edit"), GUILayout.Width(0.2f * windowWidth)))
                 {
                     // For not-existing cutscene - show new cutscene name dialog
                     if (slidesPathWalkLeft == null || slidesPathWalkLeft.Equals(""))
@@ -730,10 +730,10 @@ public class PlayerWindowAppearance : LayoutWindow, DialogReceiverInterface
 
                 GUILayout.BeginArea(previewLabelsRect);
                 GUILayout.BeginHorizontal();
-                GUILayout.Label("Walking left", GUILayout.Width(0.25f * windowWidth));
-                GUILayout.Label("Walking right", GUILayout.Width(0.25f * windowWidth));
-                GUILayout.Label("Walking up", GUILayout.Width(0.25f * windowWidth));
-                GUILayout.Label("Walking down", GUILayout.Width(0.25f * windowWidth));
+                GUILayout.Label(TC.get("Resources.DescriptionCharacterAnimationWalkLeft"), GUILayout.Width(0.25f * windowWidth));
+                GUILayout.Label(TC.get("Resources.DescriptionCharacterAnimationWalkRight"), GUILayout.Width(0.25f * windowWidth));
+                GUILayout.Label(TC.get("Resources.DescriptionCharacterAnimationWalkUp"), GUILayout.Width(0.25f * windowWidth));
+                GUILayout.Label(TC.get("Resources.DescriptionCharacterAnimationWalkDown"), GUILayout.Width(0.25f * windowWidth));
                 GUILayout.EndHorizontal();
                 GUILayout.EndArea();
 
