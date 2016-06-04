@@ -65,7 +65,7 @@ public class BooksWindowAppearance : LayoutWindow, DialogReceiverInterface
         */
         GUILayout.BeginArea(tableRect);
 
-        GUILayout.Label("Background image of the book");
+        GUILayout.Label(TC.get("Resources.DescriptionBookBackground"));
         GUILayout.BeginHorizontal();
         GUILayout.Box(backgroundPath, GUILayout.MaxWidth(0.85f*windowWidth));
         if (GUILayout.Button(TC.get("Buttons.Select"), GUILayout.MaxWidth(0.15f * windowWidth)))
@@ -78,8 +78,8 @@ public class BooksWindowAppearance : LayoutWindow, DialogReceiverInterface
 
         GUILayout.BeginHorizontal();
         // NORMAL ARROWS PART
-        GUILayout.Label("Image for left normal arrow", GUILayout.MaxWidth(0.5f*windowWidth));
-        GUILayout.Label("Image for right normal arrow", GUILayout.MaxWidth(0.5f*windowWidth));
+        GUILayout.Label(TC.get("Resources.ArrowLeftNormal"), GUILayout.MaxWidth(0.5f*windowWidth));
+        GUILayout.Label(TC.get("Resources.ArrowRightNormal"), GUILayout.MaxWidth(0.5f*windowWidth));
         GUILayout.EndHorizontal();
 
         GUILayout.BeginHorizontal();
@@ -115,8 +115,8 @@ public class BooksWindowAppearance : LayoutWindow, DialogReceiverInterface
 
         // OVER ARROWS PART
         GUILayout.BeginHorizontal();
-        GUILayout.Label("Image for left over arrow", GUILayout.MaxWidth(0.5f*windowWidth));
-        GUILayout.Label("Image for right over arrow", GUILayout.MaxWidth(0.5f*windowWidth));
+        GUILayout.Label(TC.get("Resources.ArrowLeftOver"), GUILayout.MaxWidth(0.5f*windowWidth));
+        GUILayout.Label(TC.get("Resources.ArrowRightOver"), GUILayout.MaxWidth(0.5f*windowWidth));
         GUILayout.EndHorizontal();
 
         GUILayout.BeginHorizontal();
@@ -159,7 +159,7 @@ public class BooksWindowAppearance : LayoutWindow, DialogReceiverInterface
             * PREVIEW BUTTON
             */
             GUILayout.BeginArea(infoPreviewRect);
-            if (GUILayout.Button("Edit book settings"))
+            if (GUILayout.Button(TC.get("GeneralText.Edit")))
             {
                 BooksAppearanceEditor window =
                   (BooksAppearanceEditor)ScriptableObject.CreateInstance(typeof(BooksAppearanceEditor));

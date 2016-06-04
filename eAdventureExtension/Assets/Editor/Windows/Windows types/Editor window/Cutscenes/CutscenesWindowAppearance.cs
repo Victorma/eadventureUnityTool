@@ -73,7 +73,7 @@ public class CutscenesWindowAppearance : LayoutWindow, DialogReceiverInterface
             GameRources.GetInstance().selectedCutsceneIndex].isVideoscene())
         {
             // Background chooser
-            GUILayout.Label("Video of videoscene");
+            GUILayout.Label(TC.get("Resources.DescriptionVideoscenes"));
             GUILayout.BeginHorizontal();
             if (GUILayout.Button(clearImg, GUILayout.Width(0.1f*windowWidth)))
             {
@@ -88,8 +88,8 @@ public class CutscenesWindowAppearance : LayoutWindow, DialogReceiverInterface
 
             GUILayout.Space(30);
 
-            GUILayout.Label("Video skipping");
-            canSkipVideo = GUILayout.Toggle(canSkipVideo, new GUIContent("Users can skip the video with a mouse click"));
+            GUILayout.Label(TC.get("Videoscene.Skip.border"));
+            canSkipVideo = GUILayout.Toggle(canSkipVideo, new GUIContent(TC.get("Videoscene.Skip.label")));
             if (canSkipVideo != canSkipVideoLast)
                 OnVideosceneCanSkipVideoChanged(canSkipVideo);
         }
@@ -99,7 +99,7 @@ public class CutscenesWindowAppearance : LayoutWindow, DialogReceiverInterface
         else
         {
             // Background chooser
-            GUILayout.Label("Set of slides of the slidescene");
+            GUILayout.Label(TC.get("Resources.DescriptionSlidesceneSlides"));
             GUILayout.BeginHorizontal();
             if (GUILayout.Button(clearImg, GUILayout.Width(0.1f*windowWidth)))
             {
@@ -186,7 +186,6 @@ public class CutscenesWindowAppearance : LayoutWindow, DialogReceiverInterface
         // After new cutscene name was choosed
         if (workingObject is CutsceneNameInputPopup)
         {
-            //TODO: create file
             OnSlidesceneCreated(message);
             Controller.getInstance().getSelectedChapterDataControl().getCutscenesList().getCutscenes()[
                 GameRources.GetInstance().selectedCutsceneIndex].setPathToSlides(message);

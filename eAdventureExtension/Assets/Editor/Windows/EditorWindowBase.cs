@@ -226,7 +226,7 @@ public class EditorWindowBase : EditorWindow, DialogReceiverInterface
         {
             fileMenu.menu.ShowAsContext();
         }
-        //if (GUILayout.Button(Language.GetText("EDIT")))
+        //if (GUILayout.Button(Language.GetText("GeneralText.Edit")))
         //{
         //    editMenu.menu.ShowAsContext();
         //}

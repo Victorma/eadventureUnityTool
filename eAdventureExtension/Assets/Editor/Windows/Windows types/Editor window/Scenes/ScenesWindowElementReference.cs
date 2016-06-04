@@ -53,7 +53,6 @@ public class ScenesWindowElementReference : LayoutWindow, DialogReceiverInterfac
 
         conditionTex = (Texture2D) Resources.Load("EAdventureData/img/icons/no-conditions-24x24", typeof (Texture2D));
 
-        //TODO: do new skin?
         selectedElementSkin = (GUISkin) Resources.Load("Editor/EditorLeftMenuItemSkinConcreteOptions", typeof (GUISkin));
         noBackgroundSkin = (GUISkin) Resources.Load("Editor/EditorNoBackgroundSkin", typeof (GUISkin));
 
@@ -70,9 +69,9 @@ public class ScenesWindowElementReference : LayoutWindow, DialogReceiverInterfac
     {
         GUILayout.BeginArea(tableRect);
         GUILayout.BeginHorizontal();
-        GUILayout.Box("Layer", GUILayout.Width(windowWidth*0.12f));
+        GUILayout.Box(TC.get("ElementList.Layer"), GUILayout.Width(windowWidth*0.12f));
         GUILayout.Box("", GUILayout.Width(windowWidth*0.06f));
-        GUILayout.Box("Element references", GUILayout.Width(windowWidth*0.39f));
+        GUILayout.Box(TC.get("ElementList.Title"), GUILayout.Width(windowWidth*0.39f));
         GUILayout.Box(TC.get("Conditions.Title"), GUILayout.Width(windowWidth*0.29f));
         GUILayout.EndHorizontal();
 
@@ -170,7 +169,6 @@ public class ScenesWindowElementReference : LayoutWindow, DialogReceiverInterfac
         }
         if (GUILayout.Button(moveUp, GUILayout.MaxWidth(0.08f*windowWidth)))
         {
-            Debug.Log("Up");
             Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
                 GameRources.GetInstance().selectedSceneIndex].getReferencesList()
                 .moveElementUp(Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
@@ -179,7 +177,6 @@ public class ScenesWindowElementReference : LayoutWindow, DialogReceiverInterfac
         }
         if (GUILayout.Button(moveDown, GUILayout.MaxWidth(0.08f*windowWidth)))
         {
-            Debug.Log("Down");
             Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
                 GameRources.GetInstance().selectedSceneIndex].getReferencesList()
                 .moveElementDown(Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
@@ -188,7 +185,6 @@ public class ScenesWindowElementReference : LayoutWindow, DialogReceiverInterfac
         }
         if (GUILayout.Button(clearImg, GUILayout.MaxWidth(0.08f*windowWidth)))
         {
-            Debug.Log("Clear");
             Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
                 GameRources.GetInstance().selectedSceneIndex].getReferencesList()
                 .deleteElement(Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
@@ -209,7 +205,7 @@ public class ScenesWindowElementReference : LayoutWindow, DialogReceiverInterfac
                     GameRources.GetInstance().selectedSceneIndex].getReferencesList().getAllReferencesDataControl()[
                         selectedElement].getErdc() != null)
             {
-                if (GUILayout.Button("Show preview/edit window"))
+                if (GUILayout.Button(TC.get("DefaultClickAction.ShowDetails")+"/"+TC.get("GeneralText.Edit")))
                 {
                     ObjectInSceneRefrencesEditor window =
                         (ObjectInSceneRefrencesEditor)
@@ -268,9 +264,9 @@ public class ScenesWindowElementReference : LayoutWindow, DialogReceiverInterfac
         {
             menu = new GenericMenu();
 
-            itemAction = new AddItemAction("Add item refrence");
-            setItemAction = new AddSetItemAction("Add set item reference");
-            npcAction = new AddNPCAction("Add npc reference");
+            itemAction = new AddItemAction(TC.get("TreeNode.AddElement6"));
+            setItemAction = new AddSetItemAction(TC.get("TreeNode.AddElement60"));
+            npcAction = new AddNPCAction(TC.get("TreeNode.AddElement8"));
 
             menu.AddItem(new GUIContent(itemAction.Label), false, Callback, itemAction);
             menu.AddItem(new GUIContent(setItemAction.Label), false, Callback, setItemAction);

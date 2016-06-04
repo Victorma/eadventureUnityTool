@@ -49,7 +49,7 @@ public class ScenesWindowExits : LayoutWindow, DialogReceiverInterface
 
 
         transitionTypes = new string[]
-        {"No transition", "Top to bottom", "Bottom to top", "Left to right", "Right to left", "Fade in"};
+        { TC.get("Exit.NoTransition"), TC.get("Exit.TopToBottom"), TC.get("Exit.BottomToTop"), TC.get("Exit.LeftToRight"), TC.get("Exit.RightToLeft"), TC.get("Exit.FadeIn") };
 
         transitionTimeInt = 0;
         transitionTimeString = transitionTimeStringLast = transitionTimeInt.ToString();
@@ -85,10 +85,10 @@ public class ScenesWindowExits : LayoutWindow, DialogReceiverInterface
     {
         GUILayout.BeginArea(tableRect);
         GUILayout.BeginHorizontal();
-        GUILayout.Box("Next scene", GUILayout.Width(windowWidth*0.24f));
-        GUILayout.Box("Transition", GUILayout.Width(windowWidth*0.14f));
-        GUILayout.Box("Appearance", GUILayout.Width(windowWidth*0.34f));
-        GUILayout.Box("Conditions&effects", GUILayout.Width(windowWidth*0.14f));
+        GUILayout.Box(TC.get("ExitsList.NextScene"), GUILayout.Width(windowWidth*0.24f));
+        GUILayout.Box(TC.get("ExitsList.Transition"), GUILayout.Width(windowWidth*0.14f));
+        GUILayout.Box(TC.get("ExitsList.Appearance"), GUILayout.Width(windowWidth*0.34f));
+        GUILayout.Box(TC.get("ExitsList.ConditionsAndEffects"), GUILayout.Width(windowWidth*0.14f));
         GUILayout.EndHorizontal();
 
         scrollPosition = GUILayout.BeginScrollView(scrollPosition);
@@ -129,13 +129,13 @@ public class ScenesWindowExits : LayoutWindow, DialogReceiverInterface
             // When is not selected - show normal text
             else
             {
-                if (GUILayout.Button("Edit transition", GUILayout.Width(windowWidth*0.14f)))
+                if (GUILayout.Button(TC.get("GeneralText.Edit"), GUILayout.Width(windowWidth*0.14f)))
                 {
                     ChangeExitSelection(i);
                 }
             }
 
-            if (GUILayout.Button("Edit appearance", GUILayout.Width(windowWidth*0.34f)))
+            if (GUILayout.Button(TC.get("GeneralText.Edit"), GUILayout.Width(windowWidth*0.34f)))
             {
                 ChangeExitSelection(i);
                 ExitsAppearance window =
@@ -145,7 +145,7 @@ public class ScenesWindowExits : LayoutWindow, DialogReceiverInterface
             if (selectedExit == i)
             {
                 GUILayout.BeginVertical();
-                if (GUILayout.Button("Edit conditions", GUILayout.Width(windowWidth*0.14f)))
+                if (GUILayout.Button(TC.get("Exit.EditConditions"), GUILayout.Width(windowWidth*0.14f)))
                 {
                     ConditionEditorWindow window =
                         (ConditionEditorWindow) ScriptableObject.CreateInstance(typeof (ConditionEditorWindow));
@@ -159,14 +159,14 @@ public class ScenesWindowExits : LayoutWindow, DialogReceiverInterface
                     window.Init(Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
                         GameRources.GetInstance().selectedSceneIndex].getExitsList().getExitsList()[i].getEffects());
                 }
-                if (GUILayout.Button("Edit post-effects", GUILayout.Width(windowWidth*0.14f)))
+                if (GUILayout.Button(TC.get("Exit.EditPostEffects"), GUILayout.Width(windowWidth*0.14f)))
                 {
                     EffectEditorWindow window =
                         (EffectEditorWindow) ScriptableObject.CreateInstance(typeof (EffectEditorWindow));
                     window.Init(Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
                         GameRources.GetInstance().selectedSceneIndex].getExitsList().getExitsList()[i].getPostEffects());
                 }
-                if (GUILayout.Button("Edit not-effects", GUILayout.Width(windowWidth*0.14f)))
+                if (GUILayout.Button(TC.get("Exit.EditNotEffects"), GUILayout.Width(windowWidth*0.14f)))
                 {
                     EffectEditorWindow window =
                         (EffectEditorWindow) ScriptableObject.CreateInstance(typeof (EffectEditorWindow));
@@ -177,7 +177,7 @@ public class ScenesWindowExits : LayoutWindow, DialogReceiverInterface
             }
             else
             {
-                if (GUILayout.Button("Edit", GUILayout.Width(windowWidth*0.14f)))
+                if (GUILayout.Button(TC.get("GeneralText.Edit"), GUILayout.Width(windowWidth*0.14f)))
                 {
                     ChangeExitSelection(i);
                 }
@@ -205,7 +205,6 @@ public class ScenesWindowExits : LayoutWindow, DialogReceiverInterface
         }
         if (GUILayout.Button(duplicateImg, GUILayout.MaxWidth(0.08f*windowWidth)))
         {
-            Debug.Log("Duplicate");
             Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
                 GameRources.GetInstance().selectedSceneIndex].getExitsList()
                 .duplicateElement(Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
@@ -213,7 +212,6 @@ public class ScenesWindowExits : LayoutWindow, DialogReceiverInterface
         }
         if (GUILayout.Button(moveUp, GUILayout.MaxWidth(0.08f*windowWidth)))
         {
-            Debug.Log("Up");
             Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
                 GameRources.GetInstance().selectedSceneIndex].getExitsList()
                 .moveElementUp(Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
@@ -221,7 +219,6 @@ public class ScenesWindowExits : LayoutWindow, DialogReceiverInterface
         }
         if (GUILayout.Button(moveDown, GUILayout.MaxWidth(0.08f*windowWidth)))
         {
-            Debug.Log("Down");
             Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
                 GameRources.GetInstance().selectedSceneIndex].getExitsList()
                 .moveElementDown(Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
@@ -229,7 +226,6 @@ public class ScenesWindowExits : LayoutWindow, DialogReceiverInterface
         }
         if (GUILayout.Button(clearImg, GUILayout.MaxWidth(0.08f*windowWidth)))
         {
-            Debug.Log("Clear");
             Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
                 GameRources.GetInstance().selectedSceneIndex].getExitsList()
                 .deleteElement(Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
@@ -244,7 +240,7 @@ public class ScenesWindowExits : LayoutWindow, DialogReceiverInterface
 
             GUILayout.BeginArea(infoPreviewRect);
             // Show preview dialog
-            if (GUILayout.Button("Show preview/edit window"))
+            if (GUILayout.Button(TC.get("DefaultClickAction.ShowDetails")+"/"+TC.get("GeneralText.Edit")))
             {
                 ExitsEditor window =
                     (ExitsEditor) ScriptableObject.CreateInstance(typeof (ExitsEditor));
@@ -298,7 +294,6 @@ public class ScenesWindowExits : LayoutWindow, DialogReceiverInterface
         Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
             GameRources.GetInstance().selectedSceneIndex].getExitsList().getExitsList()[selectedExit]
             .setTransitionType(i);
-        Debug.Log("ChangeSelectedTransitionType");
     }
 
     private void ChangeSelectedTransitionTime(string t)
@@ -307,6 +302,5 @@ public class ScenesWindowExits : LayoutWindow, DialogReceiverInterface
         Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
             GameRources.GetInstance().selectedSceneIndex].getExitsList().getExitsList()[selectedExit]
             .setTransitionTime(int.Parse(t));
-        Debug.Log("ChangeSelectedTransitionTime");
     }
 }

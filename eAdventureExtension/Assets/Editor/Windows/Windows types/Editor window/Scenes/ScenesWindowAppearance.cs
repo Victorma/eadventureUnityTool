@@ -71,7 +71,7 @@ public class ScenesWindowAppearance : LayoutWindow, DialogReceiverInterface
     {
         GUILayout.BeginArea(appearanceTableRect);
         GUILayout.BeginHorizontal();
-        GUILayout.Box("Appearance block", GUILayout.Width(windowWidth * 0.44f));
+        GUILayout.Box(TC.get("Scene.LookPanelTitle"), GUILayout.Width(windowWidth * 0.44f));
         GUILayout.Box(TC.get("Conditions.Title"), GUILayout.Width(windowWidth * 0.44f));
         GUILayout.EndHorizontal();
         scrollPosition = GUILayout.BeginScrollView(scrollPosition);
@@ -112,7 +112,7 @@ public class ScenesWindowAppearance : LayoutWindow, DialogReceiverInterface
 
         GUILayout.BeginArea(propertiesTable);
         // Background chooser
-        GUILayout.Label("Background image of the scene");
+        GUILayout.Label(TC.get("Background image of the scene"));
         GUILayout.BeginHorizontal();
         if (GUILayout.Button(clearImg, GUILayout.Width(0.1f * windowWidth)))
         {
@@ -126,7 +126,7 @@ public class ScenesWindowAppearance : LayoutWindow, DialogReceiverInterface
         GUILayout.EndHorizontal();
 
         // Foreground chooser
-        GUILayout.Label("Foreground mask of the scene");
+        GUILayout.Label(TC.get("Resources.DescriptionSceneForeground"));
         GUILayout.BeginHorizontal();
         if (GUILayout.Button(clearImg, GUILayout.Width(0.1f * windowWidth)))
         {
@@ -140,7 +140,7 @@ public class ScenesWindowAppearance : LayoutWindow, DialogReceiverInterface
         GUILayout.EndHorizontal();
 
         // Music chooser
-        GUILayout.Label("Background music");
+        GUILayout.Label(TC.get("Resources.DescriptionSceneMusic"));
         GUILayout.BeginHorizontal();
         if (GUILayout.Button(clearImg, GUILayout.Width(0.1f * windowWidth)))
         {

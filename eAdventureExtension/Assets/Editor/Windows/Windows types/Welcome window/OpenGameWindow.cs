@@ -23,7 +23,7 @@ public class OpenGameWindow : LayoutWindow
 
     public override void Draw(int aID)
     {
-        GUILayout.Label("Open game window placeholder");
+        GUILayout.Label(TC.get("GeneralText.Open"));
     }
 
     public void OpenFileDialog()

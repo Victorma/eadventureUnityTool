@@ -51,7 +51,6 @@ public class ScenesWindowBarriers : LayoutWindow, DialogReceiverInterface
 
         conditionTex = (Texture2D)Resources.Load("EAdventureData/img/icons/no-conditions-24x24", typeof(Texture2D));
 
-        //TODO: do new skin?
         selectedAreaSkin = (GUISkin)Resources.Load("Editor/EditorLeftMenuItemSkinConcreteOptions", typeof(GUISkin));
         noBackgroundSkin = (GUISkin)Resources.Load("Editor/EditorNoBackgroundSkin", typeof(GUISkin));
 
@@ -67,7 +66,7 @@ public class ScenesWindowBarriers : LayoutWindow, DialogReceiverInterface
     {
         GUILayout.BeginArea(tableRect);
         GUILayout.BeginHorizontal();
-        GUILayout.Box("Barrier", GUILayout.Width(windowWidth * 0.45f));
+        GUILayout.Box(TC.get("Barrier.Title"), GUILayout.Width(windowWidth * 0.45f));
         GUILayout.Box(TC.get("Conditions.Title"), GUILayout.Width(windowWidth * 0.45f));
         GUILayout.EndHorizontal();
         scrollPosition = GUILayout.BeginScrollView(scrollPosition);
@@ -119,7 +118,6 @@ public class ScenesWindowBarriers : LayoutWindow, DialogReceiverInterface
         }
         if (GUILayout.Button(duplicateImg, GUILayout.MaxWidth(0.08f * windowWidth)))
         {
-            Debug.Log("Duplicate");
             Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
                 GameRources.GetInstance().selectedSceneIndex].getBarriersList()
                 .duplicateElement(Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
@@ -127,7 +125,6 @@ public class ScenesWindowBarriers : LayoutWindow, DialogReceiverInterface
         }
         if (GUILayout.Button(moveUp, GUILayout.MaxWidth(0.08f * windowWidth)))
         {
-            Debug.Log("Up");
             Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
                 GameRources.GetInstance().selectedSceneIndex].getBarriersList()
                 .moveElementUp(Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
@@ -135,7 +132,6 @@ public class ScenesWindowBarriers : LayoutWindow, DialogReceiverInterface
         }
         if (GUILayout.Button(moveDown, GUILayout.MaxWidth(0.08f * windowWidth)))
         {
-            Debug.Log("Down");
             Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
                 GameRources.GetInstance().selectedSceneIndex].getBarriersList()
                 .moveElementDown(Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
@@ -143,7 +139,6 @@ public class ScenesWindowBarriers : LayoutWindow, DialogReceiverInterface
         }
         if (GUILayout.Button(clearImg, GUILayout.MaxWidth(0.08f * windowWidth)))
         {
-            Debug.Log("Clear");
             Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
                 GameRources.GetInstance().selectedSceneIndex].getBarriersList()
                 .deleteElement(Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
@@ -159,7 +154,7 @@ public class ScenesWindowBarriers : LayoutWindow, DialogReceiverInterface
 
             GUILayout.BeginArea(infoPreviewRect);
             // Show preview dialog
-            if (GUILayout.Button("Show preview/edit window"))
+            if (GUILayout.Button(TC.get("DefaultClickAction.ShowDetails")+"/"+TC.get("GeneralText.Edit")))
             {
                 //
                 BarrierEditor window =

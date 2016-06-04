@@ -31,16 +31,14 @@ public class CutscenesWindowDocumentation : LayoutWindow
 
     public override void Draw(int aID)
     {
-        //TODO: text from language file
-        GUILayout.Label("Full description of the cutscene");
+        GUILayout.Label(TC.get("Cutscene.Documentation"));
         descriptionOfCutscene = GUILayout.TextArea(descriptionOfCutscene, GUILayout.MinHeight(0.4f * windowHeight));
         if (!descriptionOfCutscene.Equals(descriptionOfCutsceneLast))
             ChangeDocumentation(descriptionOfCutscene);
 
         GUILayout.Space(30);
 
-        //TODO: text from language file
-        GUILayout.Label("Name of the cutscene");
+        GUILayout.Label(TC.get("Cutscene.Name"));
         nameOfCutscene = GUILayout.TextField(nameOfCutscene);
         if (!nameOfCutscene.Equals(nameOfCutsceneLast))
             ChangeName(nameOfCutscene);

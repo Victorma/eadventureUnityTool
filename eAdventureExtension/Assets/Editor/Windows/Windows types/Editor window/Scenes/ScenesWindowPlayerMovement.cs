@@ -28,9 +28,8 @@ public class ScenesWindowPlayerMovement : LayoutWindow, DialogReceiverInterface
     public override void Draw(int aID)
     {
         // Show preview dialog
-        if (GUILayout.Button("Show preview/edit window"))
+        if (GUILayout.Button(TC.get("GeneralText.Edit")))
         {
-            //
             PlayerMovementEditor window =
                 (PlayerMovementEditor)ScriptableObject.CreateInstance(typeof(PlayerMovementEditor));
             window.Init(this, Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[

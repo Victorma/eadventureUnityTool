@@ -172,7 +172,7 @@ public class ScenesWindow : LayoutWindow
             //GUILayout.BeginHorizontal();
             //GUILayout.Box(TC.get("SHOW_?"), GUILayout.MaxWidth(windowWidth*0.2f));
             //GUILayout.Box(TC.get("SCENE_ID"), GUILayout.Width(windowWidth*0.55f));
-            //GUILayout.Box(TC.get("EDIT"), GUILayout.MaxWidth(windowWidth*0.2f));
+            //GUILayout.Box(TC.get("GeneralText.Edit"), GUILayout.MaxWidth(windowWidth*0.2f));
             //GUILayout.EndHorizontal();
 
             for (int i = 0;

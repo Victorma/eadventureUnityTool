@@ -29,10 +29,10 @@ public class CutscenesWindowEndConfiguration : LayoutWindow
         params GUILayoutOption[] aOptions)
         : base(aStartPos, aContent, aStyle, aOptions)
     {
-        possibleOptions = new string[] {"Return to the previous scene", "Chapter ends", "Goes to a new scene"};
+        possibleOptions = new string[] { TC.get("Cutscene.ReturnToLastScene"), TC.get("Cutscene.ChapterEnd"), TC.get("Cutscene.GoToNextScene") };
 
         transitionTypes = new string[]
-        {"No transition", "Top to bottom", "Bottom to top", "Left to right", "Right to left", "Fade in"};
+        {TC.get("NextScene.NoTransition"),TC.get("NextScene.TopToBottom"),  TC.get("NextScene.BottomToTop"), TC.get("NextScene.LeftToRight"), TC.get("NextScene.RightToLeft"), TC.get("NextScene.FadeIn")};
 
         scenesNextNames = Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenesIDs();
         cutscenesNextNames = Controller.getInstance().getSelectedChapterDataControl().getCutscenesList().getCutscenesIDs();
@@ -93,7 +93,7 @@ public class CutscenesWindowEndConfiguration : LayoutWindow
 
     public override void Draw(int aID)
     {
-        GUILayout.Label("When the cutscene end is reached...");
+        GUILayout.Label(TC.get("Cutscene.CutsceneEndReached"));
         GUILayout.Space(20);
         
         GUILayout.BeginArea(selectorRect);
@@ -106,7 +106,7 @@ public class CutscenesWindowEndConfiguration : LayoutWindow
         if (selectedOption == 2)
         {
             GUILayout.BeginHorizontal();
-            GUILayout.Label("Next scene");
+            GUILayout.Label(TC.get("NextScene.Title"));
 
             selectedSceneNext = EditorGUILayout.Popup(selectedSceneNext, joinedNextScenesList);
             if(selectedSceneNext != selectedSceneNextLast)
@@ -123,13 +123,13 @@ public class CutscenesWindowEndConfiguration : LayoutWindow
 
 
             GUILayout.BeginHorizontal();
-            GUILayout.Label("Transition");
+            GUILayout.Label(TC.get("NextScene.Transition"));
 
             selectedTransitionType = EditorGUILayout.Popup(selectedTransitionType, transitionTypes);
             if (selectedTransitionType != selectedTransitionTypeLast)
                 ChangeSelectedTransitionType(selectedTransitionType);
 
-            GUILayout.Label("Transition time");
+            GUILayout.Label(TC.get("NextScene.TransitionTime"));
             timeString = GUILayout.TextField(timeString, 3);
             timeString = Regex.Replace(timeString, @"[^0-9 ]", "");
             if(!timeString.Equals(timeStringLast))

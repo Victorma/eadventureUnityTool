@@ -58,8 +58,7 @@ public class ScenesWindowActiveAreas : LayoutWindow, DialogReceiverInterface
                     Resources.Load(backgroundPath.Substring(0, backgroundPath.LastIndexOf(".")), typeof (Texture2D));
 
         conditionTex = (Texture2D) Resources.Load("EAdventureData/img/icons/no-conditions-24x24", typeof (Texture2D));
-
-        //TODO: do new skin?
+        
         selectedAreaSkin = (GUISkin) Resources.Load("Editor/EditorLeftMenuItemSkinConcreteOptions", typeof (GUISkin));
         noBackgroundSkin = (GUISkin) Resources.Load("Editor/EditorNoBackgroundSkin", typeof (GUISkin));
 
@@ -78,9 +77,9 @@ public class ScenesWindowActiveAreas : LayoutWindow, DialogReceiverInterface
     {
         GUILayout.BeginArea(tableRect);
         GUILayout.BeginHorizontal();
-        GUILayout.Box("ID", GUILayout.Width(windowWidth*0.54f));
+        GUILayout.Box(TC.get("ActiveAreasList.Id"), GUILayout.Width(windowWidth*0.54f));
         GUILayout.Box(TC.get("Conditions.Title"), GUILayout.Width(windowWidth*0.14f));
-        GUILayout.Box("Documentation", GUILayout.Width(windowWidth*0.18f));
+        GUILayout.Box(TC.get("ActiveAreasList.Documentation"), GUILayout.Width(windowWidth*0.18f));
         GUILayout.EndHorizontal();
         scrollPosition = GUILayout.BeginScrollView(scrollPosition);
         for (int i = 0;
@@ -111,7 +110,7 @@ public class ScenesWindowActiveAreas : LayoutWindow, DialogReceiverInterface
                     GameRources.GetInstance().selectedSceneIndex].getActiveAreasList().getActiveAreasList()[i]
                     .getConditions());
             }
-            if (GUILayout.Button("Edit documentation", GUILayout.Width(windowWidth*0.18f)))
+            if (GUILayout.Button(TC.get("GeneralText.EditDocumentation"), GUILayout.Width(windowWidth*0.18f)))
             {
                 OnSelectionChanged(i);
             }
@@ -137,7 +136,6 @@ public class ScenesWindowActiveAreas : LayoutWindow, DialogReceiverInterface
         }
         if (GUILayout.Button(duplicateImg, GUILayout.MaxWidth(0.08f*windowWidth)))
         {
-            Debug.Log("Duplicate");
             Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
                 GameRources.GetInstance().selectedSceneIndex].getActiveAreasList()
                 .duplicateElement(Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
@@ -145,7 +143,6 @@ public class ScenesWindowActiveAreas : LayoutWindow, DialogReceiverInterface
         }
         if (GUILayout.Button(moveUp, GUILayout.MaxWidth(0.08f*windowWidth)))
         {
-            Debug.Log("Up");
             Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
                 GameRources.GetInstance().selectedSceneIndex].getActiveAreasList()
                 .moveElementUp(Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
@@ -153,7 +150,6 @@ public class ScenesWindowActiveAreas : LayoutWindow, DialogReceiverInterface
         }
         if (GUILayout.Button(moveDown, GUILayout.MaxWidth(0.08f*windowWidth)))
         {
-            Debug.Log("Down");
             Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
                 GameRources.GetInstance().selectedSceneIndex].getActiveAreasList()
                 .moveElementDown(Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
@@ -161,7 +157,6 @@ public class ScenesWindowActiveAreas : LayoutWindow, DialogReceiverInterface
         }
         if (GUILayout.Button(clearImg, GUILayout.MaxWidth(0.08f*windowWidth)))
         {
-            Debug.Log("Clear");
             Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
                 GameRources.GetInstance().selectedSceneIndex].getActiveAreasList()
                 .deleteElement(Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
@@ -182,7 +177,7 @@ public class ScenesWindowActiveAreas : LayoutWindow, DialogReceiverInterface
         GUILayout.BeginHorizontal();
         GUILayout.Box(TC.get("Element.Action"), GUILayout.Width(windowWidth*0.39f));
         GUILayout.Box(TC.get("ActionsList.NeedsGoTo"), GUILayout.Width(windowWidth*0.39f));
-        GUILayout.Box("Effects/conditions", GUILayout.Width(windowWidth*0.1f));
+        GUILayout.Box(TC.get("Element.Effects") + "/" + TC.get("SmallAction.Conditions"), GUILayout.Width(windowWidth*0.1f));
         GUILayout.EndHorizontal();
         scrollPositionAction = GUILayout.BeginScrollView(scrollPositionAction, GUILayout.ExpandWidth(false));
         if (selectedArea >= 0)
@@ -247,7 +242,7 @@ public class ScenesWindowActiveAreas : LayoutWindow, DialogReceiverInterface
 
 
                     GUILayout.BeginVertical();
-                    if (GUILayout.Button("Conditons", GUILayout.Width(windowWidth*0.1f)))
+                    if (GUILayout.Button(TC.get("ActiveAreasList.Conditions"), GUILayout.Width(windowWidth*0.1f)))
                     {
                         ConditionEditorWindow window =
                             (ConditionEditorWindow) ScriptableObject.CreateInstance(typeof (ConditionEditorWindow));
@@ -257,7 +252,7 @@ public class ScenesWindowActiveAreas : LayoutWindow, DialogReceiverInterface
                                     selectedArea
                                 ].getActionsList().getActions()[i].getConditions());
                     }
-                    if (GUILayout.Button("Effects", GUILayout.Width(windowWidth*0.1f)))
+                    if (GUILayout.Button(TC.get("Element.Effects"), GUILayout.Width(windowWidth*0.1f)))
                     {
                         EffectEditorWindow window =
                             (EffectEditorWindow) ScriptableObject.CreateInstance(typeof (EffectEditorWindow));
@@ -267,7 +262,7 @@ public class ScenesWindowActiveAreas : LayoutWindow, DialogReceiverInterface
                                     selectedArea
                                 ].getActionsList().getActions()[i].getEffects());
                     }
-                    if (GUILayout.Button("Not-effects", GUILayout.Width(windowWidth*0.1f)))
+                    if (GUILayout.Button(TC.get("SmallAction.EditNotEffects"), GUILayout.Width(windowWidth*0.1f)))
                     {
                         EffectEditorWindow window =
                             (EffectEditorWindow) ScriptableObject.CreateInstance(typeof (EffectEditorWindow));
@@ -360,7 +355,7 @@ public class ScenesWindowActiveAreas : LayoutWindow, DialogReceiverInterface
 
             GUILayout.BeginArea(infoPreviewRect);
             // Show preview dialog
-            if (GUILayout.Button("Show preview/edit window"))
+            if (GUILayout.Button(TC.get("DefaultClickAction.ShowDetails")+"/"+TC.get("GeneralText.Edit")))
             {
                 ActiveAreasEditor window =
                     (ActiveAreasEditor) ScriptableObject.CreateInstance(typeof (ActiveAreasEditor));
@@ -388,7 +383,6 @@ public class ScenesWindowActiveAreas : LayoutWindow, DialogReceiverInterface
 
     public void OnDialogOk(string message, object workingObject = null, object workingObjectSecond = null)
     {
-        Debug.Log("Apply");
         if (workingObject is ActiveAreaNewName)
         {
             Controller.getInstance().getSelectedChapterDataControl().getScenesList().getScenes()[
@@ -448,7 +442,7 @@ public class ScenesWindowActiveAreas : LayoutWindow, DialogReceiverInterface
             menu.AddItem(new GUIContent(useAction.Label), false, Callback, useAction);
             menu.AddItem(new GUIContent(examineAction.Label), false, Callback, examineAction);
             menu.AddItem(new GUIContent(grabAction.Label), false, Callback, grabAction);
-            menu.AddItem(new GUIContent(customAction.Label), false, Callback, customAction);
+           // menu.AddItem(new GUIContent(customAction.Label), false, Callback, customAction);
         }
     }
 

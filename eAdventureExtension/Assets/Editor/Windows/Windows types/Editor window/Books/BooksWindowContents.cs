@@ -74,8 +74,8 @@ public class BooksWindowContents : LayoutWindow, DialogReceiverInterface
     {
         GUILayout.BeginArea(tableRect);
         GUILayout.BeginHorizontal();
-        GUILayout.Box("Paragraph type", GUILayout.Width(windowWidth*0.19f));
-        GUILayout.Box("Content", GUILayout.Width(windowWidth*0.69f));
+        GUILayout.Box(TC.get("BookParagraphsList.ParagraphType"), GUILayout.Width(windowWidth*0.19f));
+        GUILayout.Box(TC.get("BookParagraphsList.Content"), GUILayout.Width(windowWidth*0.69f));
         GUILayout.EndHorizontal();
 
         scrollPosition = GUILayout.BeginScrollView(scrollPosition);
@@ -97,19 +97,19 @@ public class BooksWindowContents : LayoutWindow, DialogReceiverInterface
             {
                 case Controller.BOOK_TITLE_PARAGRAPH:
                     tmpTexture = titleParagraphTex;
-                    tmpParagraphTypeName = "Title paragraph";
+                    tmpParagraphTypeName = TC.get("Element.Name14");
                     break;
                 case Controller.BOOK_BULLET_PARAGRAPH:
                     tmpTexture = bulletParagraphTex;
-                    tmpParagraphTypeName = "Bullet paragraph";
+                    tmpParagraphTypeName = TC.get("Element.Name16");
                     break;
                 case Controller.BOOK_TEXT_PARAGRAPH:
                     tmpTexture = textParagraphTex;
-                    tmpParagraphTypeName = "Text paragraph";
+                    tmpParagraphTypeName = TC.get("Element.Name15");
                     break;
                 case Controller.BOOK_IMAGE_PARAGRAPH:
                     tmpTexture = imageParagraphTex;
-                    tmpParagraphTypeName = "Image paragraph";
+                    tmpParagraphTypeName = TC.get("Element.Name1");
                     break;
             }
 
@@ -181,7 +181,6 @@ public class BooksWindowContents : LayoutWindow, DialogReceiverInterface
         }
         if (GUILayout.Button(moveUpTex, GUILayout.MaxWidth(0.08f*windowWidth)))
         {
-            Debug.Log("Up");
             Controller.getInstance().getSelectedChapterDataControl().getBooksList().getBooks()[
                 GameRources.GetInstance().selectedBookIndex].getBookParagraphsList().moveElementUp(
                     Controller.getInstance().getSelectedChapterDataControl().getBooksList().getBooks()[
@@ -190,7 +189,6 @@ public class BooksWindowContents : LayoutWindow, DialogReceiverInterface
         }
         if (GUILayout.Button(moveDownTex, GUILayout.MaxWidth(0.08f*windowWidth)))
         {
-            Debug.Log("Down");
             Controller.getInstance().getSelectedChapterDataControl().getBooksList().getBooks()[
                 GameRources.GetInstance().selectedBookIndex].getBookParagraphsList().moveElementDown(
                     Controller.getInstance().getSelectedChapterDataControl().getBooksList().getBooks()[
@@ -199,7 +197,6 @@ public class BooksWindowContents : LayoutWindow, DialogReceiverInterface
         }
         if (GUILayout.Button(clearTex, GUILayout.MaxWidth(0.08f*windowWidth)))
         {
-            Debug.Log("Clear");
             Controller.getInstance().getSelectedChapterDataControl().getBooksList().getBooks()[
                 GameRources.GetInstance().selectedBookIndex].getBookParagraphsList().deleteElement(
                     Controller.getInstance().getSelectedChapterDataControl().getBooksList().getBooks()[
@@ -263,10 +260,10 @@ class AddParagraphMenu : WindowMenuContainer
     {
         menu = new GenericMenu();
 
-        titleParagraph = new AddTitleParagraph("Add title paragraph");
-        bulletParagraph = new AddBulletParagraph("Add bullet paragraph");
-        textParagraph = new AddTextParagraph("Add text paragraph");
-        imageParagraph = new AddImageParagraph("Add image paragraph");
+        titleParagraph = new AddTitleParagraph(TC.get("TreeNode.AddElement14"));
+        bulletParagraph = new AddBulletParagraph(TC.get("TreeNode.AddElement16"));
+        textParagraph = new AddTextParagraph(TC.get("TreeNode.AddElement15"));
+        imageParagraph = new AddImageParagraph(TC.get("TreeNode.AddElement17"));
 
         menu.AddItem(new GUIContent(titleParagraph.Label), false, Callback, titleParagraph);
         menu.AddItem(new GUIContent(bulletParagraph.Label), false, Callback, bulletParagraph);
