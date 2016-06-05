@@ -58,23 +58,23 @@ public class ChaptersMenu : WindowMenuContainer
     {
         menu = new GenericMenu();
 
-        add = new AddChapterMenuItem("MenuChapters.AddChapter");
-        delete = new DeleteChapterMenuItem("MenuChapters.DeleteChapter");
-        import = new ImportChapterMenuItem("MenuChapters.ImportChapter");
-        variablesFlags = new EditFlagsVariablesMenuItem("MenuChapters.Flags");
-        moveUp = new MoveUpChapterMenuItem("MenuChapters.MoveChapterUp");
-        moveDown = new MoveDownChapterMenuItem("MenuChapters.MoveChapterDown");
+        add = new AddChapterMenuItem(TC.get("MenuChapters.AddChapter"));
+        delete = new DeleteChapterMenuItem(TC.get("MenuChapters.DeleteChapter"));
+        import = new ImportChapterMenuItem(TC.get("MenuChapters.ImportChapter"));
+        variablesFlags = new EditFlagsVariablesMenuItem(TC.get("MenuChapters.Flags"));
+        moveUp = new MoveUpChapterMenuItem(TC.get("MenuChapters.MoveChapterUp"));
+        moveDown = new MoveDownChapterMenuItem(TC.get("MenuChapters.MoveChapterDown"));
 
-        menu.AddItem(new GUIContent(TC.get(add.Label)), false, Callback, add);
+        menu.AddItem(new GUIContent(add.Label), false, Callback, add);
         //Delte button is only visible for more than 1 chapter
         if(Controller.getInstance().getCharapterList().getChaptersCount()>1)
-             menu.AddItem(new GUIContent(TC.get(delete.Label)), false, Callback, delete);
-        menu.AddItem(new GUIContent(TC.get(import.Label)), false, Callback, import);
+             menu.AddItem(new GUIContent(delete.Label), false, Callback, delete);
+        menu.AddItem(new GUIContent(import.Label), false, Callback, import);
         menu.AddSeparator("");
-        menu.AddItem(new GUIContent(TC.get(moveUp.Label)), false, Callback, moveUp);
-        menu.AddItem(new GUIContent(TC.get(moveDown.Label)), false, Callback, moveDown);
+        menu.AddItem(new GUIContent(moveUp.Label), false, Callback, moveUp);
+        menu.AddItem(new GUIContent(moveDown.Label), false, Callback, moveDown);
         menu.AddSeparator("");
-        menu.AddItem(new GUIContent(TC.get(variablesFlags.Label)), false, Callback, variablesFlags);
+        menu.AddItem(new GUIContent(variablesFlags.Label), false, Callback, variablesFlags);
         for (int i = 0; i < Controller.getInstance().getCharapterList().getChaptersCount(); i++)
         {
             bool selected = (Controller.getInstance().getCharapterList().getSelectedChapter() == i);

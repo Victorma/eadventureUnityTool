@@ -116,8 +116,8 @@ public class ChapterVarAndFlagsEditor : BaseCreatorPopup, DialogReceiverInterfac
         {
             GUILayout.Label(TC.get("Vars.Title"));
             GUILayout.BeginHorizontal();
-            GUILayout.Box(TC.get("Vars.FlagName"), GUILayout.Width(0.7f*windowWidth));
-            GUILayout.Box(TC.get("Vars.FlagReferences"), GUILayout.Width(0.25f*windowWidth));
+            GUILayout.Box(TC.get("Vars.VarName"), GUILayout.Width(0.7f*windowWidth));
+            GUILayout.Box(TC.get("Vars.VarReferences"), GUILayout.Width(0.25f*windowWidth));
             GUILayout.EndHorizontal();
 
             scrollPosition = GUILayout.BeginScrollView(scrollPosition);

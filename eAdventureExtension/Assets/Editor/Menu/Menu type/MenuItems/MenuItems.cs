@@ -518,6 +518,196 @@ public class RunDebugMenuItem : IMenuItem
     }
 }
 
+public class SetLanguageEnglishMenuItem : IMenuItem
+{
+    public SetLanguageEnglishMenuItem()
+    {
+        this.Label = "English";
+    }
+
+    public string Label
+    {
+        get; set;
+    }
+
+    public void OnCliked()
+    {
+        TC.loadstrings(ReleaseFolders.getLanguageFilePath4Editor(true, ReleaseFolders.LANGUAGE_ENGLISH));
+        EditorWindowBase.InitGUI();
+    }
+}
+
+public class SetLanguageDeutschMenuItem : IMenuItem
+{
+    public SetLanguageDeutschMenuItem()
+    {
+        this.Label = "Deutsch";
+    }
+
+    public string Label
+    {
+        get; set;
+    }
+
+    public void OnCliked()
+    {
+        TC.loadstrings(ReleaseFolders.getLanguageFilePath4Editor(true, ReleaseFolders.LANGUAGE_DEUTSCH));
+        EditorWindowBase.InitGUI();
+    }
+}
+
+public class SetLanguageSpanishMenuItem : IMenuItem
+{
+    public SetLanguageSpanishMenuItem()
+    {
+        this.Label = "Español";
+    }
+
+    public string Label
+    {
+        get; set;
+    }
+
+    public void OnCliked()
+    {
+        TC.loadstrings(ReleaseFolders.getLanguageFilePath4Editor(true, ReleaseFolders.LANGUAGE_SPANISH));
+        EditorWindowBase.InitGUI();
+    }
+}
+
+public class SetLanguageGalegoMenuItem : IMenuItem
+{
+    public SetLanguageGalegoMenuItem()
+    {
+        this.Label = "Galego";
+    }
+
+    public string Label
+    {
+        get; set;
+    }
+
+    public void OnCliked()
+    {
+        TC.loadstrings(ReleaseFolders.getLanguageFilePath4Editor(true, ReleaseFolders.LANGUAGE_GALEGO));
+        EditorWindowBase.InitGUI();
+    }
+}
+
+public class SetLanguageItalianoMenuItem : IMenuItem
+{
+    public SetLanguageItalianoMenuItem()
+    {
+        this.Label = "Italiano";
+    }
+
+    public string Label
+    {
+        get; set;
+    }
+
+    public void OnCliked()
+    {
+        TC.loadstrings(ReleaseFolders.getLanguageFilePath4Editor(true, ReleaseFolders.LANGUAGE_ITALIANO));
+        EditorWindowBase.InitGUI();
+    }
+}
+
+public class SetLanguagePortugeseMenuItem : IMenuItem
+{
+    public SetLanguagePortugeseMenuItem()
+    {
+        this.Label = "Português";
+    }
+
+    public string Label
+    {
+        get; set;
+    }
+
+    public void OnCliked()
+    {
+        TC.loadstrings(ReleaseFolders.getLanguageFilePath4Editor(true, ReleaseFolders.LANGUAGE_PORTUGESE));
+        EditorWindowBase.InitGUI();
+    }
+}
+
+public class SetLanguagePortugeseBrazilMenuItem : IMenuItem
+{
+    public SetLanguagePortugeseBrazilMenuItem()
+    {
+        this.Label = "Português-Brasil";
+    }
+
+    public string Label
+    {
+        get; set;
+    }
+
+    public void OnCliked()
+    {
+        TC.loadstrings(ReleaseFolders.getLanguageFilePath4Editor(true, ReleaseFolders.LANGUAGE_PORTUGESE_BRAZIL));
+        EditorWindowBase.InitGUI();
+    }
+}
+
+public class SetLanguageRomaniaMenuItem : IMenuItem
+{
+    public SetLanguageRomaniaMenuItem()
+    {
+        this.Label = "Language.Name";
+    }
+
+    public string Label
+    {
+        get; set;
+    }
+
+    public void OnCliked()
+    {
+        TC.loadstrings(ReleaseFolders.getLanguageFilePath4Editor(true, ReleaseFolders.LANGUAGE_ROMANIA));
+        EditorWindowBase.InitGUI();
+    }
+}
+
+public class SetLanguageRussiaMenuItem : IMenuItem
+{
+    public SetLanguageRussiaMenuItem()
+    {
+        this.Label = "русский язык";
+    }
+
+    public string Label
+    {
+        get; set;
+    }
+
+    public void OnCliked()
+    {
+        TC.loadstrings(ReleaseFolders.getLanguageFilePath4Editor(true, ReleaseFolders.LANGUAGE_RUSSIAN));
+        EditorWindowBase.InitGUI();
+    }
+}
+
+public class SetLanguageChinaMenuItem : IMenuItem
+{
+    public SetLanguageChinaMenuItem()
+    {
+        this.Label = "中文";
+    }
+
+    public string Label
+    {
+        get; set;
+    }
+
+    public void OnCliked()
+    {
+        TC.loadstrings(ReleaseFolders.getLanguageFilePath4Editor(true, ReleaseFolders.LANGUAGE_CHINA));
+        EditorWindowBase.InitGUI();
+    }
+}
+
 public class AboutEAMenuItem : IMenuItem
 {
     public AboutEAMenuItem(string name_)

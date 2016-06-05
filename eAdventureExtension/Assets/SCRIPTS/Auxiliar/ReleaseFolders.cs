@@ -34,16 +34,26 @@ public class ReleaseFolders  {
      * Language constant for Unknown language
      */
     //public static readonly string LANGUAGE_UNKNOWN = "es_ES";
-
-    /**
-     * Language constant for Spanish language
-     */
+    
     public static readonly string LANGUAGE_SPANISH = "es_ES";
-
-    /**
-     * Language constant for English language
-     */
+    
     public static readonly string LANGUAGE_ENGLISH = "en_EN";
+
+    public static readonly string LANGUAGE_DEUTSCH = "de_DE";
+
+    public static readonly string LANGUAGE_GALEGO = "gl_ES";
+
+    public static readonly string LANGUAGE_ITALIANO = "it_IT";
+
+    public static readonly string LANGUAGE_PORTUGESE = "pt_PT";
+
+    public static readonly string LANGUAGE_PORTUGESE_BRAZIL = "pt_BR";
+
+    public static readonly string LANGUAGE_ROMANIA= "ru_RU";
+
+    public static readonly string LANGUAGE_RUSSIAN = "ro_RO";
+
+    public static readonly string LANGUAGE_CHINA = "zh_CN";
 
     /**
      * Language constant for Default language

@@ -145,6 +145,11 @@ public class EditorWindowBase : EditorWindow, DialogReceiverInterface
         configurationMenu = new ConfigurationMenu();
         aboutMenu = new AboutMenu();
 
+        InitGUI();
+    }
+
+    public static void InitGUI()
+    {
         chapterWindow = new ChapterWindow(windowRect, new GUIContent(TC.get("Element.Name0")), "Window");
         scenesWindow = new ScenesWindow(windowRect, new GUIContent(TC.get("Element.Name1")), "Window");
         cutscenesWindow = new CutscenesWindow(windowRect, new GUIContent(TC.get("Element.Name9")), "Window");
@@ -165,48 +170,40 @@ public class EditorWindowBase : EditorWindow, DialogReceiverInterface
 
         // Left menu buttons
         leftMenuContentScene = new GUIContent();
-        leftMenuContentScene.image = (Texture2D) sceneTexture;
+        leftMenuContentScene.image = (Texture2D)sceneTexture;
         leftMenuContentScene.text = TC.get("Element.Name1");
 
         leftMenuContentCutscene = new GUIContent();
-        leftMenuContentCutscene.image = (Texture2D) cutsceneTexture;
+        leftMenuContentCutscene.image = (Texture2D)cutsceneTexture;
         leftMenuContentCutscene.text = TC.get("Element.Name9");
 
         leftMenuContentBook = new GUIContent();
-        leftMenuContentBook.image = (Texture2D) bookTexture;
+        leftMenuContentBook.image = (Texture2D)bookTexture;
         leftMenuContentBook.text = TC.get("Element.Name11");
 
         leftMenuContentItem = new GUIContent();
-        leftMenuContentItem.image = (Texture2D) itemTexture;
+        leftMenuContentItem.image = (Texture2D)itemTexture;
         leftMenuContentItem.text = TC.get("Element.Name18");
 
         leftMenuContentSetItem = new GUIContent();
-        leftMenuContentSetItem.image = (Texture2D) setItemTexture;
+        leftMenuContentSetItem.image = (Texture2D)setItemTexture;
         leftMenuContentSetItem.text = TC.get("Element.Name59");
 
         leftMenuContentPlayer = new GUIContent();
-        leftMenuContentPlayer.image = (Texture2D) playerTexture;
+        leftMenuContentPlayer.image = (Texture2D)playerTexture;
         leftMenuContentPlayer.text = TC.get("Element.Name26");
 
         leftMenuContentCharacter = new GUIContent();
-        leftMenuContentCharacter.image = (Texture2D) characterTexture;
+        leftMenuContentCharacter.image = (Texture2D)characterTexture;
         leftMenuContentCharacter.text = TC.get("Element.Name27");
 
         leftMenuContentConversation = new GUIContent();
-        leftMenuContentConversation.image = (Texture2D) conversationTexture;
+        leftMenuContentConversation.image = (Texture2D)conversationTexture;
         leftMenuContentConversation.text = TC.get("Element.Name31");
 
         leftMenuContentAdvanced = new GUIContent();
-        leftMenuContentAdvanced.image = (Texture2D) advancedTexture;
+        leftMenuContentAdvanced.image = (Texture2D)advancedTexture;
         leftMenuContentAdvanced.text = TC.get("AdvancedFeatures.Title");
-
-        //leftMenuContentAdaptation = new GUIContent();
-        //leftMenuContentAdaptation.image = (Texture2D) adaptationTexture;
-        //leftMenuContentAdaptation.text = Language.GetText("ADAPTATION_PROFILES");
-
-        //leftMenuContentAssessment = new GUIContent();
-        //leftMenuContentAssessment.image = (Texture2D) assessmentTexture;
-        //leftMenuContentAssessment.text = Language.GetText("ASSESMENT_PROFILES");
     }
 
     public static void RefreshChapter()
