@@ -44,7 +44,7 @@ public class PlaySoundEffectEditor : EffectEditor, DialogReceiverInterface
     {
 
         EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField("Sound: ");
+        EditorGUILayout.LabelField(TC.get("Effect.PlaySound"));
         if (GUILayout.Button(clearImg))
         {
             musicPath = "";
@@ -58,10 +58,10 @@ public class PlaySoundEffectEditor : EffectEditor, DialogReceiverInterface
             musicDialog.Init(this, BaseFileOpenDialog.FileType.SCENE_MUSIC);
         }
 
-        effect.setBackground(GUILayout.Toggle(effect.isBackground(), "Play sound in background"));
+        effect.setBackground(GUILayout.Toggle(effect.isBackground(), TC.get("PlaySoundEffect.BackgroundCheckBox")));
         EditorGUILayout.EndHorizontal();
 
-        EditorGUILayout.HelpBox("Music will be played.", MessageType.Info);
+        EditorGUILayout.HelpBox(TC.get("PlaySoundEffect.Description"), MessageType.Info);
     }
 
     public AbstractEffect Effect
@@ -72,7 +72,7 @@ public class PlaySoundEffectEditor : EffectEditor, DialogReceiverInterface
 
     public string EffectName
     {
-        get { return "Play sound effect"; }
+        get { return TC.get("PlaySoundEffect.Title"); }
     }
 
     public EffectEditor clone()

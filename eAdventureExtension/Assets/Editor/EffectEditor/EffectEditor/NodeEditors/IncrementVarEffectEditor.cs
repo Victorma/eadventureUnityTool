@@ -41,17 +41,17 @@ public class IncrementVarEffectEditor : EffectEditor
 
         EditorGUILayout.BeginHorizontal();
 
-        EditorGUILayout.LabelField("Variable to increment: ");
+        EditorGUILayout.LabelField(TC.get("Vars.Var"));
 
         effect.setTargetId(vars[EditorGUILayout.Popup(Array.IndexOf(vars, effect.getTargetId()), vars)]);
         effect.setIncrement(EditorGUILayout.IntField(effect.getIncrement()));
         EditorGUILayout.EndHorizontal();
 
-        EditorGUILayout.HelpBox("Variable will be increment.", MessageType.Info);
+        EditorGUILayout.HelpBox(TC.get("IncrementVarEffect.Description"), MessageType.Info);
     }
 
     public AbstractEffect Effect { get { return effect; } set { effect = value as IncrementVarEffect; } }
-    public string EffectName { get { return "Decrement var effect"; } }
+    public string EffectName { get { return TC.get("IncrementVarEffect.Title"); } }
     public EffectEditor clone() { return new IncrementVarEffectEditor(); }
 
     public bool manages(AbstractEffect c)

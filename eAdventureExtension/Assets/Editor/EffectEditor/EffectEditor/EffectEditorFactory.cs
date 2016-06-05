@@ -17,6 +17,10 @@ public abstract class EffectEditorFactory {
 	public abstract EffectEditor createEffectEditorFor (string effectName);
     public abstract EffectEditor createEffectEditorFor (AbstractEffect effect); 
 	public abstract int EffectEditorIndex(AbstractEffect effect);
+    public void ResetInstance()
+    {
+        instance = new EffectEditorFactoryImp();
+    }
 }
 
 public class EffectEditorFactoryImp : EffectEditorFactory {

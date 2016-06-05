@@ -37,7 +37,7 @@ public class MoveNPCEffectEditor : EffectEditor
     public void draw()
     {
         EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField("NPC: ");
+        EditorGUILayout.LabelField(TC.get("Element.Name28"));
         effect.setTargetId(npc[EditorGUILayout.Popup(Array.IndexOf(npc, effect.getTargetId()), npc)]);
         EditorGUILayout.EndHorizontal();
 
@@ -51,11 +51,11 @@ public class MoveNPCEffectEditor : EffectEditor
         yString = Regex.Replace(xString, "[^0-9]", "");
         effect.setDestiny(int.Parse(xString), int.Parse(yString));
 
-        EditorGUILayout.HelpBox("Move NPC to position.", MessageType.Info);
+        EditorGUILayout.HelpBox(TC.get("MoveNPCEffect.Description"), MessageType.Info);
     }
 
     public AbstractEffect Effect { get { return effect; } set { effect = value as MoveNPCEffect; } }
-    public string EffectName { get { return "Move NPC"; } }
+    public string EffectName { get { return TC.get("MoveNPCEffect.Title"); } }
     public EffectEditor clone() { return new MoveNPCEffectEditor(); }
 
     public bool manages(AbstractEffect c)

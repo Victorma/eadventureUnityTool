@@ -35,15 +35,15 @@ public class MacroReferenceEffectEditor : EffectEditor
     public void draw()
     {
         EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField("Macro: ");
+        EditorGUILayout.LabelField(TC.get("Element.Name56"));
         effect.setTargetId(macros[EditorGUILayout.Popup(Array.IndexOf(macros, effect.getTargetId()), macros)]);
         EditorGUILayout.EndHorizontal();
 
-        EditorGUILayout.HelpBox("Launch macro.", MessageType.Info);
+        EditorGUILayout.HelpBox(TC.get("Effect.MacroReference"), MessageType.Info);
     }
 
     public AbstractEffect Effect { get { return effect; } set { effect = value as MacroReferenceEffect; } }
-    public string EffectName { get { return "Launch macro"; } }
+    public string EffectName { get { return TC.get("MacroReferenceEffect.Title"); } }
     public EffectEditor clone() { return new MacroReferenceEffectEditor(); }
 
     public bool manages(AbstractEffect c)

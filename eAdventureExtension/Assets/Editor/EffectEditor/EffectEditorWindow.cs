@@ -16,6 +16,8 @@ public class EffectEditorWindow : EditorWindow
 
         editor.Effects = e;
 
+        EffectEditorFactory.Intance.ResetInstance();
+
         InitWindows();
     }
 
@@ -25,6 +27,8 @@ public class EffectEditorWindow : EditorWindow
         editor.s = Color.black;
 
         editor.Effects = e.getEffectsDirectly();
+
+        EffectEditorFactory.Intance.ResetInstance();
 
         InitWindows();
     }

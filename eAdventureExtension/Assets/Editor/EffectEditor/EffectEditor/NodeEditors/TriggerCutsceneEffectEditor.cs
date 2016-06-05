@@ -33,17 +33,17 @@ public class TriggerCutsceneEffectEditor : EffectEditor
     public void draw()
     {
         EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField("Cutscene: ");
+        EditorGUILayout.LabelField(TC.get("Element.Name2"));
 
         effect.setTargetId(cutscenes[EditorGUILayout.Popup(Array.IndexOf(cutscenes, effect.getTargetId()), cutscenes)]);
 
         EditorGUILayout.EndHorizontal();
 
-        EditorGUILayout.HelpBox("Cutscene will be displayed.", MessageType.Info);
+        EditorGUILayout.HelpBox(TC.get("TriggerCutsceneEffect.Description"), MessageType.Info);
     }
 
     public AbstractEffect Effect { get { return effect; } set { effect = value as TriggerConversationEffect; } }
-    public string EffectName { get { return "Trigger cutscene effect"; } }
+    public string EffectName { get { return TC.get("TriggerCutsceneEffect.Title"); } }
     public EffectEditor clone() { return new TriggerCutsceneEffectEditor(); }
 
     public bool manages(AbstractEffect c)

@@ -33,17 +33,17 @@ public class TriggerBookEffectEditor : EffectEditor
     public void draw()
     {
         EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField("Book: ");
+        EditorGUILayout.LabelField(TC.get("Element.Name12"));
 
         effect.setTargetId(books[EditorGUILayout.Popup(Array.IndexOf(books, effect.getTargetId()), books)]);
 
         EditorGUILayout.EndHorizontal();
 
-        EditorGUILayout.HelpBox("Book will be displayed.", MessageType.Info);
+        EditorGUILayout.HelpBox(TC.get("TriggerBookEffect.Description"), MessageType.Info);
     }
 
     public AbstractEffect Effect { get { return effect; } set { effect = value as TriggerBookEffect; } }
-    public string EffectName { get { return "Trigger book effect"; } }
+    public string EffectName { get { return TC.get("TriggerBookEffect.Title"); } }
     public EffectEditor clone() { return new TriggerBookEffectEditor(); }
 
     public bool manages(AbstractEffect c)

@@ -30,11 +30,11 @@ public class CancelActionEffectEditor : EffectEditor
 
     public void draw()
     {
-        EditorGUILayout.HelpBox("Cancels action.", MessageType.Info);
+        EditorGUILayout.HelpBox(TC.get("Effect.CancelActionInfo"), MessageType.Info);
     }
 
     public AbstractEffect Effect { get { return effect; } set { effect = value as CancelActionEffect; } }
-    public string EffectName { get { return "Cancel action effect"; } }
+    public string EffectName { get { return TC.get("Effect.CancelAction"); } }
     public EffectEditor clone() { return new CancelActionEffectEditor(); }
 
     public bool manages(AbstractEffect c)

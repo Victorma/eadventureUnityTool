@@ -34,17 +34,17 @@ public class TriggerConversationEffectEditor : EffectEditor
     public void draw()
     {
         EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField("Conversation: ");
+        EditorGUILayout.LabelField(TC.get("Conversation.Title"));
 
         effect.setTargetId(conversations[EditorGUILayout.Popup(Array.IndexOf(conversations, effect.getTargetId()), conversations)]);
 
         EditorGUILayout.EndHorizontal();
 
-        EditorGUILayout.HelpBox("Conversation will be displayed.", MessageType.Info);
+        EditorGUILayout.HelpBox(TC.get("TriggerConversationEffect.Description"), MessageType.Info);
     }
 
     public AbstractEffect Effect { get { return effect; } set { effect = value as TriggerConversationEffect; } }
-    public string EffectName { get { return "Trigger conversation effect"; } }
+    public string EffectName { get { return TC.get("TriggerConversationEffect.Title"); } }
     public EffectEditor clone() { return new TriggerConversationEffectEditor(); }
 
     public bool manages(AbstractEffect c)

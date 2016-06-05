@@ -17,6 +17,10 @@ public abstract class ConversationNodeEditorFactory {
     public abstract ConversationNodeEditor createConversationNodeEditorFor (string nodeName);
     public abstract ConversationNodeEditor createConversationNodeEditorFor (ConversationNode node); 
 	public abstract int ConversationNodeEditorIndex(ConversationNode node);
+    public void ResetInstance()
+    {
+        instance = new ConversationNodeEditorFactoryImp();
+    }
 }
 
 public class ConversationNodeEditorFactoryImp : ConversationNodeEditorFactory {

@@ -13,6 +13,8 @@ public class ConditionEditorWindow : EditorWindow
         editor.s = Color.black;
 
         editor.Conditions = con.Conditions;
+
+        ConditionEditorFactory.Intance.ResetInstance();
     }
 
     public void Init(Conditions con)
@@ -21,6 +23,8 @@ public class ConditionEditorWindow : EditorWindow
         editor.s = Color.black;
 
         editor.Conditions = con;
+
+        ConditionEditorFactory.Intance.ResetInstance();
     }
 
     private Conditions conditions;

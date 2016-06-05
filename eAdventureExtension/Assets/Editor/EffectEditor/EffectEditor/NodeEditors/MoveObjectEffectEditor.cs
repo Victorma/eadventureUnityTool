@@ -39,7 +39,7 @@ public class MoveObjectEffectEditor : EffectEditor
     public void draw()
     {
         EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField("Item: ");
+        EditorGUILayout.LabelField(TC.get("Element.Name19"));
         effect.setTargetId(items[EditorGUILayout.Popup(Array.IndexOf(items, effect.getTargetId()), items)]);
         EditorGUILayout.EndHorizontal();
 
@@ -69,11 +69,11 @@ public class MoveObjectEffectEditor : EffectEditor
         effect.setScaleSpeed(int.Parse(scaleSpeed));
         effect.setScale(floatScale);
 
-        EditorGUILayout.HelpBox("Move object to position.", MessageType.Info);
+        EditorGUILayout.HelpBox(TC.get("MoveObjectEffect.Title"), MessageType.Info);
     }
 
     public AbstractEffect Effect { get { return effect; } set { effect = value as MoveObjectEffect; } }
-    public string EffectName { get { return "Move object"; } }
+    public string EffectName { get { return TC.get("Effect.MoveObject"); } }
     public EffectEditor clone() { return new MoveObjectEffectEditor(); }
 
     public bool manages(AbstractEffect c)

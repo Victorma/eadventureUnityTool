@@ -40,12 +40,12 @@ public class WaitTimeEffectEditor : EffectEditor
     public void draw()
     {
         EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField("Time to wait: ");
+        EditorGUILayout.LabelField(TC.get("Effect.WaitTime"));
         time = EditorGUILayout.IntField(effect.getTime());
         effect.setTime(time);
         EditorGUILayout.EndHorizontal();
 
-        EditorGUILayout.HelpBox("Time that game will be waiting.", MessageType.Info);
+        EditorGUILayout.HelpBox(TC.get("WaitTimeEffect.Label"), MessageType.Info);
     }
 
     public AbstractEffect Effect
@@ -56,7 +56,7 @@ public class WaitTimeEffectEditor : EffectEditor
 
     public string EffectName
     {
-        get { return "Wait time effect"; }
+        get { return TC.get("Effect.WaitTime"); }
     }
 
     public EffectEditor clone()

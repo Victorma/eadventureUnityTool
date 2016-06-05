@@ -34,7 +34,7 @@ public class ShowTextEffectEditor : EffectEditor
     {
 
         EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField("Line: ");
+        EditorGUILayout.LabelField(TC.get("ConversationEditor.Line"));
         effect.setText(EditorGUILayout.TextField(effect.getText()));
         EditorGUILayout.LabelField("X: ");
         x = EditorGUILayout.IntField(effect.getX());
@@ -45,11 +45,11 @@ public class ShowTextEffectEditor : EffectEditor
 
         EditorGUILayout.EndHorizontal();
 
-        EditorGUILayout.HelpBox("Text will shown at position.", MessageType.Info);
+        EditorGUILayout.HelpBox(TC.get("ShowTextEffect.Title"), MessageType.Info);
     }
 
     public AbstractEffect Effect { get { return effect; } set { effect = value as ShowTextEffect; } }
-    public string EffectName { get { return "ShowText effect"; } }
+    public string EffectName { get { return TC.get("Effect.ShowText"); } }
     public EffectEditor clone() { return new ShowTextEffectEditor(); }
 
     public bool manages(AbstractEffect c)

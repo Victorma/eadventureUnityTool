@@ -30,11 +30,11 @@ public class TriggerLastSceneEffectEditor : EffectEditor
 
     public void draw()
     {
-        EditorGUILayout.HelpBox("Trigger previous scene.", MessageType.Info);
+        EditorGUILayout.HelpBox(TC.get("Effect.TriggerLastScene"), MessageType.Info);
     }
 
     public AbstractEffect Effect { get { return effect; } set { effect = value as TriggerLastSceneEffect; } }
-    public string EffectName { get { return "Trigger last scene effect"; } }
+    public string EffectName { get { return TC.get("Effect.TriggerLastSceneInfo"); } }
     public EffectEditor clone() { return new TriggerLastSceneEffectEditor(); }
 
     public bool manages(AbstractEffect c)

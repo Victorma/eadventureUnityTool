@@ -9,7 +9,7 @@ public class HighlightItemEffectEditor : EffectEditor
     public bool Collapsed { get { return collapsed; } set { collapsed = value; } }
     private Rect window = new Rect(0, 0, 300, 0);
     private string[] items;
-    private string[] higlightTypes = {"No highlight", "Blue highlight", "Red highlight", "Green highlight", "Highlight borders"};
+    private string[] higlightTypes = {TC.get("HighlightItemEffect.None"), TC.get("HighlightItemEffect.Blue"), TC.get("HighlightItemEffect.Red"), TC.get("HighlightItemEffect.Green"), TC.get("HighlightItemEffect.Border")};
 
     public Rect Window
     {
@@ -36,17 +36,17 @@ public class HighlightItemEffectEditor : EffectEditor
     public void draw()
     {
         EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField("Item: ");
+        EditorGUILayout.LabelField(TC.get("Element.Name19"));
         effect.setTargetId(items[EditorGUILayout.Popup(Array.IndexOf(items, effect.getTargetId()), items)]);
         effect.setHighlightType(EditorGUILayout.Popup(Array.IndexOf(higlightTypes, effect.getHighlightType()), higlightTypes));
-        effect.setHighlightAnimated(GUILayout.Toggle(effect.isHighlightAnimated(), "Animated"));
+        effect.setHighlightAnimated(GUILayout.Toggle(effect.isHighlightAnimated(), TC.get("HighlightItemEffect.Animated")));
         EditorGUILayout.EndHorizontal();
 
-        EditorGUILayout.HelpBox("Object will be higlighted.", MessageType.Info);
+        EditorGUILayout.HelpBox(TC.get("HighlightItemEffect.Description"), MessageType.Info);
     }
 
     public AbstractEffect Effect { get { return effect; } set { effect = value as HighlightItemEffect; } }
-    public string EffectName { get { return "Highlight object effect"; } }
+    public string EffectName { get { return TC.get("HighlightItemEffect.Title"); } }
     public EffectEditor clone() { return new HighlightItemEffectEditor(); }
 
     public bool manages(AbstractEffect c)

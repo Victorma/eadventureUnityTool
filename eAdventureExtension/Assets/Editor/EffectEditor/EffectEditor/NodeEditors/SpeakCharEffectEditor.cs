@@ -35,17 +35,17 @@ public class SpeakCharEffectEditor : EffectEditor
     {
 
         EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField("Line: ");
+        EditorGUILayout.LabelField(TC.get("ConversationEditor.Line"));
         effect.setLine(EditorGUILayout.TextField(effect.getLine()));
-        EditorGUILayout.LabelField("NPC: ");
+        EditorGUILayout.LabelField(TC.get("Element.Name28"));
         effect.setTargetId(npc[EditorGUILayout.Popup(Array.IndexOf(npc, effect.getTargetId()), npc)]);
         EditorGUILayout.EndHorizontal();
 
-        EditorGUILayout.HelpBox("Character will show the line.", MessageType.Info);
+        EditorGUILayout.HelpBox(TC.get("SpeakCharacterEffect.Description"), MessageType.Info);
     }
 
     public AbstractEffect Effect { get { return effect; } set { effect = value as SpeakCharEffect; } }
-    public string EffectName { get { return "SpeakCharacter effect"; } }
+    public string EffectName { get { return TC.get("SpeakCharacterEffect.Title"); } }
     public EffectEditor clone() { return new SpeakPlayerEffectEditor(); }
 
     public bool manages(AbstractEffect c)

@@ -35,7 +35,7 @@ public class TriggerSceneEffectEditor : EffectEditor
     public void draw()
     {
         EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField("Scene: ");
+        EditorGUILayout.LabelField(TC.get("Element.Name2"));
 
         effect.setTargetId(scenes[EditorGUILayout.Popup(Array.IndexOf(scenes, effect.getTargetId()), scenes)]);
         EditorGUILayout.LabelField("X: ");
@@ -46,11 +46,11 @@ public class TriggerSceneEffectEditor : EffectEditor
         effect.setPosition(x, y);
         EditorGUILayout.EndHorizontal();
 
-        EditorGUILayout.HelpBox("Scene will be displayed and player will appear at selected position.", MessageType.Info);
+        EditorGUILayout.HelpBox(TC.get("TriggerSceneEffect.Description"), MessageType.Info);
     }
 
     public AbstractEffect Effect { get { return effect; } set { effect = value as TriggerSceneEffect; } }
-    public string EffectName { get { return "Trigger scene effect"; } }
+    public string EffectName { get { return TC.get("TriggerSceneEffect.Title"); } }
     public EffectEditor clone() { return new TriggerSceneEffectEditor(); }
 
     public bool manages(AbstractEffect c)

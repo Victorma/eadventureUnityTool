@@ -31,17 +31,17 @@ public class ActivateEffectEditor : EffectEditor {
     public void draw(){
        
         EditorGUILayout.BeginHorizontal ();
-        EditorGUILayout.LabelField ("Flag ID: ");
+        EditorGUILayout.LabelField (TC.get("Condition.FlagID"));
 
         effect.setTargetId(flags[EditorGUILayout.Popup(Array.IndexOf(flags, effect.getTargetId()), flags)]);
 
         EditorGUILayout.EndHorizontal ();
 
-        EditorGUILayout.HelpBox("Flag will be activated.",MessageType.Info);
+        EditorGUILayout.HelpBox(TC.get("ActivateEffect.Description"),MessageType.Info);
     }
 
     public AbstractEffect Effect { get{ return effect; } set { effect = value as ActivateEffect; } }
-    public string EffectName{ get { return "Activate effect"; } }
+    public string EffectName{ get { return TC.get("ActivateEffect.Title"); } }
     public EffectEditor clone(){ return new ActivateEffectEditor(); }
 
     public bool manages(AbstractEffect c) { 

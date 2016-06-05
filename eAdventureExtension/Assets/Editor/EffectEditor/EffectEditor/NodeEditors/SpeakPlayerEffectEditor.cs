@@ -28,17 +28,17 @@ public class SpeakPlayerEffectEditor : EffectEditor
     public void draw(){
 
         EditorGUILayout.BeginHorizontal ();
-        EditorGUILayout.LabelField ("Line: ");
+        EditorGUILayout.LabelField (TC.get("ConversationEditor.Line"));
 
         effect.setLine (EditorGUILayout.TextField (effect.getLine ()));
 
         EditorGUILayout.EndHorizontal ();
 
-        EditorGUILayout.HelpBox("Player will show the line.",MessageType.Info);
+        EditorGUILayout.HelpBox(TC.get("SpeakPlayerEffect.Description"),MessageType.Info);
     }
 
     public AbstractEffect Effect { get{ return effect; } set { effect = value as SpeakPlayerEffect; } }
-    public string EffectName{ get { return "SpeakPlayer effect"; } }
+    public string EffectName{ get { return TC.get("SpeakPlayerEffect.Title"); } }
     public EffectEditor clone(){ return new SpeakPlayerEffectEditor(); }
 
     public bool manages(AbstractEffect c) { 

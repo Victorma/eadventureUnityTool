@@ -40,16 +40,16 @@ public class SetValueEffectEditor : EffectEditor
 
         EditorGUILayout.BeginHorizontal();
 
-        EditorGUILayout.LabelField("Variable to change value: ");
+        EditorGUILayout.LabelField(TC.get("Vars.Var"));
         effect.setTargetId(vars[EditorGUILayout.Popup(Array.IndexOf(vars, effect.getTargetId()), vars)]);
         effect.setValue(EditorGUILayout.IntField(effect.getValue()));
         EditorGUILayout.EndHorizontal();
 
-        EditorGUILayout.HelpBox("Variable value will be changed.", MessageType.Info);
+        EditorGUILayout.HelpBox(TC.get("SetValueEffect.Description"), MessageType.Info);
     }
 
     public AbstractEffect Effect { get { return effect; } set { effect = value as SetValueEffect; } }
-    public string EffectName { get { return "Set var value effect"; } }
+    public string EffectName { get { return TC.get("SetValueEffect.Title"); } }
     public EffectEditor clone() { return new SetValueEffectEditor(); }
 
     public bool manages(AbstractEffect c)

@@ -44,7 +44,7 @@ public class PlayAnimationEffectEditor : EffectEditor, DialogReceiverInterface
     {
 
         EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField("Sound: ");
+        EditorGUILayout.LabelField(TC.get("Effect.PlayAnimation"));
         if (GUILayout.Button(clearImg))
         {
             OnSlidesceneChanged("");
@@ -73,7 +73,7 @@ public class PlayAnimationEffectEditor : EffectEditor, DialogReceiverInterface
         }
         EditorGUILayout.EndHorizontal();
 
-        EditorGUILayout.HelpBox("Animation will be played.", MessageType.Info);
+        EditorGUILayout.HelpBox(TC.get("PlayAnimationEffect.Description"), MessageType.Info);
     }
 
     public AbstractEffect Effect
@@ -84,7 +84,7 @@ public class PlayAnimationEffectEditor : EffectEditor, DialogReceiverInterface
 
     public string EffectName
     {
-        get { return "Play animation effect"; }
+        get { return TC.get("PlayAnimationEffect.Title"); }
     }
 
     public EffectEditor clone()

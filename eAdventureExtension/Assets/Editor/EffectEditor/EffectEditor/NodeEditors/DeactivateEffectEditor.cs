@@ -31,17 +31,17 @@ public class DeactivateEffectEditor : EffectEditor {
     public void draw(){
 
         EditorGUILayout.BeginHorizontal ();
-        EditorGUILayout.LabelField ("Flag ID: ");
+        EditorGUILayout.LabelField (TC.get("Condition.FlagID"));
 
         effect.setTargetId(flags[EditorGUILayout.Popup(Array.IndexOf(flags, effect.getTargetId()), flags)]);
 
         EditorGUILayout.EndHorizontal ();
 
-        EditorGUILayout.HelpBox("Flag will be deactivated.",MessageType.Info);
+        EditorGUILayout.HelpBox(TC.get("DeactivateEffect.Description"),MessageType.Info);
     }
 
     public AbstractEffect Effect { get{ return effect; } set { effect = value as DeactivateEffect; } }
-    public string EffectName{ get { return "Deactivate effect"; } }
+    public string EffectName{ get { return TC.get("DeactivateEffect.Title"); } }
     public EffectEditor clone(){ return new DeactivateEffectEditor(); }
 
     public bool manages(AbstractEffect c) { 

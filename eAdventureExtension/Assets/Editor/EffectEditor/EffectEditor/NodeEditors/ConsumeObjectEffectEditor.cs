@@ -34,17 +34,17 @@ public class ConsumeObjectEffectEditor : EffectEditor
     public void draw()
     {
         EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField("Item: ");
+        EditorGUILayout.LabelField(TC.get("Element.Name19"));
 
         effect.setTargetId(items[EditorGUILayout.Popup(Array.IndexOf(items, effect.getTargetId()), items)]);
 
         EditorGUILayout.EndHorizontal();
 
-        EditorGUILayout.HelpBox("Object will be consumed.", MessageType.Info);
+        EditorGUILayout.HelpBox(TC.get("ConsumeObject.Description"), MessageType.Info);
     }
 
     public AbstractEffect Effect { get { return effect; } set { effect = value as ConsumeObjectEffect; } }
-    public string EffectName { get { return "Consume object effect"; } }
+    public string EffectName { get { return TC.get("Effect.ConsumeObject"); } }
     public EffectEditor clone() { return new ConsumeObjectEffectEditor(); }
 
     public bool manages(AbstractEffect c)

@@ -56,7 +56,7 @@ public class MovePlayerEffectEditor : EffectEditor
 
         EditorGUILayout.EndHorizontal();
 
-        EditorGUILayout.HelpBox("Move player to position.", MessageType.Info);
+        EditorGUILayout.HelpBox(TC.get("MovePlayerEffect.Description"), MessageType.Info);
     }
 
     public AbstractEffect Effect
@@ -67,7 +67,7 @@ public class MovePlayerEffectEditor : EffectEditor
 
     public string EffectName
     {
-        get { return "Move player"; }
+        get { return TC.get("MovePlayerEffect.Title"); }
     }
 
     public EffectEditor clone()

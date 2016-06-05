@@ -41,17 +41,17 @@ public class DecrementVarEffectEditor : EffectEditor
     {
 
         EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField("Variable to decrement: ");
+        EditorGUILayout.LabelField(TC.get("Vars.Var"));
 
         effect.setTargetId(vars[EditorGUILayout.Popup(Array.IndexOf(vars, effect.getTargetId()), vars)]);
         effect.setDecrement(EditorGUILayout.IntField(effect.getDecrement()));
         EditorGUILayout.EndHorizontal();
 
-        EditorGUILayout.HelpBox("Variable will be decrement.", MessageType.Info);
+        EditorGUILayout.HelpBox(TC.get("DecrementVarEffect.Description"), MessageType.Info);
     }
 
     public AbstractEffect Effect { get { return effect; } set { effect = value as DecrementVarEffect; } }
-    public string EffectName { get { return "Decrement var effect"; } }
+    public string EffectName { get { return TC.get("DecrementVarEffect.Title"); } }
     public EffectEditor clone() { return new DecrementVarEffectEditor(); }
 
     public bool manages(AbstractEffect c)

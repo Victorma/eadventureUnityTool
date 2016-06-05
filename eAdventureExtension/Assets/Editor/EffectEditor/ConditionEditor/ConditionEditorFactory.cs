@@ -17,6 +17,11 @@ public abstract class ConditionEditorFactory {
     public abstract List<ConditionEditor> Editors { get; }
     public abstract ConditionEditor getConditionEditorFor (Condition condition);
     public abstract int ConditionEditorIndex (Condition condition);
+
+    public void ResetInstance()
+    {
+        instance = new ConditionEditorFactoryImp();
+    }
 }
 
 public class ConditionEditorFactoryImp : ConditionEditorFactory {

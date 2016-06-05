@@ -36,6 +36,8 @@ public class ConversationEditorWindow : EditorWindow
 
         editor.conversation = conversation;
 
+        ConversationNodeEditorFactory.Intance.ResetInstance();
+
         InitWindows();
     }
 
@@ -44,6 +46,8 @@ public class ConversationEditorWindow : EditorWindow
         editor = EditorWindow.GetWindow<ConversationEditorWindow>();
 
         editor.conversation = (GraphConversation) conversation.getConversation();
+
+        ConversationNodeEditorFactory.Intance.ResetInstance();
 
         InitWindows();
     }
