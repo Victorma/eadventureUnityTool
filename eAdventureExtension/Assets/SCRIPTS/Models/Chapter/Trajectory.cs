@@ -11,6 +11,7 @@ public class Trajectory : ICloneable
 
     Node initial;
 
+
     public Trajectory()
     {
 
@@ -161,7 +162,7 @@ public class Trajectory : ICloneable
         private int y;
 
         private float scale;
-
+      
         public Node(string id, int x, int y, float scale)
         {
 
@@ -206,7 +207,8 @@ public class Trajectory : ICloneable
             return new Rect(x - 0.5f*nodeWidth*scale, y - nodeHeight*scale, nodeWidth*scale, nodeHeight*scale);
         }
 
-    /*
+
+        /*
             @Override
                 public boolean equals(Object o)
             {

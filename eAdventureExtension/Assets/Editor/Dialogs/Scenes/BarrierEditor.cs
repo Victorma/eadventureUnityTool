@@ -142,5 +142,6 @@ public class BarrierEditor : BaseAreaEditablePopup
         x = (int)currentPos.x - (int)(0.5f * sceneRef.getBarriersList().getBarriersList()[calledBarrierIndexRef].getWidth());
         y = (int)currentPos.y - (int)(0.5f * sceneRef.getBarriersList().getBarriersList()[calledBarrierIndexRef].getHeight());
         sceneRef.getBarriersList().getBarriersList()[calledBarrierIndexRef].setValues(x, y, width, heigth);
+        Repaint();
     }
 }

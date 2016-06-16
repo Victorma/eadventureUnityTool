@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
+using UnityEngine.EventSystems;
 
 public class PlayerMovementEditor : BaseAreaEditablePopup
 {
@@ -16,6 +17,7 @@ public class PlayerMovementEditor : BaseAreaEditablePopup
     private Texture2D backgroundPreviewTex = null;
     private Texture2D selectedPlayerTex = null;
     private Texture2D playerTex = null;
+    private Texture2D scaleTex = null;
 
     private static GUISkin selectedAreaSkin;
     private static GUISkin defaultSkin;
@@ -54,6 +56,8 @@ public class PlayerMovementEditor : BaseAreaEditablePopup
 
     private TrajectoryToolType trajectoryTool;
 
+    
+
     public void Init(DialogReceiverInterface e, SceneDataControl scene)
     {
         sceneRef = scene;
@@ -73,7 +77,8 @@ public class PlayerMovementEditor : BaseAreaEditablePopup
         editNodeTex = (Texture2D) Resources.Load("EAdventureData/img/icons/nodeEdit", typeof (Texture2D));
         editSideTex = (Texture2D) Resources.Load("EAdventureData/img/icons/sideEdit", typeof (Texture2D));
         setInitialNodeTex = (Texture2D) Resources.Load("EAdventureData/img/icons/selectStartNode", typeof (Texture2D));
-        deleteTex = (Texture2D) Resources.Load("EAdventureData/img/icons/deleteTool", typeof (Texture2D)); 
+        deleteTex = (Texture2D) Resources.Load("EAdventureData/img/icons/deleteTool", typeof (Texture2D));
+        deleteTex = (Texture2D)Resources.Load("EAdventureData/img/icons/ScaleArea", typeof(Texture2D));
 
         initialNodeTex = (Texture2D)Resources.Load("EAdventureData/img/icons/selectStartNode", typeof(Texture2D));
 
@@ -201,7 +206,9 @@ public class PlayerMovementEditor : BaseAreaEditablePopup
                     if (
                         trajectory.getNodes()[i].getEditorRect(playerTex.width, playerTex.height)
                             .Contains(Event.current.mousePosition))
+                    {
                         clickedIndex = i;
+                    }
                 }
 
                 if (trajectoryTool == TrajectoryToolType.EDIT_NODE)
@@ -240,7 +247,39 @@ public class PlayerMovementEditor : BaseAreaEditablePopup
                             clickedIndex = i;
                     }
                     if (clickedIndex != -1)
-                        OnBeingDraggedTrajectoryNode(clickedIndex);
+                    {
+
+                        // LEFT MOUSE BUTTON - move node
+                        if (Event.current.button == 0)
+                            OnBeingDraggedTrajectoryNode(clickedIndex);
+                    }
+                }
+            }
+
+            //if (Event.current.type == EventType.ScrollWheel)
+            if (Event.current.keyCode == KeyCode.Plus || Event.current.keyCode == KeyCode.KeypadPlus || Event.current.keyCode == KeyCode.Minus || Event.current.keyCode == KeyCode.KeypadMinus)
+            {
+                if (trajectoryTool == TrajectoryToolType.EDIT_NODE)
+                {
+                    int clickedIndex = -1;
+
+                    for (int i = 0; i < trajectory.getNodes().Count; i++)
+                    {
+                        if (
+                            trajectory.getNodes()[i].getEditorRect(playerTex.width, playerTex.height)
+                                .Contains(Event.current.mousePosition))
+                        {
+                            clickedIndex = i;
+                        }
+                    }
+
+                    if (clickedIndex != -1)
+                    {
+                        if(Event.current.keyCode == KeyCode.Plus || Event.current.keyCode == KeyCode.KeypadPlus)
+                            OnBeingTrajectoryNodeRescaled(clickedIndex, 0.01f);
+                        else if (Event.current.keyCode == KeyCode.Minus || Event.current.keyCode == KeyCode.KeypadMinus)
+                            OnBeingTrajectoryNodeRescaled(clickedIndex, -0.01f);
+                    }
                 }
             }
 
@@ -361,7 +400,7 @@ public class PlayerMovementEditor : BaseAreaEditablePopup
             x = (int) currentPos.x;
             y = (int) currentPos.y;
             sceneRef.setDefaultInitialPosition((int)currentPos.x, (int)currentPos.y);
-
+            Repaint();
             UpdatePlayerRect();
         }
     }
@@ -376,8 +415,16 @@ public class PlayerMovementEditor : BaseAreaEditablePopup
         if (useTrajectory)
         {
             trajectory.getNodes()[nodeIndex].setValues((int)currentPos.x, (int)(currentPos.y + 0.5f* playerRect.height * trajectory.getNodes()[nodeIndex].getScale()), trajectory.getNodes()[nodeIndex].getScale());
+            Repaint();
         }
     }
+
+    private void OnBeingTrajectoryNodeRescaled(int nodeIndex, float val)
+    {
+        trajectory.getNodes()[nodeIndex].setScale(trajectory.getNodes()[nodeIndex].getScale() + val);
+        Repaint();
+    }
+
 
     void OnEditNodeSelected()
     {

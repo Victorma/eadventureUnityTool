@@ -167,5 +167,6 @@ public class ExitsEditor : BaseAreaEditablePopup
         x = (int) currentPos.x - HALF_WIDTH;
         y = (int) currentPos.y - HALF_HEIGHT;
         sceneRef.getExitsList().getExitsList()[calledExitIndexRef].setValues(x, y, width, heigth);
+        Repaint();
     }
 }

@@ -183,6 +183,7 @@ public class BooksAppearanceEditor : BaseAreaEditablePopup
                 break;
         }
         CalculateArrowsPosition();
+        Repaint();
     }
 
     private void CalculateArrowsPosition()

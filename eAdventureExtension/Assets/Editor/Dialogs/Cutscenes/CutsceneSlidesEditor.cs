@@ -36,9 +36,6 @@ public class CutsceneSlidesEditor : BaseCreatorPopup, DialogReceiverInterface
 
     private Vector2 scrollPosition;
 
-    private string[] transitionTypes;
-    private int selectedTransition, selectedTransitonLast ;
-
     private string cutscenePath;
     public void Init(DialogReceiverInterface e, string cutsceneFilePath)
     {
@@ -58,7 +55,7 @@ public class CutsceneSlidesEditor : BaseCreatorPopup, DialogReceiverInterface
         noBackgroundSkin = (GUISkin) Resources.Load("Editor/EditorNoBackgroundSkin", typeof (GUISkin));
         selectedFrameSkin = (GUISkin)Resources.Load("Editor/EditorLeftMenuItemSkinConcreteOptions", typeof(GUISkin));
 
-        transitionTypes = new string []{ "None" , "Fade in", "Horizontal", "Vertical"};
+        //transitionTypes = new string []{ "None" , "Fade in", "Horizontal", "Vertical"};
         Debug.Log(cutsceneFilePath);
 
         workingAnimation = Loader.loadAnimation(AssetsController.InputStreamCreatorEditor.getInputStreamCreator(),
@@ -77,7 +74,6 @@ public class CutsceneSlidesEditor : BaseCreatorPopup, DialogReceiverInterface
             animationDurationStringLast = workingAnimation.getFrames()[selectedFrame].getTime().ToString();
         transitionDurationString =
             transitionDurationStringLast = workingAnimation.getTransitions()[selectedFrame + 1].getTime().ToString();
-        selectedTransition = selectedTransitonLast = workingAnimation.getTransitions()[selectedFrame + 1].getType();
         useTransitonFlag = useTransitonFlagLast = workingAnimation.isUseTransitions();
         slidesAnimationFlag = slidesAnimationFlagLast = workingAnimation.isSlides();
 
@@ -222,9 +218,6 @@ public class CutsceneSlidesEditor : BaseCreatorPopup, DialogReceiverInterface
             : transitionDurationStringLast);
         if (!transitionDurationString.Equals(transitionDurationStringLast))
             OnTransitionDurationChanged(transitionDurationString);
-        selectedTransition = EditorGUILayout.Popup(selectedTransition, transitionTypes);
-        if(selectedTransition!=selectedTransitonLast)
-            OnTransitionTypeChanged(selectedTransition);
         GUILayout.EndHorizontal();
         GUILayout.EndArea();
 
@@ -260,7 +253,6 @@ public class CutsceneSlidesEditor : BaseCreatorPopup, DialogReceiverInterface
             animationDurationStringLast = workingAnimation.getFrames()[selectedFrame].getTime().ToString();
         transitionDurationString =
             transitionDurationStringLast = workingAnimation.getTransitions()[selectedFrame + 1].getTime().ToString();
-        selectedTransition = selectedTransitonLast = workingAnimation.getTransitions()[selectedFrame + 1].getType();
     }
 
     private void OnSlidesAnimationFlagLastChanged(bool val)
@@ -287,11 +279,6 @@ public class CutsceneSlidesEditor : BaseCreatorPopup, DialogReceiverInterface
         workingAnimation.getTransitions()[selectedFrame+1].setTime(long.Parse(dur));
     }
 
-    private void OnTransitionTypeChanged(int val)
-    {
-        selectedTransitonLast = val;
-        workingAnimation.getTransitions()[selectedFrame+1].setType(val);
-    }
 
     private void OnFrameImageChanged(string val)
     {

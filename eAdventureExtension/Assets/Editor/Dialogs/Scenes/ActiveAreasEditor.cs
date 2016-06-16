@@ -151,5 +151,6 @@ public class ActiveAreasEditor : BaseAreaEditablePopup
         x = (int)currentPos.x - (int)(0.5f * sceneRef.getActiveAreasList().getActiveAreasList()[calledAreaIndexRef].getWidth());
         y = (int)currentPos.y - (int)(0.5f * sceneRef.getActiveAreasList().getActiveAreasList()[calledAreaIndexRef].getHeight());
         sceneRef.getActiveAreasList().getActiveAreasList()[calledAreaIndexRef].setValues(x, y, width, heigth);
+        Repaint();
     }
 }

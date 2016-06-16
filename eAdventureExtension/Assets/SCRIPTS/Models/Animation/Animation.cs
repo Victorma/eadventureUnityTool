@@ -101,8 +101,17 @@ public class Animation : Documented, HasId, ICloneable
         frames = new List<Frame>();
         transitions = new List<Transition>();
         frames.Add(frame);
-        transitions.Add(new Transition());
-        transitions.Add(new Transition());
+
+        Transition t0 = new Transition();
+        t0.setType(Transition.TYPE_FADEIN);
+        t0.setTime(1);
+        transitions.Add(t0);
+
+        Transition t1 = new Transition();
+        t1.setType(Transition.TYPE_FADEIN);
+        t1.setTime(1);
+        transitions.Add(t1);
+
         skippedFrames = 0;
         useTransitions = true;
         slides = false;
@@ -216,7 +225,10 @@ public class Animation : Documented, HasId, ICloneable
         }
         else {
             frames.Insert(after + 1, (Frame)frame.Clone());
-            transitions.Insert(after + 2, new Transition());
+            Transition t = new Transition();
+            t.setType(Transition.TYPE_FADEIN);
+            t.setTime(1);
+            transitions.Insert(after + 2, t);
         }
         return frame;
     }

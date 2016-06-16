@@ -180,11 +180,10 @@ public class ScenesWindow : LayoutWindow
                 i++)
             {
                 GUILayout.BeginHorizontal();
-                toggleList[i] = GUILayout.Toggle(toggleList[i], "", GUILayout.MaxWidth(windowWidth*0.2f));
                 GUILayout.Label(
                     Controller.getInstance().getCharapterList().getSelectedChapterData().getScenes()[i].getId(),
-                    GUILayout.Width(windowWidth*0.55f));
-                if (GUILayout.Button(TC.get("GeneralText.Edit"), GUILayout.MaxWidth(windowWidth*0.2f)))
+                    GUILayout.Width(windowWidth*0.65f));
+                if (GUILayout.Button(TC.get("GeneralText.Edit"), GUILayout.MaxWidth(windowWidth*0.3f)))
                 {
                     ShowItemWindowView(i);
                 }

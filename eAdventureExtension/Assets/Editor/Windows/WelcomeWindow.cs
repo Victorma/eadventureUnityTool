@@ -35,8 +35,10 @@ public class WelcomeWindow : EditorWindow {
         buttonsRect = new Rect(0.01f * windowWidth, 0.27f * windowHeight, windowWidth * 0.98f, windowHeight * 0.28f);
         windowRect = new Rect(0.01f * windowWidth, 0.32f * windowHeight, 0.98f * windowWidth, 0.67f * windowHeight);
 
-        newGameWindow = new NewGameWindow(windowRect, new GUIContent(TC.get("GeneralText.New")), "Window");
-        openGameWindow = new OpenGameWindow(windowRect, new GUIContent(TC.get("GeneralText.Open")), "Window");
+        //newGameWindow = new NewGameWindow(windowRect, new GUIContent(TC.get("GeneralText.New")), "Window");
+        //openGameWindow = new OpenGameWindow(windowRect, new GUIContent(TC.get("GeneralText.Open")), "Window");
+        newGameWindow = new NewGameWindow(windowRect, new GUIContent("New"), "Window");
+        openGameWindow = new OpenGameWindow(windowRect, new GUIContent("Open"), "Window");
         //recentGameWindow = new RecentGameWindow(windowRect, new GUIContent(Language.GetText("RECENT_GAME")), "Window");
     }
 
@@ -47,11 +49,13 @@ public class WelcomeWindow : EditorWindow {
         GUILayout.BeginArea(buttonsRect);
         GUILayout.BeginHorizontal();
 
-        if (GUILayout.Button(TC.get("GeneralText.New")))
+        //if (GUILayout.Button(TC.get("GeneralText.New")))
+        if (GUILayout.Button("New"))
         {
             OnWindowTypeChanged(WelcomeWindowType.New);
         }
-        if (GUILayout.Button(TC.get("GeneralText.Open")))
+        //if (GUILayout.Button(TC.get("GeneralText.Open")))
+        if (GUILayout.Button("Open"))
         {
             OnWindowTypeChanged(WelcomeWindowType.Open);
             openGameWindow.OpenFileDialog();
